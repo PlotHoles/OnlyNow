@@ -1,0 +1,51 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.sparecode.vipul.onlynow.fragments.ResetFragment">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Button
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:background="@color/orange"
+            android:layout_marginBottom="@dimen/dp_20"
+            android:layout_marginLeft="@dimen/dp_20"
+            android:layout_marginRight="@dimen/dp_20"
+            android:text="Sign In"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/button_signin" />
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true"
+            android:layout_above="@+id/button3"
+            android:gravity="center">
+
+            <TextView
+                android:textColor="@color/headercolor"
+                android:gravity="center"
+                android:text="Check Your Email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView3" />
+
+            <TextView
+                android:gravity="center"
+                android:text="A URL to reset password has been \nsent to your Email address."
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView7" />
+        </LinearLayout>
+    </RelativeLayout>
+</FrameLayout>

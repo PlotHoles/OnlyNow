@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_marginLeft="@dimen/dp_10"
+    android:layout_marginTop="@dimen/dp_10">
+
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:text="Christina Clark"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true"
+            android:id="@+id/textView60" />
+
+        <RatingBar
+            android:layout_marginLeft="@dimen/dp_5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_toEndOf="@+id/textView60"
+            android:id="@+id/ratingBar2"
+            style="?android:attr/ratingBarStyleSmall"
+            android:progressBackgroundTint="@color/orange"/>
+
+        <TextView
+            android:layout_marginRight="@dimen/dp_10"
+            android:text="Aug 19,2015"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:id="@+id/textView68" />
+    </RelativeLayout>
+    <TextView
+        android:text="Einstein has just become the world's first time teaveler .I sent him into the future. One minute into the future to be exact. And at exactly 1:21 AM we shall catch up with him."
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView69"
+        android:layout_weight="1"
+        android:layout_marginBottom="@dimen/dp_10"/>
+
+    <View
+        android:layout_marginTop="@dimen/dp_10"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/detaillinecolor"></View>
+
+</LinearLayout>

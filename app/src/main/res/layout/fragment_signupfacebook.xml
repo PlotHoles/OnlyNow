@@ -1,0 +1,170 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="com.sparecode.vipul.onlynow.fragments.SignupfacebookFragment">
+
+    <LinearLayout
+        android:layout_marginTop="@dimen/dp_10"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_above="@+id/textView"
+        android:gravity="center">
+
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/logo_black"
+            android:id="@+id/image_logo" />
+
+        <TextView
+            android:layout_marginTop="@dimen/dp_10"
+            android:text="Get best deals which is available \nOnly Now"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/text_des"
+            android:gravity="center"/>
+
+        <Button
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:background="@color/blue"
+            android:layout_marginTop="@dimen/dp_20"
+            android:layout_marginLeft="@dimen/dp_20"
+            android:layout_marginRight="@dimen/dp_20"
+            android:text="Sign up with Facebook"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/button_facebook" />
+
+        <TextView
+            android:layout_marginTop="@dimen/dp_20"
+            android:gravity="center"
+            android:text="We'll never post anything to \nFacebook without your permission."
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/text_Facebook" />
+
+        <RelativeLayout
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:text="Or"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:id="@+id/text_signup_or" />
+
+            <LinearLayout
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="8dp"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/text_signup_or"
+                android:layout_toLeftOf="@+id/text_signup_or"
+                android:layout_toStartOf="@+id/text_signup_or">
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/linecolor"></View>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="8dp"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/text_signup_or"
+                android:layout_toRightOf="@+id/text_signup_or"
+                android:layout_toEndOf="@+id/text_signup_or">
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/linecolor"></View>
+            </LinearLayout>
+
+
+        </RelativeLayout>
+
+        <Button
+            android:textColor="@color/white"
+            android:layout_marginLeft="@dimen/dp_20"
+            android:layout_marginRight="@dimen/dp_20"
+            android:layout_marginTop="@dimen/dp_20"
+            android:textAllCaps="false"
+            android:text="Sign up with Email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/button_signup"
+            android:background="@color/orange"/>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="invisible">
+
+        <EditText
+            android:layout_marginTop="@dimen/dp_20"
+            android:layout_marginLeft="@dimen/dp_20"
+            android:layout_marginRight="@dimen/dp_20"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textEmailAddress"
+            android:ems="10"
+            android:id="@+id/editText3"
+            android:hint="Email Address"
+            android:gravity="center"
+            android:background="@drawable/edittext"
+            android:padding="@dimen/dp_10"/>
+
+        <EditText
+            android:layout_marginTop="@dimen/dp_20"
+            android:layout_marginLeft="@dimen/dp_20"
+            android:layout_marginRight="@dimen/dp_20"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:ems="10"
+            android:id="@+id/editText4"
+            android:hint="Password"
+            android:gravity="center"
+            android:background="@drawable/edittext"
+            android:padding="@dimen/dp_10"/>
+
+        <LinearLayout
+            android:layout_marginLeft="@dimen/dp_20"
+            android:layout_marginRight="@dimen/dp_20"
+            android:layout_marginTop="@dimen/dp_10"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/dp_10">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Forgot Password?"
+                android:gravity="right"/>
+        </LinearLayout>
+
+
+        </LinearLayout>
+    </LinearLayout>
+
+
+</FrameLayout>

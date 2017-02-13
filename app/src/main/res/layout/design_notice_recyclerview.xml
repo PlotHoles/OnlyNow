@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal"
+    android:layout_marginTop="@dimen/dp_30">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_alignParentStart="true"
+            android:gravity="center"
+            android:id="@+id/linearLayout6"
+            android:layout_marginLeft="@dimen/dp_10">
+
+            <com.sparecode.vipul.onlynow.view.CircleImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/ic_launcher"
+                app:civ_border_width="2dp"
+                app:civ_border_color="#000000"/>
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/notice_next_icon"
+            android:layout_centerVertical="true"
+            android:layout_alignParentEnd="true"
+            android:id="@+id/imageView5"
+            android:layout_marginRight="@dimen/dp_20"/>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:layout_alignParentTop="true"
+            android:layout_toStartOf="@+id/imageView5"
+            android:layout_toEndOf="@+id/linearLayout6">
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:text="Barbara jordan"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textView11"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:text="started following you"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textView10"
+                    android:layout_marginLeft="@dimen/dp_5"/>
+            </LinearLayout>
+
+            <TextView
+                android:layout_marginTop="@dimen/dp_5"
+                android:text="27 min ago"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView15"
+                android:drawableLeft="@drawable/samll_clock_icon"
+                android:drawablePadding="@dimen/dp_5"/>
+        </LinearLayout>
+
+
+    </RelativeLayout>
+</LinearLayout>

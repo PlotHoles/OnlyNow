@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.sparecode.vipul.onlynow.activity.MainActivity">
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appbarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/headercolor"
+            android:contentInsetStart="0dp"
+            android:minHeight="?attr/actionBarSize">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:visibility="gone"
+                        android:id="@+id/imgToolBarBack"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/dp_5"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/back_icon" />
+
+                    <ImageView
+                        android:visibility="gone"
+                        android:id="@+id/imgToolBarCancel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/dp_5"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/cancel_icon"
+                        android:layout_alignParentStart="true" />
+                </RelativeLayout>
+                <TextView
+                    android:id="@+id/textViewToolBarTitle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dp_5"
+                    android:layout_marginRight="@dimen/dp_5"
+                    android:layout_weight="1"
+                    android:fontFamily="assets/fonts/Trajan Bold.ttf"
+                    android:gravity="center"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/sp_18" />
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/dp_20">
+
+                    <TextView
+                        android:visibility="gone"
+                        android:id="@+id/text_next"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/edittext"
+                        android:padding="@dimen/dp_5"
+                        android:text="Next"
+                        android:textColor="@color/white" />
+
+                    <ImageView
+                        android:visibility="gone"
+                        android:src="@drawable/home_menu_icon"
+                        android:id="@+id/imgSettings"
+                        android:layout_width="@dimen/dp_25"
+                        android:layout_height="@dimen/dp_25" />
+
+                    <ImageView
+                        android:visibility="gone"
+                        android:src="@drawable/search_map_icon"
+                        android:id="@+id/imgMap"
+                        android:layout_width="@dimen/dp_25"
+                        android:layout_height="@dimen/dp_25" />
+
+                    <ImageView
+                        android:visibility="gone"
+                        android:src="@drawable/map_mane_search_icon"
+                        android:id="@+id/imgSearch"
+                        android:layout_width="@dimen/dp_25"
+                        android:layout_height="@dimen/dp_25"/>
+
+                    <ImageView
+                        android:visibility="gone"
+                        android:src="@drawable/share_icon"
+                        android:id="@+id/imgShare"
+                        android:layout_width="@dimen/dp_25"
+                        android:layout_height="@dimen/dp_25" />
+                </RelativeLayout>
+            </LinearLayout>
+        </android.support.v7.widget.Toolbar>
+    </android.support.design.widget.AppBarLayout>
+
+    <FrameLayout
+        android:layout_weight="1"
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/appbarLayout" />
+
+    <android.support.design.widget.TabLayout
+        android:id="@+id/tabLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/container"
+        app:tabIndicatorHeight="0dp"
+        app:tabSelectedTextColor="@color/headercolor"
+        app:tabTextAppearance="@android:style/TextAppearance.Widget.TabWidget">
+
+        <android.support.design.widget.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:icon="@drawable/home_sel_icon"
+            android:text="Home" />
+
+        <android.support.design.widget.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:icon="@drawable/notice_unsel_icon"
+            android:text="Notice" />
+
+        <android.support.design.widget.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:icon="@drawable/search_unsel_icon"
+            android:text="Search" />
+
+        <android.support.design.widget.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:icon="@drawable/mylist_unsel_icon"
+            android:text="My List" />
+
+        <android.support.design.widget.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:icon="@drawable/profile_unsel_icon"
+            android:text="Profile" />
+    </android.support.design.widget.TabLayout>
+
+</LinearLayout>

@@ -1,0 +1,70 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.sparecode.vipul.onlynow.fragments.ForgotFragment">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <LinearLayout
+            android:layout_marginLeft="@dimen/dp_20"
+            android:layout_marginRight="@dimen/dp_20"
+            android:layout_marginBottom="@dimen/dp_20"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/linearLayout3">
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                android:hint="Email Address"
+                android:ems="10"
+                android:id="@+id/edit_forgotemail" />
+
+            <Button
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:background="@color/orange"
+                android:layout_marginTop="@dimen/dp_10"
+                android:text="Reset Password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/button_forgot" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true"
+            android:layout_above="@+id/linearLayout3"
+            android:gravity="center">
+
+            <TextView
+                android:textColor="@color/headercolor"
+                android:gravity="center"
+                android:text="Forgot Your Password?"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView4" />
+
+            <TextView
+                android:lineSpacingExtra="1dp"
+                android:layout_marginTop="@dimen/dp_5"
+                android:gravity="center"
+                android:text="Enter your email address below and we'll \nsend you a URL. to reset your password."
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView5" />
+        </LinearLayout>
+    </RelativeLayout>
+</FrameLayout>
