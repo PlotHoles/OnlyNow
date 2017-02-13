@@ -1,0 +1,192 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.sparecode.vipul.onlynow.fragments.ReviewFragment">
+
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_marginTop="@dimen/dp_10"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center">
+
+
+                <TextView
+                    android:gravity="center"
+                    android:text="@string/_4_5"
+                    android:textSize="@dimen/sp_50"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/text_rating" />
+
+                <TextView
+                    android:gravity="center"
+                    android:text="Average Rating"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textView62" />
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_marginTop="@dimen/dp_10"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal">
+
+                    <RatingBar
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/fivestar_rating"
+                        android:numStars="5"
+                        style="?android:attr/ratingBarStyleSmall"
+                        android:progressBackgroundTint="@color/orange"/>
+
+                    <TextView
+                        android:layout_marginLeft="@dimen/dp_5"
+                        android:text="10 Reviews"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/textView63" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal">
+
+                    <RatingBar
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/fourstar_rating"
+                        android:numStars="5"
+                        style="?android:attr/ratingBarStyleSmall"
+                        android:progressBackgroundTint="@color/orange"/>
+
+                    <TextView
+                        android:layout_marginLeft="@dimen/dp_5"
+                        android:text="7 Reviews"
+                        android:paddingLeft="@dimen/dp_8"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/textView64" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal">
+
+                    <RatingBar
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/threestar_rating"
+                        android:numStars="5"
+                        style="?android:attr/ratingBarStyleSmall"
+                        android:progressBackgroundTint="@color/orange"/>
+
+                    <TextView
+                        android:paddingLeft="@dimen/dp_8"
+
+                        android:layout_marginLeft="@dimen/dp_5"
+                        android:text="5 Reviews"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/textView65" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal">
+
+                    <RatingBar
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/twostar_rating"
+                        android:numStars="5"
+                        style="?android:attr/ratingBarStyleSmall"
+                        android:progressBackgroundTint="@color/orange"/>
+
+                    <TextView
+                        android:paddingLeft="@dimen/dp_8"
+                        android:layout_marginLeft="@dimen/dp_5"
+                        android:text="1 Reviews"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/textView66" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal">
+
+                    <RatingBar
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/onestar_rating"
+                        android:numStars="5"
+                        style="?android:attr/ratingBarStyleSmall"
+                        android:progressBackgroundTint="@color/orange" />
+
+                    <TextView
+                        android:paddingLeft="@dimen/dp_8"
+                        android:layout_marginLeft="@dimen/dp_5"
+                        android:text="2 Reviews"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/textView67" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+        <View
+            android:layout_marginTop="@dimen/dp_10"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/detaillinecolor"></View>
+        <TextView
+            android:textColor="@color/detailreview"
+            android:layout_marginTop="@dimen/dp_10"
+            android:gravity="center"
+            android:text="LEAVE A REVIEW"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/text_review" />
+        <View
+            android:layout_marginTop="@dimen/dp_10"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/detaillinecolor"></View>
+        <android.support.v7.widget.RecyclerView
+            android:layout_marginTop="@dimen/dp_10"
+            android:id="@+id/review_recyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+</FrameLayout>

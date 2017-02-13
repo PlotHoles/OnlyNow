@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#ff4d59</color>
+    <color name="colorPrimaryDark">#E54550</color>
+    <color name="colorAccent">#ff4d59</color>
+    <color name="white">#ffffff</color>
+    <color name="orange">#ff9801</color>
+    <color name="pink">#fd4d58</color>
+    <color name="blue">#3b589e</color>
+    <color name="linecolor">#ababab</color>
+    <color name="headercolor">#ff4d59</color>
+    <color name="black">#000000</color>
+    <color name="grey">#b4b4b4</color>
+
+    <color name="background_default">#000000</color>
+    <color name="step_default">#ff4d59</color>
+    <color name="current_step_default">#ff4d59</color>
+    <color name="text_default">#ffffff</color>
+    <color name="secondary_text_default">#ffffff</color>
+    <color name="tabcolor">#eae6e3</color>
+
+    <color name="detaillinecolor">#cccccc</color>
+    <color name="detailreview">#09abec</color>
+    <color name="checkBoxColor">#ff555b</color>
+</resources>

@@ -1,0 +1,48 @@
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.sparecode.vipul.onlynow.fragments.MapFragment">
+
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+        <android.support.design.widget.TabLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/maptab"
+            app:tabSelectedTextColor="@color/headercolor"
+            app:tabTextColor="@color/black"
+            app:tabIndicatorColor="@color/headercolor"
+            app:tabIndicatorHeight="@dimen/dp_5"
+            app:tabTextAppearance="@android:style/TextAppearance.Widget.TabWidget"
+            app:tabGravity="fill">
+        </android.support.design.widget.TabLayout>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab_add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/carrent_location_icon"
+        android:layout_gravity="bottom|right"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="@dimen/dp_20"
+        android:layout_marginBottom="@dimen/dp_20"
+        android:clickable="true"/>
+
+     <FrameLayout
+         android:id="@+id/container2"
+         android:layout_below="@+id/maptab"
+         android:layout_width="match_parent"
+         android:layout_height="match_parent">
+     </FrameLayout>
+
+</RelativeLayout>
+</FrameLayout>
+
+
+

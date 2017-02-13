@@ -1,0 +1,51 @@
+<resources>
+    <string name="app_name">OnlyNow</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+    <string name="next">Next</string>
+    <string name="edit_profile">Edit Profile</string>
+    <string name="mrjhon">Mr Jhon</string>
+    <string name="male">Male</string>
+    <string name="march17th1981">March 17th 1981</string>
+    <string name="uclaaerospace">uclaaerospace@gmal.com</string>
+    <string name="changepassword">Change Password</string>
+    <string name="active_location">Active location</string>
+    <string name="favourite_category">Favourite category</string>
+    <string name="receive_emails">Receive Emails</string>
+    <string name="push_notification">Push notification</string>
+    <string name="q_amp_a"><![CDATA[Q & A]]></string>
+    <string name="report_a_problem">Report a Problem</string>
+    <string name="about_onlynow">About OnlyNow</string>
+    <string name="blog">Blog</string>
+    <string name="privacy_policy">Privacy Policy</string>
+    <string name="terms_and_conditions">Terms and Conditions</string>
+    <string name="log_out">Log out</string>
+    <string name="sort_by">Sort By</string>
+    <string name="popular">Popular</string>
+    <string name="news">New</string>
+    <string name="finish_soon">Finish Soon</string>
+    <string name="_4_5">4.5</string>
+    <string name="_4_2">4.2</string>
+    <string name="ally_capellino_frank_brown_fott_shop_2010">Ally Capellino Frank Brown - Fott Shop 2010</string>
+    <string name="dave_gandy">Dave Gandy</string>
+    <string name="shinjuku">Shinjuku</string>
+    <string name="_02_days_11hrs_21_mins_left">02 days 11hrs 21 mins left</string>
+    <string name="valid_until_22_jan_2017">Valid until : 22 Jan,2017</string>
+    <string name="save">Save</string>
+    <string name="valid">Valid</string>
+    <string name="coupon_name">Coupon name</string>
+    <string name="other_coupon_details">Other Coupon Details</string>
+    <string name="free_text">Free Text</string>
+    <string name="coupon_details">Coupon Details</string>
+    <string name="phone_number_or_website">Phone number or website</string>
+    <string name="shop_name">Shop name</string>
+    <string name="shop_details">Shop Details</string>
+    <string name="they_way_to_use_this_coupon">They way to use this coupon</string>
+    <string name="coupon">Coupon</string>
+    <string name="valid_until_22nd_jan_2017">Valid until : 22nd jan, 2017</string>
+    <string name="beauty">Beauty</string>
+    <string name="_11_29_55_minute_left">11:29:55 Minute Left</string>
+    <string name="ally_capellino_frank_brown">Ally Capellino Frank Brown</string>
+</resources>
