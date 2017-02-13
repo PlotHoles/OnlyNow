@@ -30,7 +30,7 @@ public class MapFragment extends BaseFragment implements OnMapReadyCallback{
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.e(""," ");
+        Log.e("","");
 
     }
 
