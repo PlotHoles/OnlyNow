@@ -2,7 +2,6 @@ package com.sparecode.vipul.onlynow.fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,7 +10,6 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.sparecode.vipul.onlynow.R;
-import com.sparecode.vipul.onlynow.adapters.CardAdapter;
 import com.sparecode.vipul.onlynow.adapters.ReviewAdapter;
 
 import butterknife.Bind;
@@ -77,10 +75,10 @@ public class ReviewFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_review, container, false);
         ButterKnife.bind(this, view);
 
-        reviewAdapter = new ReviewAdapter();
+        /*reviewAdapter = new ReviewAdapter();
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 1);
         reviewRecyclerview.setLayoutManager(gridLayoutManager);
-        reviewRecyclerview.setAdapter(reviewAdapter);
+        reviewRecyclerview.setAdapter(reviewAdapter);*/
         return view;
     }
 

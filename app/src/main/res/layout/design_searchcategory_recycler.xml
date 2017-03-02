@@ -2,15 +2,17 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_marginTop="@dimen/dp_10"
     android:layout_marginBottom="@dimen/dp_10"
     android:layout_marginLeft="@dimen/dp_10">
 
 
-    <TextView
-        android:text="Category"
+    <com.sparecode.vipul.onlynow.widgets.LatoTextView
+        android:text="@string/category"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/textView72"
-        android:layout_weight="1" />
+        android:layout_weight="1"
+        app:typeface="lato_regular"/>
 </LinearLayout>

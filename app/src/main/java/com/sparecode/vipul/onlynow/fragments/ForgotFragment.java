@@ -1,6 +1,7 @@
 package com.sparecode.vipul.onlynow.fragments;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,6 +29,7 @@ public class ForgotFragment extends BaseFragment {
     TextView textView4;
     @Bind(R.id.textView5)
     TextView textView5;
+    String usertype;
 
     public ForgotFragment() {
         // Required empty public constructor
@@ -46,10 +48,29 @@ public class ForgotFragment extends BaseFragment {
         View view = inflater.inflate(R.layout.fragment_forgot, container, false);
         ButterKnife.bind(this, view);
 
+            usertype = getArguments().getString("key");
+            Log.e("-------->usertype",usertype);
+
+
         return view;
     }
 
-
+    void validation()
+    {
+        if (editForgotemail.getText().toString().trim().length() == 0)
+        {
+            editForgotemail.setError(getString(R.string.email));
+        }
+        else
+        {
+            ResetFragment fragment = new ResetFragment();
+            Bundle bundle = new Bundle();
+            bundle.putString("key",usertype);
+            fragment.setArguments(bundle);
+            addFragment(fragment,true);
+            //((BaseActivity)getActivity()).openResetPage();
+        }
+    }
     @Override
     public void onDestroyView() {
         super.onDestroyView();
@@ -59,19 +80,27 @@ public class ForgotFragment extends BaseFragment {
     @OnClick(R.id.button_forgot)
     public void onClick() {
 
-        ((BaseActivity)getActivity()).openResetPage();
+        validation();
     }
 
     @Override
     public void setToolbarForFragment() {
         ((BaseActivity)getActivity()).getAppbarLayout().setVisibility(View.VISIBLE);
-        ((BaseActivity)getActivity()).getTextViewToolBarTitle().setText("Reset Password");
+        ((BaseActivity)getActivity()).getTextViewToolBarTitle().setText(getString(R.string.forgotpassword));
         ((BaseActivity)getActivity()).getImgToolBarBack().setVisibility(View.VISIBLE);
         ((BaseActivity)getActivity()).getTextNext().setVisibility(View.GONE);
         ((BaseActivity)getActivity()).getImgToolBarBack().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((BaseActivity)getActivity()).openSigninPage();
+                if (usertype.equalsIgnoreCase("client"))
+                {
+                    ((BaseActivity)getActivity()).openClientSigninPage();
+                }
+                else if (usertype.equalsIgnoreCase("user"))
+                {
+                    ((BaseActivity)getActivity()).openSigninPage();
+                }
+
             }
         });
     }

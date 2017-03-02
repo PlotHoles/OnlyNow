@@ -21,6 +21,7 @@
             android:background="@drawable/searchborder"
             android:drawableRight="@drawable/search_icon"
             android:padding="@dimen/dp_10"
+            android:singleLine="true"
             android:drawablePadding="@dimen/dp_5"/>
 
         <LinearLayout
@@ -36,54 +37,61 @@
                 android:layout_height="wrap_content">
 
                 <LinearLayout
+                    android:id="@+id/currentlocation"
                     android:layout_marginRight="@dimen/dp_5"
                     android:orientation="vertical"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:background="@color/headercolor">
+                    android:background="@drawable/currentlocation"
+                    android:clickable="true"
+                    android:padding="@dimen/dp_5">
 
 
                     <ImageView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        app:srcCompat="@drawable/location_pin_icon"
+                        app:srcCompat="@drawable/locationimage"
                         android:id="@+id/imageView22"
                         android:layout_marginTop="@dimen/dp_5"/>
 
-                    <TextView
-                        android:textColor="@color/white"
+                    <com.sparecode.vipul.onlynow.widgets.LatoTextView
+                        android:textColor="@drawable/locationtext"
                         android:gravity="center"
-                        android:text="Current Location"
+                        android:text="@string/current_location"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/textView70"
+                        android:layout_height="match_parent"
+                        android:id="@+id/currenttext"
                         android:layout_marginTop="@dimen/dp_5"
-                        android:layout_marginBottom="@dimen/dp_5"/>
+                        app:typeface="lato_bold"/>
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/ecommerce"
                     android:layout_marginLeft="@dimen/dp_5"
                     android:layout_weight="1"
                     android:orientation="vertical"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/blackborderedittext">
+                    android:background="@drawable/currentlocation"
+                    android:clickable="true">
 
                     <ImageView
                         android:layout_marginTop="@dimen/dp_5"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        app:srcCompat="@drawable/_search_ecommerce_icon"
+                        app:srcCompat="@drawable/ecommerceimage"
                         android:id="@+id/imageView23" />
 
-                    <TextView
+                    <com.sparecode.vipul.onlynow.widgets.LatoTextView
+                        android:textColor="@drawable/locationtext"
                         android:gravity="center"
-                        android:text="Ecommerce"
+                        android:text="@string/ecommerce"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/textView71"
-                        android:layout_marginBottom="@dimen/dp_5"/>
+                        android:layout_height="match_parent"
+                        android:id="@+id/ecommercetext"
+                        android:layout_marginTop="@dimen/dp_5"
+                        app:typeface="lato_bold"/>
                 </LinearLayout>
 
 
@@ -149,7 +157,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
 
-            <android.support.v7.widget.RecyclerView
+            <ExpandableListView
                 android:visibility="gone"
                 android:id="@+id/searchcategoryrecycler"
                 android:layout_marginTop="@dimen/dp_10"

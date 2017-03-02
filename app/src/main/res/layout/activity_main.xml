@@ -1,161 +1,259 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
-    android:id="@+id/activity_main"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.sparecode.vipul.onlynow.activity.MainActivity">
+    android:layout_height="match_parent">
 
-    <android.support.design.widget.AppBarLayout
-        android:id="@+id/appbarLayout"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize">
-
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/headercolor"
-            android:contentInsetStart="0dp"
-            android:minHeight="?attr/actionBarSize">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:orientation="horizontal">
-
-                <RelativeLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
-
-                    <ImageView
-                        android:visibility="gone"
-                        android:id="@+id/imgToolBarBack"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:padding="@dimen/dp_5"
-                        android:scaleType="fitXY"
-                        android:src="@drawable/back_icon" />
-
-                    <ImageView
-                        android:visibility="gone"
-                        android:id="@+id/imgToolBarCancel"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:padding="@dimen/dp_5"
-                        android:scaleType="fitXY"
-                        android:src="@drawable/cancel_icon"
-                        android:layout_alignParentStart="true" />
-                </RelativeLayout>
-                <TextView
-                    android:id="@+id/textViewToolBarTitle"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/dp_5"
-                    android:layout_marginRight="@dimen/dp_5"
-                    android:layout_weight="1"
-                    android:fontFamily="assets/fonts/Trajan Bold.ttf"
-                    android:gravity="center"
-                    android:textColor="@android:color/white"
-                    android:textSize="@dimen/sp_18" />
-
-                <RelativeLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="@dimen/dp_20">
-
-                    <TextView
-                        android:visibility="gone"
-                        android:id="@+id/text_next"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/edittext"
-                        android:padding="@dimen/dp_5"
-                        android:text="Next"
-                        android:textColor="@color/white" />
-
-                    <ImageView
-                        android:visibility="gone"
-                        android:src="@drawable/home_menu_icon"
-                        android:id="@+id/imgSettings"
-                        android:layout_width="@dimen/dp_25"
-                        android:layout_height="@dimen/dp_25" />
-
-                    <ImageView
-                        android:visibility="gone"
-                        android:src="@drawable/search_map_icon"
-                        android:id="@+id/imgMap"
-                        android:layout_width="@dimen/dp_25"
-                        android:layout_height="@dimen/dp_25" />
-
-                    <ImageView
-                        android:visibility="gone"
-                        android:src="@drawable/map_mane_search_icon"
-                        android:id="@+id/imgSearch"
-                        android:layout_width="@dimen/dp_25"
-                        android:layout_height="@dimen/dp_25"/>
-
-                    <ImageView
-                        android:visibility="gone"
-                        android:src="@drawable/share_icon"
-                        android:id="@+id/imgShare"
-                        android:layout_width="@dimen/dp_25"
-                        android:layout_height="@dimen/dp_25" />
-                </RelativeLayout>
-            </LinearLayout>
-        </android.support.v7.widget.Toolbar>
-    </android.support.design.widget.AppBarLayout>
-
-    <FrameLayout
-        android:layout_weight="1"
-        android:id="@+id/container"
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/activity_main"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/appbarLayout" />
+        android:orientation="vertical"
+        tools:context="com.sparecode.vipul.onlynow.activity.MainActivity">
 
-    <android.support.design.widget.TabLayout
-        android:id="@+id/tabLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/container"
-        app:tabIndicatorHeight="0dp"
-        app:tabSelectedTextColor="@color/headercolor"
-        app:tabTextAppearance="@android:style/TextAppearance.Widget.TabWidget">
+        <android.support.design.widget.AppBarLayout
+            android:id="@+id/appbarLayout"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize">
 
-        <android.support.design.widget.TabItem
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:icon="@drawable/home_sel_icon"
-            android:text="Home" />
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/headercolor"
+                android:contentInsetStart="0dp"
+                android:minHeight="?attr/actionBarSize">
 
-        <android.support.design.widget.TabItem
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:icon="@drawable/notice_unsel_icon"
-            android:text="Notice" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:orientation="horizontal">
 
-        <android.support.design.widget.TabItem
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:icon="@drawable/search_unsel_icon"
-            android:text="Search" />
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
 
-        <android.support.design.widget.TabItem
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:icon="@drawable/mylist_unsel_icon"
-            android:text="My List" />
+                        <ImageView
+                            android:id="@+id/imgToolBarBack"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="@dimen/dp_5"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/back_icon"
+                            android:visibility="gone" />
 
-        <android.support.design.widget.TabItem
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:icon="@drawable/profile_unsel_icon"
-            android:text="Profile" />
-    </android.support.design.widget.TabLayout>
+                        <ImageView
+                            android:id="@+id/imgToolBarCancel"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentStart="true"
+                            android:padding="@dimen/dp_5"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/cancel_icon"
+                            android:visibility="gone" />
+                    </RelativeLayout>
 
-</LinearLayout>
+                    <com.sparecode.vipul.onlynow.widgets.LatoTextView
+                        android:id="@+id/textViewToolBarTitle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/dp_5"
+                        android:layout_marginRight="@dimen/dp_5"
+                        android:layout_weight="1"
+                        android:fontFamily="assets/fonts/Trajan Bold.ttf"
+                        android:gravity="center"
+                        android:textColor="@android:color/white"
+                        android:textSize="@dimen/sp_18"
+                        app:typeface="lato_bold" />
+
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="@dimen/dp_20">
+
+                        <com.sparecode.vipul.onlynow.widgets.LatoTextView
+                            android:id="@+id/text_next"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/edittext"
+                            android:padding="@dimen/dp_5"
+                            android:text="@string/next"
+                            android:textColor="@color/white"
+                            android:visibility="gone"
+                            app:typeface="lato_regular" />
+
+                        <ImageView
+                            android:id="@+id/imgSettings"
+                            android:layout_width="@dimen/dp_25"
+                            android:layout_height="@dimen/dp_25"
+                            android:src="@drawable/home_menu_icon"
+                            android:visibility="gone" />
+
+                        <ImageView
+                            android:id="@+id/imgMap"
+                            android:layout_width="@dimen/dp_25"
+                            android:layout_height="@dimen/dp_25"
+                            android:src="@drawable/search_map_icon"
+                            android:visibility="gone" />
+
+                        <ImageView
+                            android:id="@+id/imgSearchMap"
+                            android:layout_width="@dimen/dp_25"
+                            android:layout_height="@dimen/dp_25"
+                            android:src="@drawable/map_mane_search_icon"
+                            android:visibility="gone" />
+
+                        <ImageView
+                            android:id="@+id/imgShare"
+                            android:layout_width="@dimen/dp_25"
+                            android:layout_height="@dimen/dp_25"
+                            android:src="@drawable/share_icon"
+                            android:visibility="gone" />
+
+                        <ImageView
+                            android:id="@+id/imgAdd"
+                            android:layout_width="@dimen/dp_25"
+                            android:layout_height="@dimen/dp_25"
+                            android:src="@drawable/add_icon"
+                            android:visibility="gone" />
+
+                        <ImageView
+                            android:id="@+id/imgEdit"
+                            android:layout_width="@dimen/dp_25"
+                            android:layout_height="@dimen/dp_25"
+                            android:src="@drawable/edit_icon"
+                            android:visibility="gone" />
+                    </RelativeLayout>
+                </LinearLayout>
+            </android.support.v7.widget.Toolbar>
+        </android.support.design.widget.AppBarLayout>
+
+
+        <FrameLayout
+            android:id="@+id/container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/appbarLayout"
+            android:layout_weight="1" >
+
+
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/fab"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|end"
+                android:layout_margin="@dimen/fab_margin"
+                app:srcCompat="@drawable/round_add_icon"
+                app:useCompatPadding="false"
+                android:visibility="gone"/>
+        </FrameLayout>
+
+        <android.support.design.widget.TabLayout
+            android:id="@+id/tabLayout"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/container"
+            android:visibility="gone"
+            app:tabGravity="fill"
+            app:tabIndicatorHeight="0dp"
+            app:tabMode="fixed"
+            app:tabSelectedTextColor="@color/headercolor"
+            app:tabTextAppearance="@android:style/TextAppearance.Widget.TabWidget">
+
+
+            <android.support.design.widget.TabItem
+                android:id="@+id/tabItem"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:icon="@drawable/home_sel_icon"
+                android:text="Home" />
+
+            <android.support.design.widget.TabItem
+                android:id="@+id/tabItem1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:icon="@drawable/notice_unsel_icon"
+                android:text="Notice" />
+
+            <android.support.design.widget.TabItem
+                android:id="@+id/tabItem2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:icon="@drawable/search_unsel_icon"
+                android:text="Search" />
+
+            <android.support.design.widget.TabItem
+                android:id="@+id/tabItem3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:icon="@drawable/mylist_unsel_icon"
+                android:text="MyList" />
+
+            <android.support.design.widget.TabItem
+                android:id="@+id/tabItem4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:icon="@drawable/profile_unsel_icon"
+                android:text="Profile" />
+        </android.support.design.widget.TabLayout>
+
+        <com.sparecode.vipul.onlynow.view.CustomTabLayout
+            android:id="@+id/tabLayoutclient"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/container"
+            android:visibility="gone"
+            app:tabGravity="fill"
+            app:tabIndicatorHeight="0dp"
+            app:tabMode="scrollable"
+            app:tabSelectedTextColor="@color/headercolor"
+            app:tabTextAppearance="@android:style/TextAppearance.Widget.TabWidget">
+
+
+            <android.support.design.widget.TabItem
+                android:id="@+id/tabItemclient"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:icon="@drawable/coupon_sel_icon"
+                android:text="Coupon" />
+
+            <android.support.design.widget.TabItem
+                android:id="@+id/tabItem1client"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:icon="@drawable/page_unsel_icon"
+                android:text="Shop" />
+
+            <android.support.design.widget.TabItem
+                android:id="@+id/tabItem2client"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:icon="@drawable/review_unsel_icon"
+                android:text="Review" />
+
+            <android.support.design.widget.TabItem
+                android:id="@+id/tabItem3client"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:icon="@drawable/analytics_unsel_icon"
+                android:text="Analytics" />
+
+            <android.support.design.widget.TabItem
+                android:id="@+id/tabItem4client"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:icon="@drawable/settings_unsel_icon"
+                android:text="Setting" />
+        </com.sparecode.vipul.onlynow.view.CustomTabLayout>
+
+    </LinearLayout>
+
+</FrameLayout>

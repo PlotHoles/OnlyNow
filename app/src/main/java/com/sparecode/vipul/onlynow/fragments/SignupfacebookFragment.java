@@ -57,8 +57,10 @@ public class SignupfacebookFragment extends BaseFragment implements View.OnClick
     @Override
     public void setToolbarForFragment() {
         ((BaseActivity) getActivity()).getAppbarLayout().setVisibility(View.VISIBLE);
-        ((BaseActivity) getActivity()).getTextViewToolBarTitle().setText("Sign Up");
+        ((BaseActivity) getActivity()).getTextViewToolBarTitle().setText(getString(R.string.signup));
         ((BaseActivity)getActivity()).getImgToolBarBack().setVisibility(View.VISIBLE);
+        ((BaseActivity)getActivity()).getTextNext().setVisibility(View.GONE);
+        ((BaseActivity)getActivity()).setOptionMenuVisibility(false);
         ((BaseActivity) getActivity()).getImgToolBarBack().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

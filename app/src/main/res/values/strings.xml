@@ -4,4 +4,175 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="section_format">Hello World from section: %1$d</string>
+
+    <string name="splash_text">Get best deals which is available \nOnly Now</string>
+    <string name="create">Create Account</string>
+    <string name="sign">Sign In</string>
+    <string name="client">For client, click here</string>
+    <string name="user"> For User, click here</string>
+    <string name="client_splash_text">Fill in seats now by OnlyNow.</string>
+
+    <string name="signup">Sign Up</string>
+    <string name="facebooksignup">Sign up with Facebook</string>
+    <string name="signupemail">Sign up with Email</string>
+    <string name="active_area">Select Active Area</string>
+    <string name="favourite_category">Select Favourite Category</string>
+    <string name="next">Next</string>
+    <string name="selectcategory">Select Category</string>
+    <string name="changecategory">Change category</string>
+
+    <string name="doesnot">Doesn\'t have a account yet? Please sign up.</string>
+    <string name="loginfacebook">Log in with Facebook</string>
+    <string name="signintext">We\'ll never post anything to \nFacebook without your permission.</string>
+    <string name="OR">Or</string>
+    <string name="emailaddress">Email Address</string>
+    <string name="passsword">Password</string>
+    <string name="forgot">Forgot Password?</string>
+    <string name="clentname">Client Name</string>
+    <string name="locationarea">Location Area</string>
+    <string name="zipcode">Zip Code</string>
+    <string name="prefecture">Prefecture</string>
+    <string name="cityname">City Name</string>
+    <string name="streetname">Street Name &amp; Numbers</string>
+    <string name="buildname">Build Name</string>
+    <string name="phonenumber">Phone Number</string>
+    <string name="websiteurl">Website URL</string>
+
+    <string name="already">Already Have an account?</string>
+    <string name="firstname">First Name</string>
+    <string name="lastname">Last Name</string>
+    <string name="confirmemail">Confirm Email Address</string>
+    <string name="birthday">Birthday</string>
+    <string name="next_button">NEXT</string>
+    <string name="first_name">Please Enter First Name</string>
+    <string name="last_name">Please Enter Last Name</string>
+    <string name="email_proper">Please Enter Proper Email Address</string>
+    <string name="email">Please Enter Email Address</string>
+    <string name="confirm_email">Please Enter Proper Confirm Email Address</string>
+    <string name="match_email">Email and Confirm Email Must be Same</string>
+    <string name="password">Please Enter Password</string>
+    <string name="birthdate">Please Select Birthdate</string>
+    <string name="gender">Please Chooose Gender</string>
+    <string name="agree">Please Select Terms &amp; Condition</string>
+    <string name="client_name">Please Enter Client Name</string>
+    <string name="locationareaclient">Please Enter LOcation Area</string>
+    <string name="zipcodeclient">Please Enter Zip Code</string>
+    <string name="prefec">PLease Enter Prefecture</string>
+    <string name="city">Plese Enter City Name</string>
+    <string name="streetnamnumber">Please Enter Street Name &amp; Numbers</string>
+    <string name="build">Please Enter Build Name</string>
+    <string name="phonenumbre">Please Enter Phone NUmber</string>
+    <string name="website">Please Enter Website URL</string>
+
+    <string name="forgotpassword">Reset Password</string>
+    <string name="forgot_password">Forgot Your Password?</string>
+    <string name="forgot_text">Enter your email address below and we\'ll \nsend you a URL. to reset your password.</string>
+
+    <string name="resetpassword">Reset Password Done</string>
+    <string name="checkemail">Check Your Email</string>
+    <string name="reset_text">A URL to reset password has been \nsent to your Email address.</string>
+
+    <string name="done">Done</string>
+    <string name="enjoy">Enjoy OnlyNow!</string>
+    <string name="done_text">Please enjoy OnlyNow app!</string>
+    <string name="client_done_text">We will contact you soon. \nPlease wait a bit more</string>
+
+    <string name="onlynow">OnlyNow</string>
+    <string name="coupon_detail">Ally Capellino Frank Brown - Fott Shop 2010</string>
+    <string name="coupon_pname">Dave Gandy</string>
+    <string name="coupon_place">Shinjuku</string>
+    <string name="coupon_time">02 days 11hrs 21 mins left</string>
+    <string name="coupon_days">Valid until : 22 Jan,2017</string>
+    <string name="coupon_rating">4.2</string>
+
+    <string name="notice_pname">Barbara jordan</string>
+    <string name="notice_details">started following you</string>
+    <string name="notice_time">27 min ago</string>
+
+    <string name="current_location">Current Location</string>
+    <string name="ecommerce">Ecommerce</string>
+    <string name="location">Linguee</string>
+    <string name="category">Category</string>
+    <string name="coupon_type">Beauty</string>
+    <string name="Shop">Shop</string>
+    <string name="Review">Review</string>
+    <string name="analytics">Analytics</string>
+    <string name="setting">Settings</string>
+
+    <string name="canceldeal">Cancel the Deal</string>
+    <string name="mylist_day">jan 2nd 2017</string>
+    <string name="edit_profile">Edit Profile</string>
+    <string name="mrjhon">Mr Jhon</string>
+    <string name="male">Male</string>
+    <string name="mrjohnlee">Mr Jhon Lee</string>
+    <string name="march17th1981">March 17th 1981</string>
+    <string name="mobilenumber">123-4567-8900</string>
+    <string name="uclaaerospace">uclaaerospace@gmal.com</string>
+    <string name="changepassword">Change Password</string>
+    <string name="active_location">Active location</string>
+    <string name="change_location">Change the location</string>
+    <string name="receive_emails">Receive Emails</string>
+    <string name="push_notification">Push notification</string>
+    <string name="q_amp_a"><![CDATA[Q & A]]></string>
+    <string name="report_a_problem">Report a Problem</string>
+    <string name="about_onlynow">About OnlyNow</string>
+    <string name="blog">Blog</string>
+    <string name="privacy_policy">Privacy Policy</string>
+    <string name="terms_and_conditions">Terms and Conditions</string>
+    <string name="log_out">Log out</string>
+    <string name="sort_by">Sort By</string>
+    <string name="popular">Popular</string>
+    <string name="news">New</string>
+    <string name="finish_soon">Finish Soon</string>
+    <string name="_4_5">4.5</string>
+    <string name="_4_2">4.2</string>
+    <string name="ally_capellino_frank_brown_fott_shop_2010">Ally Capellino Frank Brown - Fott Shop 2010</string>
+    <string name="dave_gandy">Dave Gandy</string>
+    <string name="shinjuku">Shinjuku</string>
+    <string name="_02_days_11hrs_21_mins_left">02 days 11hrs 21 mins left</string>
+    <string name="valid_until_22_jan_2017">Valid until : 22 Jan,2017</string>
+    <string name="save">Save</string>
+    <string name="valid">Valid</string>
+    <string name="coupon_name">Coupon name</string>
+    <string name="other_coupon_details">Other Coupon Details</string>
+    <string name="free_text">Free Text</string>
+    <string name="coupon_details">Coupon Details</string>
+    <string name="phone_number_or_website">Phone number or website</string>
+    <string name="shop_name">Shop name</string>
+    <string name="shop_details">Shop Details</string>
+    <string name="they_way_to_use_this_coupon">They way to use this coupon</string>
+    <string name="coupon">Coupon</string>
+    <string name="valid_until_22nd_jan_2017">Valid until : 22nd jan, 2017</string>
+    <string name="beauty">Beauty</string>
+    <string name="_11_29_55_minute_left">11:29:55 Minute Left</string>
+    <string name="ally_capellino_frank_brown">Ally Capellino Frank Brown</string>
+    <string name="shop_name_phonenumber">Shop name\n Phone number or website (for category in EC)</string>
+
+    <string name="address">Address in text</string>
+    <string name="shop">Shop Details</string>
+    <string name="url">www.abcxyz.com</string>
+    <string name="web">Web URL</string>
+    <string name="number">1234567890</string>
+    <string name="phone">Phone number</string>
+    <string name="rating">Average Rating</string>
+    <string name="review">LEAVE A REVIEW</string>
+    <string name="reviews2">2 Reviews</string>
+    <string name="reviews1">1 Reviews</string>
+    <string name="reviews5">5 Reviews</string>
+    <string name="reviews7">7 Reviews</string>
+    <string name="reviews10">10 Reviews</string>
+
+    <string name="search">Search</string>
+    <string name="searchresult">Search Result</string>
+    <string name="list">My List</string>
+
+    <string name="editphonenumber">Edit Phone Number</string>
+    <string name="editurl">Edit URL</string>
+    <string name="editshopdetails">Edit Shop Details</string>
+    <string name="editaddress">Edit Address</string>
+    <string name="frank_brown">Frank Brown</string>
+    <string name="published">Published : 21 sep 2016</string>
+
+    <string name="from">From</string>
+    <string name="to">To</string>
 </resources>

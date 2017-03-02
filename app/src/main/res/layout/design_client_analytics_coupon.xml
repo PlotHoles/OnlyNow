@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginLeft="@dimen/dp_10"
+        android:layout_marginRight="@dimen/dp_10">
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_150"
+            android:src="@drawable/natural"
+            android:id="@+id/coupon_image"
+            android:scaleType="fitXY"/>
+
+        <com.sparecode.vipul.onlynow.widgets.LatoTextView
+            android:layout_marginTop="@dimen/dp_10"
+            android:layout_marginStart="@dimen/dp_5"
+            android:text="@string/frank_brown"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/text_coupon_name"
+            android:textColor="@color/black"/>
+
+        <com.sparecode.vipul.onlynow.widgets.LatoTextView
+            android:text="@string/published"
+            android:layout_width="wrap_content"
+            android:textColor="@color/black"
+            android:layout_height="wrap_content"
+            android:id="@+id/coupon_publishdate"
+            android:layout_marginStart="@dimen/dp_5"
+            android:layout_below="@+id/textView31" />
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/show_icon"
+                    android:layout_gravity="center"/>
+                <com.sparecode.vipul.onlynow.widgets.LatoTextView
+                    android:text="321"
+                    android:layout_width="wrap_content"
+                    android:textColor="@color/headercolor"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/coupon_view"
+                    android:layout_margin="@dimen/dp_20"/>
+            </LinearLayout>
+            <LinearLayout
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/save_icon"
+                    android:layout_gravity="center"/>
+
+                <com.sparecode.vipul.onlynow.widgets.LatoTextView
+                    android:text="112"
+                    android:layout_width="wrap_content"
+                    android:textColor="@color/headercolor"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/coupon_save"
+                    android:layout_margin="@dimen/dp_20"/>
+            </LinearLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+</LinearLayout>

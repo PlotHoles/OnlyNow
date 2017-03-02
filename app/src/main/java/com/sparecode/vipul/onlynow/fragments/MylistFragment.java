@@ -57,8 +57,12 @@ public class MylistFragment extends BaseFragment {
     @Override
     public void setToolbarForFragment() {
         ((BaseActivity) getActivity()).getAppbarLayout().setVisibility(View.VISIBLE);
-        ((BaseActivity) getActivity()).getTextViewToolBarTitle().setText("My List");
+        ((BaseActivity) getActivity()).getTextViewToolBarTitle().setText(getString(R.string.list));
         ((BaseActivity) getActivity()).getTabLayout().setVisibility(View.VISIBLE);
+        ((BaseActivity)getActivity()).getImgSearchMap().setVisibility(View.GONE);
+        ((BaseActivity)getActivity()).setOptionMenuVisibility(false);
+        ((BaseActivity)getActivity()).getImgMap().setVisibility(View.GONE);
+        ((BaseActivity)getActivity()).getImgToolBarBack().setVisibility(View.GONE);
     }
 
     @Override

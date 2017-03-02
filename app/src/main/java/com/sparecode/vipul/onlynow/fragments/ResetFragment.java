@@ -1,6 +1,7 @@
 package com.sparecode.vipul.onlynow.fragments;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,6 +23,7 @@ public class ResetFragment extends BaseFragment {
     TextView textView3;
     @Bind(R.id.textView7)
     TextView textView7;
+    String usertype;
 
     public ResetFragment() {
         // Required empty public constructor
@@ -39,6 +41,12 @@ public class ResetFragment extends BaseFragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_reset, container, false);
         ButterKnife.bind(this, view);
+
+            usertype = getArguments().getString("key");
+            Log.e("-------->usertype",usertype);
+
+
+
         return view;
     }
 
@@ -51,19 +59,32 @@ public class ResetFragment extends BaseFragment {
 
     @OnClick(R.id.button_signin)
     public void onClick() {
-        ((BaseActivity)getActivity()).openSigninPage();
+
+            if (usertype.equalsIgnoreCase("client"))
+            {
+                ((BaseActivity)getActivity()).openClientSigninPage();
+            }
+            else if (usertype.equalsIgnoreCase("user"))
+            {
+                ((BaseActivity)getActivity()).openSigninPage();
+            }
     }
 
     @Override
     public void setToolbarForFragment() {
         ((BaseActivity)getActivity()).getAppbarLayout().setVisibility(View.VISIBLE);
-        ((BaseActivity)getActivity()).getTextViewToolBarTitle().setText("Reset Password Done");
+        ((BaseActivity)getActivity()).getTextViewToolBarTitle().setText(getString(R.string.resetpassword));
         ((BaseActivity)getActivity()).getImgToolBarBack().setVisibility(View.VISIBLE);
         ((BaseActivity)getActivity()).getTextNext().setVisibility(View.GONE);
         ((BaseActivity)getActivity()).getImgToolBarBack().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((BaseActivity)getActivity()).openForgotPage();
+                ForgotFragment fragment = new ForgotFragment();
+                Bundle bundle = new Bundle();
+                bundle.putString("key",usertype);
+                fragment.setArguments(bundle);
+                addFragment(fragment,true);
+                //((BaseActivity)getActivity()).openForgotPage();
             }
         });
     }

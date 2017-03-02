@@ -58,16 +58,37 @@ public class SigninFragment extends BaseFragment {
         return view;
     }
 
+    void validation()
+    {
+        if (editEmail.getText().toString().trim().length() == 0)
+        {
+            editEmail.setError(getString(R.string.email));
+            editEmail.requestFocus();
+        }
+        else if (editPassword.getText().toString().trim().length() == 0)
+        {
+            editPassword.setError(getString(R.string.password));
+            editPassword.requestFocus();
+        }
+        else
+        {
+            ((BaseActivity)getActivity()).openHomePage();
+        }
 
+    }
     @Override
     public void setToolbarForFragment() {
         ((BaseActivity) getActivity()).getAppbarLayout().setVisibility(View.VISIBLE);
-        ((BaseActivity) getActivity()).getTextViewToolBarTitle().setText("Sign In");
+        ((BaseActivity) getActivity()).getTextViewToolBarTitle().setText(getString(R.string.sign));
         ((BaseActivity)getActivity()).getImgToolBarBack().setVisibility(View.VISIBLE);
-        ((BaseActivity) getActivity()).getImgToolBarBack().setOnClickListener(new View.OnClickListener() {
+        ((BaseActivity)getActivity()).getImgToolBarCancel().setVisibility(View.GONE);
+        ((BaseActivity)getActivity()).getImgShare().setVisibility(View.GONE);
+        ((BaseActivity)getActivity()).getTabLayout().setVisibility(View.GONE);
+        ((BaseActivity)getActivity()).getTextNext().setVisibility(View.GONE);
+        ((BaseActivity)getActivity()).getImgToolBarBack().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((BaseActivity) getActivity()).openSplashPage();
+                ((BaseActivity)getActivity()).openSplashPage();
             }
         });
     }
@@ -82,14 +103,20 @@ public class SigninFragment extends BaseFragment {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.text_signup:
+                ((BaseActivity)getActivity()).openSignupfacebookPage();
                 break;
             case R.id.button_facebook:
                 break;
             case R.id.text_forgot:
-                ((BaseActivity)getActivity()).openForgotPage();
+                ForgotFragment fragment = new ForgotFragment();
+                Bundle bundle = new Bundle();
+                bundle.putString("key","user");
+                fragment.setArguments(bundle);
+                addFragment(fragment,true);
+
                 break;
             case R.id.button_signin:
-                ((BaseActivity)getActivity()).openDonePage();
+                validation();
                 break;
         }
     }

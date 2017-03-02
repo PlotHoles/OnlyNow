@@ -1,0 +1,164 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="com.sparecode.vipul.onlynow.fragments.ClientCouponDetailsFragment">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:layout_marginRight="@dimen/dp_10"
+            android:layout_marginTop="@dimen/dp_10">
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" >
+
+
+                <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dp_150"
+                        app:srcCompat="@drawable/natural"
+                        android:id="@+id/coupon_image"
+                        android:scaleType="fitXY"/>
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:srcCompat="@drawable/details_page_next_icon"
+                        android:id="@+id/next_image"
+                        android:layout_gravity="center_vertical|right"/>
+                </FrameLayout>
+            </android.support.v7.widget.CardView>
+
+            <com.sparecode.vipul.onlynow.widgets.LatoTextView
+                android:layout_marginTop="@dimen/dp_10"
+                android:text="@string/ally_capellino_frank_brown"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/text_couponname"
+                android:textColor="@color/black"
+                app:typeface="lato_regular"/>
+
+            <RelativeLayout
+                android:layout_marginTop="@dimen/dp_2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.sparecode.vipul.onlynow.widgets.LatoTextView
+                    android:text="@string/_11_29_55_minute_left"
+                    android:layout_width="wrap_content"
+                    android:textColor="@color/black"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentStart="true"
+                    android:id="@+id/text_coupontime"
+                    app:typeface="lato_regular"
+                    android:visibility="gone"/>
+
+                <com.sparecode.vipul.onlynow.widgets.LatoTextView
+                    android:text="@string/coupon_type"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentEnd="true"
+                    android:id="@+id/text_coupontype"
+                    app:typeface="lato_regular"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_marginTop="@dimen/dp_2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.sparecode.vipul.onlynow.widgets.LatoTextView
+                    android:text="@string/coupon_days"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentStart="true"
+                    android:id="@+id/text_coupondate"
+                    app:typeface="lato_regular"
+                    android:visibility="gone"/>
+
+                <com.sparecode.vipul.onlynow.widgets.LatoTextView
+                    android:text="@string/coupon_place"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentEnd="true"
+                    android:id="@+id/text_couponplace"
+                    app:typeface="lato_regular"/>
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:id="@+id/linear">
+
+            <com.sparecode.vipul.onlynow.widgets.LatoEditText
+                android:layout_marginTop="@dimen/dp_10"
+                android:background="@drawable/blackborderedittext"
+                android:padding="@dimen/dp_10"
+                android:hint="@string/they_way_to_use_this_coupon"
+                android:text=""
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:id="@+id/coupan"
+                app:typeface="lato_regular"/>
+
+            <com.sparecode.vipul.onlynow.widgets.LatoEditText
+                android:layout_marginTop="@dimen/dp_10"
+                android:background="@drawable/blackborderedittext"
+                android:padding="@dimen/dp_10"
+                android:hint="@string/shop_name_phonenumber"
+                android:text=""
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:id="@+id/shopname"
+                app:typeface="lato_regular"/>
+
+            <com.sparecode.vipul.onlynow.widgets.LatoEditText
+                android:layout_marginTop="@dimen/dp_10"
+                android:background="@drawable/blackborderedittext"
+                android:padding="@dimen/dp_25"
+                android:hint="@string/coupon_details"
+                android:text=""
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:id="@+id/coupandetail"
+                app:typeface="lato_regular"/>
+            </LinearLayout>
+
+            <com.sparecode.vipul.onlynow.widgets.LatoButton
+                android:layout_marginTop="@dimen/dp_40"
+                android:layout_marginRight="@dimen/dp_20"
+                android:layout_marginLeft="@dimen/dp_20"
+                android:background="@color/headercolor"
+                android:text="@string/save"
+                android:textAllCaps="false"
+                android:textSize="@dimen/dp_20"
+                android:textColor="@color/white"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/save"
+                android:layout_marginBottom="@dimen/dp_10"/>
+        </LinearLayout>
+    </ScrollView>
+
+</FrameLayout>

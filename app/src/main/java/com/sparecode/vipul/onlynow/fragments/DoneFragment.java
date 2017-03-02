@@ -46,10 +46,12 @@ public class DoneFragment extends BaseFragment {
     @Override
     public void setToolbarForFragment() {
         ((BaseActivity) getActivity()).getAppbarLayout().setVisibility(View.VISIBLE);
-        ((BaseActivity) getActivity()).getTextViewToolBarTitle().setText("Done");
+        ((BaseActivity) getActivity()).getTextViewToolBarTitle().setText(getString(R.string.done));
         ((BaseActivity) getActivity()).getImgToolBarBack().setVisibility(View.INVISIBLE);
-        final int gone = View.GONE;
-        ((BaseActivity)getActivity()).getTextNext().setVisibility(gone);
+        ((BaseActivity)getActivity()).getTextNext().setVisibility(View.GONE);
+        ((BaseActivity)getActivity()).getImgSettings().setVisibility(View.GONE);
+        ((BaseActivity)getActivity()).getTabLayout().setVisibility(View.GONE);
+        ((BaseActivity)getActivity()).setOptionMenuVisibility(false);
                 
     }
 

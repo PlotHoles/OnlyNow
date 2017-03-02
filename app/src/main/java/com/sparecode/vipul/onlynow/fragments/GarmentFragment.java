@@ -1,7 +1,6 @@
 package com.sparecode.vipul.onlynow.fragments;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -18,7 +17,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class GarmentFragment extends Fragment {
+public class GarmentFragment extends BaseFragment {
 
     @Bind(R.id.recyclerview)
     RecyclerView recyclerview;
@@ -75,5 +74,10 @@ public class GarmentFragment extends Fragment {
     @OnClick(R.id.recyclerview)
     public void onClick() {
         Toast.makeText(getActivity(),"hi",Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void setToolbarForFragment() {
+
     }
 }

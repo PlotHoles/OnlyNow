@@ -2,6 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="com.sparecode.vipul.onlynow.fragments.ForgotFragment">
 
 
@@ -21,23 +22,25 @@
             android:layout_centerHorizontal="true"
             android:id="@+id/linearLayout3">
 
-            <EditText
+            <com.sparecode.vipul.onlynow.widgets.LatoEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textPersonName"
-                android:hint="Email Address"
+                android:hint="@string/emailaddress"
                 android:ems="10"
-                android:id="@+id/edit_forgotemail" />
+                android:id="@+id/edit_forgotemail"
+                app:typeface="lato_bold"/>
 
-            <Button
+            <com.sparecode.vipul.onlynow.widgets.LatoButton
                 android:textAllCaps="false"
                 android:textColor="@color/white"
                 android:background="@color/orange"
                 android:layout_marginTop="@dimen/dp_10"
-                android:text="Reset Password"
+                android:text="@string/forgotpassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/button_forgot" />
+                android:id="@+id/button_forgot"
+                app:typeface="lato_bold"/>
         </LinearLayout>
 
         <LinearLayout
@@ -49,22 +52,24 @@
             android:layout_above="@+id/linearLayout3"
             android:gravity="center">
 
-            <TextView
+            <com.sparecode.vipul.onlynow.widgets.LatoTextView
                 android:textColor="@color/headercolor"
                 android:gravity="center"
-                android:text="Forgot Your Password?"
+                android:text="@string/forgot_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/textView4" />
+                android:id="@+id/textView4"
+                app:typeface="lato_bold"/>
 
-            <TextView
+            <com.sparecode.vipul.onlynow.widgets.LatoTextView
                 android:lineSpacingExtra="1dp"
                 android:layout_marginTop="@dimen/dp_5"
                 android:gravity="center"
-                android:text="Enter your email address below and we'll \nsend you a URL. to reset your password."
+                android:text="@string/forgot_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/textView5" />
+                android:id="@+id/textView5"
+                app:typeface="lato_bold"/>
         </LinearLayout>
     </RelativeLayout>
 </FrameLayout>

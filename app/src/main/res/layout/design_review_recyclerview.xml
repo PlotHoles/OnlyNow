@@ -18,15 +18,16 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_alignParentStart="true"
-            android:id="@+id/textView60" />
+            android:id="@+id/username"
+            android:maxLength="15"/>
 
         <RatingBar
             android:layout_marginLeft="@dimen/dp_5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:layout_toEndOf="@+id/textView60"
-            android:id="@+id/ratingBar2"
+            android:layout_toEndOf="@+id/username"
+            android:id="@+id/ratingBar"
             style="?android:attr/ratingBarStyleSmall"
             android:progressBackgroundTint="@color/orange"/>
 
@@ -37,13 +38,13 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
-            android:id="@+id/textView68" />
+            android:id="@+id/text_time" />
     </RelativeLayout>
     <TextView
         android:text="Einstein has just become the world's first time teaveler .I sent him into the future. One minute into the future to be exact. And at exactly 1:21 AM we shall catch up with him."
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/textView69"
+        android:id="@+id/review"
         android:layout_weight="1"
         android:layout_marginBottom="@dimen/dp_10"/>
 
@@ -51,6 +52,7 @@
         android:layout_marginTop="@dimen/dp_10"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/detaillinecolor"></View>
+        android:background="@color/detaillinecolor"
+        android:layout_marginBottom="@dimen/dp_10"></View>
 
 </LinearLayout>

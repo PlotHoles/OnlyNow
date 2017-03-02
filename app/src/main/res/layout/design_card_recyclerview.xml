@@ -20,7 +20,7 @@
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
-                app:srcCompat="@mipmap/ic_launcher"
+                app:srcCompat="@drawable/natural"
                 android:id="@+id/imageView3"
                 android:scaleType="fitXY"/>
 
@@ -35,10 +35,11 @@
                 android:layout_marginRight="@dimen/dp_20"
                 android:id="@+id/linearLayout5">
 
-                <TextView
+                <com.sparecode.vipul.onlynow.widgets.LatoTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Ally Capellino Frank Brown - Fott Shop 2010"/>
+                    android:text="@string/coupon_detail"
+                    app:typeface="lato_bold"/>
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -53,17 +54,19 @@
                         android:layout_alignParentTop="true"
                         android:layout_alignParentEnd="true" />
 
-                    <TextView
+                    <com.sparecode.vipul.onlynow.widgets.LatoTextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Dave Gandy"
-                        android:layout_toStartOf="@+id/imageView4" />
+                        android:text="@string/coupon_pname"
+                        android:layout_toStartOf="@+id/imageView4"
+                        app:typeface="lato_bold"/>
                 </RelativeLayout>
 
-                <TextView
+                <com.sparecode.vipul.onlynow.widgets.LatoTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Shinjuku"/>
+                    android:text="@string/coupon_place"
+                    app:typeface="lato_regular"/>
             </LinearLayout>
 
 
@@ -97,19 +100,21 @@
                 android:background="@drawable/roundedlayout"
                 android:padding="@dimen/dp_5">
 
-                <TextView
+                <com.sparecode.vipul.onlynow.widgets.LatoTextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="02 days 11hrs 21 mins left"
+                    android:text="@string/coupon_time"
                     android:gravity="center"
-                    android:textColor="@color/white"/>
+                    android:textColor="@color/white"
+                    app:typeface="lato_regular"/>
 
-                <TextView
+                <com.sparecode.vipul.onlynow.widgets.LatoTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Valid until : 22 Jan,2017"
+                    android:text="@string/coupon_days"
                     android:gravity="center"
-                    android:textColor="@color/white"/>
+                    android:textColor="@color/white"
+                    app:typeface="lato_regular"/>
             </LinearLayout>
         </RelativeLayout>
     </android.support.v7.widget.CardView>

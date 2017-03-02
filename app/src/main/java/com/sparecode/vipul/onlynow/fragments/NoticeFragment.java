@@ -51,6 +51,10 @@ public class NoticeFragment extends BaseFragment {
         ((BaseActivity) getActivity()).getAppbarLayout().setVisibility(View.VISIBLE);
         ((BaseActivity) getActivity()).getTextViewToolBarTitle().setText("Notice");
         ((BaseActivity) getActivity()).getTabLayout().setVisibility(View.VISIBLE);
+        ((BaseActivity)getActivity()).getImgSettings().setVisibility(View.GONE);
+        ((BaseActivity)getActivity()).setOptionMenuVisibility(true);
+        ((BaseActivity)getActivity()).getImgMap().setVisibility(View.GONE);
+        ((BaseActivity)getActivity()).getImgSearchMap().setVisibility(View.GONE);
     }
 
     @Override

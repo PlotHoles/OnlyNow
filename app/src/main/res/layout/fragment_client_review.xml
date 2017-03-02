@@ -1,0 +1,192 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="com.sparecode.vipul.onlynow.fragments.ClientReviewFragment">
+
+    <LinearLayout
+        android:layout_marginTop="@dimen/dp_10"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/reviewborder">
+
+            <LinearLayout
+                android:background="@drawable/border"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center">
+
+
+                <com.sparecode.vipul.onlynow.widgets.LatoTextView
+                    android:gravity="center"
+                    android:text="@string/_4_5"
+                    android:textSize="@dimen/sp_50"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/text_rating"
+                    app:typeface="lato_bold"/>
+
+                <com.sparecode.vipul.onlynow.widgets.LatoTextView
+                    android:gravity="center"
+                    android:text="@string/rating"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/text_average"
+                    android:layout_marginBottom="@dimen/dp_10"
+                    app:typeface="lato_regular"/>
+
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal">
+
+                    <RatingBar
+                        android:layout_marginTop="@dimen/dp_10"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/fivestar_rating"
+                        android:numStars="5"
+                        style="?android:attr/ratingBarStyleSmall"
+                        android:progressBackgroundTint="@color/orange"/>
+
+                    <com.sparecode.vipul.onlynow.widgets.LatoTextView
+                        android:layout_marginLeft="@dimen/dp_5"
+                        android:text="@string/reviews10"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="@dimen/dp_8"
+                        android:id="@+id/star5"
+                        android:layout_marginTop="@dimen/dp_10"
+                        app:typeface="lato_regular"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal">
+
+                    <RatingBar
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/fourstar_rating"
+                        android:numStars="5"
+                        style="?android:attr/ratingBarStyleSmall"
+                        android:progressBackgroundTint="@color/orange"/>
+
+                    <com.sparecode.vipul.onlynow.widgets.LatoTextView
+                        android:layout_marginLeft="@dimen/dp_5"
+                        android:text="@string/reviews7"
+                        android:paddingLeft="@dimen/dp_8"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/star4"
+                        app:typeface="lato_regular"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal">
+
+                    <RatingBar
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/threestar_rating"
+                        android:numStars="5"
+                        style="?android:attr/ratingBarStyleSmall"
+                        android:progressBackgroundTint="@color/orange"/>
+
+                    <com.sparecode.vipul.onlynow.widgets.LatoTextView
+                        android:paddingLeft="@dimen/dp_8"
+                        android:layout_marginLeft="@dimen/dp_5"
+                        android:text="@string/reviews5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/star3"
+                        app:typeface="lato_regular"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal">
+
+                    <RatingBar
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/twostar_rating"
+                        android:numStars="5"
+                        style="?android:attr/ratingBarStyleSmall"
+                        android:progressBackgroundTint="@color/orange"/>
+
+                    <com.sparecode.vipul.onlynow.widgets.LatoTextView
+                        android:paddingLeft="@dimen/dp_8"
+                        android:layout_marginLeft="@dimen/dp_5"
+                        android:text="@string/reviews1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/star2"
+                        app:typeface="lato_regular"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal">
+
+                    <RatingBar
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/onestar_rating"
+                        android:numStars="5"
+                        style="?android:attr/ratingBarStyleSmall"
+                        android:progressBackgroundTint="@color/orange" />
+
+                    <com.sparecode.vipul.onlynow.widgets.LatoTextView
+                        android:paddingLeft="@dimen/dp_8"
+                        android:layout_marginLeft="@dimen/dp_5"
+                        android:text="@string/reviews2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/star1"
+                        android:layout_marginBottom="@dimen/dp_10"
+                        app:typeface="lato_regular"/>
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/detaillinecolor">
+
+        </View>
+        <android.support.v7.widget.RecyclerView
+            android:layout_marginTop="@dimen/dp_10"
+            android:id="@+id/review_recyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+
+</FrameLayout>

@@ -1,5 +1,6 @@
 package com.sparecode.vipul.onlynow.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -49,8 +50,10 @@ public class DetailsFragment extends BaseFragment {
         sectionPagerAdapter = new SectionPagerAdapter(getChildFragmentManager());
         pager.setAdapter(sectionPagerAdapter);
         tabs.setupWithViewPager(pager);
+
         return view;
     }
+
 
     @Override
     public void onDestroyView() {
@@ -63,6 +66,20 @@ public class DetailsFragment extends BaseFragment {
         ((BaseActivity)getActivity()).getAppbarLayout().setVisibility(View.VISIBLE);
         ((BaseActivity)getActivity()).getTextViewToolBarTitle().setText("Details");
         ((BaseActivity)getActivity()).getTabLayout().setVisibility(View.VISIBLE);
+        ((BaseActivity)getActivity()).getImgShare().setVisibility(View.VISIBLE);
+        ((BaseActivity)getActivity()).getImgSettings().setVisibility(View.GONE);
+        ((BaseActivity)getActivity()).getImgToolBarCancel().setVisibility(View.VISIBLE);
+        ((BaseActivity)getActivity()).setOptionMenuVisibility(false);
+        ((BaseActivity)getActivity()).getImgShare().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent sendIntent = new Intent();
+                sendIntent.setAction(Intent.ACTION_SEND);
+                sendIntent.putExtra(Intent.EXTRA_TEXT, "This is my text to send.");
+                sendIntent.setType("text/plain");
+                startActivity(sendIntent);
+            }
+        });
     }
 
     public class SectionPagerAdapter extends FragmentPagerAdapter {

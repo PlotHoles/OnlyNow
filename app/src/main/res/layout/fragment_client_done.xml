@@ -1,0 +1,54 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="com.sparecode.vipul.onlynow.fragments.ClientDoneFragment">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.sparecode.vipul.onlynow.widgets.LatoButton
+            android:layout_marginLeft="@dimen/dp_20"
+            android:layout_marginRight="@dimen/dp_20"
+            android:layout_marginBottom="@dimen/dp_20"
+            android:background="@color/orange"
+            android:textColor="@color/white"
+            android:textAllCaps="false"
+            android:text="@string/done"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/button_done"
+            app:typeface="lato_bold"/>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/button4"
+            android:layout_alignParentStart="true"
+            android:gravity="center">
+
+            <com.sparecode.vipul.onlynow.widgets.LatoTextView
+                android:textColor="@color/headercolor"
+                android:gravity="center"
+                android:text="@string/done"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView8"
+                app:typeface="lato_bold"/>
+
+            <com.sparecode.vipul.onlynow.widgets.LatoTextView
+                android:gravity="center"
+                android:text="@string/client_done_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView9"
+                app:typeface="lato_bold"/>
+        </LinearLayout>
+    </RelativeLayout>
+
+</FrameLayout>

@@ -21,11 +21,11 @@
             android:layout_marginLeft="@dimen/dp_10">
 
             <com.sparecode.vipul.onlynow.view.CircleImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@mipmap/ic_launcher"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/natural"
                 app:civ_border_width="2dp"
-                app:civ_border_color="#000000"/>
+                app:civ_border_color="#ffffff"/>
         </LinearLayout>
 
         <ImageView
@@ -52,29 +52,31 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <TextView
-                    android:text="Barbara jordan"
+                <com.sparecode.vipul.onlynow.widgets.LatoTextView
+                    android:text="@string/notice_pname"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/textView11"
-                    android:textStyle="bold"/>
+                    app:typeface="lato_bold"/>
 
-                <TextView
-                    android:text="started following you"
+                <com.sparecode.vipul.onlynow.widgets.LatoTextView
+                    android:text="@string/notice_details"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/textView10"
-                    android:layout_marginLeft="@dimen/dp_5"/>
+                    android:layout_marginLeft="@dimen/dp_5"
+                    app:typeface="lato_regular"/>
             </LinearLayout>
 
-            <TextView
+            <com.sparecode.vipul.onlynow.widgets.LatoTextView
                 android:layout_marginTop="@dimen/dp_5"
-                android:text="27 min ago"
+                android:text="@string/notice_time"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/textView15"
                 android:drawableLeft="@drawable/samll_clock_icon"
-                android:drawablePadding="@dimen/dp_5"/>
+                android:drawablePadding="@dimen/dp_5"
+                app:typeface="lato_regular"/>
         </LinearLayout>
 
 

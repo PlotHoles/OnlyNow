@@ -17,4 +17,58 @@
         <attr name="civ_border_overlay" format="boolean" />
         <attr name="civ_fill_color" format="color" />
     </declare-styleable>
+
+    <declare-styleable name="LatoTextView">
+        <attr name="typeface"/>
+        <attr name="fontFamily"/>
+        <attr name="textWeight"/>
+        <attr name="textStyle"/>
+    </declare-styleable>
+
+    <declare-styleable name="LatoButton">
+        <attr name="typeface"/>
+        <attr name="fontFamily"/>
+        <attr name="textWeight"/>
+        <attr name="textStyle"/>
+    </declare-styleable>
+
+    <declare-styleable name="LatoEditText">
+        <attr name="typeface"/>
+        <attr name="fontFamily"/>
+        <attr name="textWeight"/>
+        <attr name="textStyle"/>
+    </declare-styleable>
+
+    <declare-styleable name="LatoRadioButton">
+        <attr name="typeface"/>
+        <attr name="fontFamily"/>
+        <attr name="textWeight"/>
+        <attr name="textStyle"/>
+    </declare-styleable>
+
+    <declare-styleable name="LatoCheckBox">
+        <attr name="typeface"/>
+        <attr name="fontFamily"/>
+        <attr name="textWeight"/>
+        <attr name="textStyle"/>
+    </declare-styleable>
+
+    <attr name="typeface">
+        <enum name="lato_regular" value="4"/>
+        <enum name="lato_bold" value="8"/>
+
+    </attr>
+
+    <attr name="fontFamily">
+        <enum name="lato" value="0"/>
+    </attr>
+
+    <attr name="textWeight">
+        <enum name="normal" value="0"/>
+        <enum name="bold" value="4"/>
+    </attr>
+
+    <attr name="textStyle">
+        <enum name="normal" value="0"/>
+    </attr>
 </resources>

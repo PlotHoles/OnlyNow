@@ -30,15 +30,16 @@
                 android:id="@+id/imageView22"
                 android:layout_marginTop="@dimen/dp_5"/>
 
-            <TextView
+            <com.sparecode.vipul.onlynow.widgets.LatoTextView
                 android:textColor="@color/white"
                 android:gravity="center"
-                android:text="Linguee"
+                android:text="@string/location"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/textView70"
                 android:layout_marginTop="@dimen/dp_5"
-                android:layout_marginBottom="@dimen/dp_5"/>
+                android:layout_marginBottom="@dimen/dp_5"
+                app:typeface="lato_bold"/>
         </LinearLayout>
 
 </LinearLayout>

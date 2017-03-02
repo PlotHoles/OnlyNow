@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 
 import com.sparecode.vipul.onlynow.R;
 import com.sparecode.vipul.onlynow.activity.BaseActivity;
+import com.sparecode.vipul.onlynow.util.Utils;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -47,7 +48,7 @@ public class HomeFragment extends BaseFragment {
         sectionPagerAdapter = new SectionPagerAdapter(getChildFragmentManager());
         pager.setAdapter(sectionPagerAdapter);
         tabs.setupWithViewPager(pager);
-
+        Utils.applyFontedTab(getActivity(),pager,tabs);
         return view;
     }
 
@@ -56,9 +57,16 @@ public class HomeFragment extends BaseFragment {
     @Override
     public void setToolbarForFragment() {
         ((BaseActivity) getActivity()).getAppbarLayout().setVisibility(View.VISIBLE);
-        ((BaseActivity) getActivity()).getTextViewToolBarTitle().setText("OnlyNow");
+        ((BaseActivity) getActivity()).getTextViewToolBarTitle().setText(getString(R.string.onlynow));
         ((BaseActivity) getActivity()).getImgToolBarBack().setVisibility(View.INVISIBLE);
+        ((BaseActivity)getActivity()).getTextNext().setVisibility(View.GONE);
         ((BaseActivity)getActivity()).getTabLayout().setVisibility(View.VISIBLE);
+        ((BaseActivity)getActivity()).getImgSettings().setVisibility(View.GONE);
+        ((BaseActivity)getActivity()).getImgMap().setVisibility(View.GONE);
+        ((BaseActivity)getActivity()).getImgShare().setVisibility(View.GONE);
+        ((BaseActivity)getActivity()).getImgToolBarCancel().setVisibility(View.GONE);
+        ((BaseActivity)getActivity()).setOptionMenuVisibility(true);
+        ((BaseActivity)getActivity()).getImgSearchMap().setVisibility(View.GONE);
     }
 
     @Override

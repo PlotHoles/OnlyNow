@@ -1,0 +1,263 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.sparecode.vipul.onlynow.fragments.ClientSignupstep1Fragment">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <com.sparecode.vipul.onlynow.widgets.LatoTextView
+        app:typeface="lato_regular"
+        android:gravity="center"
+        android:layout_marginBottom="@dimen/dp_10"
+        android:text="@string/already"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/text_already" />
+
+    <com.sparecode.vipul.onlynow.widgets.LatoTextView
+        android:gravity="center"
+        android:layout_marginBottom="@dimen/dp_10"
+        android:layout_marginLeft="@dimen/dp_5"
+        android:text="@string/sign"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_toEndOf="@+id/text_already"
+        android:id="@+id/text_signin"
+        android:textColor="@color/orange"
+        app:typeface="lato_bold"/>
+
+    <LinearLayout
+        android:layout_marginTop="@dimen/dp_10"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/text_already">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/logo_black"
+            android:id="@+id/imageView19" />
+
+        <TextView
+            android:layout_marginTop="@dimen/dp_20"
+            android:text="@string/client_splash_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView73"
+            android:gravity="center"/>
+
+        <ScrollView
+            android:id="@+id/scrollview"
+            android:scrollbars="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/text_already">
+
+
+            <LinearLayout
+                android:layout_marginLeft="@dimen/dp_10"
+                android:layout_marginRight="@dimen/dp_10"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentStart="true"
+                android:layout_above="@+id/textView6">
+
+                <LinearLayout
+                    android:layout_marginTop="@dimen/dp_5"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <com.sparecode.vipul.onlynow.widgets.LatoEditText
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:inputType="textPersonName"
+                        android:hint="@string/firstname"
+                        android:ems="10"
+                        android:id="@+id/edit_firstname"
+                        android:layout_weight="1"
+                        android:singleLine="false"
+                        app:typeface="lato_bold"/>
+
+                    <com.sparecode.vipul.onlynow.widgets.LatoEditText
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:inputType="textPersonName"
+                        android:hint="@string/lastname"
+                        android:ems="10"
+                        android:id="@+id/edit_lastname"
+                        android:layout_weight="1"
+                        android:singleLine="false"
+                        app:typeface="lato_bold"/>
+                </LinearLayout>
+
+                <com.sparecode.vipul.onlynow.widgets.LatoEditText
+                    android:layout_marginTop="@dimen/dp_5"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPersonName"
+                    android:hint="@string/clentname"
+                    android:ems="10"
+                    android:id="@+id/edit_clientname"
+                    android:singleLine="false"
+                    app:typeface="lato_bold"/>
+
+                <com.sparecode.vipul.onlynow.widgets.LatoEditText
+                    android:layout_marginTop="@dimen/dp_5"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPersonName"
+                    android:hint="@string/locationarea"
+                    android:ems="10"
+                    android:id="@+id/edit_location"
+                    android:singleLine="false"
+                    app:typeface="lato_bold"/>
+
+                <com.sparecode.vipul.onlynow.widgets.LatoEditText
+                    android:layout_marginTop="@dimen/dp_5"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:hint="@string/zipcode"
+                    android:ems="10"
+                    android:id="@+id/edit_zipcode"
+                    android:singleLine="false"
+                    app:typeface="lato_bold"/>
+
+                <com.sparecode.vipul.onlynow.widgets.LatoEditText
+                    android:layout_marginTop="@dimen/dp_5"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPersonName"
+                    android:hint="@string/prefecture"
+                    android:ems="10"
+                    android:id="@+id/edit_prefecture"
+                    android:singleLine="false"
+                    app:typeface="lato_bold"/>
+
+                <com.sparecode.vipul.onlynow.widgets.LatoEditText
+                    android:layout_marginTop="@dimen/dp_5"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPersonName"
+                    android:hint="@string/cityname"
+                    android:ems="10"
+                    android:id="@+id/edit_cityname"
+                    android:singleLine="false"
+                    app:typeface="lato_bold"/>
+
+                <com.sparecode.vipul.onlynow.widgets.LatoEditText
+                    android:layout_marginTop="@dimen/dp_5"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPersonName"
+                    android:hint="@string/streetname"
+                    android:ems="10"
+                    android:id="@+id/edit_street"
+                    android:singleLine="false"
+                    app:typeface="lato_bold"/>
+
+                <com.sparecode.vipul.onlynow.widgets.LatoEditText
+                    android:layout_marginTop="@dimen/dp_5"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPersonName"
+                    android:hint="@string/buildname"
+                    android:ems="10"
+                    android:id="@+id/edit_build"
+                    android:singleLine="false"
+                    app:typeface="lato_bold"/>
+
+                <com.sparecode.vipul.onlynow.widgets.LatoEditText
+                    android:layout_marginTop="@dimen/dp_5"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:hint="@string/phonenumber"
+                    android:ems="10"
+                    android:id="@+id/edit_phone"
+                    android:singleLine="false"
+                    app:typeface="lato_bold"/>
+
+                <com.sparecode.vipul.onlynow.widgets.LatoEditText
+                    android:layout_marginTop="@dimen/dp_5"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textEmailAddress"
+                    android:hint="@string/emailaddress"
+                    android:ems="10"
+                    android:id="@+id/edit_email"
+                    android:singleLine="false"
+                    app:typeface="lato_bold"/>
+
+                <com.sparecode.vipul.onlynow.widgets.LatoEditText
+                    android:layout_marginTop="@dimen/dp_5"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textEmailAddress"
+                    android:hint="@string/confirmemail"
+                    android:ems="10"
+                    android:id="@+id/edit_confirmemail"
+                    android:singleLine="false"
+                    app:typeface="lato_bold"/>
+
+                <com.sparecode.vipul.onlynow.widgets.LatoEditText
+                    android:layout_marginTop="@dimen/dp_5"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPassword"
+                    android:hint="@string/passsword"
+                    android:ems="10"
+                    android:id="@+id/edit_password"
+                    android:singleLine="false"
+                    app:typeface="lato_bold"/>
+
+                <com.sparecode.vipul.onlynow.widgets.LatoEditText
+                    android:layout_marginTop="@dimen/dp_5"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPersonName"
+                    android:hint="@string/websiteurl"
+                    android:ems="10"
+                    android:id="@+id/edit_website"
+                    android:singleLine="false"
+                    app:typeface="lato_bold" />
+
+
+                <com.sparecode.vipul.onlynow.widgets.LatoCheckBox
+                    android:layout_marginTop="@dimen/dp_5"
+                    android:text="Agree T&amp;Cs"
+                    android:paddingLeft="@dimen/dp_15"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/agreecheck"
+                    android:button="@drawable/checkboxbutton"
+                    app:typeface="lato_regular"
+                    android:layout_marginLeft="@dimen/dp_20"/>
+
+
+                <com.sparecode.vipul.onlynow.widgets.LatoButton
+                    android:layout_marginRight="@dimen/dp_20"
+                    android:layout_marginLeft="@dimen/dp_20"
+                    android:layout_marginTop="@dimen/dp_20"
+                    android:background="@color/orange"
+                    android:text="@string/next_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/buttonNext"
+                    android:layout_marginBottom="@dimen/dp_10"
+                    app:typeface="lato_bold"/>
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+    </RelativeLayout>
+</FrameLayout>

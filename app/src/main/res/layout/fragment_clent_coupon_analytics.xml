@@ -1,0 +1,146 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="com.sparecode.vipul.onlynow.fragments.ClentCouponAnalyticsFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <View
+                android:layout_marginRight="10dp"
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="@color/black"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:id="@+id/viewright"
+                android:layout_marginTop="10dp"
+                android:layout_alignBottom="@+id/linearLayout5"></View>
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="@color/black"
+                android:id="@+id/viewcenter"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:layout_alignBottom="@+id/linearLayout5"></View>
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="@color/black"
+                android:id="@+id/viewleft"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_alignBottom="@+id/linearLayout16"></View>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/viewleft"
+                android:layout_alignRight="@+id/viewcenter"
+                android:layout_alignEnd="@+id/viewcenter"
+                android:id="@+id/linearLayout16">
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/black"
+                    android:layout_marginTop="10dp"></View>
+
+                <com.sparecode.vipul.onlynow.widgets.LatoTextView
+                    android:layout_marginTop="@dimen/dp_5"
+                    android:text="@string/from"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/text_datepickerlbl"
+                    android:gravity="center"
+                    app:typeface="lato_regular"/>
+
+                <com.sparecode.vipul.onlynow.widgets.LatoTextView
+                    app:typeface="lato_bold"
+                    android:textColor="@color/headercolor"
+                    android:text="21/12/2016"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/text_datefrom"
+                    android:gravity="center"
+                    android:layout_marginTop="2dp"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/black"
+                    android:layout_marginTop="10dp"
+                    android:id="@+id/view_bottom_date"></View>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignLeft="@+id/viewcenter"
+                android:layout_alignStart="@+id/viewcenter"
+                android:layout_toLeftOf="@+id/viewright"
+                android:layout_toStartOf="@+id/viewright"
+                android:id="@+id/linearLayout5">
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/black"
+                    android:layout_marginTop="10dp"></View>
+
+                <com.sparecode.vipul.onlynow.widgets.LatoTextView
+                    android:layout_marginTop="@dimen/dp_5"
+                    android:text="@string/to"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/text_timepickerlbl"
+                    android:gravity="center"
+                    app:typeface="lato_regular"/>
+
+                <com.sparecode.vipul.onlynow.widgets.LatoTextView
+                    android:textColor="@color/headercolor"
+                    android:text="1:30 PM"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/text_dateto"
+                    android:gravity="center"
+                    android:layout_marginTop="2dp"
+                    app:typeface="lato_bold"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/black"
+                    android:layout_marginTop="10dp"></View>
+            </LinearLayout>
+        </RelativeLayout>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerview"
+            android:layout_marginBottom="@dimen/dp_10"
+            android:layout_marginTop="@dimen/dp_20"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:layout_marginRight="@dimen/dp_10"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+
+    </LinearLayout>
+
+</FrameLayout>

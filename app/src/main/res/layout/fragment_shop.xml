@@ -23,44 +23,39 @@
         android:layout_height="wrap_content" >
 
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_150"
+                app:srcCompat="@drawable/natural"
+                android:id="@+id/imageView9"
+                android:scaleType="fitXY"/>
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:srcCompat="@drawable/details_page_next_icon"
-                android:layout_centerVertical="true"
-                android:layout_alignParentEnd="true"
-                android:id="@+id/imageView19" />
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="150dp"
-                app:srcCompat="@mipmap/ic_launcher"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentStart="true"
-                android:id="@+id/imageView20"
-                android:scaleType="fitXY"/>
+                android:id="@+id/imageView11"
+                android:layout_gravity="center_vertical|right"/>
 
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentStart="true"
                 android:gravity="center"
                 android:background="@drawable/ratingrounder"
                 android:layout_marginLeft="@dimen/dp_10"
                 android:layout_marginTop="@dimen/dp_10"
                 android:padding="@dimen/dp_5">
-
-                <TextView
+                <com.sparecode.vipul.onlynow.widgets.LatoTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="4.2"
-                    android:textColor="@color/white"/>
+                    android:text="@string/coupon_rating"
+                    android:textColor="@color/white"
+                    app:typeface="lato_bold"/>
                 <RatingBar
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -69,17 +64,16 @@
                     style="?android:attr/ratingBarStyleSmall"
                     android:progressBackgroundTint="@color/white"/>
             </LinearLayout>
-        </RelativeLayout>
-
-
+        </FrameLayout>
     </android.support.v7.widget.CardView>
 
-        <TextView
+        <com.sparecode.vipul.onlynow.widgets.LatoTextView
             android:layout_marginTop="@dimen/dp_10"
-            android:text="Ally Capellino Frank Brown"
+            android:text="@string/coupon_detail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/textView35" />
+            android:id="@+id/textView35"
+            app:typeface="lato_regular"/>
 
         <LinearLayout
             android:layout_marginTop="@dimen/dp_10"
@@ -100,8 +94,8 @@
                     android:background="@color/headercolor"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:srcCompat="@drawable/notice_favo_icon"
                     android:id="@+id/imageButton2"
+                    android:src="@drawable/favouriteselector"
                     android:padding="@dimen/dp_10"/>
             </LinearLayout>
 
@@ -114,19 +108,21 @@
                 android:gravity="right"
                 android:layout_weight="1">
 
-                <TextView
+                <com.sparecode.vipul.onlynow.widgets.LatoTextView
                     android:gravity="right"
-                    android:text="Beauty"
+                    android:text="@string/coupon_type"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/textView51" />
+                    android:id="@+id/textView51"
+                    app:typeface="lato_regular"/>
 
-                <TextView
+                <com.sparecode.vipul.onlynow.widgets.LatoTextView
                     android:gravity="right"
-                    android:text="shinjuku"
+                    android:text="@string/coupon_place"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/textView52" />
+                    android:id="@+id/textView52"
+                    app:typeface="lato_regular"/>
             </LinearLayout>
 
 
@@ -138,20 +134,22 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <TextView
+            <com.sparecode.vipul.onlynow.widgets.LatoTextView
                 android:textColor="@color/headercolor"
-                android:text="Phone number"
+                android:text="@string/phone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/textView53" />
+                android:id="@+id/textView53"
+                app:typeface="lato_bold"/>
 
-            <TextView
+            <com.sparecode.vipul.onlynow.widgets.LatoTextView
                 android:layout_marginTop="@dimen/dp_2"
                 android:layout_marginLeft="@dimen/dp_20"
-                android:text="1234567890"
+                android:text="@string/number"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/textView54" />
+                android:id="@+id/textView54"
+                app:typeface="lato_regular"/>
         </LinearLayout>
 
         <LinearLayout
@@ -160,20 +158,22 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <TextView
+            <com.sparecode.vipul.onlynow.widgets.LatoTextView
                 android:textColor="@color/headercolor"
-                android:text="Web URL"
+                android:text="@string/web"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/textView55" />
+                android:id="@+id/textView55"
+                app:typeface="lato_bold"/>
 
-            <TextView
+            <com.sparecode.vipul.onlynow.widgets.LatoTextView
                 android:layout_marginTop="@dimen/dp_2"
                 android:layout_marginLeft="@dimen/dp_20"
-                android:text="www.abcxyz.com"
+                android:text="@string/url"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/textView56" />
+                android:id="@+id/textView56"
+                app:typeface="lato_regular"/>
         </LinearLayout>
 
         <LinearLayout
@@ -182,20 +182,22 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <TextView
+            <com.sparecode.vipul.onlynow.widgets.LatoTextView
                 android:textColor="@color/headercolor"
-                android:text="Shop Details"
+                android:text="@string/shop"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/textView57" />
+                android:id="@+id/textView57"
+                app:typeface="lato_bold"/>
 
-            <TextView
+            <com.sparecode.vipul.onlynow.widgets.LatoTextView
                 android:layout_marginTop="@dimen/dp_2"
                 android:layout_marginLeft="@dimen/dp_20"
-                android:text="Free Text."
+                android:text="@string/free_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/textView58" />
+                android:id="@+id/textView58"
+                app:typeface="lato_regular"/>
         </LinearLayout>
 
         <LinearLayout
@@ -204,12 +206,13 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <TextView
+            <com.sparecode.vipul.onlynow.widgets.LatoTextView
                 android:textColor="@color/headercolor"
-                android:text="Address in text"
+                android:text="@string/address"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/textView59" />
+                android:id="@+id/textView59"
+                app:typeface="lato_bold"/>
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -224,16 +227,17 @@
                     android:layout_alignParentEnd="true"
                     android:id="@+id/imageView21" />
 
-                <TextView
+                <com.sparecode.vipul.onlynow.widgets.LatoTextView
                     android:layout_marginTop="@dimen/dp_2"
                     android:layout_marginLeft="@dimen/dp_20"
-                    android:text="Free text"
+                    android:text="@string/free_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignBottom="@+id/imageView21"
                     android:layout_alignParentStart="true"
                     android:id="@+id/textView61"
-                    android:layout_toStartOf="@+id/imageView21" />
+                    android:layout_toStartOf="@+id/imageView21"
+                    app:typeface="lato_regular"/>
             </RelativeLayout>
 
         </LinearLayout>

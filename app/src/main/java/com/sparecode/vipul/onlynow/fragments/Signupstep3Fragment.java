@@ -45,11 +45,18 @@ public class Signupstep3Fragment extends BaseFragment {
         View view = inflater.inflate(R.layout.fragment_signupstep3, container, false);
         ButterKnife.bind(this, view);
 
+
         linearAdapter = new LinearAdapter();
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(),1);
         recyclerview.setLayoutManager(gridLayoutManager);
         recyclerview.setAdapter(linearAdapter);
-
+        linearAdapter.notifyDataSetChanged();
+        int oldFocusability = recyclerview.getDescendantFocusability();
+        recyclerview.setItemAnimator(null);
+        recyclerview.setDescendantFocusability(recyclerview.FOCUS_BLOCK_DESCENDANTS);
+        recyclerview.setDescendantFocusability(oldFocusability);
+        recyclerview.setHasFixedSize(true);
+       // linearAdapter.setHasStableIds(false);
         Title3 = getArguments().getString("arg");
         return view;
     }

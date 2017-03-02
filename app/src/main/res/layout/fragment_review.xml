@@ -2,10 +2,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="com.sparecode.vipul.onlynow.fragments.ReviewFragment">
 
 
     <LinearLayout
+        android:layout_marginTop="@dimen/dp_10"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -13,10 +15,11 @@
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:background="@drawable/reviewborder">
 
             <LinearLayout
-                android:layout_marginTop="@dimen/dp_10"
+                android:background="@drawable/border"
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -24,23 +27,26 @@
                 android:gravity="center">
 
 
-                <TextView
+                <com.sparecode.vipul.onlynow.widgets.LatoTextView
                     android:gravity="center"
-                    android:text="4.5"
+                    android:text="@string/_4_5"
+                    android:textSize="@dimen/sp_50"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/text_rating" />
+                    android:id="@+id/text_rating"
+                    app:typeface="lato_bold"/>
 
-                <TextView
+                <com.sparecode.vipul.onlynow.widgets.LatoTextView
                     android:gravity="center"
-                    android:text="Average Rating"
+                    android:text="@string/rating"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/textView62" />
+                    android:id="@+id/textView62"
+                    android:layout_marginBottom="@dimen/dp_10"
+                    app:typeface="lato_regular"/>
 
             </LinearLayout>
             <LinearLayout
-                android:layout_marginTop="@dimen/dp_10"
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -54,6 +60,7 @@
                     android:gravity="center_horizontal">
 
                     <RatingBar
+                        android:layout_marginTop="@dimen/dp_10"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:id="@+id/fivestar_rating"
@@ -61,12 +68,14 @@
                         style="?android:attr/ratingBarStyleSmall"
                         android:progressBackgroundTint="@color/orange"/>
 
-                    <TextView
+                    <com.sparecode.vipul.onlynow.widgets.LatoTextView
                         android:layout_marginLeft="@dimen/dp_5"
-                        android:text="10 Reviews"
+                        android:text="@string/reviews10"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/textView63" />
+                        android:id="@+id/textView63"
+                        android:layout_marginTop="@dimen/dp_10"
+                        app:typeface="lato_regular"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -83,12 +92,14 @@
                         style="?android:attr/ratingBarStyleSmall"
                         android:progressBackgroundTint="@color/orange"/>
 
-                    <TextView
+                    <com.sparecode.vipul.onlynow.widgets.LatoTextView
                         android:layout_marginLeft="@dimen/dp_5"
-                        android:text="7 Reviews"
+                        android:text="@string/reviews7"
+                        android:paddingLeft="@dimen/dp_8"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/textView64" />
+                        android:id="@+id/textView64"
+                        app:typeface="lato_regular"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -105,12 +116,14 @@
                         style="?android:attr/ratingBarStyleSmall"
                         android:progressBackgroundTint="@color/orange"/>
 
-                    <TextView
+                    <com.sparecode.vipul.onlynow.widgets.LatoTextView
+                        android:paddingLeft="@dimen/dp_8"
                         android:layout_marginLeft="@dimen/dp_5"
-                        android:text="5 Reviews"
+                        android:text="@string/reviews5"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/textView65" />
+                        android:id="@+id/textView65"
+                        app:typeface="lato_regular"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -127,12 +140,14 @@
                         style="?android:attr/ratingBarStyleSmall"
                         android:progressBackgroundTint="@color/orange"/>
 
-                    <TextView
+                    <com.sparecode.vipul.onlynow.widgets.LatoTextView
+                        android:paddingLeft="@dimen/dp_8"
                         android:layout_marginLeft="@dimen/dp_5"
-                        android:text="1 Reviews"
+                        android:text="@string/reviews1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/textView66" />
+                        android:id="@+id/textView66"
+                        app:typeface="lato_regular"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -149,29 +164,29 @@
                         style="?android:attr/ratingBarStyleSmall"
                         android:progressBackgroundTint="@color/orange" />
 
-                    <TextView
+                    <com.sparecode.vipul.onlynow.widgets.LatoTextView
+                        android:paddingLeft="@dimen/dp_8"
                         android:layout_marginLeft="@dimen/dp_5"
-                        android:text="2 Reviews"
+                        android:text="@string/reviews2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/textView67" />
+                        android:id="@+id/textView67"
+                        android:layout_marginBottom="@dimen/dp_10"
+                        app:typeface="lato_regular"/>
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
 
-        <View
-            android:layout_marginTop="@dimen/dp_10"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/detaillinecolor"></View>
-        <TextView
+
+        <com.sparecode.vipul.onlynow.widgets.LatoTextView
             android:textColor="@color/detailreview"
             android:layout_marginTop="@dimen/dp_10"
             android:gravity="center"
-            android:text="LEAVE A REVIEW"
+            android:text="@string/review"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/text_review" />
+            android:id="@+id/text_review"
+            app:typeface="lato_bold"/>
         <View
             android:layout_marginTop="@dimen/dp_10"
             android:layout_width="match_parent"

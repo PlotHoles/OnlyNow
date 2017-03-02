@@ -22,47 +22,51 @@
             app:srcCompat="@drawable/logo_black"
             android:id="@+id/image_logo" />
 
-        <TextView
+        <com.sparecode.vipul.onlynow.widgets.LatoTextView
             android:layout_marginTop="@dimen/dp_10"
-            android:text="Get best deals which is available \nOnly Now"
+            android:text="@string/splash_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/text_des"
-            android:gravity="center"/>
+            android:gravity="center"
+            app:typeface="lato_bold"/>
 
-        <Button
+        <com.sparecode.vipul.onlynow.widgets.LatoButton
             android:textAllCaps="false"
             android:textColor="@color/white"
             android:background="@color/blue"
             android:layout_marginTop="@dimen/dp_20"
             android:layout_marginLeft="@dimen/dp_20"
             android:layout_marginRight="@dimen/dp_20"
-            android:text="Sign up with Facebook"
+            android:text="@string/facebooksignup"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/button_facebook" />
+            android:id="@+id/button_facebook"
+            app:typeface="lato_bold"/>
 
-        <TextView
+        <com.sparecode.vipul.onlynow.widgets.LatoTextView
             android:layout_marginTop="@dimen/dp_20"
             android:gravity="center"
-            android:text="We'll never post anything to \nFacebook without your permission."
+            android:text="@string/signintext"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/text_Facebook" />
+            android:id="@+id/text_Facebook"
+            app:typeface="lato_regular"/>
 
         <RelativeLayout
             android:layout_marginTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <TextView
-                android:text="Or"
+            <com.sparecode.vipul.onlynow.widgets.LatoTextView
+                android:text="@string/OR"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="10dp"
-                android:id="@+id/text_signup_or" />
+                android:id="@+id/text_signup_or"
+                app:typeface="lato_bold"/>
 
             <LinearLayout
                 android:layout_marginLeft="20dp"
@@ -100,17 +104,18 @@
 
         </RelativeLayout>
 
-        <Button
+        <com.sparecode.vipul.onlynow.widgets.LatoButton
             android:textColor="@color/white"
             android:layout_marginLeft="@dimen/dp_20"
             android:layout_marginRight="@dimen/dp_20"
             android:layout_marginTop="@dimen/dp_20"
             android:textAllCaps="false"
-            android:text="Sign up with Email"
+            android:text="@string/signupemail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/button_signup"
-            android:background="@color/orange"/>
+            android:background="@color/orange"
+            app:typeface="lato_bold"/>
 
         <LinearLayout
             android:orientation="vertical"

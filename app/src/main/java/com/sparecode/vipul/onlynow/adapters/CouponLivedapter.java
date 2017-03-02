@@ -1,14 +1,21 @@
 package com.sparecode.vipul.onlynow.adapters;
 
 import android.content.Context;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import com.sparecode.vipul.onlynow.R;
+import com.sparecode.vipul.onlynow.model.ClientLiveData;
 import com.sparecode.vipul.onlynow.view.OnClickListener;
+import com.sparecode.vipul.onlynow.widgets.LatoTextView;
+import com.squareup.picasso.Picasso;
+
+import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -17,8 +24,7 @@ import butterknife.ButterKnife;
  * Created by vipul on 29/12/16.
  */
 
-public class SearchCategoryAdapter extends RecyclerView.Adapter<SearchCategoryAdapter.MyViewHolder> {
-
+public class CouponLivedapter extends RecyclerView.Adapter<CouponLivedapter.MyViewHolder> {
 
 
 //    private List<History> historyList;
@@ -27,19 +33,33 @@ public class SearchCategoryAdapter extends RecyclerView.Adapter<SearchCategoryAd
 //        this.historyList = historyList;
 //    }
 
-
     private Context context;
     private OnClickListener listener;
+    private List<ClientLiveData> data;
 
-    public SearchCategoryAdapter(Context context, OnClickListener listener) {
+    public CouponLivedapter(Context context, List<ClientLiveData> data, OnClickListener listener) {
         this.context = context;
         this.listener = listener;
+        this.data = data;
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
+        //public TextView text_name,text_place,text_time,text_payments;;
+        @Bind(R.id.coupon_image)
+        ImageView couponImage;
+        @Bind(R.id.coupon_name)
+        LatoTextView couponName;
+        @Bind(R.id.imageView4)
+        ImageView imageView4;
+        @Bind(R.id.name)
+        LatoTextView name;
+        @Bind(R.id.shop_name)
+        LatoTextView shopName;
+        @Bind(R.id.linearLayout5)
+        LinearLayout linearLayout5;
+        @Bind(R.id.cardCoupon)
+        CardView cardCoupon;
 
-        @Bind(R.id.textView72)
-        TextView textView72;
         public MyViewHolder(View view) {
             super(view);
             ButterKnife.bind(this, view);
@@ -56,7 +76,7 @@ public class SearchCategoryAdapter extends RecyclerView.Adapter<SearchCategoryAd
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
         View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.design_searchcategory_recycler, parent, false);
+                .inflate(R.layout.design_couponlive_recyclerview, parent, false);
 
 
         return new MyViewHolder(itemView);
@@ -65,13 +85,24 @@ public class SearchCategoryAdapter extends RecyclerView.Adapter<SearchCategoryAd
     @Override
     public void onBindViewHolder(MyViewHolder holder, final int position) {
 
-        holder.textView72.setOnClickListener(new View.OnClickListener() {
+        holder.cardCoupon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 listener.onItemClicked(position);
             }
         });
+        if (data.get(position).getImageURL() != null &&
+                (!data.get(position).getImageURL().equals("")))
+            Picasso.with(context)
+                    .load(data.get(position).getImageURL())
+                    .placeholder(R.drawable.natural)
+                    .error(R.drawable.natural)
+                    .resize(720,200)
+                    .into(holder.couponImage);
 
+        holder.couponName.setText(data.get(position).getDescription());
+        holder.name.setText(data.get(position).getName());
+        holder.shopName.setText(data.get(position).getShopName());
 //        History history = historyList.get(position);
 //        holder.text_name.setText(history.getName());
 //        holder.text_place.setText(history.getPlace());
@@ -81,7 +112,7 @@ public class SearchCategoryAdapter extends RecyclerView.Adapter<SearchCategoryAd
 
     @Override
     public int getItemCount() {
-        return 20;
+        return data.size();
     }
 
 

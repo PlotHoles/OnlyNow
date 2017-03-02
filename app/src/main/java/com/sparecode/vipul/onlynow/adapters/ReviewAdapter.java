@@ -5,15 +5,24 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RatingBar;
+import android.widget.TextView;
 
 import com.sparecode.vipul.onlynow.R;
+import com.sparecode.vipul.onlynow.model.ClientReview;
 import com.sparecode.vipul.onlynow.view.OnClickListener;
+
+import java.util.List;
+
+import butterknife.Bind;
+import butterknife.ButterKnife;
 
 /**
  * Created by vipul on 29/12/16.
  */
 
 public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.MyViewHolder> {
+
 
 //    private List<History> historyList;
 //
@@ -23,15 +32,28 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.MyViewHold
 
     private Context context;
     private OnClickListener listener;
+    private List<ClientReview> data;
 
+    public ReviewAdapter(Context context, List<ClientReview> data, OnClickListener listener) {
+        this.context = context;
+        this.listener = listener;
+        this.data = data;
+    }
 
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
+        @Bind(R.id.username)
+        TextView username;
+        @Bind(R.id.ratingBar)
+        RatingBar ratingBar;
+        @Bind(R.id.text_time)
+        TextView textTime;
+        @Bind(R.id.review)
+        TextView review;
 
         public MyViewHolder(View view) {
             super(view);
-
-
+            ButterKnife.bind(this, view);
 
 
 //            text_name = (TextView) view.findViewById(R.id.text_name);
@@ -55,7 +77,10 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.MyViewHold
     public void onBindViewHolder(MyViewHolder holder, final int position) {
 
 
-
+        holder.username.setText(data.get(position).getUsername());
+        holder.ratingBar.setRating(Float.parseFloat(data.get(position).getStar()));
+        holder.textTime.setText(data.get(position).getDate());
+        holder.review.setText(data.get(position).getReview());
 //        History history = historyList.get(position);
 //        holder.text_name.setText(history.getName());
 //        holder.text_place.setText(history.getPlace());
@@ -65,7 +90,7 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.MyViewHold
 
     @Override
     public int getItemCount() {
-        return 10;
+        return data.size();
     }
 
 

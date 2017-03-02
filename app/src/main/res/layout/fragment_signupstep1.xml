@@ -2,33 +2,36 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="com.sparecode.vipul.onlynow.fragments.Signupstep1Fragment">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <TextView
+        <com.sparecode.vipul.onlynow.widgets.LatoTextView
+            app:typeface="lato_regular"
             android:gravity="center"
             android:layout_marginBottom="@dimen/dp_10"
-            android:text="Already Have an account?"
+            android:text="@string/already"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:id="@+id/text_already" />
 
-        <TextView
+        <com.sparecode.vipul.onlynow.widgets.LatoTextView
             android:gravity="center"
             android:layout_marginBottom="@dimen/dp_10"
             android:layout_marginLeft="@dimen/dp_5"
-            android:text="Sign In"
+            android:text="@string/sign"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_toEndOf="@+id/text_already"
             android:id="@+id/text_signin"
-            android:textColor="@color/orange"/>
+            android:textColor="@color/orange"
+            app:typeface="lato_bold"/>
 
         <ScrollView
             android:id="@+id/scrollview"
@@ -54,62 +57,77 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <EditText
+                <com.sparecode.vipul.onlynow.widgets.LatoEditText
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:inputType="textPersonName"
-                    android:hint="First Name"
+                    android:hint="@string/firstname"
                     android:ems="10"
                     android:id="@+id/edit_firstname"
-                    android:layout_weight="1" />
+                    android:layout_weight="1"
+                    android:singleLine="false"
+                    app:typeface="lato_bold"/>
 
-                <EditText
+                <com.sparecode.vipul.onlynow.widgets.LatoEditText
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:inputType="textPersonName"
-                    android:hint="Last Name"
+                    android:hint="@string/lastname"
                     android:ems="10"
                     android:id="@+id/edit_lastname"
-                    android:layout_weight="1" />
+                    android:layout_weight="1"
+                    android:singleLine="false"
+                    app:typeface="lato_bold"/>
             </LinearLayout>
 
-            <EditText
+            <com.sparecode.vipul.onlynow.widgets.LatoEditText
                 android:layout_marginTop="@dimen/dp_5"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textEmailAddress"
-                android:hint="Email Address"
+                android:hint="@string/emailaddress"
                 android:ems="10"
-                android:id="@+id/edit_email" />
+                android:id="@+id/edit_email"
+                android:singleLine="false"
+                app:typeface="lato_bold"/>
 
-            <EditText
+            <com.sparecode.vipul.onlynow.widgets.LatoEditText
                 android:layout_marginTop="@dimen/dp_5"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textEmailAddress"
-                android:hint="Confirm Email Address"
+                android:hint="@string/confirmemail"
                 android:ems="10"
-                android:id="@+id/edit_confirmemail" />
+                android:id="@+id/edit_confirmemail"
+                android:singleLine="false"
+                app:typeface="lato_bold"/>
 
-            <EditText
+            <com.sparecode.vipul.onlynow.widgets.LatoEditText
                 android:layout_marginTop="@dimen/dp_5"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textPassword"
-                android:hint="Password"
+                android:hint="@string/passsword"
                 android:ems="10"
-                android:id="@+id/edit_password" />
+                android:id="@+id/edit_password"
+                android:singleLine="false"
+                app:typeface="lato_bold"/>
 
-            <EditText
+            <com.sparecode.vipul.onlynow.widgets.LatoEditText
                 android:layout_marginTop="@dimen/dp_5"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textPersonName"
-                android:hint="Birthday"
+                android:inputType="none"
+                android:hint="@string/birthday"
                 android:ems="10"
-                android:id="@+id/edit_birthday" />
+                android:id="@+id/edit_birthday"
+                android:singleLine="false"
+                app:typeface="lato_bold"
+                android:cursorVisible="false"
+                android:gravity="center"/>
 
             <RadioGroup
+                android:id="@+id/genderradiogroup"
                 android:layout_marginTop="@dimen/dp_5"
                 android:layout_gravity="center"
                 android:layout_width="wrap_content"
@@ -117,45 +135,60 @@
                 android:orientation="horizontal"
                 android:gravity="center_vertical">
 
-                <RadioButton
+                <com.sparecode.vipul.onlynow.widgets.LatoRadioButton
                     android:text="Male"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/radioButton"
-                    android:layout_weight="1" />
+                    android:layout_weight="1"
+                    android:paddingLeft="@dimen/dp_5"
+                    android:layout_marginEnd="@dimen/dp_10"
+                    android:button="@drawable/radiobutton"
+                    app:typeface="lato_regular"/>
 
-                <RadioButton
+                <com.sparecode.vipul.onlynow.widgets.LatoRadioButton
                     android:text="Female"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/radioButton2"
-                    android:layout_weight="1"/>
+                    android:layout_weight="1"
+                    android:paddingLeft="@dimen/dp_5"
+                    android:button="@drawable/radiobutton"
+                    app:typeface="lato_regular"/>
             </RadioGroup>
 
-            <CheckBox
+            <com.sparecode.vipul.onlynow.widgets.LatoCheckBox
                 android:layout_marginTop="@dimen/dp_5"
                 android:text="Agree T&amp;Cs"
+                android:paddingLeft="@dimen/dp_15"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/checkBox" />
+                android:id="@+id/agreecheck"
+                android:button="@drawable/checkboxbutton"
+                app:typeface="lato_regular"/>
 
-            <CheckBox
+
+            <com.sparecode.vipul.onlynow.widgets.LatoCheckBox
                 android:layout_marginTop="@dimen/dp_5"
                 android:text="Receive Emails"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/checkBox2" />
+                android:paddingLeft="@dimen/dp_15"
+                android:id="@+id/receivecheck"
+                android:button="@drawable/checkboxbutton"
+                app:typeface="lato_regular"/>
 
-            <Button
+            <com.sparecode.vipul.onlynow.widgets.LatoButton
                 android:layout_marginRight="@dimen/dp_20"
                 android:layout_marginLeft="@dimen/dp_20"
                 android:layout_marginTop="@dimen/dp_20"
                 android:background="@color/orange"
-                android:text="NEXT"
+                android:text="@string/next_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/button"
-                android:layout_marginBottom="@dimen/dp_10"/>
+                android:id="@+id/buttonNext"
+                android:layout_marginBottom="@dimen/dp_10"
+                app:typeface="lato_bold"/>
         </LinearLayout>
         </ScrollView>
     </RelativeLayout>

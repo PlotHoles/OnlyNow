@@ -1,0 +1,131 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="com.sparecode.vipul.onlynow.fragments.ClientSigninFragment">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center">
+
+        <com.sparecode.vipul.onlynow.widgets.LatoTextView
+            android:text="@string/doesnot"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/text_signup"
+            android:layout_marginBottom="@dimen/dp_10"
+            android:clickable="true"
+            app:typeface="lato_regular"/>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/text_signup"
+            android:gravity="center">
+
+
+
+            <LinearLayout
+                android:layout_marginTop="@dimen/dp_10"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentStart="true"
+                android:gravity="center">
+
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@drawable/logo_black"
+                    android:id="@+id/image_logo" />
+
+                <com.sparecode.vipul.onlynow.widgets.LatoTextView
+                    android:layout_marginTop="@dimen/dp_10"
+                    android:text="@string/client_splash_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/text_des"
+                    android:gravity="center"
+                    app:typeface="lato_bold"/>
+
+
+                <com.sparecode.vipul.onlynow.widgets.LatoEditText
+                    android:layout_marginTop="60dp"
+                    android:layout_marginLeft="@dimen/dp_20"
+                    android:layout_marginRight="@dimen/dp_20"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textEmailAddress"
+                    android:ems="10"
+                    android:id="@+id/edit_email"
+                    android:hint="@string/emailaddress"
+                    android:gravity="center"
+                    android:background="@drawable/blackborderedittext"
+                    android:padding="@dimen/dp_10"
+                    app:typeface="lato_bold"/>
+
+                <com.sparecode.vipul.onlynow.widgets.LatoEditText
+                    android:layout_marginTop="@dimen/dp_20"
+                    android:layout_marginLeft="@dimen/dp_20"
+                    android:layout_marginRight="@dimen/dp_20"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPassword"
+                    android:ems="10"
+                    android:id="@+id/edit_password"
+                    android:hint="@string/passsword"
+                    android:gravity="center"
+                    android:background="@drawable/blackborderedittext"
+                    android:padding="@dimen/dp_10"
+                    app:typeface="lato_bold"/>
+
+                <LinearLayout
+                    android:layout_marginLeft="@dimen/dp_20"
+                    android:layout_marginRight="@dimen/dp_20"
+                    android:layout_marginTop="@dimen/dp_10"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <com.sparecode.vipul.onlynow.widgets.LatoTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/forgot"
+                        android:gravity="right"
+                        android:id="@+id/text_forgot"
+                        app:typeface="lato_regular"/>
+                </LinearLayout>
+
+                <com.sparecode.vipul.onlynow.widgets.LatoButton
+                    android:textColor="@color/white"
+                    android:layout_marginLeft="@dimen/dp_20"
+                    android:layout_marginRight="@dimen/dp_20"
+                    android:layout_marginTop="@dimen/dp_20"
+                    android:textAllCaps="false"
+                    android:text="@string/sign"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/button_signin"
+                    android:background="@color/orange"
+                    android:layout_marginBottom="@dimen/dp_10"
+                    app:typeface="lato_bold"/>
+
+            </LinearLayout>
+
+        </RelativeLayout>
+        </ScrollView>
+    </RelativeLayout>
+
+</FrameLayout>

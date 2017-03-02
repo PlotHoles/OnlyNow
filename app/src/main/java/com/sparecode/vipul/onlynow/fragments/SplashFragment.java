@@ -75,6 +75,7 @@ public class SplashFragment extends BaseFragment implements View.OnClickListener
                 ((BaseActivity)getActivity()).openSigninPage();
                 break;
             case R.id.text_client:
+                ((BaseActivity)getActivity()).openClientSplashPage();
                 break;
             case R.id.createaccount_button:
                 ((BaseActivity)getActivity()).openSignupfacebookPage();
