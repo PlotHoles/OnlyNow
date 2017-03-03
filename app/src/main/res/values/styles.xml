@@ -21,4 +21,11 @@
     <style name="MyCustomTabLayout" parent="Widget.Design.TabLayout">
         <item name="tabTextAppearance">@style/MyCustomTextAppearance</item>
     </style>
+
+    <style name="ratingBar" parent="@android:style/Widget.RatingBar">
+        <item name="android:progressDrawable">@drawable/ratingbar_selecor</item>
+        <item name="android:minHeight">27px</item>
+        <item name="android:maxHeight">27px</item>
+
+    </style>
 </resources>

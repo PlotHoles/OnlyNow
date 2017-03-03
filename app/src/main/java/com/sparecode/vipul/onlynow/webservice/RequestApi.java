@@ -30,6 +30,7 @@ public interface RequestApi {
     String SERVICE = BASEURL + "services.php?data=";
     String CLIENTSERVICE = BASEURL + "client/?data=";
     String CLIENTDATA = BASEURL + "?data=";
+    String COMMONSERVICE = BASEURL + "?data=";
     String PRODUCT_ADD = BASEURL + "product_add.php";
     String PRODUCT_EDIT = BASEURL + "product_edit.php";
     String SIGNUP_CUSTOMER = BASEURL + "signup_customer.php";

@@ -124,9 +124,8 @@ public class ClientShopFragment extends BaseFragment implements ClientShopBacken
                 (!clientShopWrapper.getData().getImageURL().equals("")))
             Picasso.with(getActivity())
                 .load(clientShopWrapper.getData().getImageURL())
-                .placeholder(R.drawable.image_placeholder)
-                .error(R.drawable.image_placeholder)
-                .resize(720,200)
+                .placeholder(R.drawable.natural)
+                .error(R.drawable.natural)
                 .into(couponImage);
     }
 

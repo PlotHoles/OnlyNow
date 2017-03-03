@@ -101,6 +101,16 @@ public class ReqestParameter {
         }
         return object;
     }
+    public JSONObject toCategoryList(int page) {
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("method", "get_all_categories");
+            jsonObject.put("page", "" + page);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return jsonObject;
+    }
     public JSONObject toMyProduct(String... vars) {
         JSONObject object = new JSONObject();
         try {

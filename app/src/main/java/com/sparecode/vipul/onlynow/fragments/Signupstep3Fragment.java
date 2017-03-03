@@ -46,11 +46,11 @@ public class Signupstep3Fragment extends BaseFragment {
         ButterKnife.bind(this, view);
 
 
-        linearAdapter = new LinearAdapter();
+       // linearAdapter = new LinearAdapter();
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(),1);
         recyclerview.setLayoutManager(gridLayoutManager);
-        recyclerview.setAdapter(linearAdapter);
-        linearAdapter.notifyDataSetChanged();
+        //recyclerview.setAdapter(linearAdapter);
+        //linearAdapter.notifyDataSetChanged();
         int oldFocusability = recyclerview.getDescendantFocusability();
         recyclerview.setItemAnimator(null);
         recyclerview.setDescendantFocusability(recyclerview.FOCUS_BLOCK_DESCENDANTS);

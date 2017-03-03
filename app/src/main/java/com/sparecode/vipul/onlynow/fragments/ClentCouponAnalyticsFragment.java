@@ -26,6 +26,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashSet;
 import java.util.List;
 
 import butterknife.Bind;
@@ -97,12 +98,12 @@ public class ClentCouponAnalyticsFragment extends BaseFragment implements Client
         mMonth = c.get(Calendar.MONTH);
         mDay = c.get(Calendar.DAY_OF_MONTH);
 
-        textDatefrom.setText(mYear+ "-" + (mMonth + 1) + "-" + mDay);
+        textDatefrom.setText(mYear + "-" + (mMonth + 1) + "-" + mDay);
         fromdate = mYear + "-" + (mMonth + 1) + "-" + mDay;
-        System.out.println("------->fromdate"+fromdate);
+        System.out.println("------->fromdate" + fromdate);
         textDateto.setText(mYear + "-" + (mMonth + 1) + "-" + mDay);
         todate = mYear + "-" + (mMonth + 1) + "-" + mDay;
-        System.out.println("------->todate"+todate);
+        System.out.println("------->todate" + todate);
         textDatefrom.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -113,16 +114,16 @@ public class ClentCouponAnalyticsFragment extends BaseFragment implements Client
                             @Override
                             public void onDateSet(DatePicker view, int year,
                                                   int monthOfYear, int dayOfMonth) {
-                                Log.e("fromdate",year + "-" + (monthOfYear + 1) + "-" + dayOfMonth+"");
-                                textDatefrom.setText(year+ "-" + (monthOfYear + 1) + "-" + dayOfMonth);
+                                Log.e("fromdate", year + "-" + (monthOfYear + 1) + "-" + dayOfMonth + "");
+                                textDatefrom.setText(year + "-" + (monthOfYear + 1) + "-" + dayOfMonth);
                                 fromdate = year + "-" + (monthOfYear + 1) + "-" + dayOfMonth;
-                                Log.e("fromdate",fromdate);
-                                CheckDates(fromdate,todate);
+                                Log.e("fromdate", fromdate);
+                                CheckDates(fromdate, todate);
 
                             }
                         }, mYear, mMonth, mDay);
                 datePickerDialog.show();
-                System.out.println("----->date"+textDatefrom.getText().toString());
+                System.out.println("----->date" + textDatefrom.getText().toString());
             }
         });
 
@@ -139,8 +140,8 @@ public class ClentCouponAnalyticsFragment extends BaseFragment implements Client
 
                                 textDateto.setText(year + "-" + (monthOfYear + 1) + "-" + dayOfMonth);
                                 todate = year + "-" + (monthOfYear + 1) + "-" + dayOfMonth;
-                                System.out.println("------->todate"+todate);
-                                CheckDates(fromdate,todate);
+                                System.out.println("------->todate" + todate);
+                                CheckDates(fromdate, todate);
                             }
                         }, mYear, mMonth, mDay);
                 datePickerDialog.show();
@@ -153,20 +154,17 @@ public class ClentCouponAnalyticsFragment extends BaseFragment implements Client
         setRecycleView();
         return view;
     }
-    public  boolean CheckDates(String fromdate,String todate)
-    {
+
+    public boolean CheckDates(String fromdate, String todate) {
         boolean b = false;
 
-        Log.e("--->fromdate",fromdate);
-        Log.e("--->todate",todate);
+        Log.e("--->fromdate", fromdate);
+        Log.e("--->todate", todate);
         try {
-            if (dfDate.parse(todate).after(dfDate.parse(fromdate)))
-            {
+            if (dfDate.parse(todate).after(dfDate.parse(fromdate))) {
                 b = true;
-                ClientAnalyticsBackend clientAnalyticsBackend = new ClientAnalyticsBackend(getActivity(), "5",fromdate,todate,this);
-            }
-            else
-            {
+                ClientAnalyticsBackend clientAnalyticsBackend = new ClientAnalyticsBackend(getActivity(), "5", fromdate, todate, this);
+            } else {
                 b = false;
                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
                 builder.setTitle("DATE")
@@ -189,17 +187,18 @@ public class ClentCouponAnalyticsFragment extends BaseFragment implements Client
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        Log.e("------>boolean",b+"");
+        Log.e("------>boolean", b + "");
         return b;
 
     }
+
     public void setRecycleView() {
         recyclerview.setLayoutManager(new GridLayoutManager(getActivity(), 1));
         clientCouponAnalyticsAdapter = new ClientCouponAnalyticsAdapter(getActivity(), data, new OnClickListener() {
             @Override
             public void onItemClicked(int position) {
                 if (getActivity() != null)
-                    ((BaseActivity)getActivity()).openClientCouponDetailsPage();
+                    ((BaseActivity) getActivity()).openClientCouponDetailsPage();
             }
         });
         recyclerview.setAdapter(clientCouponAnalyticsAdapter);
@@ -207,9 +206,15 @@ public class ClentCouponAnalyticsFragment extends BaseFragment implements Client
 
     public void setAdapter(List<ClientsAnalyticsCoupon> dataList) {
 
-            this.data = new ArrayList<>();
-            this.data.addAll(dataList);
-            clientCouponAnalyticsAdapter.notifyDataSetChanged();
+
+        HashSet<ClientsAnalyticsCoupon> hashSet = new HashSet<ClientsAnalyticsCoupon>();
+        hashSet.addAll(dataList);
+        data.clear();
+        data.addAll(hashSet);
+        //this.data.addAll(dataList);
+        clientCouponAnalyticsAdapter.notifyDataSetChanged();
+
+
         /*}
         else
         {
@@ -232,6 +237,7 @@ public class ClentCouponAnalyticsFragment extends BaseFragment implements Client
 
     @Override
     public void onSuccessfullLogin(ClientAnalyticsWrapper clientAnalyticsWrapper) {
+        //this.data = new ArrayList<>();
         setAdapter(clientAnalyticsWrapper.getData().getCoupons());
     }
 

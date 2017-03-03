@@ -66,4 +66,5 @@ public class Signupstep2Fragment extends BaseFragment {
        // ((BaseActivity)getActivity()).getAppbarLayout().setVisibility(View.VISIBLE);
        // ((BaseActivity)getActivity()).getTextViewToolBarTitle().setText(Title2);
     }
+
 }
