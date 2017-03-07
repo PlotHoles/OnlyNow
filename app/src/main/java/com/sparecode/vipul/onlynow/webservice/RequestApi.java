@@ -25,6 +25,9 @@ public interface RequestApi {
     String GETCLIENTDRAFTCOUPONS = "get_my_draft_coupons";
     String GETCLIENTREVIEW = "get_shop_reviews";
     String GETCLIENTANALYTICS = "get_analitics";
+    String GETCLIENTCOUPON = "get_coupon";
+    String UPDATESHOP = "update_shop";
+    String UPDATECOUPON = "update_coupon";
     //String BASEURL = "http://192.168.2.16/projects/wilo/api/";
     String BASEURL = "http://192.168.2.7/projects/onlynow/api/";
     String SERVICE = BASEURL + "services.php?data=";

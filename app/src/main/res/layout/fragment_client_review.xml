@@ -31,7 +31,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="@string/_4_5"
+                    android:text=""
                     android:textSize="@dimen/sp_50"
                     app:typeface="lato_bold" />
 
@@ -76,7 +76,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/dp_15"
-                        android:text="@string/reviews10"
+                        android:text=""
                         app:typeface="lato_regular" />
                 </LinearLayout>
 
@@ -101,7 +101,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/dp_15"
-                        android:text="@string/reviews7"
+                        android:text=""
                         app:typeface="lato_regular" />
                 </LinearLayout>
 
@@ -126,7 +126,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/dp_15"
-                        android:text="@string/reviews5"
+                        android:text=""
                         app:typeface="lato_regular" />
                 </LinearLayout>
 
@@ -151,7 +151,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/dp_15"
-                        android:text="@string/reviews1"
+                        android:text=""
                         app:typeface="lato_regular" />
                 </LinearLayout>
 
@@ -176,7 +176,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/dp_15"
-                        android:text="@string/reviews2"
+                        android:text=""
                         app:typeface="lato_regular" />
                 </LinearLayout>
             </LinearLayout>

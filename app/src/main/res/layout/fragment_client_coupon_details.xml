@@ -7,7 +7,8 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_marginBottom="@dimen/dp_10">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -26,13 +27,18 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
 
-                    <ImageView
+
+                    <android.support.v4.view.ViewPager
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/dp_150"
                         app:srcCompat="@drawable/natural"
-                        android:id="@+id/coupon_image"
-                        android:scaleType="fitXY"/>
-
+                        android:id="@+id/coupon_pager"/>
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:srcCompat="@drawable/coupondetails_previous_icon"
+                        android:id="@+id/previous_image"
+                        android:layout_gravity="center_vertical|left"/>
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -44,7 +50,7 @@
 
             <com.sparecode.vipul.onlynow.widgets.LatoTextView
                 android:layout_marginTop="@dimen/dp_10"
-                android:text="@string/ally_capellino_frank_brown"
+                android:text=""
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/text_couponname"
@@ -68,7 +74,7 @@
                     android:visibility="gone"/>
 
                 <com.sparecode.vipul.onlynow.widgets.LatoTextView
-                    android:text="@string/coupon_type"
+                    android:text=""
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
@@ -93,7 +99,7 @@
                     android:visibility="gone"/>
 
                 <com.sparecode.vipul.onlynow.widgets.LatoTextView
-                    android:text="@string/coupon_place"
+                    android:text=""
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
@@ -112,7 +118,7 @@
                 android:layout_marginTop="@dimen/dp_10"
                 android:background="@drawable/blackborderedittext"
                 android:padding="@dimen/dp_10"
-                android:hint="@string/they_way_to_use_this_coupon"
+                android:hint=""
                 android:text=""
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -124,7 +130,7 @@
                 android:layout_marginTop="@dimen/dp_10"
                 android:background="@drawable/blackborderedittext"
                 android:padding="@dimen/dp_10"
-                android:hint="@string/shop_name_phonenumber"
+                android:hint=""
                 android:text=""
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -136,7 +142,7 @@
                 android:layout_marginTop="@dimen/dp_10"
                 android:background="@drawable/blackborderedittext"
                 android:padding="@dimen/dp_25"
-                android:hint="@string/coupon_details"
+                android:hint=""
                 android:text=""
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

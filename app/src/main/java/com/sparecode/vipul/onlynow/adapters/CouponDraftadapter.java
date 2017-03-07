@@ -97,8 +97,8 @@ public class CouponDraftadapter extends RecyclerView.Adapter<CouponDraftadapter.
         Log.e(":::::IMAGE URLS:::::", ":" + data.get(position).getImageURL());
         if (!data.get(position).getImageURL().trim().isEmpty()) {
             Picasso.with(context).load(data.get(position).getImageURL())
-                    .placeholder(R.drawable.natural)
-                    .error(R.drawable.natural)
+                    .placeholder(R.drawable.placeholder)
+                    .error(R.drawable.placeholder)
                     .resize(720,200)
                     .into(holder.couponImage, new Callback() {
                         @Override
@@ -112,7 +112,7 @@ public class CouponDraftadapter extends RecyclerView.Adapter<CouponDraftadapter.
                         }
                     });
         } else {
-            Picasso.with(context).load(R.drawable.natural).fit().into(holder.couponImage);
+            Picasso.with(context).load(R.drawable.placeholder).fit().into(holder.couponImage);
         }
 
         Log.e("---data",data.get(position).getDescription());

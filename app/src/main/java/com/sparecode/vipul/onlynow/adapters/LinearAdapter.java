@@ -37,13 +37,13 @@ public class LinearAdapter extends RecyclerView.Adapter<LinearAdapter.MyViewHold
     OnClickListener onClickListener;
     int focusPos;
     private int selectedPosition = -1;
+    private int previousSelectedPos = 0;
 
     public LinearAdapter(List<CategoryData> categoryDatas, Context mContext, OnClickListener onClickListener) {
         this.categoryDatas = categoryDatas;
         this.mContext = mContext;
         this.onClickListener = onClickListener;
     }
-
 
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
@@ -95,32 +95,57 @@ public class LinearAdapter extends RecyclerView.Adapter<LinearAdapter.MyViewHold
 //        holder.text_place.setText(history.getPlace());
 //        holder.text_time.setText(history.getTime());
 //        holder.text_payments.setText(history.getPayments());
-        Picasso.with(mContext).load(categoryDatas.get(position).getImageURL()).placeholder(R.drawable.natural).resize(720, 200).into(holder.imageView2);
+        Picasso.with(mContext).load(categoryDatas.get(position).getImageURL()).placeholder(R.drawable.placeholder).resize(720, 200).into(holder.imageView2);
         holder.txtCategoryName.setText(categoryDatas.get(position).getName());
 
 
         //holder.ImageCategorySelected.setOnClickListener(onStateChangedListener(holder.ImageCategorySelected, position));
 
+        holder.ImageCategorySelected.setTag(position);
+
+        if (position==selectedPosition)
+        {
+            holder.ImageCategory.setSelected(true);
+        }
+        else
+        {
+            holder.ImageCategory.setSelected(false);
+        }
 
         holder.ImageCategorySelected.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // Log.e("CLICKED", "CLICK PERFORMED");
-                onClickListener.onItemClicked(position);
-                selectedPosition = position;
-                Log.e("hihello",position+"");
 
-                for (int i = selectedPosition;i<=categoryDatas.size();i++)
+                //selectedPosition = position;
+
+               // holder.ImageCategorySelected.setSelected(true);
+/*                if (position != previousSelectedPos) {
+                    previousSelectedPos = position;
+                    holder.ImageCategorySelected = (LinearLayout) holder.ImageCategorySelected.findViewWithTag(position);
+                    holder.ImageCategorySelected.setSelected(true);
+                } else {
+                    holder.ImageCategorySelected.setSelected(false);
+                }*/
+                Log.e("hihello", position + "");
+                onClickListener.onItemClicked(position);
+
+                if (!holder.ImageCategory.isSelected()){
+                    holder.ImageCategory.setSelected(true);
+                    selectedPosition = position;
+                }
+                else
                 {
-                    if (i==position)
-                    {
+                    selectedPosition = -1;
+                }
+                notifyDataSetChanged();
+               /* for (int i = selectedPosition; i <= categoryDatas.size(); i++) {
+                    if (i == position) {
                         holder.ImageCategory.setSelected(true);
-                    }
-                    else
-                    {
+                    } else {
                         holder.ImageCategory.setSelected(false);
                     }
-                }
+                }*/
                 /*if (position == selectedPosition) {
                     holder.ImageCategory.setSelected(true);
 

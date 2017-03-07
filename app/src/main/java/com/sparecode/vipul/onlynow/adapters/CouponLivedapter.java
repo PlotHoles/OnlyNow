@@ -92,13 +92,19 @@ public class CouponLivedapter extends RecyclerView.Adapter<CouponLivedapter.MyVi
             }
         });
         if (data.get(position).getImageURL() != null &&
-                (!data.get(position).getImageURL().equals("")))
+                (!data.get(position).getImageURL().equals(""))){
+
             Picasso.with(context)
                     .load(data.get(position).getImageURL())
-                    .placeholder(R.drawable.natural)
-                    .error(R.drawable.natural)
+                    .placeholder(R.drawable.placeholder)
+                    .error(R.drawable.placeholder)
                     .resize(720,200)
                     .into(holder.couponImage);
+        }
+        else {
+            Picasso.with(context).load(R.drawable.placeholder).fit().into(holder.couponImage);
+        }
+
 
         holder.couponName.setText(data.get(position).getDescription());
         holder.name.setText(data.get(position).getName());

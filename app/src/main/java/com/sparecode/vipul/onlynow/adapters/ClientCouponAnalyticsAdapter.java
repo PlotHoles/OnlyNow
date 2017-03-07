@@ -84,8 +84,8 @@ public class ClientCouponAnalyticsAdapter extends RecyclerView.Adapter<ClientCou
                 (!data.get(position).getImageURL().equals("")))
             Picasso.with(context)
                     .load(data.get(position).getImageURL())
-                    .placeholder(R.drawable.image_placeholder)
-                    .error(R.drawable.image_placeholder)
+                    .placeholder(R.drawable.placeholder)
+                    .error(R.drawable.placeholder)
                     .resize(720,200)
                     .into(holder.couponImage);
         holder.textCouponName.setText(data.get(position).getName());

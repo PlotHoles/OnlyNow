@@ -6,10 +6,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.sparecode.vipul.onlynow.R;
 import com.sparecode.vipul.onlynow.activity.BaseActivity;
 import com.sparecode.vipul.onlynow.model.ClientShopWrapper;
+import com.sparecode.vipul.onlynow.model.ClientUpdateshopWrapper;
 import com.sparecode.vipul.onlynow.widgets.LatoButton;
 import com.sparecode.vipul.onlynow.widgets.LatoEditText;
 import com.sparecode.vipul.onlynow.widgets.LatoTextView;
@@ -17,9 +19,10 @@ import com.squareup.picasso.Picasso;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 
-public class ClientShopFragment extends BaseFragment implements ClientShopBackend.ClientShopResultProvider{
+public class ClientShopFragment extends BaseFragment implements ClientShopBackend.ClientShopResultProvider, ClientUpdateshopBackend.ClientUpdateShopResultProvider {
 
 
     @Bind(R.id.coupon_image)
@@ -43,7 +46,8 @@ public class ClientShopFragment extends BaseFragment implements ClientShopBacken
     @Bind(R.id.savedetail)
     LatoButton savedetail;
     private View view;
-
+    private String shop_id;
+    
     public ClientShopFragment() {
         // Required empty public constructor
     }
@@ -63,16 +67,16 @@ public class ClientShopFragment extends BaseFragment implements ClientShopBacken
         ButterKnife.bind(this, view);
 
         String id = getUserId();
-        System.out.println("----->user"+id);
+        System.out.println("----->user" + id);
 
-        ClientShopBackend clientShopBackend = new ClientShopBackend(getActivity(),getUserId(),this);
+        ClientShopBackend clientShopBackend = new ClientShopBackend(getActivity(), getUserId(), this);
 
         editnumber.setEnabled(false);
         editurl.setEnabled(false);
         editaddress.setEnabled(false);
         editshopdetail.setEnabled(false);
 
-        ((BaseActivity)getActivity()).getImgEdit().setOnClickListener(new View.OnClickListener() {
+        ((BaseActivity) getActivity()).getImgEdit().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 editnumber.setEnabled(true);
@@ -96,10 +100,10 @@ public class ClientShopFragment extends BaseFragment implements ClientShopBacken
         ((BaseActivity) getActivity()).getImgToolBarCancel().setVisibility(View.VISIBLE);
         ((BaseActivity) getActivity()).getImgAdd().setVisibility(View.GONE);
         ((BaseActivity) getActivity()).getFab().setVisibility(View.GONE);
-        ((BaseActivity)getActivity()).getImgToolBarCancel().setOnClickListener(new View.OnClickListener() {
+        ((BaseActivity) getActivity()).getImgToolBarCancel().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((BaseActivity)getActivity()).openClientCouponPage();
+                ((BaseActivity) getActivity()).openClientCouponPage();
             }
         });
     }
@@ -112,25 +116,40 @@ public class ClientShopFragment extends BaseFragment implements ClientShopBacken
 
     @Override
     public void onSuccessfullLogin(ClientShopWrapper clientShopWrapper) {
-            couponName.setText(clientShopWrapper.getData().getTitle());
-            couponType.setText(clientShopWrapper.getData().getCatName());
-            couponPlace.setText(clientShopWrapper.getData().getCity());
-            editnumber.setText(clientShopWrapper.getData().getPhone());
-            editurl.setText(clientShopWrapper.getData().getWeb());
-            editshopdetail.setText(clientShopWrapper.getData().getDetails());
-            editaddress.setText(clientShopWrapper.getData().getArea());
+        couponName.setText(clientShopWrapper.getData().getTitle());
+        couponType.setText(clientShopWrapper.getData().getCatName());
+        couponPlace.setText(clientShopWrapper.getData().getCity());
+        editnumber.setText(clientShopWrapper.getData().getPhone());
+        editurl.setText(clientShopWrapper.getData().getWeb());
+        editshopdetail.setText(clientShopWrapper.getData().getDetails());
+        editaddress.setText(clientShopWrapper.getData().getArea());
 
         if (clientShopWrapper.getData().getImageURL() != null &&
                 (!clientShopWrapper.getData().getImageURL().equals("")))
             Picasso.with(getActivity())
-                .load(clientShopWrapper.getData().getImageURL())
-                .placeholder(R.drawable.natural)
-                .error(R.drawable.natural)
-                .into(couponImage);
+                    .load(clientShopWrapper.getData().getImageURL())
+                    .placeholder(R.drawable.placeholder)
+                    .error(R.drawable.placeholder)
+                    .into(couponImage);
+        
+
+        shop_id = clientShopWrapper.getData().getShopId();
+    }
+
+    @Override
+    public void onSuccessfullLogin(ClientUpdateshopWrapper clientUpdateshopWrapper) {
+        Snackbar.make(view, clientUpdateshopWrapper.getMessage(), Snackbar.LENGTH_SHORT).show();
     }
 
     @Override
     public void onLoginFailure(String msg) {
-        Snackbar.make(view,msg,Snackbar.LENGTH_SHORT).show();
+        Snackbar.make(view, msg, Snackbar.LENGTH_SHORT).show();
+    }
+
+    @OnClick(R.id.savedetail)
+    public void onClick() {
+        Toast.makeText(getActivity(),shop_id ,Toast.LENGTH_LONG).show();
+        ClientUpdateshopBackend clientUpdateshopBackend = new ClientUpdateshopBackend(getActivity(),shop_id,editnumber.getText().toString().trim(),editurl.getText().toString().trim(),
+                editshopdetail.getText().toString().trim(),editaddress.getText().toString().trim(),this);
     }
 }

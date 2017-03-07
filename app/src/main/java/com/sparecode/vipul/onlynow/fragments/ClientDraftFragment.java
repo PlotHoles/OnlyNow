@@ -10,7 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.sparecode.vipul.onlynow.R;
-import com.sparecode.vipul.onlynow.activity.BaseActivity;
 import com.sparecode.vipul.onlynow.adapters.CouponDraftadapter;
 import com.sparecode.vipul.onlynow.model.ClientDraftData;
 import com.sparecode.vipul.onlynow.model.ClientDraftWrapper;
@@ -62,7 +61,7 @@ public class ClientDraftFragment extends BaseFragment implements ClientDraftBack
         ButterKnife.bind(this, view);
         data = new ArrayList<>();
 
-        clientDraftBackend = new ClientDraftBackend(getActivity(),"5",this);
+        clientDraftBackend = new ClientDraftBackend(getActivity(),"3",this);
         clientDraftBackend.callPagination(1);
 
         gridLayoutManager = new GridLayoutManager(getActivity(), 1);
@@ -98,8 +97,14 @@ public class ClientDraftFragment extends BaseFragment implements ClientDraftBack
         couponDraftadapter = new CouponDraftadapter(getActivity(), data, new OnClickListener() {
             @Override
             public void onItemClicked(int position) {
-                if (getActivity() != null)
-                    ((BaseActivity)getActivity()).openClientCouponDetailsPage();
+                if (getActivity() != null){
+                    ClientCouponDetailsFragment clientCouponDetailsFragment = new ClientCouponDetailsFragment();
+                    Bundle bundle = new Bundle();
+                    bundle.putString("key",data.get(position).getId());
+                    clientCouponDetailsFragment.setArguments(bundle);
+                    addFragment(clientCouponDetailsFragment,true);
+                }
+                // ((BaseActivity)getActivity()).openClientCouponDetailsPage();
             }
         });
         recyclerview.setAdapter(couponDraftadapter);

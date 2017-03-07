@@ -10,7 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.sparecode.vipul.onlynow.R;
-import com.sparecode.vipul.onlynow.activity.BaseActivity;
 import com.sparecode.vipul.onlynow.adapters.CouponLivedapter;
 import com.sparecode.vipul.onlynow.model.ClientLiveData;
 import com.sparecode.vipul.onlynow.model.ClientLiveWrapper;
@@ -62,7 +61,7 @@ public class ClientLiveFragment extends BaseFragment implements CliebtLiveBacken
         ButterKnife.bind(this, view);
         data = new ArrayList<>();
 
-        cliebtLiveBackend = new CliebtLiveBackend(getActivity(),"5",this);
+        cliebtLiveBackend = new CliebtLiveBackend(getActivity(),"3",this);
         cliebtLiveBackend.callPagination(1);
         gridLayoutManager = new GridLayoutManager(getActivity(), 1);
         /*recyclerview.setLayoutManager(gridLayoutManager);
@@ -100,7 +99,15 @@ public class ClientLiveFragment extends BaseFragment implements CliebtLiveBacken
             @Override
             public void onItemClicked(int position) {
                 if (getActivity() != null)
-                    ((BaseActivity)getActivity()).openClientCouponDetailsPage();
+                {
+                    ClientCouponDetailsFragment clientCouponDetailsFragment = new ClientCouponDetailsFragment();
+                    Bundle bundle = new Bundle();
+                    bundle.putString("key",data.get(position).getId());
+                    clientCouponDetailsFragment.setArguments(bundle);
+                    addFragment(clientCouponDetailsFragment,true);
+                  // ((BaseActivity)getActivity()).openClientCouponDetailsPage();
+                }
+
             }
         });
         recyclerview.setAdapter(couponLivedapter);

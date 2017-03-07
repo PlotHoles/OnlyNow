@@ -55,6 +55,8 @@ public class ClientAnalyticsClientkFragment extends BaseFragment implements Clie
     LatoTextView textClientShow;
     @Bind(R.id.text_client_like)
     LatoTextView textClientLike;
+    @Bind(R.id.linearclient)
+    LinearLayout linearclient;
 
     private int mYear, mMonth, mDay;
     private View view;
@@ -94,12 +96,12 @@ public class ClientAnalyticsClientkFragment extends BaseFragment implements Clie
         mMonth = c.get(Calendar.MONTH);
         mDay = c.get(Calendar.DAY_OF_MONTH);
 
-        textDatefrom.setText(mYear+ "-" + (mMonth + 1) + "-" + mDay);
+        textDatefrom.setText(mYear + "-" + (mMonth + 1) + "-" + mDay);
         fromdate = mYear + "-" + (mMonth + 1) + "-" + mDay;
-        System.out.println("------->fromdate"+fromdate);
+        System.out.println("------->fromdate" + fromdate);
         textDateto.setText(mYear + "-" + (mMonth + 1) + "-" + mDay);
         todate = mYear + "-" + (mMonth + 1) + "-" + mDay;
-        System.out.println("------->todate"+todate);
+        System.out.println("------->todate" + todate);
         textDatefrom.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -110,16 +112,16 @@ public class ClientAnalyticsClientkFragment extends BaseFragment implements Clie
                             @Override
                             public void onDateSet(DatePicker view, int year,
                                                   int monthOfYear, int dayOfMonth) {
-                                Log.e("fromdate",year + "-" + (monthOfYear + 1) + "-" + dayOfMonth+"");
-                                textDatefrom.setText(year+ "-" + (monthOfYear + 1) + "-" + dayOfMonth);
+                                Log.e("fromdate", year + "-" + (monthOfYear + 1) + "-" + dayOfMonth + "");
+                                textDatefrom.setText(year + "-" + (monthOfYear + 1) + "-" + dayOfMonth);
                                 fromdate = year + "-" + (monthOfYear + 1) + "-" + dayOfMonth;
-                                Log.e("fromdate",fromdate);
-                                CheckDates(todate,fromdate);
+                                Log.e("fromdate", fromdate);
+                                CheckDates(todate, fromdate);
 
                             }
                         }, mYear, mMonth, mDay);
                 datePickerDialog.show();
-                System.out.println("----->date"+textDatefrom.getText().toString());
+                System.out.println("----->date" + textDatefrom.getText().toString());
             }
         });
 
@@ -136,8 +138,8 @@ public class ClientAnalyticsClientkFragment extends BaseFragment implements Clie
 
                                 textDateto.setText(year + "-" + (monthOfYear + 1) + "-" + dayOfMonth);
                                 todate = year + "-" + (monthOfYear + 1) + "-" + dayOfMonth;
-                                System.out.println("------->todate"+todate);
-                                CheckDates(todate,fromdate);
+                                System.out.println("------->todate" + todate);
+                                CheckDates(todate, fromdate);
                             }
                         }, mYear, mMonth, mDay);
                 datePickerDialog.show();
@@ -150,20 +152,16 @@ public class ClientAnalyticsClientkFragment extends BaseFragment implements Clie
         return view;
     }
 
-    public  boolean CheckDates(String fromdate,String todate)
-    {
+    public boolean CheckDates(String fromdate, String todate) {
         boolean b = false;
 
-        Log.e("--->fromdate",fromdate);
-        Log.e("--->todate",todate);
+        Log.e("--->fromdate", fromdate);
+        Log.e("--->todate", todate);
         try {
-            if (dfDate.parse(fromdate).after(dfDate.parse(todate)))
-            {
+            if (dfDate.parse(fromdate).after(dfDate.parse(todate))) {
                 b = true;
-                ClientAnalyticsBackend clientAnalyticsBackend = new ClientAnalyticsBackend(getActivity(), "5",todate,fromdate,this);
-            }
-            else
-            {
+                ClientAnalyticsBackend clientAnalyticsBackend = new ClientAnalyticsBackend(getActivity(), "3", todate, fromdate, this);
+            } else {
                 b = false;
                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
                 builder.setTitle("DATE")
@@ -186,7 +184,7 @@ public class ClientAnalyticsClientkFragment extends BaseFragment implements Clie
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        Log.e("------>boolean",b+"");
+        Log.e("------>boolean", b + "");
         return b;
 
     }
@@ -204,23 +202,23 @@ public class ClientAnalyticsClientkFragment extends BaseFragment implements Clie
 
     @Override
     public void onSuccessfullLogin(ClientAnalyticsWrapper clientAnalyticsWrapper) {
-
+        linearclient.setVisibility(View.VISIBLE);
         textCoupon.setText(clientAnalyticsWrapper.getData().getClient().getDetails());
         textClientShow.setText(clientAnalyticsWrapper.getData().getClient().getTotalViews());
         textClientLike.setText(clientAnalyticsWrapper.getData().getClient().getTotalLikes());
 
         if (clientAnalyticsWrapper.getData().getClient().getImageURL() != null &&
                 (!clientAnalyticsWrapper.getData().getClient().getImageURL().equals("")))
-        Picasso.with(getActivity())
-                .load(clientAnalyticsWrapper.getData().getClient().getImageURL())
-                .placeholder(R.drawable.image_placeholder)
-                .error(R.drawable.image_placeholder)
-                .resize(720,200)
-                .into(couponImage);
+            Picasso.with(getActivity())
+                    .load(clientAnalyticsWrapper.getData().getClient().getImageURL())
+                    .placeholder(R.drawable.image_placeholder)
+                    .error(R.drawable.image_placeholder)
+                    .resize(720, 200)
+                    .into(couponImage);
     }
 
     @Override
     public void onLoginfailure(String msg) {
-        Snackbar.make(view,msg,Snackbar.LENGTH_SHORT).show();
+        Snackbar.make(view, msg, Snackbar.LENGTH_SHORT).show();
     }
 }

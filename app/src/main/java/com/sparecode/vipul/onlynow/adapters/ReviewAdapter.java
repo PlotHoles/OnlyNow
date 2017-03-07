@@ -81,6 +81,13 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.MyViewHold
         holder.ratingBar.setRating(Float.parseFloat(data.get(position).getStar()));
         holder.textTime.setText(data.get(position).getDate());
         holder.review.setText(data.get(position).getReview());
+
+        /*String date = data.get(position).getDate();
+
+        Log.e("----->datereview",date);
+        String replace = date.replace("`"," ");
+        holder.textTime.setText(replace);
+        Log.e("replacestring",replace);*/
 //        History history = historyList.get(position);
 //        holder.text_name.setText(history.getName());
 //        holder.text_place.setText(history.getPlace());

@@ -111,6 +111,42 @@ public class ReqestParameter {
         }
         return jsonObject;
     }
+    public JSONObject toGetCoupon(String...vars){
+        JSONObject object = new JSONObject();
+        try {
+            object.put("method",RequestApi.GETCLIENTCOUPON);
+            object.put("id",vars[0]);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return object;
+    }
+    public JSONObject toUpdateShop(String...vars){
+        JSONObject object = new JSONObject();
+        try {
+            object.put("method",RequestApi.UPDATESHOP);
+            object.put("shop_id",vars[0]);
+            object.put("phone",vars[1]);
+            object.put("web",vars[2]);
+            object.put("details",vars[3]);
+            object.put("area",vars[4]);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return object;
+    }
+    public JSONObject toUpdateCoupon(String...vars){
+        JSONObject object = new JSONObject();
+        try {
+            object.put("method",RequestApi.UPDATECOUPON);
+            object.put("coupon_id",vars[0]);
+            object.put("instruction",vars[1]);
+            object.put("description",vars[2]);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return object;
+    }
     public JSONObject toMyProduct(String... vars) {
         JSONObject object = new JSONObject();
         try {

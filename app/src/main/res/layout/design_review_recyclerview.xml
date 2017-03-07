@@ -13,7 +13,7 @@
         android:layout_height="wrap_content">
 
         <TextView
-            android:text="Christina Clark"
+            android:text=""
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
@@ -36,7 +36,7 @@
 
         <TextView
             android:layout_marginRight="@dimen/dp_10"
-            android:text="Aug 19,2015"
+            android:text=""
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
@@ -44,7 +44,7 @@
             android:id="@+id/text_time" />
     </RelativeLayout>
     <TextView
-        android:text="Einstein has just become the world's first time teaveler .I sent him into the future. One minute into the future to be exact. And at exactly 1:21 AM we shall catch up with him."
+        android:text=""
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/review"

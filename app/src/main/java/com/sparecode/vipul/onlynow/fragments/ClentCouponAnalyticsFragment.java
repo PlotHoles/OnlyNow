@@ -163,7 +163,7 @@ public class ClentCouponAnalyticsFragment extends BaseFragment implements Client
         try {
             if (dfDate.parse(todate).after(dfDate.parse(fromdate))) {
                 b = true;
-                ClientAnalyticsBackend clientAnalyticsBackend = new ClientAnalyticsBackend(getActivity(), "5", fromdate, todate, this);
+                ClientAnalyticsBackend clientAnalyticsBackend = new ClientAnalyticsBackend(getActivity(), "3", fromdate, todate, this);
             } else {
                 b = false;
                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());

@@ -10,7 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.sparecode.vipul.onlynow.R;
-import com.sparecode.vipul.onlynow.activity.BaseActivity;
 import com.sparecode.vipul.onlynow.adapters.CouponPastdapter;
 import com.sparecode.vipul.onlynow.model.ClientPastData;
 import com.sparecode.vipul.onlynow.model.ClientPastWrapper;
@@ -97,8 +96,15 @@ public class ClientPastFragment extends BaseFragment implements ClientPastBacken
         couponPastdapter = new CouponPastdapter(getActivity(), data, new OnClickListener() {
             @Override
             public void onItemClicked(int position) {
-                if (getActivity() != null)
-                    ((BaseActivity)getActivity()).openClientCouponDetailsPage();
+                if (getActivity() != null){
+                    ClientCouponDetailsFragment clientCouponDetailsFragment = new ClientCouponDetailsFragment();
+                    Bundle bundle = new Bundle();
+                    bundle.putString("key",data.get(position).getId());
+                    clientCouponDetailsFragment.setArguments(bundle);
+                    addFragment(clientCouponDetailsFragment,true);
+                    //((BaseActivity)getActivity()).openClientCouponDetailsPage();
+                }
+
             }
         });
         recyclerview.setAdapter(couponPastdapter);

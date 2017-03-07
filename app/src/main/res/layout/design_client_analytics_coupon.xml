@@ -25,14 +25,27 @@
             android:id="@+id/text_coupon_name"
             android:textColor="@color/black"/>
 
-        <com.sparecode.vipul.onlynow.widgets.LatoTextView
-            android:text="@string/published"
-            android:layout_width="wrap_content"
-            android:textColor="@color/black"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/coupon_publishdate"
-            android:layout_marginStart="@dimen/dp_5"
-            android:layout_below="@+id/textView31" />
+            android:orientation="horizontal"
+            android:layout_marginStart="@dimen/dp_5">
+
+            <com.sparecode.vipul.onlynow.widgets.LatoTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/published"
+                android:textColor="@color/black"/>
+
+            <com.sparecode.vipul.onlynow.widgets.LatoTextView
+                android:text=""
+                android:layout_width="wrap_content"
+                android:textColor="@color/black"
+                android:layout_height="wrap_content"
+                android:id="@+id/coupon_publishdate"
+                android:layout_marginStart="@dimen/dp_5"/>
+        </LinearLayout>
+
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"

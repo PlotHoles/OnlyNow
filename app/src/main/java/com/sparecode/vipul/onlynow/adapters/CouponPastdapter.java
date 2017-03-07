@@ -97,8 +97,8 @@ public class CouponPastdapter extends RecyclerView.Adapter<CouponPastdapter.MyVi
         Log.e(":::::IMAGE URLS:::::", ":" + data.get(position).getImageURL());
         if (!data.get(position).getImageURL().trim().isEmpty()) {
             Picasso.with(context).load(data.get(position).getImageURL())
-                    .placeholder(R.drawable.image_placeholder)
-                    .error(R.drawable.image_placeholder)
+                    .placeholder(R.drawable.placeholder)
+                    .error(R.drawable.placeholder)
                     .resize(720,200)
                     .into(holder.couponImage, new Callback() {
                         @Override
