@@ -210,7 +210,7 @@ public class ClientCouponDetailsFragment extends BaseFragment implements ClientC
             nextImage.setVisibility(View.VISIBLE);
         }
         Log.e("sizeeeeeeegone", datasize + "");
-        Log.e("currrent", currentposition + "");
+        Log.e("currrent ", currentposition + "");
     }
 
     @Override
