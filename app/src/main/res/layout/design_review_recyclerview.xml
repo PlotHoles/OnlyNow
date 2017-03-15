@@ -27,9 +27,9 @@
             android:id="@+id/ratingBar"
             style="@style/ratingBar"
             android:layout_width="wrap_content"
-            android:layout_height="27px"
-            android:scaleX="1.5"
-            android:scaleY="1.5"
+            android:layout_height="29px"
+            android:scaleX="1.2"
+            android:scaleY="1.2"
             android:isIndicator="true"
             android:numStars="5"
             android:layout_marginLeft="@dimen/dp_15"/>

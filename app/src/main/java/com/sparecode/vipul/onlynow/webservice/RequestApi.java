@@ -28,12 +28,17 @@ public interface RequestApi {
     String GETCLIENTCOUPON = "get_coupon";
     String UPDATESHOP = "update_shop";
     String UPDATECOUPON = "update_coupon";
+    String CLIENTSIGNUP = "signup";
+    String UPDATELOCATION = "update_shop";
+    String CANCELDEAL = "cancel_request";
+    String LOGOUT = "logout";
     //String BASEURL = "http://192.168.2.16/projects/wilo/api/";
     String BASEURL = "http://192.168.2.7/projects/onlynow/api/";
     String SERVICE = BASEURL + "services.php?data=";
     String CLIENTSERVICE = BASEURL + "client/?data=";
     String CLIENTDATA = BASEURL + "?data=";
     String COMMONSERVICE = BASEURL + "?data=";
+    String ZIPDATA = "http://zipcloud.ibsnet.co.jp/api/search?zipcode=";
     String PRODUCT_ADD = BASEURL + "product_add.php";
     String PRODUCT_EDIT = BASEURL + "product_edit.php";
     String SIGNUP_CUSTOMER = BASEURL + "signup_customer.php";

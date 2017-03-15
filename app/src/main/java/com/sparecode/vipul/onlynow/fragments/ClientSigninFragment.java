@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.sparecode.vipul.onlynow.R;
 import com.sparecode.vipul.onlynow.activity.BaseActivity;
@@ -19,10 +20,9 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class ClientSigninFragment extends BaseFragment implements ClientSigninBackend.ClientSigninResultProvider{
+public class ClientSigninFragment extends BaseFragment implements ClientSigninBackend.ClientSigninResultProvider {
 
-    @Bind(R.id.text_signup)
-    LatoTextView textSignup;
+
     @Bind(R.id.image_logo)
     ImageView imageLogo;
     @Bind(R.id.text_des)
@@ -35,14 +35,14 @@ public class ClientSigninFragment extends BaseFragment implements ClientSigninBa
     LatoTextView textForgot;
     @Bind(R.id.button_signin)
     LatoButton buttonSignin;
+    @Bind(R.id.text_signups)
+    LatoTextView textSignups;
     private View view;
-
 
 
     public ClientSigninFragment() {
         // Required empty public constructor
     }
-
 
 
     @Override
@@ -56,39 +56,39 @@ public class ClientSigninFragment extends BaseFragment implements ClientSigninBa
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_client_signin, container, false);
         ButterKnife.bind(this, view);
-
+        textSignups.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getActivity(), "hi", Toast.LENGTH_SHORT).show();
+            }
+        });
         return view;
     }
 
-    void validation()
-    {
-        if (editEmail.getText().toString().trim().length() == 0)
-        {
+    void validation() {
+        if (editEmail.getText().toString().trim().length() == 0) {
             editEmail.setError(getString(R.string.email));
             editEmail.requestFocus();
-        }
-        else if (editPassword.getText().toString().trim().length() == 0)
-        {
+        } else if (editPassword.getText().toString().trim().length() == 0) {
             editPassword.setError(getString(R.string.password));
             editPassword.requestFocus();
-        }
-        else
-        {
-            ClientSigninBackend clientSigninBackend = new ClientSigninBackend(getActivity(),editEmail.getText().toString(),editPassword.getText().toString(),"A","0000",this);
+        } else {
+            ClientSigninBackend clientSigninBackend = new ClientSigninBackend(getActivity(), editEmail.getText().toString(), editPassword.getText().toString(), "A", "0000", this);
         }
 
     }
+
     @Override
     public void setToolbarForFragment() {
         ((BaseActivity) getActivity()).getAppbarLayout().setVisibility(View.VISIBLE);
         ((BaseActivity) getActivity()).getImgToolBarBack().setVisibility(View.VISIBLE);
         ((BaseActivity) getActivity()).getTextViewToolBarTitle().setText(getString(R.string.sign));
-        ((BaseActivity)getActivity()).getTabLayoutclient().setVisibility(View.GONE);
-        ((BaseActivity)getActivity()).getTextNext().setVisibility(View.GONE);
-        ((BaseActivity)getActivity()).getImgToolBarBack().setOnClickListener(new View.OnClickListener() {
+        ((BaseActivity) getActivity()).getTabLayoutclient().setVisibility(View.GONE);
+        ((BaseActivity) getActivity()).getTextNext().setVisibility(View.GONE);
+        ((BaseActivity) getActivity()).getImgToolBarBack().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((BaseActivity)getActivity()).openClientSplashPage();
+                ((BaseActivity) getActivity()).openClientSplashPage();
             }
         });
     }
@@ -99,18 +99,19 @@ public class ClientSigninFragment extends BaseFragment implements ClientSigninBa
         ButterKnife.unbind(this);
     }
 
-    @OnClick({R.id.text_signup, R.id.text_forgot, R.id.button_signin})
+    @OnClick({R.id.text_signups, R.id.text_forgot, R.id.button_signin})
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.text_signup:
-                ((BaseActivity)getActivity()).openClientSignupPage();
+            case R.id.text_signups:
+                Toast.makeText(getActivity(), "hi", Toast.LENGTH_SHORT).show();
+                ((BaseActivity) getActivity()).openClientSignupPage();
                 break;
             case R.id.text_forgot:
                 ForgotFragment fragment = new ForgotFragment();
                 Bundle bundle = new Bundle();
-                bundle.putString("key","client");
+                bundle.putString("key", "client");
                 fragment.setArguments(bundle);
-                addFragment(fragment,true);
+                addFragment(fragment, true);
                 //((BaseActivity)getActivity()).openForgotPage();
                 break;
             case R.id.button_signin:
@@ -121,19 +122,19 @@ public class ClientSigninFragment extends BaseFragment implements ClientSigninBa
 
     @Override
     public void onSuccessfullLogin(LoginWrapper loginWrapper) {
-        if (getActivity() !=null)
-        {
-            ((MainActivity)getActivity()).setUserData(loginWrapper.getData());
-            ((BaseActivity)getActivity()).openClientCouponPage();
+        if (getActivity() != null) {
+            ((MainActivity) getActivity()).setUserData(loginWrapper.getData());
+            ((BaseActivity) getActivity()).openClientCouponPage();
         }
 
     }
 
     @Override
     public void onLoginFailure(String msg) {
-        if (getActivity() != null)
-        {
-            Snackbar.make(view,msg,Snackbar.LENGTH_SHORT).show();
+        if (getActivity() != null) {
+            Snackbar.make(view, msg, Snackbar.LENGTH_SHORT).show();
         }
     }
+
+
 }

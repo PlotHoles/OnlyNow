@@ -62,17 +62,34 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <com.sparecode.vipul.onlynow.widgets.LatoTextView
-                    android:text="@string/_11_29_55_minute_left"
-                    android:layout_width="wrap_content"
-                    android:textColor="@color/black"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentStart="true"
-                    android:id="@+id/text_coupontime"
-                    app:typeface="lato_regular"
-                    android:visibility="gone"/>
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_toStartOf="@+id/text_coupontype">
+                    <com.sparecode.vipul.onlynow.widgets.LatoTextView
+                        android:text="@string/validuntill"
+                        android:layout_width="wrap_content"
+                        android:textColor="@color/black"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentStart="true"
+                        android:id="@+id/text_valid"
+                        app:typeface="lato_regular"
+                        android:visibility="visible"/>
+
+                    <com.sparecode.vipul.onlynow.widgets.LatoTextView
+                        android:text=""
+                        android:layout_width="wrap_content"
+                        android:textColor="@color/black"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentStart="true"
+                        android:id="@+id/text_coupondate"
+                        app:typeface="lato_regular"
+                        android:visibility="visible"
+                        android:layout_marginLeft="@dimen/dp_5"/>
+                </LinearLayout>
                 <com.sparecode.vipul.onlynow.widgets.LatoTextView
                     android:text=""
                     android:layout_width="wrap_content"
@@ -94,7 +111,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
                     android:layout_alignParentStart="true"
-                    android:id="@+id/text_coupondate"
+                    android:id="@+id/text_coupontime"
                     app:typeface="lato_regular"
                     android:visibility="gone"/>
 

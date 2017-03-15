@@ -19,6 +19,7 @@ import com.sparecode.vipul.onlynow.activity.BaseActivity;
 import com.sparecode.vipul.onlynow.adapters.ClientCouponAnalyticsAdapter;
 import com.sparecode.vipul.onlynow.model.ClientAnalyticsWrapper;
 import com.sparecode.vipul.onlynow.model.ClientsAnalyticsCoupon;
+import com.sparecode.vipul.onlynow.view.EndlessRecyclerViewScrollListener;
 import com.sparecode.vipul.onlynow.view.OnClickListener;
 import com.sparecode.vipul.onlynow.widgets.LatoTextView;
 
@@ -66,6 +67,8 @@ public class ClentCouponAnalyticsFragment extends BaseFragment implements Client
     String todate;
     SimpleDateFormat dfDate;
     List<ClientsAnalyticsCoupon> data;
+    ClientAnalyticsBackend clientAnalyticsBackend;
+    GridLayoutManager gridLayoutManager;
 
     public ClentCouponAnalyticsFragment() {
         // Required empty public constructor
@@ -92,6 +95,9 @@ public class ClentCouponAnalyticsFragment extends BaseFragment implements Client
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_clent_coupon_analytics, container, false);
         ButterKnife.bind(this, view);
+
+        gridLayoutManager = new GridLayoutManager(getActivity(), 1);
+
         data = new ArrayList<>();
         final Calendar c = Calendar.getInstance();
         mYear = c.get(Calendar.YEAR);
@@ -152,6 +158,7 @@ public class ClentCouponAnalyticsFragment extends BaseFragment implements Client
         dfDate = new SimpleDateFormat("yyyy-MM-dd");
         //CheckDates(fromdate,todate);
         setRecycleView();
+        setPagination(recyclerview);
         return view;
     }
 
@@ -163,7 +170,9 @@ public class ClentCouponAnalyticsFragment extends BaseFragment implements Client
         try {
             if (dfDate.parse(todate).after(dfDate.parse(fromdate))) {
                 b = true;
-                ClientAnalyticsBackend clientAnalyticsBackend = new ClientAnalyticsBackend(getActivity(), "3", fromdate, todate, this);
+
+                clientAnalyticsBackend = new ClientAnalyticsBackend(getActivity(), "3", fromdate, todate, this);
+                clientAnalyticsBackend.callPagination(1);
             } else {
                 b = false;
                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
@@ -190,6 +199,21 @@ public class ClentCouponAnalyticsFragment extends BaseFragment implements Client
         Log.e("------>boolean", b + "");
         return b;
 
+    }
+
+    private void setPagination(RecyclerView recyclerview) {
+        recyclerview.addOnScrollListener(new EndlessRecyclerViewScrollListener(gridLayoutManager) {
+            @Override
+            public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
+                Log.e("PAGINATION CALL::", "::" + page);
+                clientAnalyticsBackend.callPagination(page);
+            }
+
+            @Override
+            public void MaxPage(int maxpage) {
+                Log.e("::MAXPAGE::", "" + maxpage);
+            }
+        });
     }
 
     public void setRecycleView() {

@@ -54,7 +54,10 @@ public class LoginData {
     private String shopId;
     @SerializedName("imageURL")
     private String imageURL;
-
+    @SerializedName("phone")
+    private String phone;
+    @SerializedName("web")
+    private String web;
     public String getId() {
         return id;
     }
@@ -231,6 +234,22 @@ public class LoginData {
         this.shopId = shopId;
     }
 
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getWeb() {
+        return web;
+    }
+
+    public void setWeb(String web) {
+        this.web = web;
+    }
+
     public String getImageURL() {
         return imageURL;
     }
@@ -238,4 +257,5 @@ public class LoginData {
     public void setImageURL(String imageURL) {
         this.imageURL = imageURL;
     }
+
 }

@@ -1,5 +1,6 @@
 package com.sparecode.vipul.onlynow.fragments;
 
+import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v4.view.ViewPager;
@@ -7,6 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.DatePicker;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
@@ -20,7 +22,11 @@ import com.sparecode.vipul.onlynow.widgets.LatoButton;
 import com.sparecode.vipul.onlynow.widgets.LatoEditText;
 import com.sparecode.vipul.onlynow.widgets.LatoTextView;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import butterknife.Bind;
@@ -62,6 +68,8 @@ public class ClientCouponDetailsFragment extends BaseFragment implements ClientC
     List<ClientGetCouponImage> data;
     CustomPagerAdapter customPagerAdapter;
     Integer datasize;
+    Date date;
+    private int mYear, mMonth, mDay;
 
     public ClientCouponDetailsFragment() {
         // Required empty public constructor
@@ -96,7 +104,30 @@ public class ClientCouponDetailsFragment extends BaseFragment implements ClientC
 
         ClientCouponDetailBackend clientCouponDetailBackend = new ClientCouponDetailBackend(coupon_id, getActivity(), this);
 
+        final Calendar c = Calendar.getInstance();
+        mYear = c.get(Calendar.YEAR);
+        mMonth = c.get(Calendar.MONTH);
+        mDay = c.get(Calendar.DAY_OF_MONTH);
 
+        textCoupondate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DatePickerDialog datePickerDialog = new DatePickerDialog(getActivity(),
+                        new DatePickerDialog.OnDateSetListener() {
+
+                            @Override
+                            public void onDateSet(DatePicker view, int year,
+                                                  int monthOfYear, int dayOfMonth) {
+                                Log.e("fromdate", year + "-" + (monthOfYear + 1) + "-" + dayOfMonth + "");
+                                textCoupondate.setText(year + "-" + (monthOfYear + 1) + "-" + dayOfMonth);
+
+
+                            }
+                        }, mYear, mMonth, mDay);
+                datePickerDialog.show();
+
+            }
+        });
         coupan.setEnabled(false);
         shopname.setEnabled(false);
         coupandetail.setEnabled(false);
@@ -222,11 +253,25 @@ public class ClientCouponDetailsFragment extends BaseFragment implements ClientC
         coupan.setText(clientGetCouponWrapper.getData().getCoupon().getInstruction());
         shopname.setText(clientGetCouponWrapper.getData().getCoupon().getShopName());
         coupandetail.setText(clientGetCouponWrapper.getData().getCoupon().getDescription());
+
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-dd-mm");
+        try {
+
+            date = sdf.parse(clientGetCouponWrapper.getData().getCoupon().getEndDate());
+            Log.e("date",""+sdf.format(date));
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        textCoupondate.setText(sdf.format(date));
     }
 
     @Override
     public void onSuuccessfullLogin(CLientUpdateCouponWrapper cLientUpdateCouponWrapper) {
         Snackbar.make(view, cLientUpdateCouponWrapper.getMessage(), Snackbar.LENGTH_SHORT).show();
+        coupan.setEnabled(false);
+        shopname.setEnabled(false);
+        coupandetail.setEnabled(false);
     }
 
     @Override
@@ -237,6 +282,6 @@ public class ClientCouponDetailsFragment extends BaseFragment implements ClientC
     @OnClick(R.id.save)
     public void onClick() {
 
-        ClientUpdateCouponBackend clientUpdateCouponBackend = new ClientUpdateCouponBackend(getActivity(),coupon_id,coupan.getText().toString().trim(),coupandetail.getText().toString().trim(),this);
+        ClientUpdateCouponBackend clientUpdateCouponBackend = new ClientUpdateCouponBackend(getActivity(),coupon_id,coupan.getText().toString().trim(),coupandetail.getText().toString().trim(),textCoupondate.getText().toString(),this);
     }
 }

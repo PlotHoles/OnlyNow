@@ -29,14 +29,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp_150"
                 app:srcCompat="@drawable/natural"
-                android:id="@+id/imageView9"
+                android:id="@+id/coupon_image"
                 android:scaleType="fitXY"/>
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:srcCompat="@drawable/details_page_next_icon"
-                android:id="@+id/imageView11"
+                android:id="@+id/coupon_next_image"
                 android:layout_gravity="center_vertical|right"/>
 
             <LinearLayout
@@ -53,7 +53,8 @@
                     android:layout_height="wrap_content"
                     android:text="@string/coupon_rating"
                     android:textColor="@color/white"
-                    app:typeface="lato_bold"/>
+                    app:typeface="lato_bold"
+                    android:id="@+id/text_rating"/>
                 <RatingBar
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -69,7 +70,7 @@
             android:text="@string/coupon_detail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/textView31"
+            android:id="@+id/text_coupon_desc"
             app:typeface="lato_regular"/>
 
         <RelativeLayout
@@ -83,7 +84,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentStart="true"
-                android:id="@+id/textView32"
+                android:id="@+id/text_validtime"
                 app:typeface="lato_regular"/>
 
             <com.sparecode.vipul.onlynow.widgets.LatoTextView
@@ -92,7 +93,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
-                android:id="@+id/textView33"
+                android:id="@+id/text_coupon_category"
                 app:typeface="lato_regular"/>
         </RelativeLayout>
 
@@ -100,15 +101,29 @@
             android:layout_marginTop="@dimen/dp_2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-
-            <com.sparecode.vipul.onlynow.widgets.LatoTextView
-                android:text="@string/coupon_days"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentStart="true"
-                android:id="@+id/textView34"
-                app:typeface="lato_regular"/>
+                android:layout_toStartOf="@+id/textView36">
+
+                <com.sparecode.vipul.onlynow.widgets.LatoTextView
+                    android:text="Valid until:"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentStart="true"
+                    app:typeface="lato_regular"/>
+
+                <com.sparecode.vipul.onlynow.widgets.LatoTextView
+                    android:text=""
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentStart="true"
+                    android:id="@+id/text_validdate"
+                    app:typeface="lato_regular"/>
+            </LinearLayout>
+
 
             <com.sparecode.vipul.onlynow.widgets.LatoTextView
                 android:text="@string/coupon_place"
@@ -116,7 +131,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
-                android:id="@+id/textView36"
+                android:id="@+id/text_coupon_area"
                 app:typeface="lato_regular"/>
         </RelativeLayout>
 
@@ -131,7 +146,7 @@
                 android:text="@string/coupon"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/textView37"
+                android:id="@+id/text_coupon"
                 app:typeface="lato_bold"/>
 
             <com.sparecode.vipul.onlynow.widgets.LatoTextView
@@ -140,7 +155,7 @@
                 android:text="@string/they_way_to_use_this_coupon"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/textView38"
+                android:id="@+id/text_coupon_description"
                 app:typeface="lato_regular"/>
 
         </LinearLayout>
@@ -169,7 +184,7 @@
                     android:text="@string/shop_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/textView40"
+                    android:id="@+id/text_shopname"
                     app:typeface="lato_regular"/>
 
                 <com.sparecode.vipul.onlynow.widgets.LatoTextView
@@ -177,7 +192,7 @@
                     android:text="@string/phone_number_or_website"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/textView41"
+                    android:id="@+id/text_phone"
                     app:typeface="lato_regular"/>
             </LinearLayout>
         </LinearLayout>
@@ -207,14 +222,14 @@
                     android:text="@string/coupon_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/textView43"
+                    android:id="@+id/text_couponname"
                     app:typeface="lato_regular"/>
 
                 <com.sparecode.vipul.onlynow.widgets.LatoTextView
                     android:text="@string/free_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/textView44"
+                    android:id="@+id/text_coupon_des"
                     app:typeface="lato_regular"/>
             </LinearLayout>
         </LinearLayout>
@@ -232,7 +247,7 @@
                 android:text="@string/other_coupon_details"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/textView45"
+                android:id="@+id/text_other_coupon"
                 app:typeface="lato_bold"/>
 
             <LinearLayout
@@ -246,14 +261,14 @@
                     android:text="@string/coupon_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/textView46"
+                    android:id="@+id/text_other_coupon_name"
                     app:typeface="lato_regular"/>
 
                 <com.sparecode.vipul.onlynow.widgets.LatoTextView
                     android:text="@string/valid"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/textView47"
+                    android:id="@+id/text_validothertime"
                     app:typeface="lato_regular"/>
             </LinearLayout>
         </LinearLayout>
@@ -270,7 +285,7 @@
                 android:text="@string/other_coupon_details"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/textView48"
+                android:id="@+id/text_othercoupondetails"
                 app:typeface="lato_bold"/>
 
             <LinearLayout
@@ -284,14 +299,14 @@
                     android:text="@string/coupon_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/textView49"
+                    android:id="@+id/text_othercouponnames"
                     app:typeface="lato_regular"/>
 
                 <com.sparecode.vipul.onlynow.widgets.LatoTextView
                     android:text="@string/valid"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/textView50"
+                    android:id="@+id/text_validothercoupon"
                     app:typeface="lato_regular"/>
             </LinearLayout>
 
@@ -306,7 +321,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/save"
-            app:typeface="lato_bold"/>
+            app:typeface="lato_bold"
+            android:id="@+id/button_savecoupon"/>
 
         </LinearLayout>
     </ScrollView>

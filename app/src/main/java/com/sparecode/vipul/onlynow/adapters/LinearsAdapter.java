@@ -24,7 +24,7 @@ import butterknife.ButterKnife;
  * Created by vipul on 29/12/16.
  */
 
-public class LinearAdapter extends RecyclerView.Adapter<LinearAdapter.MyViewHolder> {
+public class LinearsAdapter extends RecyclerView.Adapter<LinearsAdapter.MyViewHolder> {
 
 
     //    private List<History> historyList;
@@ -39,7 +39,7 @@ public class LinearAdapter extends RecyclerView.Adapter<LinearAdapter.MyViewHold
     private int selectedPosition = -1;
     private int previousSelectedPos = 0;
 
-    public LinearAdapter(List<CategoryData> categoryDatas, Context mContext, OnClickListener onClickListener) {
+    public LinearsAdapter(List<CategoryData> categoryDatas, Context mContext, OnClickListener onClickListener) {
         this.categoryDatas = categoryDatas;
         this.mContext = mContext;
         this.onClickListener = onClickListener;

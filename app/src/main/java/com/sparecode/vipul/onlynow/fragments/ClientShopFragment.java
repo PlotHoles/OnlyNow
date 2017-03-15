@@ -100,6 +100,8 @@ public class ClientShopFragment extends BaseFragment implements ClientShopBacken
         ((BaseActivity) getActivity()).getImgToolBarCancel().setVisibility(View.VISIBLE);
         ((BaseActivity) getActivity()).getImgAdd().setVisibility(View.GONE);
         ((BaseActivity) getActivity()).getFab().setVisibility(View.GONE);
+        ((BaseActivity)getActivity()).getTextNext().setVisibility(View.GONE);
+        ((BaseActivity)getActivity()).getImgToolBarBack().setVisibility(View.GONE);
         ((BaseActivity) getActivity()).getImgToolBarCancel().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

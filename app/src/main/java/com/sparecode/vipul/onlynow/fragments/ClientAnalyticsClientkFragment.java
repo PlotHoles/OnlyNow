@@ -25,7 +25,7 @@ import java.util.Calendar;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class ClientAnalyticsClientkFragment extends BaseFragment implements ClientAnalyticsBackend.ClientAnalyticsResultProvider {
+public class ClientAnalyticsClientkFragment extends BaseFragment implements ClientAnalyticsClientBackend.ClientAnalyticsResultProvider {
 
     @Bind(R.id.viewright)
     View viewright;
@@ -63,6 +63,7 @@ public class ClientAnalyticsClientkFragment extends BaseFragment implements Clie
     String fromdate;
     String todate;
     SimpleDateFormat dfDate;
+    ClientAnalyticsClientBackend clientAnalyticsClientBackend;
 
     public ClientAnalyticsClientkFragment() {
         // Required empty public constructor
@@ -154,13 +155,14 @@ public class ClientAnalyticsClientkFragment extends BaseFragment implements Clie
 
     public boolean CheckDates(String fromdate, String todate) {
         boolean b = false;
-
+        //getUserId()
         Log.e("--->fromdate", fromdate);
         Log.e("--->todate", todate);
         try {
             if (dfDate.parse(fromdate).after(dfDate.parse(todate))) {
                 b = true;
-                ClientAnalyticsBackend clientAnalyticsBackend = new ClientAnalyticsBackend(getActivity(), "3", todate, fromdate, this);
+
+                clientAnalyticsClientBackend = new ClientAnalyticsClientBackend(getActivity(), "3", todate, fromdate, this);
             } else {
                 b = false;
                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());

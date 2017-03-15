@@ -175,4 +175,5 @@
 
     <string name="from">From</string>
     <string name="to">To</string>
+    <string name="validuntill">Valid until :</string>
 </resources>

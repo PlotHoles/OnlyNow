@@ -15,6 +15,7 @@ import com.sparecode.vipul.onlynow.activity.BaseActivity;
 import com.sparecode.vipul.onlynow.adapters.ReviewAdapter;
 import com.sparecode.vipul.onlynow.model.ClientReview;
 import com.sparecode.vipul.onlynow.model.ClientReviewWrapper;
+import com.sparecode.vipul.onlynow.view.EndlessRecyclerViewScrollListener;
 import com.sparecode.vipul.onlynow.view.OnClickListener;
 import com.sparecode.vipul.onlynow.widgets.LatoTextView;
 
@@ -58,6 +59,8 @@ public class ClientReviewFragment extends BaseFragment implements ClientReviewBa
     LatoTextView star1;
     private View view;
     List<ClientReview> data;
+    ClientReviewBackend clientReviewBackend;
+    GridLayoutManager gridLayoutManager;
 
     public ClientReviewFragment() {
         // Required empty public constructor
@@ -83,12 +86,30 @@ public class ClientReviewFragment extends BaseFragment implements ClientReviewBa
         reviewRecyclerview.setLayoutManager(gridLayoutManager);
         reviewRecyclerview.setAdapter(reviewAdapter);*/
 
-        ClientReviewBackend clientReviewBackend = new ClientReviewBackend("1", getActivity(), this);
+
+        clientReviewBackend = new ClientReviewBackend("1", getActivity(), this);
+        clientReviewBackend.callPagination(1);
+        gridLayoutManager = new GridLayoutManager(getActivity(), 1);
         Log.e("shop", getShopId());
         setRecycleView();
+        setPagination(reviewRecyclerview);
         return view;
     }
 
+    private void setPagination(RecyclerView recyclerview) {
+        recyclerview.addOnScrollListener(new EndlessRecyclerViewScrollListener(gridLayoutManager) {
+            @Override
+            public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
+                Log.e("PAGINATION CALL::", "::" + page);
+                clientReviewBackend.callPagination(page);
+            }
+
+            @Override
+            public void MaxPage(int maxpage) {
+                Log.e("::MAXPAGE::", "" + maxpage);
+            }
+        });
+    }
     public void setRecycleView() {
         reviewRecyclerview.setLayoutManager(new GridLayoutManager(getActivity(), 1));
         reviewAdapter = new ReviewAdapter(getActivity(), data, new OnClickListener() {
@@ -114,6 +135,8 @@ public class ClientReviewFragment extends BaseFragment implements ClientReviewBa
         ((BaseActivity) getActivity()).getImgAdd().setVisibility(View.GONE);
         ((BaseActivity) getActivity()).getImgEdit().setVisibility(View.GONE);
         ((BaseActivity) getActivity()).getFab().setVisibility(View.GONE);
+        ((BaseActivity)getActivity()).getImgToolBarBack().setVisibility(View.GONE);
+        ((BaseActivity)getActivity()).getTextNext().setVisibility(View.GONE);
         ((BaseActivity) getActivity()).getImgToolBarCancel().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

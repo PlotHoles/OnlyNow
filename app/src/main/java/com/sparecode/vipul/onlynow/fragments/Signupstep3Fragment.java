@@ -8,7 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.sparecode.vipul.onlynow.R;
-import com.sparecode.vipul.onlynow.adapters.LinearAdapter;
+import com.sparecode.vipul.onlynow.adapters.LinearsAdapter;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -17,7 +17,7 @@ public class Signupstep3Fragment extends BaseFragment {
 
     @Bind(R.id.recyclerview)
     RecyclerView recyclerview;
-    LinearAdapter linearAdapter;
+    LinearsAdapter linearsAdapter;
     String Title3;
 
     public Signupstep3Fragment() {
@@ -46,17 +46,17 @@ public class Signupstep3Fragment extends BaseFragment {
         ButterKnife.bind(this, view);
 
 
-       // linearAdapter = new LinearAdapter();
+       // linearsAdapter = new LinearsAdapter();
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(),1);
         recyclerview.setLayoutManager(gridLayoutManager);
-        //recyclerview.setAdapter(linearAdapter);
-        //linearAdapter.notifyDataSetChanged();
+        //recyclerview.setAdapter(linearsAdapter);
+        //linearsAdapter.notifyDataSetChanged();
         int oldFocusability = recyclerview.getDescendantFocusability();
         recyclerview.setItemAnimator(null);
         recyclerview.setDescendantFocusability(recyclerview.FOCUS_BLOCK_DESCENDANTS);
         recyclerview.setDescendantFocusability(oldFocusability);
         recyclerview.setHasFixedSize(true);
-       // linearAdapter.setHasStableIds(false);
+       // linearsAdapter.setHasStableIds(false);
         Title3 = getArguments().getString("arg");
         return view;
     }

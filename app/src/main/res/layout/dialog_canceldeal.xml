@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    android:orientation="vertical">
+
+    <com.sparecode.vipul.onlynow.widgets.LatoTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/dp_10"
+        android:gravity="center"
+        android:padding="@dimen/dp_5"
+        android:text="cancel deal"
+        android:textSize="@dimen/sp_20"
+        app:typeface="lato_bold" />
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#D3D3D3" />
+
+
+    <com.sparecode.vipul.onlynow.widgets.LatoEditText
+        android:id="@+id/edtReview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/dp_10"
+        android:gravity="top"
+        android:lines="5"
+        android:maxLines="5"
+        android:padding="@dimen/dp_5"
+        android:textSize="@dimen/sp_18"
+        android:background="@drawable/reviewbox"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <com.sparecode.vipul.onlynow.widgets.LatoButton
+            android:id="@+id/button_no"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dp_10"
+            android:background="@color/pink"
+            android:text="NO"
+            android:textAllCaps="true"
+            android:textColor="@color/white"
+            android:layout_weight="1"/>
+
+        <com.sparecode.vipul.onlynow.widgets.LatoButton
+            android:id="@+id/button_yes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dp_10"
+            android:background="@color/pink"
+            android:text="YES"
+            android:textAllCaps="true"
+            android:textColor="@color/white"
+            android:layout_weight="1"/>
+    </LinearLayout>
+
+</LinearLayout>

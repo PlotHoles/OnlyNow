@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -170,5 +171,15 @@ public class SignupFragment extends BaseFragment implements SignupNextListner {
                     return null;
             }
         }
+    }
+    public void addFragment(BaseFragment fragment, boolean isReplace) {
+        FragmentManager fragmentManager = getChildFragmentManager();
+
+        fragmentManager.popBackStackImmediate(fragment.getClass().getName(),
+                FragmentManager.POP_BACK_STACK_INCLUSIVE);
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.container, fragment);
+        fragmentTransaction.addToBackStack(fragment.getClass().getName());
+        fragmentTransaction.commitAllowingStateLoss();
     }
 }

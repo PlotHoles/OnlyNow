@@ -3,7 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.sparecode.vipul.onlynow.fragments.ClientSignupstep1Fragment">
+    tools:context="com.sparecode.vipul.onlynow.fragments.ClientSignupstep1Fragment"
+    android:id="@+id/frame">
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -142,7 +144,8 @@
                     android:ems="10"
                     android:id="@+id/edit_prefecture"
                     android:singleLine="false"
-                    app:typeface="lato_bold"/>
+                    app:typeface="lato_bold"
+                    android:enabled="false"/>
 
                 <com.sparecode.vipul.onlynow.widgets.LatoEditText
                     android:layout_marginTop="@dimen/dp_5"
@@ -153,7 +156,8 @@
                     android:ems="10"
                     android:id="@+id/edit_cityname"
                     android:singleLine="false"
-                    app:typeface="lato_bold"/>
+                    app:typeface="lato_bold"
+                    android:enabled="false"/>
 
                 <com.sparecode.vipul.onlynow.widgets.LatoEditText
                     android:layout_marginTop="@dimen/dp_5"

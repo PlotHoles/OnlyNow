@@ -16,4 +16,8 @@ public class GetRequest<T>  {
     public void toGetRequest(final Context context, String url, JSONObject jsonObject, final Class<T> clazz, final OnResponse<T> t) {
         new GetAsync<T>(context, url, jsonObject,clazz, t).execute();
     }
+
+    public void toSimpleRequest(final Context context,String url, final Class<T> clazz, final OnResponse<T> t){
+        new SimpleAsync<>(context,url,clazz,t).execute();
+    }
 }

@@ -142,6 +142,84 @@ public class ReqestParameter {
             object.put("coupon_id",vars[0]);
             object.put("instruction",vars[1]);
             object.put("description",vars[2]);
+            object.put("end_date",vars[3]);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return object;
+    }
+    public JSONObject toClientSignup(String...vars){
+        JSONObject object = new JSONObject();
+        try {
+            object.put("method",RequestApi.CLIENTSIGNUP);
+            object.put("fname",vars[0]);
+            object.put("lname",vars[1]);
+            object.put("email",vars[2]);
+            object.put("password",vars[3]);
+            object.put("lat",vars[4]);
+            object.put("long",vars[5]);
+            object.put("client_name",vars[6]);
+            object.put("cat_id",vars[7]);
+            object.put("area",vars[8]);
+            object.put("zip_code",vars[9]);
+            object.put("prefecture",vars[10]);
+            object.put("city",vars[11]);
+            object.put("street",vars[12]);
+            object.put("build_name",vars[13]);
+            object.put("phone",vars[14]);
+            object.put("website",vars[15]);
+            object.put("device_type",vars[16]);
+            object.put("device_id",vars[17]);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return object;
+    }
+
+    public JSONObject toUpdateLocation(String...vars)
+    {
+        JSONObject object = new JSONObject();
+        try {
+            object.put("method",RequestApi.UPDATESHOP);
+            object.put("shop_id",vars[0]);
+            object.put("zip_code",vars[1]);
+            object.put("prefecture",vars[2]);
+            object.put("city",vars[3]);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return object;
+    }
+    public JSONObject toUpdateCategory(String...vars)
+    {
+        JSONObject object = new JSONObject();
+        try {
+            object.put("method",RequestApi.UPDATESHOP);
+            object.put("shop_id",vars[0]);
+            object.put("cat_id",vars[1]);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return object;
+    }
+    public JSONObject toCancelDeal(String...vars)
+    {
+        JSONObject object = new JSONObject();
+        try {
+            object.put("method",RequestApi.CANCELDEAL);
+            object.put("user_id",vars[0]);
+            object.put("comment",vars[1]);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return object;
+    }
+    public JSONObject toLogout(String...vars)
+    {
+        JSONObject object = new JSONObject();
+        try {
+            object.put("method",RequestApi.LOGOUT);
+            object.put("user_id",vars[0]);
         } catch (JSONException e) {
             e.printStackTrace();
         }

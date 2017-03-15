@@ -23,6 +23,7 @@ import com.sparecode.vipul.onlynow.fragments.ClientCouponFragment;
 import com.sparecode.vipul.onlynow.fragments.ClientReviewFragment;
 import com.sparecode.vipul.onlynow.fragments.ClientSettingFragment;
 import com.sparecode.vipul.onlynow.fragments.ClientShopFragment;
+import com.sparecode.vipul.onlynow.fragments.ClientSigninFragment;
 import com.sparecode.vipul.onlynow.fragments.HomeFragment;
 import com.sparecode.vipul.onlynow.fragments.MylistFragment;
 import com.sparecode.vipul.onlynow.fragments.NoticeFragment;
@@ -183,7 +184,11 @@ public class MainActivity extends BaseActivity {
             finish();
         } else if (fragment instanceof ClientCouponFragment || fragment instanceof ClientShopFragment || fragment instanceof ClientReviewFragment || fragment instanceof ClientAnalyticsFragment || fragment instanceof ClientSettingFragment) {
             finish();
-        } else {
+        }  else if (fragment instanceof ClientSigninFragment)
+        {
+            finish();
+        }
+        else {
             super.onBackPressed();
         }
     }

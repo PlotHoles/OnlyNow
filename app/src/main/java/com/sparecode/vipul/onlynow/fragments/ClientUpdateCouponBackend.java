@@ -18,20 +18,22 @@ public class ClientUpdateCouponBackend {
     private String couponId;
     private String instruction;
     private String description;
+    private String date;
     private ClientUpdateCouponResultProvider clientUpdateCouponResultProvider;
 
-    public ClientUpdateCouponBackend(Context context, String couponId,String instruction, String description,ClientUpdateCouponResultProvider clientUpdateCouponResultProvider) {
+    public ClientUpdateCouponBackend(Context context, String couponId,String instruction, String description,String date,ClientUpdateCouponResultProvider clientUpdateCouponResultProvider) {
         this.context = context;
         this.couponId = couponId;
         this.instruction = instruction;
         this.description = description;
+        this.date = date;
         this.clientUpdateCouponResultProvider = clientUpdateCouponResultProvider;
         call();
     }
 
     private void call()
     {
-        new GetRequest<CLientUpdateCouponWrapper>().toGetRequest(context, RequestApi.CLIENTSERVICE, new ReqestParameter().toUpdateCoupon(couponId, instruction, description), CLientUpdateCouponWrapper.class, new OnResponse<CLientUpdateCouponWrapper>() {
+        new GetRequest<CLientUpdateCouponWrapper>().toGetRequest(context, RequestApi.CLIENTSERVICE, new ReqestParameter().toUpdateCoupon(couponId, instruction, description,date), CLientUpdateCouponWrapper.class, new OnResponse<CLientUpdateCouponWrapper>() {
             @Override
             public void onSuccess(CLientUpdateCouponWrapper cLientUpdateCouponWrapper) {
 

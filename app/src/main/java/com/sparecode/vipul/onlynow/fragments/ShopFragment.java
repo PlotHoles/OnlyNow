@@ -8,9 +8,9 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RatingBar;
-import android.widget.TextView;
 
 import com.sparecode.vipul.onlynow.R;
+import com.sparecode.vipul.onlynow.widgets.LatoTextView;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -20,34 +20,32 @@ import butterknife.OnClick;
 public class ShopFragment extends Fragment {
 
 
+    @Bind(R.id.coupon_image)
+    ImageView couponImage;
+    @Bind(R.id.coupon_next_image)
+    ImageView couponNextImage;
+    @Bind(R.id.coupon_rating)
+    LatoTextView couponRating;
     @Bind(R.id.ratingBar)
     RatingBar ratingBar;
-    @Bind(R.id.textView35)
-    TextView textView35;
-    @Bind(R.id.imageButton2)
-    ImageButton imageButton2;
-    @Bind(R.id.textView51)
-    TextView textView51;
-    @Bind(R.id.textView52)
-    TextView textView52;
-    @Bind(R.id.textView53)
-    TextView textView53;
-    @Bind(R.id.textView54)
-    TextView textView54;
-    @Bind(R.id.textView55)
-    TextView textView55;
-    @Bind(R.id.textView56)
-    TextView textView56;
-    @Bind(R.id.textView57)
-    TextView textView57;
-    @Bind(R.id.textView58)
-    TextView textView58;
-    @Bind(R.id.textView59)
-    TextView textView59;
+    @Bind(R.id.text_coupon_desc)
+    LatoTextView textCouponDesc;
+    @Bind(R.id.imageButton_coupon_like)
+    ImageButton imageButtonCouponLike;
+    @Bind(R.id.text_coupon_category)
+    LatoTextView textCouponCategory;
+    @Bind(R.id.text_coupon_area)
+    LatoTextView textCouponArea;
+    @Bind(R.id.text_phone)
+    LatoTextView textPhone;
+    @Bind(R.id.text_coupon_web)
+    LatoTextView textCouponWeb;
+    @Bind(R.id.text_shopname)
+    LatoTextView textShopname;
     @Bind(R.id.imageView21)
     ImageView imageView21;
-    @Bind(R.id.textView61)
-    TextView textView61;
+    @Bind(R.id.text_adress)
+    LatoTextView textAdress;
 
     public ShopFragment() {
         // Required empty public constructor
@@ -76,17 +74,15 @@ public class ShopFragment extends Fragment {
         ButterKnife.bind(this, view);
         return view;
     }
-@OnClick(R.id.imageButton2)
-void onFavSelected() {
-    if (!imageButton2.isSelected())
-    {
-        imageButton2.setSelected(true);
+
+    @OnClick(R.id.imageButton_coupon_like)
+    void onFavSelected() {
+        if (!imageButtonCouponLike.isSelected()) {
+            imageButtonCouponLike.setSelected(true);
+        } else {
+            imageButtonCouponLike.setSelected(false);
+        }
     }
-    else
-    {
-        imageButton2.setSelected(false);
-    }
-}
 
 
     @Override

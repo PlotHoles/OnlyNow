@@ -20,13 +20,14 @@
             <com.sparecode.vipul.onlynow.view.CircleImageView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:src="@drawable/profile_icon"/>
+                android:src="@drawable/profile_icon"
+                android:id="@+id/profile_image"/>
 
             <com.sparecode.vipul.onlynow.widgets.LatoTextView
                 android:text="@string/mrjhon"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/textView13"
+                android:id="@+id/firstname"
                 android:gravity="center"
                 android:layout_marginTop="@dimen/dp_2"
                 android:textStyle="bold"
@@ -37,7 +38,7 @@
                 android:text="@string/mrjohnlee"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/textView14"
+                android:id="@+id/fullname"
                 android:gravity="center"
                 android:layout_marginTop="@dimen/dp_2"
                 android:textStyle="bold"
@@ -47,7 +48,7 @@
                 android:text="@string/mobilenumber"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/textView16"
+                android:id="@+id/mobile"
                 android:gravity="center"
                 android:layout_marginTop="@dimen/dp_2"
                 app:typeface="lato_regular"/>
@@ -56,7 +57,7 @@
                 android:text=   "@string/uclaaerospace"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/textView17"
+                android:id="@+id/email"
                 android:gravity="center"
                 android:layout_marginTop="@dimen/dp_2"
                 app:typeface="lato_regular"/>
@@ -73,7 +74,8 @@
                 android:layout_marginTop="@dimen/dp_3"
                 android:clickable="true"
                 android:background="@drawable/editprofile"
-                app:typeface="lato_bold"/>
+                app:typeface="lato_bold"
+                android:visibility="gone"/>
 
             <View
                 android:layout_width="match_parent"
@@ -84,7 +86,8 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_10">
+                android:layout_marginTop="@dimen/dp_10"
+                android:id="@+id/relative_changepassword">
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -93,23 +96,26 @@
                     android:layout_centerVertical="true"
                     android:layout_alignParentEnd="true"
                     android:id="@+id/imageView7"
-                    android:clickable="true" />
+                    android:clickable="true"
+                    android:visibility="gone"/>
 
                 <com.sparecode.vipul.onlynow.widgets.LatoTextView
                     android:text="@string/changepassword"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_alignParentStart="true"
-                    android:id="@+id/textView19"
+                    android:id="@+id/text_changepassword"
                     android:layout_toStartOf="@+id/imageView7"
                     android:clickable="true"
-                    app:typeface="lato_regular"/>
+                    app:typeface="lato_regular"
+                    android:drawableRight="@drawable/search_category_next_icon"/>
             </RelativeLayout>
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_5">
+                android:layout_marginTop="@dimen/dp_5"
+                android:id="@+id/relative_changelocation">
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -118,20 +124,58 @@
                     android:layout_centerVertical="true"
                     android:layout_alignParentEnd="true"
                     android:id="@+id/imageView8"
-                    android:clickable="true"/>
+                    android:clickable="true"
+                    android:visibility="gone"/>
 
                 <com.sparecode.vipul.onlynow.widgets.LatoTextView
                     android:text="@string/change_location"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_alignParentStart="true"
-                    android:id="@+id/textView20"
+                    android:id="@+id/text_changelocation"
                     android:layout_toStartOf="@+id/imageView8"
                     android:clickable="true"
-                    app:typeface="lato_regular"/>
+                    app:typeface="lato_regular"
+                    android:drawableRight="@drawable/search_category_next_icon"/>
             </RelativeLayout>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:id="@+id/ziplinear"
+                android:visibility="gone">
+
+                <com.sparecode.vipul.onlynow.widgets.LatoEditText
+                    android:id="@+id/edit_zipcode"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/zipcode"
+                    app:typeface="lato_regular"/>
+
+                <com.sparecode.vipul.onlynow.widgets.LatoEditText
+                    android:id="@+id/edit_prefecture"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/prefecture"
+                    app:typeface="lato_regular"
+                    android:enabled="false"/>
+                <com.sparecode.vipul.onlynow.widgets.LatoEditText
+                    android:id="@+id/edit_cityname"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/cityname"
+                    app:typeface="lato_regular"
+                    android:enabled="false"/>
+                <com.sparecode.vipul.onlynow.widgets.LatoButton
+                    android:id="@+id/button_change"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Change Location"
+                    android:textAllCaps="false"
+                    android:layout_gravity="center"/>
+            </LinearLayout>
             <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp_1"
@@ -141,7 +185,8 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_10">
+                android:layout_marginTop="@dimen/dp_10"
+                android:id="@+id/relative_changecategory">
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -149,24 +194,27 @@
                     app:srcCompat="@drawable/search_category_next_icon"
                     android:layout_centerVertical="true"
                     android:layout_alignParentEnd="true"
-                    android:id="@+id/imageView10" />
+                    android:id="@+id/imageView10"
+                    android:visibility="gone"/>
 
                 <com.sparecode.vipul.onlynow.widgets.LatoTextView
                     android:text="@string/changecategory"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_alignParentStart="true"
-                    android:id="@+id/textView22"
+                    android:id="@+id/text_changecategory"
                     android:layout_toStartOf="@+id/imageView10"
                     android:clickable="true"
-                    app:typeface="lato_regular"/>
+                    app:typeface="lato_regular"
+                    android:drawableRight="@drawable/search_category_next_icon"/>
             </RelativeLayout>
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_5">
+                android:layout_marginTop="@dimen/dp_5"
+                android:id="@+id/relative_pushnotification">
 
                 <Switch
                     android:layout_width="wrap_content"
@@ -182,7 +230,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_alignParentStart="true"
-                    android:id="@+id/textView21"
+                    android:id="@+id/text_pushnotification"
                     android:layout_toStartOf="@+id/notificationswitch"
                     app:typeface="lato_regular"/>
             </RelativeLayout>
@@ -196,7 +244,8 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_10">
+                android:layout_marginTop="@dimen/dp_10"
+                android:id="@+id/relative_qa">
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -205,23 +254,26 @@
                     android:layout_centerVertical="true"
                     android:layout_alignParentEnd="true"
                     android:id="@+id/imageView12"
-                    android:clickable="true" />
+                    android:clickable="true"
+                    android:visibility="gone"/>
 
                 <com.sparecode.vipul.onlynow.widgets.LatoTextView
                     android:text="@string/q_amp_a"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_alignParentStart="true"
-                    android:id="@+id/textView24"
+                    android:id="@+id/text_qa"
                     android:layout_toStartOf="@+id/imageView12"
                     android:clickable="true"
-                    app:typeface="lato_regular"/>
+                    app:typeface="lato_regular"
+                    android:drawableRight="@drawable/search_category_next_icon"/>
             </RelativeLayout>
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_5">
+                android:layout_marginTop="@dimen/dp_5"
+                android:id="@+id/relative_report">
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -230,18 +282,20 @@
                     android:layout_centerVertical="true"
                     android:layout_alignParentEnd="true"
                     android:id="@+id/imageView13"
-                    android:clickable="true"/>
+                    android:clickable="true"
+                    android:visibility="gone"/>
 
                 <com.sparecode.vipul.onlynow.widgets.LatoTextView
                     android:text="@string/report_a_problem"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_alignParentStart="true"
-                    android:id="@+id/textView25"
+                    android:id="@+id/text_report"
                     android:layout_toStartOf="@+id/imageView13"
                     android:clickable="true"
-                    app:typeface="lato_regular"/>
+                    app:typeface="lato_regular"
+                    android:drawableRight="@drawable/search_category_next_icon"/>
             </RelativeLayout>
 
             <View
@@ -252,7 +306,8 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_10">
+                android:layout_marginTop="@dimen/dp_10"
+                android:id="@+id/relative_about">
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -261,24 +316,27 @@
                     android:layout_centerVertical="true"
                     android:layout_alignParentEnd="true"
                     android:id="@+id/imageView14"
-                    android:clickable="true"/>
+                    android:clickable="true"
+                    android:visibility="gone"/>
 
                 <com.sparecode.vipul.onlynow.widgets.LatoTextView
                     android:text="@string/about_onlynow"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_alignParentStart="true"
-                    android:id="@+id/textView26"
+                    android:id="@+id/text_about"
                     android:layout_toStartOf="@+id/imageView14"
                     android:clickable="true"
-                    app:typeface="lato_regular"/>
+                    app:typeface="lato_regular"
+                    android:drawableRight="@drawable/search_category_next_icon"/>
             </RelativeLayout>
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_5">
+                android:layout_marginTop="@dimen/dp_5"
+                android:id="@+id/relative_blog">
 
 
                 <ImageView
@@ -288,18 +346,20 @@
                     android:layout_centerVertical="true"
                     android:layout_alignParentEnd="true"
                     android:id="@+id/imageView15"
-                    android:clickable="true"/>
+                    android:clickable="true"
+                    android:visibility="gone"/>
 
                 <com.sparecode.vipul.onlynow.widgets.LatoTextView
                     android:text="@string/blog"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_alignParentStart="true"
-                    android:id="@+id/textView27"
+                    android:id="@+id/text_blog"
                     android:layout_toStartOf="@+id/imageView15"
                     android:clickable="true"
-                    app:typeface="lato_regular"/>
+                    app:typeface="lato_regular"
+                    android:drawableRight="@drawable/search_category_next_icon"/>
             </RelativeLayout>
 
             <View
@@ -311,7 +371,8 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_10">
+                android:layout_marginTop="@dimen/dp_10"
+                android:id="@+id/relative_privacy">
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -320,24 +381,27 @@
                     android:layout_centerVertical="true"
                     android:layout_alignParentEnd="true"
                     android:id="@+id/imageView16"
-                    android:clickable="true"/>
+                    android:clickable="true"
+                    android:visibility="gone"/>
 
                 <com.sparecode.vipul.onlynow.widgets.LatoTextView
                     android:text="@string/privacy_policy"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_alignParentStart="true"
-                    android:id="@+id/textView28"
+                    android:id="@+id/text_privacy"
                     android:layout_toStartOf="@+id/imageView16"
                     android:clickable="true"
-                    app:typeface="lato_regular"/>
+                    app:typeface="lato_regular"
+                    android:drawableRight="@drawable/search_category_next_icon"/>
             </RelativeLayout>
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_5">
+                android:layout_marginTop="@dimen/dp_5"
+                android:id="@+id/relative_terms">
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -346,23 +410,26 @@
                     android:layout_centerVertical="true"
                     android:layout_alignParentEnd="true"
                     android:id="@+id/imageView17"
-                    android:clickable="true"/>
+                    android:clickable="true"
+                    android:visibility="gone"/>
 
                 <com.sparecode.vipul.onlynow.widgets.LatoTextView
                     android:text="@string/terms_and_conditions"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_alignParentStart="true"
-                    android:id="@+id/textView29"
+                    android:id="@+id/text_terms"
                     android:layout_toStartOf="@+id/imageView17"
                     android:clickable="true"
-                    app:typeface="lato_regular"/>
+                    app:typeface="lato_regular"
+                    android:drawableRight="@drawable/search_category_next_icon"/>
             </RelativeLayout>
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_5">
+                android:layout_marginTop="@dimen/dp_5"
+                android:id="@+id/relative_cancel">
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -371,24 +438,27 @@
                     android:layout_centerVertical="true"
                     android:layout_alignParentEnd="true"
                     android:id="@+id/imageView19"
-                    android:clickable="true"/>
+                    android:clickable="true"
+                    android:visibility="gone"/>
 
                 <com.sparecode.vipul.onlynow.widgets.LatoTextView
                     android:text="@string/canceldeal"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_alignParentStart="true"
-                    android:id="@+id/textView23"
+                    android:id="@+id/text_cancel"
                     android:layout_toStartOf="@+id/imageView19"
-                    app:typeface="lato_regular"/>
+                    app:typeface="lato_regular"
+                    android:drawableRight="@drawable/search_category_next_icon"/>
             </RelativeLayout>
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_5"
-                android:layout_marginBottom="@dimen/dp_20">
+                android:layout_marginBottom="@dimen/dp_20"
+                android:id="@+id/relative_logout">
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -397,18 +467,20 @@
                     android:layout_centerVertical="true"
                     android:layout_alignParentEnd="true"
                     android:id="@+id/imageView18"
-                    android:clickable="true"/>
+                    android:clickable="true"
+                    android:visibility="gone"/>
 
                 <com.sparecode.vipul.onlynow.widgets.LatoTextView
                     android:text="@string/log_out"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_alignParentStart="true"
-                    android:id="@+id/textView30"
+                    android:id="@+id/text_logout"
                     android:layout_toStartOf="@+id/imageView18"
                     android:clickable="true"
-                    app:typeface="lato_regular"/>
+                    app:typeface="lato_regular"
+                    android:drawableRight="@drawable/search_category_next_icon"/>
             </RelativeLayout>
         </LinearLayout>
     </ScrollView>

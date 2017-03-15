@@ -1,39 +1,26 @@
-package com.sparecode.vipul.onlynow;
+package com.sparecode.vipul.onlynow.model;
 
-import android.app.Application;
-import android.content.Context;
-import android.content.ContextWrapper;
-
-import com.sparecode.vipul.onlynow.util.Prefs;
-import com.sparecode.vipul.onlynow.webservice.RequestBuilder;
+import com.sparecode.vipul.onlynow.fragments.ClientSignupstep1Fragment;
 
 /**
- * Created by vipul on 25/2/17.
+ * Created by vipul on 9/3/17.
  */
 
-public class Onlynow extends Application{
+public class Clientsignupsetter {
 
-    private static RequestBuilder requestBuilder;
+    public String cat_id;
+    public String first_name,lname,cname,area,zipcode,prefecture,cityname,streetname,buildname,pnumber,emailaddress,cemailaddress,password,wurl;
 
-    private static Context context;
+    public static ClientSignupstep1Fragment clientSignupstep1Fragment;
 
-    private String first_name,lname,cname,area,zipcode,prefecture,cityname,streetname,buildname,pnumber,emailaddress,cemailaddress,password,wurl,cat_id;
-    @Override
-    public void onCreate() {
-        super.onCreate();
-        requestBuilder = new RequestBuilder();
-
-        Onlynow.context = getApplicationContext();
-
-        new Prefs.Builder()
-                .setContext(this)
-                .setMode(ContextWrapper.MODE_PRIVATE)
-                .setPrefsName(getPackageName())
-                .setUseDefaultSharedPreference(true)
-                .build();
-
+    public static ClientSignupstep1Fragment getinstance()
+    {
+        if (clientSignupstep1Fragment == null)
+        {
+            clientSignupstep1Fragment = new ClientSignupstep1Fragment();
+        }
+        return clientSignupstep1Fragment;
     }
-
     public String getCat_id() {
         return cat_id;
     }
@@ -152,13 +139,5 @@ public class Onlynow extends Application{
 
     public void setWurl(String wurl) {
         this.wurl = wurl;
-    }
-
-    public static Context getContext() {
-        return context;
-    }
-
-    public static RequestBuilder getRequestBuilder() {
-        return requestBuilder;
     }
 }

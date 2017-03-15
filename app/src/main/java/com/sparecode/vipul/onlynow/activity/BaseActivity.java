@@ -30,6 +30,7 @@ import android.widget.Toast;
 
 import com.sparecode.vipul.onlynow.R;
 import com.sparecode.vipul.onlynow.fragments.BaseFragment;
+import com.sparecode.vipul.onlynow.fragments.ChangeCategoryFragment;
 import com.sparecode.vipul.onlynow.fragments.ClientAnalyticsFragment;
 import com.sparecode.vipul.onlynow.fragments.ClientCouponDetailsFragment;
 import com.sparecode.vipul.onlynow.fragments.ClientCouponFragment;
@@ -478,6 +479,9 @@ public class BaseActivity extends AppCompatActivity implements NetworkChangeList
         replaceFragment(new ClientSignupstep2Fragment(), R.id.container, ClientSignupstep2Fragment.class.getName(), true);
     }
 
+    public void openClientChangeCategoryPage(){
+        replaceFragment(new ChangeCategoryFragment(),R.id.container,ChangeCategoryFragment.class.getName(),true);
+    }
     public void onSignupNextClickPerform() {
         if (getSignupNextListner() != null) {
             // Toast.makeText(this, "::" + currentSignupPageNumber, Toast.LENGTH_SHORT).show();

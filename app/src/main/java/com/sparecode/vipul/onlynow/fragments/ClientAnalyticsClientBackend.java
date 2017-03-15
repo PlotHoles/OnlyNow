@@ -12,7 +12,7 @@ import com.sparecode.vipul.onlynow.webservice.RequestApi;
  * Created by vipul on 1/3/17.
  */
 
-public class ClientAnalyticsBackend {
+public class ClientAnalyticsClientBackend {
 
     private Context context;
     private String userId;
@@ -20,17 +20,17 @@ public class ClientAnalyticsBackend {
     private String endDate;
     ClientAnalyticsResultProvider clientAnalyticsResultProvider;
 
-    public ClientAnalyticsBackend(Context context, String userId,String startDate,String endDate,ClientAnalyticsResultProvider clientAnalyticsResultProvider) {
+    public ClientAnalyticsClientBackend(Context context, String userId, String startDate, String endDate, ClientAnalyticsResultProvider clientAnalyticsResultProvider) {
         this.context = context;
         this.userId = userId;
         this.startDate = startDate;
         this.endDate = endDate;
         this.clientAnalyticsResultProvider = clientAnalyticsResultProvider;
-       // call();
+        call();
     }
 
 
-    private void call(int page)
+    private void call()
     {
         new GetRequest<ClientAnalyticsWrapper>().toGetRequest(context, RequestApi.CLIENTSERVICE, new ReqestParameter().toClientAnalytics(userId,startDate,endDate), ClientAnalyticsWrapper.class, new OnResponse<ClientAnalyticsWrapper>() {
             @Override
@@ -52,9 +52,6 @@ public class ClientAnalyticsBackend {
         });
     }
 
-    public void callPagination(int page) {
-        call(page);
-    }
 
     public interface ClientAnalyticsResultProvider{
 

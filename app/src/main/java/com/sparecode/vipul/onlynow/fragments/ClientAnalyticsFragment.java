@@ -64,6 +64,8 @@ public class ClientAnalyticsFragment extends BaseFragment {
         ((BaseActivity)getActivity()).getImgToolBarCancel().setVisibility(View.GONE);
         ((BaseActivity)getActivity()).getImgEdit().setVisibility(View.GONE);
         ((BaseActivity)getActivity()).getFab().setVisibility(View.GONE);
+        ((BaseActivity)getActivity()).getTextNext().setVisibility(View.GONE);
+        ((BaseActivity)getActivity()).getImgToolBarBack().setVisibility(View.GONE);
     }
 
     @Override

@@ -22,10 +22,10 @@ public class ClientReviewBackend {
         this.shopId = shopId;
         this.context = context;
         this.clientReviewResultProvider = clientReviewResultProvider;
-        call();;
+       // call();;
     }
 
-    private void call()
+    private void call(int page)
     {
 
         new GetRequest<ClientReviewWrapper>().toGetRequest(context, RequestApi.CLIENTDATA, new ReqestParameter().toClientReview(shopId), ClientReviewWrapper.class, new OnResponse<ClientReviewWrapper>() {
@@ -47,7 +47,9 @@ public class ClientReviewBackend {
             }
         });
     }
-
+    public void callPagination(int page) {
+        call(page);
+    }
     public interface ClientReviewResultProvider{
 
         void onSuccessfullLogin(ClientReviewWrapper clientReviewWrapper);

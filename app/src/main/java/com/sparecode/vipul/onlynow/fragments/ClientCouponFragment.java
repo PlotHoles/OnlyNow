@@ -61,6 +61,7 @@ public class ClientCouponFragment extends BaseFragment {
         ((BaseActivity)getActivity()).getImgToolBarCancel().setVisibility(View.GONE);
         ((BaseActivity)getActivity()).getImgEdit().setVisibility(View.GONE);
         ((BaseActivity)getActivity()).getFab().setVisibility(View.VISIBLE);
+        ((BaseActivity)getActivity()).getTextNext().setVisibility(View.GONE);
         ((BaseActivity)getActivity()).getImgAdd().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
