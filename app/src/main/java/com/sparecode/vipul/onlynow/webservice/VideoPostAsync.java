@@ -33,6 +33,7 @@ public class VideoPostAsync<T> extends AsyncTask<String, Void, String> {
     private String url;
     private List<Pair<String, String>> pairList;
     private List<File> listFiles;
+    private List<File> listFiles1;
     private File fileVideo;
     private File fileThumb;
     private Class<T> clazz;
@@ -53,6 +54,15 @@ public class VideoPostAsync<T> extends AsyncTask<String, Void, String> {
         this.callback = t;
     }
 
+    public VideoPostAsync(Context context, String url, List<Pair<String, String>> pairList, List<File> listFiles1, Class<T> clazz, OnResponse<T> t) {
+        this.context = context;
+        this.url = url;
+        this.pairList = pairList;
+        this.listFiles1 = listFiles1;
+        this.clazz = clazz;
+        this.callback = t;
+    }
+
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
@@ -64,10 +74,10 @@ public class VideoPostAsync<T> extends AsyncTask<String, Void, String> {
         for (Pair pair : pairList)
             multipartBuilder.addFormDataPart(pair.first.toString(), pair.second.toString());
 
-        if (listFiles != null)
-        for (int i = 0; i < listFiles.size(); i++)
-            multipartBuilder.addFormDataPart("image" + "[" + i + "]", listFiles.get(i).getAbsolutePath(),
-                    RequestBody.create(MEDIA_TYPE_PNG, listFiles.get(i)));
+        if (listFiles1 != null)
+        for (int i = 0; i < listFiles1.size(); i++)
+            multipartBuilder.addFormDataPart("images" + "[" + i + "]", listFiles1.get(i).getAbsolutePath(),
+                    RequestBody.create(MEDIA_TYPE_PNG, listFiles1.get(i)));
 
         if (fileVideo != null)
             multipartBuilder.addFormDataPart("video", fileVideo.getAbsolutePath(),
@@ -78,11 +88,17 @@ public class VideoPostAsync<T> extends AsyncTask<String, Void, String> {
                     RequestBody.create(MEDIA_TYPE_PNG, fileThumb));
 
         RequestBody requestBody = multipartBuilder.build();
+
         Request request = new Request.Builder()
-                .header("Authorization", "Client-ID " + IMGUR_CLIENT_ID)
                 .url(url)
                 .post(requestBody)
                 .build();
+
+        /*Request request = new Request.Builder()
+                .header("Authorization", "Client-ID " + IMGUR_CLIENT_ID)
+                .url(url)
+                .post(requestBody)
+                .build();*/
 
 
         try (Response response = Onlynow.getRequestBuilder().getOkHttpClient().newCall(request).execute()) {

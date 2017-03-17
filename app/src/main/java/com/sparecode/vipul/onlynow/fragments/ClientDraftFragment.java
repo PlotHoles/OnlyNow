@@ -61,7 +61,7 @@ public class ClientDraftFragment extends BaseFragment implements ClientDraftBack
         ButterKnife.bind(this, view);
         data = new ArrayList<>();
 
-        clientDraftBackend = new ClientDraftBackend(getActivity(),"3",this);
+        clientDraftBackend = new ClientDraftBackend(getActivity(),getUserId(),this);
         clientDraftBackend.callPagination(1);
 
         gridLayoutManager = new GridLayoutManager(getActivity(), 1);

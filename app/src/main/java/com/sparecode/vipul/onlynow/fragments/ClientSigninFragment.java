@@ -1,6 +1,7 @@
 package com.sparecode.vipul.onlynow.fragments;
 
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.design.widget.Snackbar;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -73,7 +74,8 @@ public class ClientSigninFragment extends BaseFragment implements ClientSigninBa
             editPassword.setError(getString(R.string.password));
             editPassword.requestFocus();
         } else {
-            ClientSigninBackend clientSigninBackend = new ClientSigninBackend(getActivity(), editEmail.getText().toString(), editPassword.getText().toString(), "A", "0000", this);
+            String android_id = Settings.Secure.getString(getContext().getContentResolver(), Settings.Secure.ANDROID_ID);
+            ClientSigninBackend clientSigninBackend = new ClientSigninBackend(getActivity(), editEmail.getText().toString(), editPassword.getText().toString(), "A", android_id, this);
         }
 
     }

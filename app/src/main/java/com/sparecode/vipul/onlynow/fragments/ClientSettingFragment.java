@@ -1,9 +1,11 @@
 package com.sparecode.vipul.onlynow.fragments;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
+import android.telephony.PhoneNumberUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -101,6 +103,8 @@ public class ClientSettingFragment extends BaseFragment implements UpdateLocatio
     @Bind(R.id.relative_logout)
     RelativeLayout relativeLogout;
     private View view;
+    public static final int PICK_IMAGE_ID = 234;
+    public static final int PICK_VIDEO = 123;
 
     public ClientSettingFragment() {
         // Required empty public constructor
@@ -122,7 +126,9 @@ public class ClientSettingFragment extends BaseFragment implements UpdateLocatio
 
         firstname.setText(getUserData().getFname());
         fullname.setText(getUserData().getFname() + getUserData().getLname());
-        mobile.setText(getUserData().getPhone());
+
+        String phonenumber = PhoneNumberUtils.formatNumber(getUserData().getPhone());
+        mobile.setText(phonenumber);
         email.setText(getUserData().getEmail());
         String visible = String.valueOf(ziplinear.getVisibility());
         System.out.println("visible"+visible);
@@ -170,7 +176,7 @@ public class ClientSettingFragment extends BaseFragment implements UpdateLocatio
         buttonChange.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getActivity(),"hi",Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getActivity(),"hi",Toast.LENGTH_SHORT).show();
 
                 UpdateLocationBackend updateLocationBackend = new UpdateLocationBackend(getActivity(),getShopId(),editZipcode.getText().toString().trim(),editPrefecture.getText().toString(),editCityname.getText().toString(),ClientSettingFragment.this);
             }
@@ -188,7 +194,7 @@ public class ClientSettingFragment extends BaseFragment implements UpdateLocatio
             public void onClick(View v) {
                 CancelDealDialog cancelDealDialog = new CancelDealDialog();
                 cancelDealDialog.show(getActivity().getSupportFragmentManager(), "cancel");
-                Toast.makeText(getActivity(),"hi",Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getActivity(),"hi",Toast.LENGTH_SHORT).show();
             }
         });
         textLogout.setOnClickListener(new View.OnClickListener() {
@@ -211,6 +217,25 @@ public class ClientSettingFragment extends BaseFragment implements UpdateLocatio
                             }
                         })
                         .create().show();
+            }
+        });
+        textReport.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
+                emailIntent.setType("plain/text");
+                emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL, new String[]{"contact@onlynow.jp"});
+                emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Report a problem");
+                emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, "Text");
+
+/* Send it off to the Activity-Chooser */
+                getActivity().startActivity(Intent.createChooser(emailIntent, "Send mail..."));
+            }
+        });
+        profileImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
             }
         });
         return view;

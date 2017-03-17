@@ -3,6 +3,7 @@ package com.sparecode.vipul.onlynow.fragments;
 import android.content.Context;
 import android.location.Location;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -89,8 +90,9 @@ public class ClientSignupFragment extends BaseFragment implements SignupNextList
                         public void onClick(View v) {
                             //((BaseActivity)getActivity()).openClientDonePage();
                             //Toast.makeText(getActivity(),"hi",Toast.LENGTH_SHORT).show();
+                            String android_id = Settings.Secure.getString(getContext().getContentResolver(), Settings.Secure.ANDROID_ID);
                             Onlynow onlynow = (Onlynow)getActivity().getApplicationContext();
-                            ClientSignupBackend clientSignupBackend = new ClientSignupBackend(context,onlynow.getFirst_name(),onlynow.getLname(),onlynow.getEmailaddress(),onlynow.getPassword(),"1.1","1.1",onlynow.getCname(),onlynow.getCat_id(),onlynow.getArea(),onlynow.getZipcode(),onlynow.getPrefecture(),onlynow.getCityname(),onlynow.getStreetname(),onlynow.getBuildname(),onlynow.getPnumber(),onlynow.getWurl(),"A","0000",ClientSignupFragment.this);
+                            ClientSignupBackend clientSignupBackend = new ClientSignupBackend(context,onlynow.getFirst_name(),onlynow.getLname(),onlynow.getEmailaddress(),onlynow.getPassword(),"1.1","1.1",onlynow.getCname(),onlynow.getCat_id(),onlynow.getArea(),onlynow.getZipcode(),onlynow.getPrefecture(),onlynow.getCityname(),onlynow.getStreetname(),onlynow.getBuildname(),onlynow.getPnumber(),onlynow.getWurl(),"A",android_id,ClientSignupFragment.this);
                         }
                     });
                 }

@@ -61,7 +61,7 @@ public class ClientLiveFragment extends BaseFragment implements CliebtLiveBacken
         ButterKnife.bind(this, view);
         data = new ArrayList<>();
 
-        cliebtLiveBackend = new CliebtLiveBackend(getActivity(),"3",this);
+        cliebtLiveBackend = new CliebtLiveBackend(getActivity(),getUserId(),this);
         cliebtLiveBackend.callPagination(1);
         gridLayoutManager = new GridLayoutManager(getActivity(), 1);
         /*recyclerview.setLayoutManager(gridLayoutManager);

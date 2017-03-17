@@ -26,4 +26,11 @@ public class VideoPostRequest<T> {
         new VideoPostAsync<T>(context, url, pairList, listFiles, fileVideo, fileThumb, clazz, t).execute();
     }
 
+    @TargetApi(Build.VERSION_CODES.KITKAT)
+    public void onPostRequest1(final Context context, String url, List<Pair<String, String>> pairList,
+                               List<File> listFiles, final Class<T> clazz, final OnResponse<T> t) {
+
+        new VideoPostAsync<T>(context, url, pairList, listFiles, clazz, t).execute();
+    }
+
 }

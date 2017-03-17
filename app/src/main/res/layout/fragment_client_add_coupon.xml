@@ -1,0 +1,144 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.sparecode.vipul.onlynow.fragments.ClientAddCouponFragment">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginRight="@dimen/dp_10"
+        android:layout_marginLeft="@dimen/dp_10">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="@dimen/dp_20"
+        android:visibility="gone">
+
+        <Button
+            android:id="@+id/camera_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Camera"
+            android:textAllCaps="false"
+            android:background="@color/headercolor"
+            android:textColor="#ffffff"/>
+
+        <Button
+            android:id="@+id/gallery_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Gallery"
+            android:textAllCaps="false"
+            android:background="@color/headercolor"
+            android:textColor="#ffffff"
+            android:layout_marginLeft="@dimen/dp_10"/>
+    </LinearLayout>
+
+        <ImageView
+            android:layout_marginTop="@dimen/dp_30"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/addcoupon"
+            android:id="@+id/addimage"/>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_20"
+            android:scrollbars="vertical"
+            android:padding="@dimen/dp_10"/>
+
+        <com.sparecode.vipul.onlynow.widgets.LatoEditText
+            android:id="@+id/coupon_desc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_5"
+            android:hint="They way to use this coupon"
+            android:gravity="center"
+            android:background="@drawable/blackborderedittext"
+            android:padding="@dimen/dp_10"/>
+
+        <com.sparecode.vipul.onlynow.widgets.LatoEditText
+            android:id="@+id/shop_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_5"
+            android:gravity="center"
+            android:hint="Coupon Name"
+            android:background="@drawable/blackborderedittext"
+            android:padding="@dimen/dp_10"/>
+
+        <Spinner
+            android:id="@+id/category_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_5"
+            android:gravity="center"
+            android:hint="Category"
+            android:background="@drawable/blackborderedittext"
+            android:padding="@dimen/dp_5"/>
+
+
+        <com.sparecode.vipul.onlynow.widgets.LatoEditText
+            android:id="@+id/coupon_details"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_5"
+            android:gravity="center"
+            android:hint="Coupon Details"
+            android:background="@drawable/blackborderedittext"
+            android:padding="@dimen/dp_10"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="@dimen/dp_20">
+
+            <com.sparecode.vipul.onlynow.widgets.LatoTextView
+                android:id="@+id/start_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Start Date"
+                android:gravity="center"
+                android:background="@drawable/blackborderedittext"
+                android:padding="@dimen/dp_10" />
+
+            <com.sparecode.vipul.onlynow.widgets.LatoTextView
+                android:id="@+id/end_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="End Date"
+                android:gravity="center"
+                android:background="@drawable/blackborderedittext"
+                android:layout_marginLeft="@dimen/dp_10"
+                android:padding="@dimen/dp_10"/>
+
+        </LinearLayout>
+        <com.sparecode.vipul.onlynow.widgets.LatoButton
+            android:id="@+id/add_coupon"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Add Coupon"
+            android:textAllCaps="false"
+            android:background="@color/headercolor"
+            android:textColor="#ffffff"
+            android:layout_marginBottom="@dimen/dp_10"
+            android:layout_marginTop="@dimen/dp_10"/>
+    </LinearLayout>
+    </ScrollView>
+</FrameLayout>

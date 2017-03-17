@@ -71,7 +71,7 @@ public class ClientCouponFragment extends BaseFragment {
         ((BaseActivity)getActivity()).getFab().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((BaseActivity)getActivity()).openClientCouponDetailsPage();
+                ((BaseActivity)getActivity()).openClientAddCouponFragment();
             }
         });
     }

@@ -61,7 +61,7 @@ public class ClientPastFragment extends BaseFragment implements ClientPastBacken
         ButterKnife.bind(this, view);
         data = new ArrayList<>();
 
-        clientPastBackend = new ClientPastBackend(getActivity(),"3",this);
+        clientPastBackend = new ClientPastBackend(getActivity(),getUserId(),this);
         clientPastBackend.callPagination(1);
         gridLayoutManager = new GridLayoutManager(getActivity(), 1);
         /*recyclerview.setLayoutManager(gridLayoutManager);

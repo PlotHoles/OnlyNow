@@ -87,7 +87,7 @@ public class ClientReviewFragment extends BaseFragment implements ClientReviewBa
         reviewRecyclerview.setAdapter(reviewAdapter);*/
 
 
-        clientReviewBackend = new ClientReviewBackend("1", getActivity(), this);
+        clientReviewBackend = new ClientReviewBackend(getUserId(), getActivity(), this);
         clientReviewBackend.callPagination(1);
         gridLayoutManager = new GridLayoutManager(getActivity(), 1);
         Log.e("shop", getShopId());

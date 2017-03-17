@@ -162,7 +162,7 @@ public class ClientAnalyticsClientkFragment extends BaseFragment implements Clie
             if (dfDate.parse(fromdate).after(dfDate.parse(todate))) {
                 b = true;
 
-                clientAnalyticsClientBackend = new ClientAnalyticsClientBackend(getActivity(), "3", todate, fromdate, this);
+                clientAnalyticsClientBackend = new ClientAnalyticsClientBackend(getActivity(), getUserId(), todate, fromdate, this);
             } else {
                 b = false;
                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());

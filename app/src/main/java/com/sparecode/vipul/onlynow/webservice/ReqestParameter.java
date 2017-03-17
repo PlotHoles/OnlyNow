@@ -225,6 +225,29 @@ public class ReqestParameter {
         }
         return object;
     }
+    public JSONObject toClientGetCategory()
+    {
+        JSONObject object = new JSONObject();
+        try {
+            object.put("method",RequestApi.CLIENTGETCATEGORY);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return object;
+    }
+
+    public List<Pair<String, String>> toAddCLientCoupon(String... vars) {
+        List<Pair<String, String>> pairList = new ArrayList<>();
+        pairList.add(new Pair<>("client_id", vars[0]));
+        pairList.add(new Pair<>("cat_id", vars[1]));
+        pairList.add(new Pair<>("name", vars[2]));
+        pairList.add(new Pair<>("instruction", vars[3]));
+        pairList.add(new Pair<>("description", vars[4]));
+        pairList.add(new Pair<>("start_date", vars[5]));
+        pairList.add(new Pair<>("end_date", vars[5]));
+
+        return pairList;
+    }
     public JSONObject toMyProduct(String... vars) {
         JSONObject object = new JSONObject();
         try {

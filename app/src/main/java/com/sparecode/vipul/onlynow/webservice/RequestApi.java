@@ -32,6 +32,8 @@ public interface RequestApi {
     String UPDATELOCATION = "update_shop";
     String CANCELDEAL = "cancel_request";
     String LOGOUT = "logout";
+    String CLIENTGETCATEGORY = "get_spinner_categories";
+    String ADDCOUPON = "http://192.168.2.7/projects/onlynow/api/add_coupon";
     //String BASEURL = "http://192.168.2.16/projects/wilo/api/";
     String BASEURL = "http://192.168.2.7/projects/onlynow/api/";
     String SERVICE = BASEURL + "services.php?data=";
