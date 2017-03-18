@@ -5,6 +5,7 @@ import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v4.util.Pair;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -314,10 +315,16 @@ public class ClientAddCouponFragment extends BaseFragment implements ClientGetCa
 
                         @Override
                         public void onSuccess(ClientAddCouponWrapper clientAddCouponWrapper) {
-                            if (clientAddCouponWrapper.getStatus() == 1)
+                            if (clientAddCouponWrapper.getStatus() == 1){
                                 clientAddCouponWrapper.getMessage();
-                            else
+                                ((BaseActivity)getActivity()).openClientCouponPage();
+                                Toast.makeText(getActivity(),"Coupon Added Successfully",Toast.LENGTH_SHORT).show();
+                            }
+                            else{
+                                Snackbar.make(view,clientAddCouponWrapper.getMessage(),Snackbar.LENGTH_SHORT).show();
                                 clientAddCouponWrapper.getMessage();
+                            }
+
                             Log.e(this.getClass().getName(), " ::: RESPONSE IS ::: " + clientAddCouponWrapper.toString());
                         }
 
@@ -375,7 +382,7 @@ public class ClientAddCouponFragment extends BaseFragment implements ClientGetCa
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
                 categoryid = clientGetCategoryWrapper.getData().get(position).getId();
-                Toast.makeText(getActivity(), categoryid, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getActivity(), categoryid, Toast.LENGTH_SHORT).show();
             }
 
             @Override

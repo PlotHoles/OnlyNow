@@ -248,6 +248,39 @@ public class ReqestParameter {
 
         return pairList;
     }
+
+    public List<Pair<String, String>> toUpdateProfilePicture(String... vars) {
+        List<Pair<String, String>> pairList = new ArrayList<>();
+        pairList.add(new Pair<>("user_id", vars[0]));
+        return pairList;
+    }
+
+    public JSONObject toUpdateProfile(String... vars) {
+        JSONObject object = new JSONObject();
+        try {
+            object.put("method", RequestApi.UPDATEPROFILE);
+            object.put("user_id", vars[0]);
+            object.put("fname", vars[1]);
+            object.put("lname", vars[2]);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return object;
+    }
+
+    public JSONObject toChangePassword(String... vars) {
+        JSONObject object = new JSONObject();
+        try {
+            object.put("method", RequestApi.CHANGEPASSWORD);
+            object.put("user_id", vars[0]);
+            object.put("old_password", vars[1]);
+            object.put("new_password", vars[2]);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return object;
+    }
+
     public JSONObject toMyProduct(String... vars) {
         JSONObject object = new JSONObject();
         try {

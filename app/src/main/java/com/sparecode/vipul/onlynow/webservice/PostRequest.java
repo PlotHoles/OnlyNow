@@ -27,4 +27,8 @@ public class PostRequest<T> {
 
         new PostAsync<T>(context, url, pairList, clazz, t).execute();
     }
+
+    public void onPostRequestImage(final Context context, String url, String keyImage, File file, final Class<T> clazz, final OnResponse<T> t) {
+        new PostAsync<T>(context, url,  keyImage, file, clazz, t).execute();
+    }
 }

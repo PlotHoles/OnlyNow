@@ -17,7 +17,7 @@ public class Onlynow extends Application{
 
     private static Context context;
 
-    private String first_name,lname,cname,area,zipcode,prefecture,cityname,streetname,buildname,pnumber,emailaddress,cemailaddress,password,wurl,cat_id;
+    private String first_name,lname,cname,area,zipcode,prefecture,cityname,streetname,buildname,pnumber,emailaddress,cemailaddress,password,wurl,cat_id,longitude,latitude;
     @Override
     public void onCreate() {
         super.onCreate();
@@ -32,6 +32,22 @@ public class Onlynow extends Application{
                 .setUseDefaultSharedPreference(true)
                 .build();
 
+    }
+
+    public String getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(String longitude) {
+        this.longitude = longitude;
+    }
+
+    public String getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(String latitude) {
+        this.latitude = latitude;
     }
 
     public String getCat_id() {

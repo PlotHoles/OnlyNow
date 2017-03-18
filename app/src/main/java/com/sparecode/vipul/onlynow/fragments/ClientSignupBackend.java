@@ -3,7 +3,7 @@ package com.sparecode.vipul.onlynow.fragments;
 import android.content.Context;
 
 import com.sparecode.vipul.onlynow.interfaces.OnResponse;
-import com.sparecode.vipul.onlynow.model.ClientSignupWrapper;
+import com.sparecode.vipul.onlynow.model.LoginWrapper;
 import com.sparecode.vipul.onlynow.webservice.GetRequest;
 import com.sparecode.vipul.onlynow.webservice.ReqestParameter;
 import com.sparecode.vipul.onlynow.webservice.RequestApi;
@@ -46,17 +46,17 @@ public class ClientSignupBackend {
 
     private void call()
     {
-        new GetRequest<ClientSignupWrapper>().toGetRequest(context, RequestApi.CLIENTSERVICE, new ReqestParameter().toClientSignup(fname, lname, email, password, lat, longt, client_name, cat_id, area, zip_code, prefecture, city, street, build_name, phone, website, device_type, device_id), ClientSignupWrapper.class, new OnResponse<ClientSignupWrapper>() {
+        new GetRequest<LoginWrapper>().toGetRequest(context, RequestApi.CLIENTSERVICE, new ReqestParameter().toClientSignup(fname, lname, email, password, lat, longt, client_name, cat_id, area, zip_code, prefecture, city, street, build_name, phone, website, device_type, device_id), LoginWrapper.class, new OnResponse<LoginWrapper>() {
             @Override
-            public void onSuccess(ClientSignupWrapper clientSignupWrapper) {
+            public void onSuccess(LoginWrapper loginWrapper) {
 
-                if (clientSignupWrapper.getStatus() == 0)
+                if (loginWrapper.getStatus() == 0)
                 {
-                    clientSignupResultProvider.onLoginFailure(clientSignupWrapper.getMessage());
+                    clientSignupResultProvider.onLoginFailure(loginWrapper.getMessage());
                 }
                 else
                 {
-                    clientSignupResultProvider.onSuccessfullLogin(clientSignupWrapper);
+                    clientSignupResultProvider.onSuccessfullLogin(loginWrapper);
                 }
             }
 
@@ -68,7 +68,7 @@ public class ClientSignupBackend {
     }
     public interface ClientSignupResultProvider{
 
-        void onSuccessfullLogin(ClientSignupWrapper clientSignupWrapper);
+        void onSuccessfullLogin(LoginWrapper loginWrapper);
 
         void onLoginFailure(String msg);
     }

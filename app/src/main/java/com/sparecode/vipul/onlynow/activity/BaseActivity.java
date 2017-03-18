@@ -45,6 +45,7 @@ import com.sparecode.vipul.onlynow.fragments.ClientSignupstep2Fragment;
 import com.sparecode.vipul.onlynow.fragments.ClientSplashFragment;
 import com.sparecode.vipul.onlynow.fragments.DetailsFragment;
 import com.sparecode.vipul.onlynow.fragments.DoneFragment;
+import com.sparecode.vipul.onlynow.fragments.ClientEditprofileFragment;
 import com.sparecode.vipul.onlynow.fragments.ForgotFragment;
 import com.sparecode.vipul.onlynow.fragments.HomeFragment;
 import com.sparecode.vipul.onlynow.fragments.MapFragment;
@@ -486,6 +487,9 @@ public class BaseActivity extends AppCompatActivity implements NetworkChangeList
 
     public void openClientAddCouponFragment(){
         replaceFragment(new ClientAddCouponFragment(),R.id.container,ClientAddCouponFragment.class.getName(),true);
+    }
+    public void openClientEditProfileFragment(){
+        replaceFragment(new ClientEditprofileFragment(),R.id.container,ClientEditprofileFragment.class.getName(),true);
     }
 
     public void onSignupNextClickPerform() {

@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -81,13 +82,13 @@ public class MapFragment extends BaseFragment implements OnMapReadyCallback, Loc
         request.setCallback(new PiemissionsCallback() {
             @Override
             public void onGranted() {
-                Log.e("log----::","Permission Granted");
-                locationHelper = new LocationHelper(getActivity(),MapFragment.this);
+                Log.e("log----::", "Permission Granted");
+                locationHelper = new LocationHelper(getActivity(), MapFragment.this);
             }
 
             @Override
             public boolean onDenied(HashMap<String, Boolean> rationalizablePermissions) {
-                Log.e("log---::","Permission Denied");
+                Log.e("log---::", "Permission Denied");
 
                 return true;
             }
@@ -98,16 +99,12 @@ public class MapFragment extends BaseFragment implements OnMapReadyCallback, Loc
     }
 
 
-
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         //locationHelper = new LocationHelper(getActivity(),this);
-        Log.e("AllWentWell Flga::","::::::");
+        Log.e("AllWentWell Flga::", "::::::");
     }
-
-
-
 
 
     @Override
@@ -136,6 +133,7 @@ public class MapFragment extends BaseFragment implements OnMapReadyCallback, Loc
     public void onNewLcoationReceived(Location location) {
         System.out.println("------>location" + location);
         Log.d("::", location + "");
+        Toast.makeText(getActivity(), "RECEIVED LOC" + location, Toast.LENGTH_SHORT).show();
         //ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
 
 
@@ -150,7 +148,7 @@ public class MapFragment extends BaseFragment implements OnMapReadyCallback, Loc
             }
         } else {
             if (previouslatlng.latitude == location.getLatitude() && previouslatlng.longitude == location.getLongitude()) {
-                Log.e("hi","hello");
+                Log.e("hi", "hello");
                 locationHelper.doLicationDisconnect();
                 return;
             } else {

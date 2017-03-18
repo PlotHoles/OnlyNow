@@ -90,7 +90,7 @@ public class ClientSignupstep2Fragment extends BaseFragment implements Signupste
             @Override
             public void onItemClicked(int position) {
                 cat_id = categoryDatas.get(position).getId();
-                Toast.makeText(getActivity(),cat_id,Toast.LENGTH_LONG).show();
+                //Toast.makeText(getActivity(),cat_id,Toast.LENGTH_LONG).show();
                 Log.e("position",cat_id);
                 Onlynow onlynow = (Onlynow)getActivity().getApplicationContext();
                 onlynow.setCat_id(categoryDatas.get(position).getId());

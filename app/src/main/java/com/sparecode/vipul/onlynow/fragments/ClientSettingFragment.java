@@ -6,9 +6,11 @@ import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.telephony.PhoneNumberUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Switch;
@@ -26,11 +28,13 @@ import com.sparecode.vipul.onlynow.webservice.GetRequest;
 import com.sparecode.vipul.onlynow.widgets.LatoButton;
 import com.sparecode.vipul.onlynow.widgets.LatoEditText;
 import com.sparecode.vipul.onlynow.widgets.LatoTextView;
+import com.squareup.picasso.Picasso;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
-public class ClientSettingFragment extends BaseFragment implements UpdateLocationBackend.UpdateLocationResultProvider,LogoutBackend.LogoutBackendResultProvider{
+public class ClientSettingFragment extends BaseFragment implements UpdateLocationBackend.UpdateLocationResultProvider, LogoutBackend.LogoutBackendResultProvider, ChangePasswordbackend.ChangePasswordDataProvider {
 
     @Bind(R.id.profile_image)
     CircleImageView profileImage;
@@ -102,6 +106,18 @@ public class ClientSettingFragment extends BaseFragment implements UpdateLocatio
     LatoTextView textLogout;
     @Bind(R.id.relative_logout)
     RelativeLayout relativeLogout;
+    @Bind(R.id.text_editprofile)
+    LatoTextView textEditprofile;
+    @Bind(R.id.button_changepassword)
+    LatoButton buttonChangepassword;
+    @Bind(R.id.changepasswordlinear)
+    LinearLayout changepasswordlinear;
+    @Bind(R.id.imageView7)
+    ImageView imageView7;
+    @Bind(R.id.edit_oldpassword)
+    LatoEditText editOldpassword;
+    @Bind(R.id.edit_newpassword)
+    LatoEditText editNewpassword;
     private View view;
     public static final int PICK_IMAGE_ID = 234;
     public static final int PICK_VIDEO = 123;
@@ -131,14 +147,26 @@ public class ClientSettingFragment extends BaseFragment implements UpdateLocatio
         mobile.setText(phonenumber);
         email.setText(getUserData().getEmail());
         String visible = String.valueOf(ziplinear.getVisibility());
-        System.out.println("visible"+visible);
+        System.out.println("visible" + visible);
 
+        if (getUserData().getImageURL() != null &&
+                (!getUserData().getImageURL().equals(""))) {
+
+            Picasso.with(getActivity())
+                    .load(getUserData().getImageURL())
+                    .placeholder(R.drawable.placeholder)
+                    .error(R.drawable.placeholder)
+                    .resize(720, 200)
+                    .into(profileImage);
+        } else {
+            Picasso.with(getActivity()).load(R.drawable.placeholder).fit().into(profileImage);
+        }
         textChangelocation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 String visible = String.valueOf(ziplinear.getVisibility());
-                System.out.println("visible"+visible);
+                System.out.println("visible" + visible);
                 ziplinear.setVisibility(View.VISIBLE);
 
             }
@@ -148,19 +176,16 @@ public class ClientSettingFragment extends BaseFragment implements UpdateLocatio
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
 
-                String zipurl = "http://zipcloud.ibsnet.co.jp/api/search?zipcode="+editZipcode.getText().toString();
-                System.out.println("zipcode"+zipurl);
+                String zipurl = "http://zipcloud.ibsnet.co.jp/api/search?zipcode=" + editZipcode.getText().toString();
+                System.out.println("zipcode" + zipurl);
                 new GetRequest<ZipWrapper>().toSimpleRequest(getActivity(), zipurl, ZipWrapper.class, new OnResponse<ZipWrapper>() {
                     @Override
                     public void onSuccess(ZipWrapper zipWrapper) {
-                        if (zipWrapper.getStatus() == 400)
-                        {
-                            Toast.makeText(getActivity(),"Please Select Valid ZipCode",Toast.LENGTH_SHORT).show();
-                        }
-                        else
-                        {
+                        if (zipWrapper.getStatus() == 400) {
+                            Toast.makeText(getActivity(), "Please Select Valid ZipCode", Toast.LENGTH_SHORT).show();
+                        } else {
                             editPrefecture.setText(zipWrapper.getResults().get(0).getAddress1());
-                            editCityname.setText(zipWrapper.getResults().get(0).getAddress2()+" "+zipWrapper.getResults().get(0).getAddress3());
+                            editCityname.setText(zipWrapper.getResults().get(0).getAddress2() + " " + zipWrapper.getResults().get(0).getAddress3());
                         }
                     }
 
@@ -178,14 +203,14 @@ public class ClientSettingFragment extends BaseFragment implements UpdateLocatio
             public void onClick(View v) {
                 //Toast.makeText(getActivity(),"hi",Toast.LENGTH_SHORT).show();
 
-                UpdateLocationBackend updateLocationBackend = new UpdateLocationBackend(getActivity(),getShopId(),editZipcode.getText().toString().trim(),editPrefecture.getText().toString(),editCityname.getText().toString(),ClientSettingFragment.this);
+                UpdateLocationBackend updateLocationBackend = new UpdateLocationBackend(getActivity(), getShopId(), editZipcode.getText().toString().trim(), editPrefecture.getText().toString(), editCityname.getText().toString(), ClientSettingFragment.this);
             }
         });
         textChangecategory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               // Toast.makeText(getActivity(),"hi",Toast.LENGTH_SHORT).show();
-                ((BaseActivity)getActivity()).openClientChangeCategoryPage();
+                // Toast.makeText(getActivity(),"hi",Toast.LENGTH_SHORT).show();
+                ((BaseActivity) getActivity()).openClientChangeCategoryPage();
             }
         });
 
@@ -207,7 +232,7 @@ public class ClientSettingFragment extends BaseFragment implements UpdateLocatio
                         .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                    LogoutBackend logoutBackend = new LogoutBackend(getActivity(),getUserId(),ClientSettingFragment.this);
+                                LogoutBackend logoutBackend = new LogoutBackend(getActivity(), getUserId(), ClientSettingFragment.this);
                             }
                         })
                         .setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
@@ -222,20 +247,27 @@ public class ClientSettingFragment extends BaseFragment implements UpdateLocatio
         textReport.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
+                final Intent emailIntent = new Intent(Intent.ACTION_SEND);
                 emailIntent.setType("plain/text");
-                emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL, new String[]{"contact@onlynow.jp"});
-                emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Report a problem");
-                emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, "Text");
+                emailIntent.putExtra(Intent.EXTRA_EMAIL, new String[]{"contact@onlynow.jp"});
+                emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Report a problem");
+                emailIntent.putExtra(Intent.EXTRA_TEXT, "Text");
 
 /* Send it off to the Activity-Chooser */
                 getActivity().startActivity(Intent.createChooser(emailIntent, "Send mail..."));
             }
         });
-        profileImage.setOnClickListener(new View.OnClickListener() {
+        textEditprofile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                //Toast.makeText(getActivity(),"hi",Toast.LENGTH_SHORT).show();
+                ((BaseActivity) getActivity()).openClientEditProfileFragment();
+            }
+        });
+        textChangepassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                changepasswordlinear.setVisibility(View.VISIBLE);
             }
         });
         return view;
@@ -250,8 +282,8 @@ public class ClientSettingFragment extends BaseFragment implements UpdateLocatio
         ((BaseActivity) getActivity()).getImgEdit().setVisibility(View.GONE);
         ((BaseActivity) getActivity()).getImgToolBarCancel().setVisibility(View.GONE);
         ((BaseActivity) getActivity()).getFab().setVisibility(View.GONE);
-        ((BaseActivity)getActivity()).getImgToolBarBack().setVisibility(View.GONE);
-        ((BaseActivity)getActivity()).getTextNext().setVisibility(View.GONE);
+        ((BaseActivity) getActivity()).getImgToolBarBack().setVisibility(View.GONE);
+        ((BaseActivity) getActivity()).getTextNext().setVisibility(View.GONE);
     }
 
     @Override
@@ -262,22 +294,45 @@ public class ClientSettingFragment extends BaseFragment implements UpdateLocatio
 
     @Override
     public void onSuccesssfullLogin(UpdateLocationWrapper updateLocationWrapper) {
-        Snackbar.make(view,"Location detals updated successfully",Snackbar.LENGTH_SHORT).show();
+        Snackbar.make(view, "Location details updated successfully", Snackbar.LENGTH_SHORT).show();
         ziplinear.setVisibility(View.GONE);
     }
 
     @Override
     public void onLoginFailure(String msg) {
-        Snackbar.make(view,"Please Provide valid Zipcode",Snackbar.LENGTH_SHORT).show();
+        Snackbar.make(view, "Please Provide valid Zipcode", Snackbar.LENGTH_SHORT).show();
     }
 
     @Override
     public void onSuccessfullLogout(LogoutWrapper logoutWrapper) {
-        ((BaseActivity)getActivity()).openClientSigninPage();
+        ((BaseActivity) getActivity()).openClientSigninPage();
     }
 
     @Override
     public void onLogoutFailure(String msg) {
 
+    }
+
+
+    @OnClick(R.id.button_changepassword)
+    public void onClick() {
+
+
+        String oldpassword = editOldpassword.getText().toString().trim();
+        String newpassword = editNewpassword.getText().toString().trim();
+
+        Log.e("oldpassword",oldpassword);
+        Log.e("oldpassword",newpassword);
+        ChangePasswordbackend changePasswordbackend = new ChangePasswordbackend(getActivity(), getUserId(), oldpassword,newpassword,ClientSettingFragment.this);
+    }
+
+    @Override
+    public void onSuccessfull(ChangePasswordWrapper changePasswordWrapper) {
+        Toast.makeText(getActivity(),changePasswordWrapper.getMessage(),Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onFailure(String msg) {
+        Toast.makeText(getActivity(),msg,Toast.LENGTH_SHORT).show();
     }
 }

@@ -1,0 +1,53 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.sparecode.vipul.onlynow.fragments.ClientEditprofileFragment">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginLeft="@dimen/dp_20"
+        android:layout_marginRight="@dimen/dp_20">
+
+        <com.sparecode.vipul.onlynow.view.CircleImageView
+            android:layout_marginTop="@dimen/dp_20"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/placeholder"
+            android:layout_gravity="center"
+            android:id="@+id/edit_profilepicture"/>
+
+        <LinearLayout
+            android:layout_marginTop="@dimen/dp_30"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <com.sparecode.vipul.onlynow.widgets.LatoEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="@string/firstname"
+                android:id="@+id/ediprofile_firstname"/>
+
+            <com.sparecode.vipul.onlynow.widgets.LatoEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="@string/lastname"
+                android:id="@+id/ediprofile_lastname"/>
+        </LinearLayout>
+         <com.sparecode.vipul.onlynow.widgets.LatoButton
+            android:layout_marginTop="@dimen/dp_20"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Update Profile"
+            android:textAllCaps="false"
+             android:background="@color/headercolor"
+             android:textColor="#ffffff"
+             android:id="@+id/update_profile"/>
+    </LinearLayout>
+</FrameLayout>

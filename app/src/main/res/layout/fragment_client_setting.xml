@@ -66,7 +66,7 @@
                 android:text="@string/edit_profile"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/textView18"
+                android:id="@+id/text_editprofile"
                 android:gravity="center"
                 android:layout_gravity="center"
                 android:textColor="@color/headercolor"
@@ -75,7 +75,7 @@
                 android:clickable="true"
                 android:background="@drawable/editprofile"
                 app:typeface="lato_bold"
-                android:visibility="gone"/>
+                android:visibility="visible"/>
 
             <View
                 android:layout_width="match_parent"
@@ -111,6 +111,35 @@
                     app:typeface="lato_regular"
                     android:drawableRight="@drawable/search_category_next_icon"/>
             </RelativeLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:id="@+id/changepasswordlinear"
+                android:visibility="gone">
+
+                <com.sparecode.vipul.onlynow.widgets.LatoEditText
+                    android:id="@+id/edit_oldpassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/old_password"
+                    app:typeface="lato_regular"/>
+
+                <com.sparecode.vipul.onlynow.widgets.LatoEditText
+                    android:id="@+id/edit_newpassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/new_password"
+                    app:typeface="lato_regular"/>
+
+                <com.sparecode.vipul.onlynow.widgets.LatoButton
+                    android:id="@+id/button_changepassword"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Change Password"
+                    android:textAllCaps="false"
+                    android:layout_gravity="center"/>
+            </LinearLayout>
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

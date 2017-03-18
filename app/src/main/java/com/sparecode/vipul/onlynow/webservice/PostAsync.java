@@ -48,6 +48,15 @@ public class PostAsync<T> extends AsyncTask<String, Void, String> {
         this.callback = t;
     }
 
+    public PostAsync(Context context, String url,  String keyImage, File file, Class<T> clazz, OnResponse<T> t) {
+        this.context = context;
+        this.url = url;
+        this.keyImage = keyImage;
+        this.file = file;
+        this.clazz = clazz;
+        this.callback = t;
+    }
+
     public PostAsync(Context context, String url, List<Pair<String, String>> pairList, Class<T> clazz, OnResponse<T> t) {
         this.context = context;
         this.url = url;

@@ -33,11 +33,14 @@ public interface RequestApi {
     String CANCELDEAL = "cancel_request";
     String LOGOUT = "logout";
     String CLIENTGETCATEGORY = "get_spinner_categories";
-    String ADDCOUPON = "http://192.168.2.7/projects/onlynow/api/add_coupon";
+    String UPDATEPROFILE = "update_profile";
+    String CHANGEPASSWORD = "change_password";
     //String BASEURL = "http://192.168.2.16/projects/wilo/api/";
     String BASEURL = "http://192.168.2.7/projects/onlynow/api/";
     String SERVICE = BASEURL + "services.php?data=";
     String CLIENTSERVICE = BASEURL + "client/?data=";
+    String ADDCOUPON = BASEURL +"add_coupon";
+    String UPDATEPROFILEPICTURE = BASEURL + "update_profile_picture";
     String CLIENTDATA = BASEURL + "?data=";
     String COMMONSERVICE = BASEURL + "?data=";
     String ZIPDATA = "http://zipcloud.ibsnet.co.jp/api/search?zipcode=";
