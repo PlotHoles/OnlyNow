@@ -14,7 +14,258 @@ import java.util.List;
 
 public class ReqestParameter {
 
-    //email,password
+    public JSONObject toSignup(String... vars) {
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("method", "signup");
+            jsonObject.put("fname", "" + vars[0]);
+            jsonObject.put("lname", "" + vars[1]);
+            jsonObject.put("email", "" + vars[2]);
+            jsonObject.put("password", "" + vars[3]);
+            jsonObject.put("gender", "" + vars[4]);
+            jsonObject.put("birthday", "" + vars[5]);
+            jsonObject.put("lat", "" + vars[6]);
+            jsonObject.put("long", "" + vars[7]);
+            jsonObject.put("recieve_email", "" + vars[8]);
+            jsonObject.put("device_type", "" + vars[9]);
+            jsonObject.put("device_id", "" + vars[10]);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return jsonObject;
+    }
+    public JSONObject toFbSignup(String... vars) {
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("method", "signup");
+            jsonObject.put("fname", "" + vars[0]);
+            jsonObject.put("lname", "" + vars[1]);
+            jsonObject.put("email", "" + vars[2]);
+            jsonObject.put("password", "" + vars[3]);
+            jsonObject.put("gender", "" + vars[4]);
+            jsonObject.put("birthday", "" + vars[5]);
+            jsonObject.put("lat", "" + vars[6]);
+            jsonObject.put("long", "" + vars[7]);
+            jsonObject.put("recieve_email", "" + vars[8]);
+            jsonObject.put("device_type", "" + vars[9]);
+            jsonObject.put("device_id", "" + vars[10]);
+            jsonObject.put("fb_id", "" + vars[11]);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return jsonObject;
+    }
+    public JSONObject toGetAllAreas(int page) {
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("method", "get_all_areas");
+            jsonObject.put("page", "" + page);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return jsonObject;
+    }
+    public JSONObject toAddActiveArea(String userId, String areaId, String lat, String lng) {
+        //add_active_area
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("method", "add_active_area");
+            jsonObject.put("user_id", "" + userId);
+            jsonObject.put("area_id", "" + areaId);
+            jsonObject.put("lat", "" + lat);
+            jsonObject.put("long", "" + lng);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return jsonObject;
+    }
+    public JSONObject toRemoveActivrArea(String areaId) {
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("method", "remove_active_area");
+            jsonObject.put("a_id", "" + areaId);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return jsonObject;
+    }
+    public JSONObject toAddFavCategory(String userId, String catId) {
+        //add_fav_category
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("method", "add_fav_category");
+            jsonObject.put("user_id", "" + userId);
+            jsonObject.put("cat_id", "" + catId);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return jsonObject;
+    }
+    public JSONObject toRemoveFavCategory(String catId) {
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("method", "remove_fav_category");
+            jsonObject.put("cat_id", "" + catId);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return jsonObject;
+    }
+    public JSONObject toUserLogin(String... vars) {
+        JSONObject object = new JSONObject();
+        try {
+            object.put("method", RequestApi.LOGIN);
+            object.put("email", vars[0]);
+            object.put("password", vars[1]);
+            object.put("lat", vars[2]);
+            object.put("long", vars[3]);
+            object.put("device_type", vars[4]);
+            object.put("device_id", vars[5]);
+
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return object;
+    }
+    //login_with_fb
+    public JSONObject toFbLogin(String... vars) {
+        JSONObject object = new JSONObject();
+        try {
+            object.put("method", RequestApi.FBLOGIN);
+            object.put("email", vars[0]);
+            object.put("password", vars[1]);
+            object.put("lat", vars[2]);
+            object.put("long", vars[3]);
+            object.put("device_type", vars[4]);
+            object.put("device_id", vars[5]);
+            object.put("fb_id", vars[6]);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return object;
+    }
+    public JSONObject toGetFavCategory(String userId) {
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("method", "get_fav_categories");
+            jsonObject.put("user_id", "" + userId);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return jsonObject;
+    }
+    public JSONObject toGetCoupnsByCategory(String userId, String catId) {
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("method", "get_coupons_by_category");
+            jsonObject.put("user_id", "" + userId);
+            jsonObject.put("cat_id", "" + catId);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return jsonObject;
+    }
+    public JSONObject toGetCouponById(String couponId) {
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("method", "get_coupon_by_id");
+            jsonObject.put("id", "" + couponId);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return jsonObject;
+    }
+    public JSONObject toGetReviewShop(String shopId) {
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("method", "get_shop_reviews");
+            jsonObject.put("shop_id", "" + shopId);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return jsonObject;
+    }
+    public JSONObject toGetFavShop(String shopId,String userId) {
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("method", "add_fav_shop");
+            jsonObject.put("shop_id", "" + shopId);
+            jsonObject.put("user_id", "" + userId);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return jsonObject;
+    }
+    public JSONObject toGetShop(String shopId,String userId) {
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("method", "get_shop");
+            jsonObject.put("shop_id", "" + shopId);
+            jsonObject.put("user_id", "" + userId);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return jsonObject;
+    }
+    public JSONObject toGetRemoveFavShop(String Id) {
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("method", "remove_shop_from_list");
+            jsonObject.put("id", "" + Id);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return jsonObject;
+    }
+    public JSONObject toGetNotification(String userId, int page) {
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("method", "get_my_notifications");
+            jsonObject.put("user_id", "" + userId);
+            jsonObject.put("page", "" + page);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return jsonObject;
+    }
+    public JSONObject toGetMyListSaved(String userId, int page) {
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("method", "get_saved_coupons");
+            jsonObject.put("user_id", "" + userId);
+            jsonObject.put("page", "" + page);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return jsonObject;
+    }
+    public JSONObject toGetUserShops(String userId, int page, int type) {
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("method", "get_user_shops");
+            jsonObject.put("user_id", "" + userId);
+            jsonObject.put("page", "" + page);
+            jsonObject.put("type", "" + type);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return jsonObject;
+    }
+    public JSONObject toGetReviewed(String userId, int page) {
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("method", "get_reviewed_shops");
+            jsonObject.put("user_id", "" + userId);
+            jsonObject.put("page", "" + page);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return jsonObject;
+    }
     public JSONObject toLogin(String... vars) {
         JSONObject object = new JSONObject();
         try {
@@ -281,11 +532,12 @@ public class ReqestParameter {
         return object;
     }
 
-    public JSONObject toMyProduct(String... vars) {
+    public JSONObject toMAPCOUPONS(String... vars) {
         JSONObject object = new JSONObject();
         try {
-            object.put("method", RequestApi.MYPRODUCT);
-            object.put("vendor_id", vars[0]);
+            object.put("method", RequestApi.MAP_COUPONS);
+            object.put("lat", vars[0]);
+            object.put("long", vars[1]);
         } catch (JSONException e) {
             e.printStackTrace();
         }

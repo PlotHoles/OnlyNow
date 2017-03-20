@@ -10,7 +10,14 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.sparecode.vipul.onlynow.R;
+import com.sparecode.vipul.onlynow.model.CouponWrapper;
 import com.sparecode.vipul.onlynow.view.OnClickListener;
+import com.sparecode.vipul.onlynow.widgets.LatoTextView;
+import com.squareup.picasso.Picasso;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -29,14 +36,27 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.MyViewHolder> 
 
     private Context context;
     private OnClickListener listener;
+    private CouponWrapper couponWrapper;
 
-    public CardAdapter(Context context, OnClickListener listener) {
+    public CardAdapter(Context context, CouponWrapper couponWrapper, OnClickListener listener) {
         this.context = context;
         this.listener = listener;
+        this.couponWrapper = couponWrapper;
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        //public TextView text_name,text_place,text_time,text_payments;;
+
+        @Bind(R.id.txtCouponName)
+        LatoTextView txtCouponName;
+        @Bind(R.id.txtCouponShopName)
+        LatoTextView txtCouponShopName;
+        @Bind(R.id.txtCouponAreaName)
+        LatoTextView txtCouponAreaName;
+        @Bind(R.id.txtCouponTimer)
+        LatoTextView txtCouponTimer;
+        @Bind(R.id.txtCouponValidTill)
+        LatoTextView txtCouponValidTill;
+        //public TextView text_name,text_place,text_time,text_payments;
         @Bind(R.id.imageView3)
         ImageView imageView3;
         @Bind(R.id.imageView4)
@@ -47,10 +67,10 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.MyViewHolder> 
         LinearLayout linearrating;
         @Bind(R.id.cardCoupon)
         CardView cardCoupon;
+
         public MyViewHolder(View view) {
             super(view);
             ButterKnife.bind(this, view);
-
 
 
 //            text_name = (TextView) view.findViewById(R.id.text_name);
@@ -79,6 +99,18 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.MyViewHolder> 
                 listener.onItemClicked(position);
             }
         });
+        if (!couponWrapper.getData().get(position).getImageURL().trim().isEmpty()) {
+            Picasso.with(context).load(couponWrapper.getData().get(position).getImageURL()).resize(720, 200).into(holder.imageView3);
+        }
+        holder.txtCouponName.setText(couponWrapper.getData().get(position).getName());
+        holder.txtCouponShopName.setText(couponWrapper.getData().get(position).getShopName());
+        holder.txtCouponAreaName.setText(couponWrapper.getData().get(position).getArea());
+        holder.txtCouponTimer.setText(getLeftTimeDuration(couponWrapper.getData().get(position).getDate(), couponWrapper.getData().get(position).getEndDate()));
+        holder.txtCouponValidTill.setText(couponWrapper.getData().get(position).getDate());
+
+        //getLeftTimeDuration(couponWrapper.getData().get(position).getDate(), couponWrapper.getData().get(position).getEndDate());
+        //holder.txtCouponTimer.setText(couponWrapper.getData().get(position).);
+
 
 //        History history = historyList.get(position);
 //        holder.text_name.setText(history.getName());
@@ -89,7 +121,43 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.MyViewHolder> 
 
     @Override
     public int getItemCount() {
-        return 10;
+        return couponWrapper.getData().size();
+    }
+
+
+    private String getLeftTimeDuration(String startDate, String endDate) {
+
+
+//HH converts hour in 24 hours format (0-23), day calculation
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-mm-dd HH:mm:ss");
+
+        Date d1 = null;
+        Date d2 = null;
+
+        try {
+            d1 = format.parse(startDate);
+            d2 = format.parse(endDate);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+
+//in milliseconds
+        long diff = d2.getTime() - d1.getTime();
+
+        long diffSeconds = diff / 1000 % 60;
+        long diffMinutes = diff / (60 * 1000) % 60;
+        long diffHours = diff / (60 * 60 * 1000) % 24;
+        long diffDays = diff / (24 * 60 * 60 * 1000);
+
+        System.out.print(diffDays + " days, ");
+        System.out.print(diffHours + " hours, ");
+        System.out.print(diffMinutes + " minutes, ");
+        System.out.print(diffSeconds + " seconds.");
+
+        String retValue = "" + diffDays + "days" + diffHours + "hours" + diffMinutes + "mins";
+
+        return retValue.replace("-", "");
     }
 
 

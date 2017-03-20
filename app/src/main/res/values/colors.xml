@@ -26,4 +26,5 @@
     <color name="multiple_image_select_toolbarPrimaryText">#FFFFFF</color>
     <color name="custom_progress_bg_color">#EEEEEE</color>
     <color name="custom_progress_message_color">#6D6D6D</color>
+    <color name="greycolor">#d1d1d1</color>
 </resources>

@@ -13,41 +13,43 @@
         android:layout_height="wrap_content">
 
         <TextView
-            android:text=""
+            android:text="Christina Clark"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_alignParentStart="true"
-            android:id="@+id/username"
-            android:maxLength="15"/>
+            android:id="@+id/textUserName"
+            android:singleLine="true"
+            android:maxLines="1"
+            android:maxEms="20"
+            android:maxLength="15"
+            android:ellipsize="end"/>
 
         <RatingBar
-            android:layout_marginTop="@dimen/dp_5"
-            android:layout_toEndOf="@+id/username"
-            android:id="@+id/ratingBar"
-            style="@style/ratingBar"
+            android:layout_marginTop="@dimen/dp_2"
+            android:layout_marginLeft="@dimen/dp_5"
             android:layout_width="wrap_content"
-            android:layout_height="29px"
-            android:scaleX="1.2"
-            android:scaleY="1.2"
-            android:isIndicator="true"
-            android:numStars="5"
-            android:layout_marginLeft="@dimen/dp_15"/>
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_toEndOf="@+id/textUserName"
+            android:id="@+id/ratingBar2"
+            style="?android:attr/ratingBarStyleSmall"
+            android:progressBackgroundTint="@color/orange"/>
 
         <TextView
             android:layout_marginRight="@dimen/dp_10"
-            android:text=""
+            android:text="aug_19_2015"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
-            android:id="@+id/text_time" />
+            android:id="@+id/textReviewDate" />
     </RelativeLayout>
     <TextView
-        android:text=""
+        android:text="einstein_has_just_become_the_world_s_first_time_teaveler_i_sent_him_into_the_future_one_minute_into_the_future_to_be_exact_and_at_exactly_1_21_am_we_shall_catch_up_with_him"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/review"
+        android:id="@+id/textUserDescription"
         android:layout_weight="1"
         android:layout_marginBottom="@dimen/dp_10"/>
 
@@ -56,6 +58,8 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="@color/detaillinecolor"
-        android:layout_marginBottom="@dimen/dp_10"></View>
+        android:layout_marginBottom="@dimen/dp_10">
+
+    </View>
 
 </LinearLayout>

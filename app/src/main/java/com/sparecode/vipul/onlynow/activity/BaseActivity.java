@@ -36,6 +36,7 @@ import com.sparecode.vipul.onlynow.fragments.ClientAnalyticsFragment;
 import com.sparecode.vipul.onlynow.fragments.ClientCouponDetailsFragment;
 import com.sparecode.vipul.onlynow.fragments.ClientCouponFragment;
 import com.sparecode.vipul.onlynow.fragments.ClientDoneFragment;
+import com.sparecode.vipul.onlynow.fragments.ClientEditprofileFragment;
 import com.sparecode.vipul.onlynow.fragments.ClientReviewFragment;
 import com.sparecode.vipul.onlynow.fragments.ClientSettingFragment;
 import com.sparecode.vipul.onlynow.fragments.ClientShopFragment;
@@ -45,7 +46,6 @@ import com.sparecode.vipul.onlynow.fragments.ClientSignupstep2Fragment;
 import com.sparecode.vipul.onlynow.fragments.ClientSplashFragment;
 import com.sparecode.vipul.onlynow.fragments.DetailsFragment;
 import com.sparecode.vipul.onlynow.fragments.DoneFragment;
-import com.sparecode.vipul.onlynow.fragments.ClientEditprofileFragment;
 import com.sparecode.vipul.onlynow.fragments.ForgotFragment;
 import com.sparecode.vipul.onlynow.fragments.HomeFragment;
 import com.sparecode.vipul.onlynow.fragments.MapFragment;
@@ -60,6 +60,7 @@ import com.sparecode.vipul.onlynow.fragments.SignupfacebookFragment;
 import com.sparecode.vipul.onlynow.fragments.SplashFragment;
 import com.sparecode.vipul.onlynow.interfaces.NetworkChangeListener;
 import com.sparecode.vipul.onlynow.interfaces.SignupNextListner;
+import com.sparecode.vipul.onlynow.model.FacebookWrapper;
 import com.sparecode.vipul.onlynow.receiver.LocationReceiver;
 import com.sparecode.vipul.onlynow.receiver.NetworkReceiver;
 
@@ -396,7 +397,9 @@ public class BaseActivity extends AppCompatActivity implements NetworkChangeList
     public void openSignupPage() {
         replaceFragment(new SignupFragment(), R.id.container, SignupFragment.class.getName(), true);
     }
-
+    public void openSignupPage(FacebookWrapper facebookWrapper) {
+        replaceFragment(new SignupFragment(facebookWrapper), R.id.container, SignupFragment.class.getName(), true);
+    }
     public void openForgotPage() {
         replaceFragment(new ForgotFragment(), R.id.container, ForgotFragment.class.getName(), true);
     }
@@ -429,8 +432,8 @@ public class BaseActivity extends AppCompatActivity implements NetworkChangeList
         replaceFragment(new ProfileFragment(), R.id.container, ProfileFragment.class.getName(), true);
     }
 
-    public void openDetailPage() {
-        replaceFragment(new DetailsFragment(), R.id.container, DetailsFragment.class.getName(), true);
+    public void openDetailPage(String couponId,String shopId,String userId,String Id) {
+        replaceFragment(new DetailsFragment(couponId,shopId,userId,Id), R.id.container, DetailsFragment.class.getName(), true);
     }
 
     public void openMapPage() {

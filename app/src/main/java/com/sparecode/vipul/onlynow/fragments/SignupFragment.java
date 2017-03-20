@@ -1,10 +1,10 @@
 package com.sparecode.vipul.onlynow.fragments;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,21 +13,29 @@ import android.view.ViewGroup;
 import com.sparecode.vipul.onlynow.R;
 import com.sparecode.vipul.onlynow.activity.BaseActivity;
 import com.sparecode.vipul.onlynow.interfaces.SignupNextListner;
+import com.sparecode.vipul.onlynow.model.FacebookWrapper;
+import com.sparecode.vipul.onlynow.view.CustomViewPager;
 import com.sparecode.vipul.onlynow.view.StepIndicator;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
+@SuppressLint("ValidFragment")
 public class SignupFragment extends BaseFragment implements SignupNextListner {
 
     @Bind(R.id.step_indicator)
     StepIndicator stepIndicator;
     @Bind(R.id.pager)
-    ViewPager pager;
+    CustomViewPager pager;
+    FacebookWrapper facebookWrapper;
     private SectionPagerAdapter sectionPagerAdapter;
 
     public SignupFragment() {
         // Required empty public constructor
+    }
+
+    public SignupFragment(FacebookWrapper facebookWrapper) {
+        this.facebookWrapper = facebookWrapper;
     }
 
     @Override
@@ -55,7 +63,6 @@ public class SignupFragment extends BaseFragment implements SignupNextListner {
                     ((BaseActivity) getActivity()).getTextViewToolBarTitle().setText(getString(R.string.signup));
                     ((BaseActivity) getActivity()).getAppbarLayout().findViewById(R.id.text_next).setVisibility(View.GONE);
 
-
                 } else if (position == 1) {
                     ((BaseActivity) getActivity()).getTextViewToolBarTitle().setText(getString(R.string.active_area));
                     ((BaseActivity) getActivity()).getTextNext().setVisibility(View.VISIBLE);
@@ -80,6 +87,10 @@ public class SignupFragment extends BaseFragment implements SignupNextListner {
             }
         });
         return view;
+    }
+
+    public FacebookWrapper getFacebookWrapper() {
+        return facebookWrapper;
     }
 
     public void performNext() {
@@ -109,11 +120,11 @@ public class SignupFragment extends BaseFragment implements SignupNextListner {
         ((BaseActivity) getActivity()).getAppbarLayout().setVisibility(View.VISIBLE);
         ((BaseActivity) getActivity()).getImgToolBarCancel().setVisibility(View.GONE);
         ((BaseActivity) getActivity()).getImgShare().setVisibility(View.GONE);
-        ((BaseActivity)getActivity()).getImgMap().setVisibility(View.GONE);
-        ((BaseActivity)getActivity()).getImgToolBarBack().setOnClickListener(new View.OnClickListener() {
+        ((BaseActivity) getActivity()).getImgMap().setVisibility(View.GONE);
+        ((BaseActivity) getActivity()).getImgToolBarBack().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((BaseActivity)getActivity()).openSignupfacebookPage();
+                ((BaseActivity) getActivity()).openSignupfacebookPage();
             }
         });
         // ((BaseActivity)getActivity()).getTextViewToolBarTitle().setText("Sign Up");
@@ -121,9 +132,9 @@ public class SignupFragment extends BaseFragment implements SignupNextListner {
 
     @Override
     public void onSignupNextClick(boolean flag) {
-        if(!flag){
+        if (!flag) {
             ((BaseActivity) getActivity()).onSignupNextClickPerform();
-        }else{
+        } else {
             //performNext();
             performNext();
         }
@@ -171,15 +182,5 @@ public class SignupFragment extends BaseFragment implements SignupNextListner {
                     return null;
             }
         }
-    }
-    public void addFragment(BaseFragment fragment, boolean isReplace) {
-        FragmentManager fragmentManager = getChildFragmentManager();
-
-        fragmentManager.popBackStackImmediate(fragment.getClass().getName(),
-                FragmentManager.POP_BACK_STACK_INCLUSIVE);
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.container, fragment);
-        fragmentTransaction.addToBackStack(fragment.getClass().getName());
-        fragmentTransaction.commitAllowingStateLoss();
     }
 }

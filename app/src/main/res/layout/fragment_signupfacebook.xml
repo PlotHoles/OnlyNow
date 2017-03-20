@@ -41,7 +41,7 @@
             android:text="@string/facebooksignup"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/button_facebook"
+            android:id="@+id/button_signup_facebook"
             app:typeface="lato_bold"/>
 
         <com.sparecode.vipul.onlynow.widgets.LatoTextView

@@ -16,8 +16,8 @@
         app:siBackgroundColor="@color/background_default"
         app:siStepColor="@color/step_default" />
 
-    <android.support.v4.view.ViewPager
+    <com.sparecode.vipul.onlynow.view.CustomViewPager
         android:id="@+id/pager"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"></android.support.v4.view.ViewPager>
+        android:layout_height="match_parent"></com.sparecode.vipul.onlynow.view.CustomViewPager>
 </LinearLayout>

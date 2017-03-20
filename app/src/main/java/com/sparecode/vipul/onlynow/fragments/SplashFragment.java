@@ -17,7 +17,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 
-public class SplashFragment extends BaseFragment implements View.OnClickListener{
+public class SplashFragment extends BaseFragment implements View.OnClickListener {
     @Bind(R.id.image_next)
     ImageView imageNext;
     @Bind(R.id.text_client)
@@ -51,7 +51,9 @@ public class SplashFragment extends BaseFragment implements View.OnClickListener
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_splash, container, false);
-        ButterKnife.bind(this,view);
+
+        ButterKnife.bind(this, view);
+
         return view;
     }
 
@@ -59,7 +61,7 @@ public class SplashFragment extends BaseFragment implements View.OnClickListener
     @Override
     public void setToolbarForFragment() {
         ((BaseActivity) getActivity()).getAppbarLayout().setVisibility(View.GONE);
-        ((BaseActivity)getActivity()).getTabLayout().setVisibility(View.GONE);
+        ((BaseActivity) getActivity()).getTabLayout().setVisibility(View.GONE);
     }
 
     @Override
@@ -72,16 +74,16 @@ public class SplashFragment extends BaseFragment implements View.OnClickListener
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.image_next:
-                ((BaseActivity)getActivity()).openSigninPage();
+                ((BaseActivity) getActivity()).openSigninPage();
                 break;
             case R.id.text_client:
-                ((BaseActivity)getActivity()).openClientSplashPage();
+                ((BaseActivity) getActivity()).openClientSplashPage();
                 break;
             case R.id.createaccount_button:
-                ((BaseActivity)getActivity()).openSignupfacebookPage();
+                ((BaseActivity) getActivity()).openSignupfacebookPage();
                 break;
             case R.id.signin_button:
-                ((BaseActivity)getActivity()).openSigninPage();
+                ((BaseActivity) getActivity()).openSigninPage();
                 break;
         }
     }

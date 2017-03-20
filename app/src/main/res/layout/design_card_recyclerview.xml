@@ -1,45 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginBottom="@dimen/dp_5"
     android:layout_marginLeft="@dimen/dp_5"
     android:layout_marginRight="@dimen/dp_5"
-    android:layout_marginTop="@dimen/dp_5"
-    android:layout_marginBottom="@dimen/dp_5">
+    android:layout_marginTop="@dimen/dp_5">
 
     <android.support.v7.widget.CardView
         android:id="@+id/cardCoupon"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content">
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <ImageView
+                android:id="@+id/imageView3"
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
-                app:srcCompat="@drawable/natural"
-                android:id="@+id/imageView3"
-                android:scaleType="fitXY"/>
+                android:scaleType="fitXY"
+                app:srcCompat="@drawable/natural" />
 
             <LinearLayout
+                android:id="@+id/linearLayout5"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
                 android:layout_below="@+id/imageView3"
-                android:layout_marginLeft="@dimen/dp_20"
-                android:layout_marginTop="@dimen/dp_5"
                 android:layout_marginBottom="@dimen/dp_5"
+                android:layout_marginLeft="@dimen/dp_20"
                 android:layout_marginRight="@dimen/dp_20"
-                android:id="@+id/linearLayout5">
+                android:layout_marginTop="@dimen/dp_5"
+                android:orientation="vertical">
 
                 <com.sparecode.vipul.onlynow.widgets.LatoTextView
+                    android:id="@+id/txtCouponName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/coupon_detail"
-                    app:typeface="lato_bold"/>
+                    app:typeface="lato_bold" />
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -47,50 +48,52 @@
                     android:gravity="center">
 
                     <ImageView
+                        android:id="@+id/imageView4"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        app:srcCompat="@drawable/home_next_icon"
-                        android:id="@+id/imageView4"
+                        android:layout_alignParentEnd="true"
                         android:layout_alignParentTop="true"
-                        android:layout_alignParentEnd="true" />
+                        app:srcCompat="@drawable/home_next_icon" />
 
                     <com.sparecode.vipul.onlynow.widgets.LatoTextView
+                        android:id="@+id/txtCouponShopName"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/coupon_pname"
                         android:layout_toStartOf="@+id/imageView4"
-                        app:typeface="lato_bold"/>
+                        android:text="@string/coupon_pname"
+                        app:typeface="lato_bold" />
                 </RelativeLayout>
 
                 <com.sparecode.vipul.onlynow.widgets.LatoTextView
+                    android:id="@+id/txtCouponAreaName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/coupon_place"
-                    app:typeface="lato_regular"/>
+                    app:typeface="lato_regular" />
             </LinearLayout>
 
 
             <LinearLayout
-                android:orientation="horizontal"
-                android:layout_marginLeft="@dimen/dp_15"
-                android:layout_marginTop="@dimen/dp_15"
+                android:id="@+id/linearrating"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
                 android:layout_alignParentStart="true"
-                android:id="@+id/linearrating"
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="@dimen/dp_15"
+                android:layout_marginTop="@dimen/dp_15"
                 android:background="@drawable/roundedlayout"
+                android:orientation="horizontal"
                 android:padding="@dimen/dp_5">
 
                 <RatingBar
+                    style="?android:attr/ratingBarStyleSmall"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    style="?android:attr/ratingBarStyleSmall"
-                    android:progressBackgroundTint="@color/white"/>
+                    android:progressBackgroundTint="@color/white" />
 
             </LinearLayout>
+
             <LinearLayout
-                android:orientation="vertical"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_above="@+id/linearLayout5"
@@ -98,23 +101,26 @@
                 android:layout_marginBottom="@dimen/dp_10"
                 android:layout_marginRight="@dimen/dp_10"
                 android:background="@drawable/roundedlayout"
+                android:orientation="vertical"
                 android:padding="@dimen/dp_5">
 
                 <com.sparecode.vipul.onlynow.widgets.LatoTextView
+                    android:id="@+id/txtCouponTimer"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="@string/coupon_time"
                     android:gravity="center"
+                    android:text="@string/coupon_time"
                     android:textColor="@color/white"
-                    app:typeface="lato_regular"/>
+                    app:typeface="lato_regular" />
 
                 <com.sparecode.vipul.onlynow.widgets.LatoTextView
+                    android:id="@+id/txtCouponValidTill"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/coupon_days"
                     android:gravity="center"
+                    android:text="@string/coupon_days"
                     android:textColor="@color/white"
-                    app:typeface="lato_regular"/>
+                    app:typeface="lato_regular" />
             </LinearLayout>
         </RelativeLayout>
     </android.support.v7.widget.CardView>

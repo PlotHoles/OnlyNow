@@ -17,5 +17,50 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:name="com.sparecode.vipul.onlynow.fragments.MapFragment"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:background="@color/greycolor">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:background="@color/white"
+                android:layout_marginLeft="@dimen/dp_10"
+                android:layout_marginRight="@dimen/dp_10"
+                android:layout_marginBottom="@dimen/dp_10"
+                android:layout_marginTop="@dimen/dp_10">
+
+                <android.support.v4.view.ViewPager
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/map_viewpger"
+                    android:layout_marginRight="@dimen/dp_10"
+                    android:layout_marginLeft="@dimen/dp_25"
+                    android:layout_marginBottom="@dimen/dp_10">
+
+                </android.support.v4.view.ViewPager>
+                <ImageView
+                    android:id="@+id/mapnexticon"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/map_next_icon"
+                    android:layout_gravity="center|right"
+                    android:layout_marginRight="@dimen/dp_10"/>
+                <ImageView
+                    android:id="@+id/mapprevioudicon"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/map_previous_icon"
+                    android:layout_gravity="center|left"
+                    android:layout_marginLeft="@dimen/dp_10"/>
+            </FrameLayout>
+        </LinearLayout>
+
     </RelativeLayout>
+
+
+
 </FrameLayout>

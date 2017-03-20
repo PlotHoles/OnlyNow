@@ -24,24 +24,25 @@
 
 
         <FrameLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp_150"
                 app:srcCompat="@drawable/natural"
-                android:id="@+id/coupon_image"
+                android:id="@+id/imageView9"
                 android:scaleType="fitXY"/>
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:srcCompat="@drawable/details_page_next_icon"
-                android:id="@+id/coupon_next_image"
+                android:id="@+id/imageView11"
                 android:layout_gravity="center_vertical|right"/>
 
             <LinearLayout
+                android:visibility="gone"
                 android:orientation="horizontal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -51,13 +52,15 @@
                 android:layout_marginTop="@dimen/dp_10"
                 android:padding="@dimen/dp_5">
                 <com.sparecode.vipul.onlynow.widgets.LatoTextView
+                    android:visibility="gone"
+                    android:id="@+id/text_rating"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/coupon_rating"
                     android:textColor="@color/white"
-                    app:typeface="lato_bold"
-                    android:id="@+id/coupon_rating"/>
+                    app:typeface="lato_bold"/>
                 <RatingBar
+                    android:visibility="gone"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/ratingBar"
@@ -73,7 +76,7 @@
             android:text="@string/coupon_detail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/text_coupon_desc"
+            android:id="@+id/textCouponDesc"
             app:typeface="lato_regular"/>
 
         <LinearLayout
@@ -94,8 +97,8 @@
                 <ImageButton
                     android:background="@color/headercolor"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/imageButton_coupon_like"
+                    android:layout_height="match_parent"
+                    android:id="@+id/imageButton2"
                     android:src="@drawable/favouriteselector"
                     android:padding="@dimen/dp_10"/>
             </LinearLayout>
@@ -114,7 +117,7 @@
                     android:text="@string/coupon_type"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/text_coupon_category"
+                    android:id="@+id/textCategory"
                     app:typeface="lato_regular"/>
 
                 <com.sparecode.vipul.onlynow.widgets.LatoTextView
@@ -122,7 +125,7 @@
                     android:text="@string/coupon_place"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/text_coupon_area"
+                    android:id="@+id/textArea"
                     app:typeface="lato_regular"/>
             </LinearLayout>
 
@@ -140,6 +143,7 @@
                 android:text="@string/phone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:id="@+id/textView53"
                 app:typeface="lato_bold"/>
 
             <com.sparecode.vipul.onlynow.widgets.LatoTextView
@@ -148,7 +152,7 @@
                 android:text="@string/number"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/text_phone"
+                android:id="@+id/textNumber"
                 app:typeface="lato_regular"/>
         </LinearLayout>
 
@@ -163,6 +167,7 @@
                 android:text="@string/web"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:id="@+id/textView55"
                 app:typeface="lato_bold"/>
 
             <com.sparecode.vipul.onlynow.widgets.LatoTextView
@@ -171,7 +176,7 @@
                 android:text="@string/url"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/text_coupon_web"
+                android:id="@+id/textWeb"
                 app:typeface="lato_regular"/>
         </LinearLayout>
 
@@ -186,15 +191,17 @@
                 android:text="@string/shop"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:id="@+id/textView57"
                 app:typeface="lato_bold"/>
 
             <com.sparecode.vipul.onlynow.widgets.LatoTextView
                 android:layout_marginTop="@dimen/dp_2"
                 android:layout_marginLeft="@dimen/dp_20"
                 android:text="@string/free_text"
+                android:maxLines="10"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/text_shopname"
+                android:id="@+id/textShopDetail"
                 app:typeface="lato_regular"/>
         </LinearLayout>
 
@@ -209,6 +216,7 @@
                 android:text="@string/address"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:id="@+id/textView59"
                 app:typeface="lato_bold"/>
 
             <RelativeLayout
@@ -232,7 +240,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignBottom="@+id/imageView21"
                     android:layout_alignParentStart="true"
-                    android:id="@+id/text_adress"
+                    android:id="@+id/textAddress"
                     android:layout_toStartOf="@+id/imageView21"
                     app:typeface="lato_regular"/>
             </RelativeLayout>

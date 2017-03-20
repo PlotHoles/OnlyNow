@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    android:orientation="vertical">
+
+    <com.sparecode.vipul.onlynow.widgets.LatoTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/dp_10"
+        android:gravity="center"
+        android:padding="@dimen/dp_5"
+        android:text="WRITE REVIEW"
+        android:textSize="@dimen/sp_20"
+        app:typeface="lato_bold" />
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#D3D3D3" />
+
+    <RatingBar
+        android:id="@+id/ratingReview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+
+        android:layout_margin="@dimen/dp_10"
+        android:numStars="5"
+        android:progressBackgroundTint="#B5B5B5"
+        android:progressTint="#F09F22"
+        android:secondaryProgressTint="#F09F22" />
+
+    <com.sparecode.vipul.onlynow.widgets.LatoEditText
+        android:id="@+id/edtReview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/dp_10"
+        android:background="@drawable/reviewbox"
+        android:gravity="top"
+        android:lines="5"
+        android:maxLines="5"
+        android:padding="@dimen/dp_5"
+        android:textSize="@dimen/sp_18" />
+
+    <com.sparecode.vipul.onlynow.widgets.LatoButton
+        android:id="@+id/submitReview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/dp_10"
+        android:background="@color/pink"
+        android:text="Submit"
+        android:textAllCaps="true"
+        android:textColor="@color/white" />
+</LinearLayout>

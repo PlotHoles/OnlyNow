@@ -25,8 +25,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scrollbars="vertical"
-            android:layout_above="@+id/text_signup"
-            android:fillViewport="true">
+            android:layout_above="@+id/text_signup">
 
         <LinearLayout
             android:layout_marginTop="@dimen/dp_10"
@@ -55,6 +54,7 @@
                 app:typeface="lato_bold"/>
 
             <com.sparecode.vipul.onlynow.widgets.LatoButton
+
                 android:textAllCaps="false"
                 android:textColor="@color/white"
                 android:background="@color/blue"

@@ -5,6 +5,8 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="section_format">Hello World from section: %1$d</string>
 
+    <string name="fbAppId">435172540147467</string>
+
     <string name="splash_text">Get best deals which is available \nOnly Now</string>
     <string name="create">Create Account</string>
     <string name="sign">Sign In</string>

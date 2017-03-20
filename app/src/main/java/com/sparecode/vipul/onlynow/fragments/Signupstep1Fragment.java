@@ -1,7 +1,12 @@
 package com.sparecode.vipul.onlynow.fragments;
 
+import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.os.Bundle;
+import android.provider.Settings;
+import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,8 +19,12 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
 import com.sparecode.vipul.onlynow.R;
 import com.sparecode.vipul.onlynow.activity.BaseActivity;
+import com.sparecode.vipul.onlynow.model.FacebookWrapper;
+import com.sparecode.vipul.onlynow.model.SignupWrapper;
+import com.sparecode.vipul.onlynow.util.Prefs;
 import com.sparecode.vipul.onlynow.widgets.LatoCheckBox;
 
 import java.util.Calendar;
@@ -26,7 +35,7 @@ import butterknife.OnClick;
 
 import static com.sparecode.vipul.onlynow.R.id.text_signin;
 
-public class Signupstep1Fragment extends BaseFragment {
+public class Signupstep1Fragment extends BaseFragment implements Signupstep1Backend.SignupWrapperProvider {
 
     String Title1;
     @Bind(R.id.text_already)
@@ -60,6 +69,8 @@ public class Signupstep1Fragment extends BaseFragment {
     @Bind(R.id.genderradiogroup)
     RadioGroup genderradiogroup;
     private int mYear, mMonth, mDay;
+     Signupstep1Backend signupstep1Backend;
+    View view;
 
     public Signupstep1Fragment() {
         // Required empty public constructor
@@ -84,7 +95,8 @@ public class Signupstep1Fragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_signupstep1, container, false);
+
+        view = inflater.inflate(R.layout.fragment_signupstep1, container, false);
 
         Title1 = getArguments().getString("arg");
         System.out.println("------>" + Title1);
@@ -94,7 +106,14 @@ public class Signupstep1Fragment extends BaseFragment {
         mYear = c.get(Calendar.YEAR);
         mMonth = c.get(Calendar.MONTH);
         mDay = c.get(Calendar.DAY_OF_MONTH);
+        getFbData();
         return view;
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
     }
 
     void validation() {
@@ -112,37 +131,36 @@ public class Signupstep1Fragment extends BaseFragment {
         String gender = String.valueOf(genderradiogroup.getCheckedRadioButtonId());
         System.out.println("----->gender" + gender);
         boolean gender1 = gender.matches("-1");
-        System.out.println("----->gender1"+gender1);
+        System.out.println("----->gender1" + gender1);
 
         if (editFirstname.getText().toString().trim().length() == 0) {
             editFirstname.setError(getString(R.string.first_name));
-            editFirstname.requestFocus();
         } else if (editLastname.getText().toString().trim().length() == 0) {
             editLastname.setError(getString(R.string.last_name));
-            editLastname.requestFocus();
         } else if (editEmail.getText().toString().trim().length() == 0) {
             editEmail.setError(getString(R.string.email));
-            editEmail.requestFocus();
         } else if (emailmatches != true) {
             editEmail.setError(getString(R.string.email_proper));
         } else if (editConfirmemail.getText().toString().trim().length() == 0) {
             editConfirmemail.setError(getString(R.string.confirm_email));
-            editConfirmemail.requestFocus();
         } else if (strigmatches != true) {
             editConfirmemail.setError(getString(R.string.match_email));
         } else if (editPassword.getText().toString().trim().length() == 0) {
             editPassword.setError(getString(R.string.password));
-            editPassword.requestFocus();
         } else if ((editBirthday.getText().toString().trim().length() == 0)) {
             editBirthday.setError(getString(R.string.birthdate));
-            editBirthday.requestFocus();
-        } else if (gender1 == true){
-            Toast.makeText(getContext(), R.string.gender,Toast.LENGTH_SHORT).show();
-        } else if (agree != true){
-            Toast.makeText(getContext(),R.string.agree,Toast.LENGTH_SHORT).show();
-        }
-        else {
-            ((SignupFragment) getParentFragment()).performNext();
+        } else if (gender1 == true) {
+            Toast.makeText(getContext(), R.string.gender, Toast.LENGTH_SHORT).show();
+        } else if (agree != true) {
+            Toast.makeText(getContext(), R.string.agree, Toast.LENGTH_SHORT).show();
+        } else {
+            @SuppressLint("HardwareIds") String android_id = Settings.Secure.getString(getContext().getContentResolver(), Settings.Secure.ANDROID_ID);
+            if (facebookWrapper != null) {
+                signupstep1Backend = new Signupstep1Backend(getActivity(), editFirstname.getText().toString(), editLastname.getText().toString(), editEmail.getText().toString(), editPassword.getText().toString(), editBirthday.getText().toString(), gender, "1.1", "1.2", android_id, "1", facebookWrapper.getId(), Signupstep1Fragment.this);
+            } else {
+                signupstep1Backend = new Signupstep1Backend(getActivity(), editFirstname.getText().toString(), editLastname.getText().toString(), editEmail.getText().toString(), editPassword.getText().toString(), editBirthday.getText().toString(), gender, "1.1", "1.2", android_id, "1", Signupstep1Fragment.this);
+            }
+
         }
     }
 
@@ -155,6 +173,26 @@ public class Signupstep1Fragment extends BaseFragment {
     void onNextButtonClick() {
         validation();
 
+    }
+
+    private FacebookWrapper facebookWrapper;
+
+    private void getFbData() {
+        if (((SignupFragment) getParentFragment()).getFacebookWrapper() != null) {
+            facebookWrapper = ((SignupFragment) getParentFragment()).getFacebookWrapper();
+            Log.e("FB DATA ::", "::" + facebookWrapper.getFirstName());
+            editFirstname.setText(facebookWrapper.getFirstName());
+            editLastname.setText(facebookWrapper.getLastName());
+            editEmail.setText(facebookWrapper.getEmail());
+            editConfirmemail.setText(facebookWrapper.getEmail());
+            editBirthday.setText(facebookWrapper.getBirthday());
+            if (facebookWrapper.getGender().equals("male")) {
+                radioButton.setChecked(true);
+
+            } else {
+                radioButton2.setChecked(true);
+            }
+        }
     }
 
     @Override
@@ -171,7 +209,7 @@ public class Signupstep1Fragment extends BaseFragment {
 
     @OnClick(R.id.edit_birthday)
     public void onClick() {
-       DatePickerDialog datePickerDialog = new DatePickerDialog(getActivity(),
+        DatePickerDialog datePickerDialog = new DatePickerDialog(getActivity(),
                 new DatePickerDialog.OnDateSetListener() {
 
                     @Override
@@ -183,5 +221,20 @@ public class Signupstep1Fragment extends BaseFragment {
                     }
                 }, mYear, mMonth, mDay);
         datePickerDialog.show();
+    }
+
+    @Override
+    public void onSuccess(SignupWrapper signupWrapper) {
+        if (getActivity() != null) {
+            ((SignupFragment) getParentFragment()).performNext();
+            Prefs.putString("user",new Gson().toJson(signupWrapper));
+        }
+    }
+
+    @Override
+    public void onFailure(String msg) {
+        if (getActivity() != null) {
+            Snackbar.make(view, msg, Snackbar.LENGTH_SHORT).show();
+        }
     }
 }

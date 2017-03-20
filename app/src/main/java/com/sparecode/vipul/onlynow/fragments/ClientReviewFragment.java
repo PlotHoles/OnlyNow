@@ -16,7 +16,6 @@ import com.sparecode.vipul.onlynow.adapters.ReviewAdapter;
 import com.sparecode.vipul.onlynow.model.ClientReview;
 import com.sparecode.vipul.onlynow.model.ClientReviewWrapper;
 import com.sparecode.vipul.onlynow.view.EndlessRecyclerViewScrollListener;
-import com.sparecode.vipul.onlynow.view.OnClickListener;
 import com.sparecode.vipul.onlynow.widgets.LatoTextView;
 
 import java.util.ArrayList;
@@ -112,13 +111,13 @@ public class ClientReviewFragment extends BaseFragment implements ClientReviewBa
     }
     public void setRecycleView() {
         reviewRecyclerview.setLayoutManager(new GridLayoutManager(getActivity(), 1));
-        reviewAdapter = new ReviewAdapter(getActivity(), data, new OnClickListener() {
+        /*reviewAdapter = new ReviewAdapter(getActivity(), data, new OnClickListener() {
             @Override
             public void onItemClicked(int position) {
                 if (getActivity() != null)
                     ((BaseActivity)getActivity()).openClientCouponDetailsPage();
             }
-        });
+        });*/
         reviewRecyclerview.setAdapter(reviewAdapter);
     }
 

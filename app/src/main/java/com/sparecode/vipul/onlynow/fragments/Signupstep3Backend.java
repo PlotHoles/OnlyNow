@@ -1,9 +1,12 @@
 package com.sparecode.vipul.onlynow.fragments;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.sparecode.vipul.onlynow.interfaces.OnResponse;
+import com.sparecode.vipul.onlynow.model.AddCategoryWrapper;
 import com.sparecode.vipul.onlynow.model.CategoryWrapper;
+import com.sparecode.vipul.onlynow.model.RemoveCategoryWrapper;
 import com.sparecode.vipul.onlynow.webservice.GetRequest;
 import com.sparecode.vipul.onlynow.webservice.ReqestParameter;
 import com.sparecode.vipul.onlynow.webservice.RequestApi;
@@ -40,16 +43,17 @@ public class Signupstep3Backend {
     }
 
 
-    /*public void addFavoriteLocation(String userId, String areaId, String lat, String lng) {
+    public void addFavoriteCategory(String userId, String catId) {
 
-        new GetRequest<AddActiveAreaWrapper>().toGetRequest(context, RequestApi.USERSERVICE, new ReqestParameter().toAddActiveArea(userId, areaId, lat, lng), AddActiveAreaWrapper.class, new OnResponse<AddActiveAreaWrapper>() {
+        new GetRequest<AddCategoryWrapper>().toGetRequest(context, RequestApi.USERSERVICE, new ReqestParameter().toAddFavCategory(userId, catId), AddCategoryWrapper.class, new OnResponse<AddCategoryWrapper>() {
             @Override
-            public void onSuccess(AddActiveAreaWrapper addFavWrapper) {
+            public void onSuccess(AddCategoryWrapper addFavWrapper) {
                 if (addFavWrapper.getStatus() == 0) {
                     //areaListProvider.onError(addFavWrapper);
+
                     Log.e("RESPONSE", "" + addFavWrapper.getMessage());
                 } else {
-                    Log.e("RESPONSE", "" + addFavWrapper.getData().getAreaId());
+                    Log.e("RESPONSE", "" + addFavWrapper.getData().getCatId());
                 }
             }
 
@@ -60,17 +64,17 @@ public class Signupstep3Backend {
         });
     }
 
-    public void removeFavoriteLocation(String areaId) {
-        new GetRequest<RemoveActiveAreaWrapper>().toGetRequest(context, RequestApi.USERSERVICE, new ReqestParameter().toRemoveActivrArea(areaId), RemoveActiveAreaWrapper.class, new OnResponse<RemoveActiveAreaWrapper>() {
+    public void removeFavoriteCategory(String catId) {
+        new GetRequest<RemoveCategoryWrapper>().toGetRequest(context, RequestApi.USERSERVICE, new ReqestParameter().toRemoveFavCategory(catId), RemoveCategoryWrapper.class, new OnResponse<RemoveCategoryWrapper>() {
             @Override
-            public void onSuccess(RemoveActiveAreaWrapper removeActiveAreaWrapper) {
+            public void onSuccess(RemoveCategoryWrapper removeActiveAreaWrapper) {
             }
             @Override
             public void onError() {
 
             }
         });
-    }*/
+    }
 
     public void callPagination(int page) {
         callWs(page);

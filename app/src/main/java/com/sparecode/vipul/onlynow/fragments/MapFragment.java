@@ -1,14 +1,22 @@
 package com.sparecode.vipul.onlynow.fragments;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.view.ViewPager;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdate;
@@ -22,12 +30,15 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.sparecode.vipul.onlynow.R;
 import com.sparecode.vipul.onlynow.activity.BaseActivity;
+import com.sparecode.vipul.onlynow.adapters.CustomMapPagerAdapter;
 import com.sparecode.vipul.onlynow.location.LocationHelper;
 import com.sparecode.vipul.onlynow.location.LocationProvider;
 import com.sparecode.vipul.onlynow.permission.PiemissionsCallback;
 import com.sparecode.vipul.onlynow.permission.PiemissionsRequest;
 import com.sparecode.vipul.onlynow.permission.PiemissionsUtils;
 import com.sparecode.vipul.onlynow.view.CircleImageView;
+import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Target;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -35,9 +46,18 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
 
-public class MapFragment extends BaseFragment implements OnMapReadyCallback, LocationProvider {
 
+public class MapFragment extends BaseFragment implements OnMapReadyCallback, LocationProvider, MapBackend.MapDataProvider {
+
+    @Bind(R.id.map_viewpger)
+    ViewPager mapViewpger;
+    @Bind(R.id.mapnexticon)
+    ImageView mapnexticon;
+    @Bind(R.id.mapprevioudicon)
+    ImageView mapprevioudicon;
     private GoogleMap mMap;
     Context context;
     Marker marker;
@@ -52,6 +72,10 @@ public class MapFragment extends BaseFragment implements OnMapReadyCallback, Loc
 
     };
     LocationHelper locationHelper;
+    CameraUpdate cameraUpdate;
+    List<MapData> data;
+    CustomMapPagerAdapter customMapPagerAdapter;
+    Integer datasize;
 
     public MapFragment() {
         // Required empty public constructor
@@ -70,7 +94,7 @@ public class MapFragment extends BaseFragment implements OnMapReadyCallback, Loc
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_map, container, false);
-
+        ButterKnife.bind(this, view);
         final SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
@@ -78,6 +102,25 @@ public class MapFragment extends BaseFragment implements OnMapReadyCallback, Loc
         context = getActivity();
         //locationHelper = new LocationHelper(getActivity(),this);
         //locationHelper = new LocationHelper(getActivity(),this);
+
+        data = new ArrayList<>();
+
+        mapViewpger.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                gone(position);
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
         final PiemissionsRequest request = new PiemissionsRequest(PERMISSIONS_CODE, PERMISSIONS);
         request.setCallback(new PiemissionsCallback() {
             @Override
@@ -95,10 +138,51 @@ public class MapFragment extends BaseFragment implements OnMapReadyCallback, Loc
         });
         PiemissionsUtils.requestPermission(request);
 
+        mapnexticon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mapViewpger.setCurrentItem(getItem(+1), true);
+            }
+        });
+        mapprevioudicon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mapViewpger.setCurrentItem(getpreviousItem(+1), true);
+            }
+        });
         return view;
     }
 
+    private void gone(int currentposition) {
+        if (currentposition == 0) {
+            mapprevioudicon.setVisibility(View.GONE);
+        } else if (datasize == (currentposition + 1)) {
+            mapnexticon.setVisibility(View.GONE);
+        } else if (datasize == 0) {
+            mapnexticon.setVisibility(View.GONE);
+            mapprevioudicon.setVisibility(View.GONE);
+        } else {
+            mapprevioudicon.setVisibility(View.VISIBLE);
+            mapnexticon.setVisibility(View.VISIBLE);
+        }
+        Log.e("sizeeeeeeegone", datasize + "");
+        Log.e("currrent ", currentposition + "");
+    }
 
+    /*public void setAdapter(List<MapData> dataList) {
+        this.data.addAll(dataList);
+        customMapPagerAdapter.notifyDataSetChanged();
+        *//*datasize = data.size();
+        if (datasize == 0) {
+            nextImage.setVisibility(View.GONE);
+            previousImage.setVisibility(View.GONE);
+        } else if (datasize == 1) {
+            nextImage.setVisibility(View.GONE);
+            previousImage.setVisibility(View.GONE);
+        }
+        Log.e("sizeeeeeee", datasize + "");*//*
+
+    }*/
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -125,26 +209,36 @@ public class MapFragment extends BaseFragment implements OnMapReadyCallback, Loc
     public void setToolbarForFragment() {
         ((BaseActivity) getActivity()).getAppbarLayout().setVisibility(View.VISIBLE);
         ((BaseActivity) getActivity()).getTextViewToolBarTitle().setText("Search By Map");
-        ((BaseActivity) getActivity()).getImgSearchMap().setVisibility(View.VISIBLE);
+        ((BaseActivity) getActivity()).getImgSearchMap().setVisibility(View.GONE);
         ((BaseActivity) getActivity()).getImgMap().setVisibility(View.GONE);
+        ((BaseActivity) getActivity()).getImgToolBarBack().setVisibility(View.VISIBLE);
+        ((BaseActivity)getActivity()).getImgToolBarBack().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((BaseActivity)getActivity()).openSearchPage();
+            }
+        });
     }
 
     @Override
     public void onNewLcoationReceived(Location location) {
         System.out.println("------>location" + location);
         Log.d("::", location + "");
+
         Toast.makeText(getActivity(), "RECEIVED LOC" + location, Toast.LENGTH_SHORT).show();
         //ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
 
-
+        String latitude = String.valueOf(location.getLatitude());
+        String longitude = String.valueOf(location.getLongitude());
+        MapBackend mapBackend = new MapBackend(getActivity(), latitude, longitude, this);
         if (previouslatlng == null) {
             previouslatlng = new LatLng(location.getLatitude(), location.getLongitude());
             for (int i = 0; i < 10; i++) {
-                Log.d("::", "" + getRandomLocation(new LatLng(location.getLatitude(), location.getLongitude()), 50));
-                mMap.addMarker(new MarkerOptions().position(getRandomLocation(new LatLng(location.getLatitude(), location.getLongitude()), 50)).icon(BitmapDescriptorFactory.fromResource(R.drawable.map_pin_icon)));
+                // Log.d("::", "" + getRandomLocation(new LatLng(location.getLatitude(), location.getLongitude()), 50));
+                //mMap.addMarker(new MarkerOptions().position(getRandomLocation(new LatLng(location.getLatitude(), location.getLongitude()), 50)).icon(BitmapDescriptorFactory.fromResource(R.drawable.map_pin_icon)));
                 //mMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(location.getLatitude(), location.getLongitude())));
-                CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(new LatLng(location.getLatitude(), location.getLongitude()), 17);
-                mMap.animateCamera(cameraUpdate);
+                // CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(new LatLng(location.getLatitude(), location.getLongitude()), 17);
+                //mMap.animateCamera(cameraUpdate);
             }
         } else {
             if (previouslatlng.latitude == location.getLatitude() && previouslatlng.longitude == location.getLongitude()) {
@@ -153,11 +247,11 @@ public class MapFragment extends BaseFragment implements OnMapReadyCallback, Loc
                 return;
             } else {
                 for (int i = 0; i < 10; i++) {
-                    Log.d("::", "" + getRandomLocation(new LatLng(location.getLatitude(), location.getLongitude()), 50));
-                    mMap.addMarker(new MarkerOptions().position(getRandomLocation(new LatLng(location.getLatitude(), location.getLongitude()), 50)).icon(BitmapDescriptorFactory.fromResource(R.drawable.map_pin_icon)));
+                    //  Log.d("::", "" + getRandomLocation(new LatLng(location.getLatitude(), location.getLongitude()), 50));
+                    // mMap.addMarker(new MarkerOptions().position(getRandomLocation(new LatLng(location.getLatitude(), location.getLongitude()), 50)).icon(BitmapDescriptorFactory.fromResource(R.drawable.map_pin_icon)));
                     //mMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(location.getLatitude(), location.getLongitude())));
-                    CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(new LatLng(location.getLatitude(), location.getLongitude()), 17);
-                    mMap.animateCamera(cameraUpdate);
+                    //  CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(new LatLng(location.getLatitude(), location.getLongitude()), 17);
+                    //mMap.animateCamera(cameraUpdate);
                 }
             }
         }
@@ -233,41 +327,51 @@ public class MapFragment extends BaseFragment implements OnMapReadyCallback, Loc
         return randomPoints.get(indexOfNearestPointToCentre);
     }
 
-    public void addMarker(final LatLng latLng) {
+    public void addMarker(final MapWrapper mapWrapper) {
 
 
         final View markerView = ((LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.layout_marker, null);
         final CircleImageView userImage = (CircleImageView) markerView.findViewById(R.id.imgMarker);
+        final HashMap<String, Integer> mapMarkers = new HashMap<>();
 
+        for (int i = 0; i < mapWrapper.getData().size(); i++) {
+            final int j = i;
+            Log.e("latitudem", mapWrapper.getData().get(j).getLat());
+            Log.e("latitudem", mapWrapper.getData().get(j).getLong());
 
-//        Picasso.with(getActivity()).load("https://fakeimg.pl/300/").into(new Target() {
-//            @Override
-//            public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
-//                userImage.setImageBitmap(bitmap);
-//                addItems(latLng);
-//                marker = googleMap.addMarker(new MarkerOptions()
-//                        .position(latLng)
-//                        .icon(BitmapDescriptorFactory.fromBitmap(createDrawableFromView(getActivity(), markerView))));
-//            }
-//
-//            @Override
-//            public void onBitmapFailed(Drawable errorDrawable) {
-//
-//            }
-//
-//            @Override
-//            public void onPrepareLoad(Drawable placeHolderDrawable) {
-//
-//            }
-//        });
+            Picasso.with(getActivity()).load(mapWrapper.getData().get(j).getIconURL()).resize(40, 40).into(new Target() {
+                @Override
+                public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
+                    userImage.setImageBitmap(bitmap);
+                    //addItems(latLng);
+                    marker = mMap.addMarker(new MarkerOptions()
+                            .position(new LatLng(Double.valueOf(mapWrapper.getData().get(j).getLat()), Double.valueOf(mapWrapper.getData().get(j).getLong())))
+                            .icon(BitmapDescriptorFactory.fromBitmap(createDrawableFromView(getActivity(), markerView))));
+                    mapMarkers.put(marker.getId(), j);
+
+                }
+
+                @Override
+                public void onBitmapFailed(Drawable errorDrawable) {
+
+                }
+
+                @Override
+                public void onPrepareLoad(Drawable placeHolderDrawable) {
+
+                }
+            });
+            cameraUpdate = CameraUpdateFactory.newLatLngZoom(new LatLng(Double.valueOf(mapWrapper.getData().get(j).getLat()), Double.valueOf(mapWrapper.getData().get(j).getLong())), 17);
+            mMap.animateCamera(cameraUpdate);
+        }
 
 
         //mClusterManager = new ClusterManager<MyItem>(getActivity(), googleMap);
 
 
-/*        marker = googleMap.addMarker(new MarkerOptions()
+       /* marker = mMap.addMarker(new MarkerOptions()
                 .position(latLng));*/
-        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 14);
+
 
         //mMap.setOnMarkerClickListener(new GoogleMap().OnMarkerClickListener);
         mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
@@ -275,9 +379,66 @@ public class MapFragment extends BaseFragment implements OnMapReadyCallback, Loc
             public boolean onMarkerClick(Marker marker) {
                 //DebugLog.e("CLICKED MARKER!!");
                 //openMatchesDialog();
+                String position;
+                Log.e("CLICKED POS:", "" + mapMarkers.get(marker.getId()));
+                position = mapWrapper.getData().get(mapMarkers.get(marker.getId())).getIconURL();
+                Toast.makeText(getActivity(), position, Toast.LENGTH_SHORT).show();
+                mapViewpger.setCurrentItem(mapMarkers.get(marker.getId()), true);
                 return false;
             }
         });
-        mMap.animateCamera(cameraUpdate);
+        //
+    }
+
+    public static Bitmap createDrawableFromView(Context context, View view) {
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        ((Activity) context).getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        view.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+        view.measure(displayMetrics.widthPixels, displayMetrics.heightPixels);
+        view.layout(0, 0, displayMetrics.widthPixels, displayMetrics.heightPixels);
+        view.buildDrawingCache();
+        Bitmap bitmap = Bitmap.createBitmap(view.getMeasuredWidth(), view.getMeasuredHeight(), Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(bitmap);
+        view.draw(canvas);
+
+        return bitmap;
+    }
+
+    @Override
+    public void onSuccessfull(MapWrapper mapWrapper) {
+
+        addMarker(mapWrapper);
+        customMapPagerAdapter = new CustomMapPagerAdapter(getActivity(), mapWrapper.getData());
+        mapViewpger.setAdapter(customMapPagerAdapter);
+        customMapPagerAdapter.notifyDataSetChanged();
+
+        datasize = mapWrapper.getData().size();
+
+        if (datasize == 0) {
+            mapnexticon.setVisibility(View.GONE);
+            mapprevioudicon.setVisibility(View.GONE);
+        } else if (datasize == 1) {
+            mapnexticon.setVisibility(View.GONE);
+            mapprevioudicon.setVisibility(View.GONE);
+        }
+    }
+
+    private int getItem(int i) {
+        return mapViewpger.getCurrentItem() + i;
+    }
+
+    private int getpreviousItem(int i) {
+        return mapViewpger.getCurrentItem() - i;
+    }
+
+    @Override
+    public void onFailure(String msg) {
+
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        ButterKnife.unbind(this);
     }
 }

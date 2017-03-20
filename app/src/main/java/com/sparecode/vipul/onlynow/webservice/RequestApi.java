@@ -8,6 +8,7 @@ public interface RequestApi {
 
     String USERDATA = "userData";
     String LOGIN = "login";
+    String FBLOGIN = "login_with_fb";
     String MYPRODUCT = "MyProduct";
     String SEARCH_PRODUCT = "search_product";
     String FORGOT_PASSWORD = "forgotPassword";
@@ -35,9 +36,11 @@ public interface RequestApi {
     String CLIENTGETCATEGORY = "get_spinner_categories";
     String UPDATEPROFILE = "update_profile";
     String CHANGEPASSWORD = "change_password";
+    String MAP_COUPONS = "get_map_coupons";
     //String BASEURL = "http://192.168.2.16/projects/wilo/api/";
     String BASEURL = "http://192.168.2.7/projects/onlynow/api/";
     String SERVICE = BASEURL + "services.php?data=";
+    String USERSERVICE = BASEURL + "user/?data=";
     String CLIENTSERVICE = BASEURL + "client/?data=";
     String ADDCOUPON = BASEURL +"add_coupon";
     String UPDATEPROFILEPICTURE = BASEURL + "update_profile_picture";
