@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:TagsEditText="http://schemas.android.com/apk/res-auto"
     tools:context="com.sparecode.vipul.onlynow.fragments.SearchFragment">
 
     <LinearLayout
@@ -13,7 +14,7 @@
         android:layout_marginLeft="@dimen/dp_10"
         android:layout_marginRight="@dimen/dp_10">
 
-        <AutoCompleteTextView
+        <com.sparecode.vipul.onlynow.view.TagsEditText
             android:hint="Search"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -22,7 +23,11 @@
             android:drawableRight="@drawable/search_icon"
             android:padding="@dimen/dp_10"
             android:singleLine="true"
-            android:drawablePadding="@dimen/dp_5"/>
+            android:drawablePadding="@dimen/dp_5"
+            TagsEditText:allowSpaceInTag="true"
+            TagsEditText:tagsCloseImageRight="@drawable/small_close_icon"
+            tools:layout_editor_absoluteY="0dp"
+            tools:layout_editor_absoluteX="8dp"/>
 
         <LinearLayout
             android:orientation="vertical"
@@ -155,16 +160,66 @@
                 android:layout_marginTop="@dimen/dp_30"
                 android:id="@+id/recyclerview"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:visibility="visible"/>
 
-            <ExpandableListView
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            <LinearLayout
                 android:visibility="gone"
                 android:id="@+id/searchcategoryrecycler"
                 android:layout_marginTop="@dimen/dp_10"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
-            <android.support.v7.widget.RecyclerView
+                <com.sparecode.vipul.onlynow.widgets.LatoTextView
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:text="Category"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:layout_marginLeft="@dimen/dp_20"/>
+
+                <LinearLayout
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:orientation="vertical"
+                    android:id="@+id/category_linear"
+                    android:layout_marginLeft="@dimen/dp_20">
+                </LinearLayout>
+
+                <View android:layout_height="1dp"
+                    android:layout_width="match_parent"
+                    android:background="@color/headercolor"
+                    android:layout_marginTop="@dimen/dp_10"
+                    android:layout_marginLeft="@dimen/dp_10"
+                    android:layout_marginRight="@dimen/dp_10"/>
+
+                <com.sparecode.vipul.onlynow.widgets.LatoTextView
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:text="Popular Queries"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:layout_marginLeft="@dimen/dp_20"
+                    android:layout_marginTop="@dimen/dp_10"/>
+
+                <LinearLayout
+                    android:layout_marginTop="@dimen/dp_20"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:orientation="vertical"
+                    android:id="@+id/popular_linear"
+                    android:layout_marginLeft="@dimen/dp_20"
+                    android:layout_marginBottom="@dimen/dp_10">
+                </LinearLayout>
+
+                </LinearLayout>
+            </ScrollView>
+                <android.support.v7.widget.RecyclerView
                 android:visibility="gone"
                 android:id="@+id/searchresultrecycler"
                 android:layout_marginTop="@dimen/dp_10"

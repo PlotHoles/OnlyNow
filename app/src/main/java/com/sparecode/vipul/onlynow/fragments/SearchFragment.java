@@ -1,24 +1,34 @@
 package com.sparecode.vipul.onlynow.fragments;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AutoCompleteTextView;
-import android.widget.ExpandableListView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.sparecode.vipul.onlynow.R;
 import com.sparecode.vipul.onlynow.activity.BaseActivity;
 import com.sparecode.vipul.onlynow.adapters.ExpandableListAdapter;
 import com.sparecode.vipul.onlynow.adapters.SearchAdapter;
 import com.sparecode.vipul.onlynow.adapters.SearchResultAdapter;
+import com.sparecode.vipul.onlynow.model.SearchCategoryWrapper;
+import com.sparecode.vipul.onlynow.model.SearchLocationData;
+import com.sparecode.vipul.onlynow.model.SearchLocationWrapper;
+import com.sparecode.vipul.onlynow.model.SearchPopularQueriesWrapper;
+import com.sparecode.vipul.onlynow.model.SearchResultWrapper;
 import com.sparecode.vipul.onlynow.view.OnClickListener;
+import com.sparecode.vipul.onlynow.view.TagsEditText;
+import com.squareup.picasso.Picasso;
+
+import org.apache.commons.lang3.ArrayUtils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -28,12 +38,12 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class SearchFragment extends BaseFragment {
+import static com.facebook.FacebookSdk.getApplicationContext;
+
+public class SearchFragment extends BaseFragment implements SearchBackend.SearchDataProvider, SearchCategoryBackend.SearchCategoryDataProvider, SearchPopularQueriesbackend.SearchPopularQueriesDataProvider,SearchResultBackend.SearchResultDataProvider {
 
     SearchAdapter searchAdapter;
     SearchResultAdapter searchResultAdapter;
-    @Bind(R.id.autoCompleteTextView)
-    AutoCompleteTextView autoCompleteTextView;
     @Bind(R.id.imageView22)
     ImageView imageView22;
     @Bind(R.id.currenttext)
@@ -54,14 +64,23 @@ public class SearchFragment extends BaseFragment {
     RelativeLayout locationrecycler;
     @Bind(R.id.recyclerview)
     RecyclerView recyclerview;
-
     @Bind(R.id.searchresultrecycler)
     RecyclerView searchresultrecycler;
-    @Bind(R.id.searchcategoryrecycler)
-    ExpandableListView searchcategoryrecycler;
     ExpandableListAdapter listAdapter;
     List<String> listDataHeader;
     HashMap<String, List<String>> listDataChild;
+    @Bind(R.id.autoCompleteTextView)
+    TagsEditText autoCompleteTextView;
+    List<SearchLocationData> data;
+    GridLayoutManager gridLayoutManager;
+    @Bind(R.id.category_linear)
+    LinearLayout categoryLinear;
+    @Bind(R.id.popular_linear)
+    LinearLayout popularLinear;
+    @Bind(R.id.searchcategoryrecycler)
+    LinearLayout searchcategoryrecycler;
+    String[] tags = new String[]{};
+    String latitude,longitude;
 
     public SearchFragment() {
         // Required empty public constructor
@@ -99,8 +118,17 @@ public class SearchFragment extends BaseFragment {
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 3);
         recyclerview.setLayoutManager(gridLayoutManager);
 
+        SearchBackend searchBackend = new SearchBackend(getActivity(), this);
 
-        searchAdapter = new SearchAdapter(getActivity(), new OnClickListener() {
+        SearchCategoryBackend searchCategoryBackend = new SearchCategoryBackend(getActivity(), "1", this);
+
+        SearchPopularQueriesbackend searchPopularQueriesbackend = new SearchPopularQueriesbackend(getActivity(), this);
+        gridLayoutManager = new GridLayoutManager(getActivity(), 1);
+
+        Log.e("log", autoCompleteTextView.getText().toString());
+
+       // autoCompleteTextView.setOnTouchListener(new );
+        /*searchAdapter = new SearchAdapter(getActivity(), new OnClickListener() {
             @Override
             public void onItemClicked(int position) {
                 recyclerview.setVisibility(View.GONE);
@@ -117,10 +145,10 @@ public class SearchFragment extends BaseFragment {
 
 
             }
-        });
+        });*/
 
-        recyclerview.setAdapter(searchAdapter);
-       // GridLayoutManager gridLayoutManager1 = new GridLayoutManager(getActivity(), 1);
+        //recyclerview.setAdapter(searchAdapter);
+        // GridLayoutManager gridLayoutManager1 = new GridLayoutManager(getActivity(), 1);
         //searchcategoryrecycler.setLayoutManager(gridLayoutManager1);
 
 
@@ -152,8 +180,8 @@ public class SearchFragment extends BaseFragment {
 //                ((BaseActivity)getActivity()).getTextViewToolBarTitle().setText(getString(R.string.searchresult));
 //            }
 //        });
-        prepareListData();
-        listAdapter = new ExpandableListAdapter(getActivity(),listDataHeader,listDataChild);
+       /* prepareListData();
+        listAdapter = new ExpandableListAdapter(getActivity(), listDataHeader, listDataChild);
         searchcategoryrecycler.setAdapter(listAdapter);
 
         searchcategoryrecycler.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
@@ -190,10 +218,10 @@ public class SearchFragment extends BaseFragment {
 
 
             }
-        });
+        });*/
 
         // Listview on child click listener
-        searchcategoryrecycler.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
+        /*searchcategoryrecycler.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
 
             @Override
             public boolean onChildClick(ExpandableListView parent, View v,
@@ -213,25 +241,25 @@ public class SearchFragment extends BaseFragment {
                 searchcategoryrecycler.setVisibility(View.GONE);
                 searchcategoryrecycler.setVisibility(View.GONE);
                 searchresultrecycler.setVisibility(View.VISIBLE);
-                ((BaseActivity)getActivity()).getImgMap().setVisibility(View.GONE);
-                ((BaseActivity)getActivity()).setOptionMenuVisibility(true);
-                ((BaseActivity)getActivity()).getTextViewToolBarTitle().setText(getString(R.string.searchresult));
+                ((BaseActivity) getActivity()).getImgMap().setVisibility(View.GONE);
+                ((BaseActivity) getActivity()).setOptionMenuVisibility(true);
+                ((BaseActivity) getActivity()).getTextViewToolBarTitle().setText(getString(R.string.searchresult));
                 return false;
             }
-        });
+        });*/
 
 
         GridLayoutManager gridLayoutManager2 = new GridLayoutManager(getActivity(), 1);
         searchresultrecycler.setLayoutManager(gridLayoutManager2);
 
-        searchResultAdapter = new SearchResultAdapter(getActivity(), new OnClickListener() {
+        /*searchResultAdapter = new SearchResultAdapter(getActivity(), new OnClickListener() {
             @Override
             public void onItemClicked(int position) {
                 if (getActivity() != null)
                     searchresultrecycler.setVisibility(View.VISIBLE);
             }
         });
-        searchresultrecycler.setAdapter(searchResultAdapter);
+        searchresultrecycler.setAdapter(searchResultAdapter);*/
         return view;
     }
 
@@ -280,6 +308,7 @@ public class SearchFragment extends BaseFragment {
         super.onDestroyView();
         ButterKnife.unbind(this);
     }
+
     private void prepareListData() {
         listDataHeader = new ArrayList<String>();
         listDataChild = new HashMap<String, List<String>>();
@@ -315,5 +344,148 @@ public class SearchFragment extends BaseFragment {
         listDataChild.put(listDataHeader.get(0), top250); // Header, Child data
         listDataChild.put(listDataHeader.get(1), nowShowing);
         //listDataChild.put(listDataHeader.get(2), comingSoon);
+    }
+
+    @Override
+    public void Successfull(final SearchLocationWrapper searchLocationWrapper) {
+
+        searchAdapter = new SearchAdapter(getActivity(), searchLocationWrapper.getData(), new OnClickListener() {
+            @Override
+            public void onItemClicked(int position) {
+                Toast.makeText(getActivity(), searchLocationWrapper.getData().get(position).getLat(), Toast.LENGTH_SHORT).show();
+                recyclerview.setVisibility(View.GONE);
+                locationlinear.setVisibility(View.GONE);
+                locationrecycler.setVisibility(View.GONE);
+
+                tags = new String[]{searchLocationWrapper.getData().get(position).getArea()};
+
+                latitude = searchLocationWrapper.getData().get(position).getLat();
+                longitude = searchLocationWrapper.getData().get(position).getLong();
+                autoCompleteTextView.setTags(tags);
+                searchcategoryrecycler.setVisibility(View.VISIBLE);
+                ((BaseActivity) getActivity()).getImgToolBarBack().setVisibility(View.VISIBLE);
+
+                ((BaseActivity) getActivity()).getImgToolBarBack().setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        ((BaseActivity) getActivity()).openSearchPage();
+                    }
+                });
+            }
+        });
+        recyclerview.setAdapter(searchAdapter);
+    }
+
+    @Override
+    public void Failure(String msg) {
+
+    }
+
+    @Override
+    public void onsuccessfull(final SearchCategoryWrapper searchCategoryWrapper) {
+        //Toast.makeText(getActivity(), searchCategoryWrapper.getData().size() + "", Toast.LENGTH_SHORT).show();
+        for (int i = 0; i < searchCategoryWrapper.getData().size(); i++) {
+            LayoutInflater layoutInflater = (LayoutInflater) getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            View v = layoutInflater.inflate(R.layout.design_category_recycler, null);
+
+            final TextView textcategory = (TextView) v.findViewById(R.id.text_Category);
+            ImageView imagecateory = (ImageView) v.findViewById(R.id.image_Category);
+
+            categoryLinear.addView(v, i, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+
+            textcategory.setText(searchCategoryWrapper.getData().get(i).getName());
+
+            textcategory.setTag(i);
+            textcategory.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    recyclerview.setVisibility(View.GONE);
+                    locationlinear.setVisibility(View.GONE);
+                    locationrecycler.setVisibility(View.GONE);
+                    searchcategoryrecycler.setVisibility(View.GONE);
+                    searchcategoryrecycler.setVisibility(View.GONE);
+                    searchresultrecycler.setVisibility(View.VISIBLE);
+                    ((BaseActivity) getActivity()).getImgMap().setVisibility(View.GONE);
+                    ((BaseActivity) getActivity()).setOptionMenuVisibility(true);
+                    ((BaseActivity) getActivity()).getTextViewToolBarTitle().setText(getString(R.string.searchresult));
+                    searchCategoryWrapper.getData().get((Integer) textcategory.getTag()).getName();
+                    //autoCompleteTextView.getText();
+                    String[] tmp = tags;
+                    tags = ArrayUtils.addAll(tmp, new String[]{searchCategoryWrapper.getData().get((Integer) textcategory.getTag()).getName()});
+                    //tags[tags.length] = searchCategoryWrapper.getData().get((Integer) textcategory.getTag()).getName();
+                    String cat_id = searchCategoryWrapper.getData().get((Integer) textcategory.getTag()).getId();
+                    SearchResultBackend searchResultBackend = new SearchResultBackend(getApplicationContext(),latitude,longitude,cat_id,SearchFragment.this);
+
+                    autoCompleteTextView.setTags(tags);
+
+                    //Toast.makeText(getActivity(),textcategory.getTag()+"",Toast.LENGTH_SHORT).show();
+                }
+            });
+            if (searchCategoryWrapper.getData().get(i).getPinkIconURL() != null &&
+                    (!searchCategoryWrapper.getData().get(i).getPinkIconURL().equals(""))) {
+
+                Picasso.with(getActivity())
+                        .load(searchCategoryWrapper.getData().get(i).getPinkIconURL())
+                        .placeholder(R.drawable.placeholder)
+                        .error(R.drawable.placeholder)
+                        .resize(20, 20)
+                        .into(imagecateory);
+            } else {
+                Picasso.with(getActivity()).load(R.drawable.placeholder).fit().into(imagecateory);
+            }
+        }
+    }
+
+    @Override
+    public void onSuccessfull(final SearchPopularQueriesWrapper searchPopularQueriesWrapper) {
+        for (int i = 0; i < searchPopularQueriesWrapper.getData().size(); i++) {
+            LayoutInflater layoutInflater = (LayoutInflater) getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            View v = layoutInflater.inflate(R.layout.design_popular_queries, null);
+
+            final TextView textqueries = (TextView) v.findViewById(R.id.text_popularqueries);
+            textqueries.setText(searchPopularQueriesWrapper.getData().get(i).getKeyword());
+
+            textqueries.setTag(i);
+            textqueries.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    recyclerview.setVisibility(View.GONE);
+                    locationlinear.setVisibility(View.GONE);
+                    locationrecycler.setVisibility(View.GONE);
+                    searchcategoryrecycler.setVisibility(View.GONE);
+                    searchcategoryrecycler.setVisibility(View.GONE);
+                    searchresultrecycler.setVisibility(View.VISIBLE);
+                    ((BaseActivity) getActivity()).getImgMap().setVisibility(View.GONE);
+                    ((BaseActivity) getActivity()).setOptionMenuVisibility(true);
+                    ((BaseActivity) getActivity()).getTextViewToolBarTitle().setText(getString(R.string.searchresult));
+                    String[] tmps = tags;
+                    tags = ArrayUtils.addAll(tmps, new String[]{searchPopularQueriesWrapper.getData().get((Integer) textqueries.getTag()).getKeyword()});
+
+                    String keyword = searchPopularQueriesWrapper.getData().get((Integer) textqueries.getTag()).getKeyword();
+                    SearchResultBackend searchResultBackend = new SearchResultBackend(getApplicationContext(),latitude,longitude,keyword,SearchFragment.this);
+                    autoCompleteTextView.setTags(tags);
+                }
+            });
+
+
+            popularLinear.addView(v, i, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+        }
+    }
+
+    @Override
+    public void onSuccessfull(SearchResultWrapper searchResultWrapper) {
+
+        searchResultAdapter = new SearchResultAdapter(getActivity(), searchResultWrapper.getData(), new OnClickListener() {
+            @Override
+            public void onItemClicked(int position) {
+
+            }
+        });
+        searchresultrecycler.setAdapter(searchResultAdapter);
+    }
+
+    @Override
+    public void onFailure(String msg) {
+
     }
 }

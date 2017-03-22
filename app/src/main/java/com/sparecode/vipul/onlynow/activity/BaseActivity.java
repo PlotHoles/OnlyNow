@@ -300,6 +300,7 @@ public class BaseActivity extends AppCompatActivity implements NetworkChangeList
             case R.id.sortby:
 
                 Toast.makeText(BaseActivity.this, "Sort By is Selected", Toast.LENGTH_SHORT).show();
+
                 return true;
 
             case R.id.popular:

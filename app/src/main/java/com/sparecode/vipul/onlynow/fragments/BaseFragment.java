@@ -5,14 +5,30 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 
 import com.sparecode.vipul.onlynow.activity.MainActivity;
+import com.sparecode.vipul.onlynow.interfaces.SortInterface;
 import com.sparecode.vipul.onlynow.model.LoginData;
 
 /**
  * Created by vipul on 30/1/17.
  */
 
-public abstract class BaseFragment extends Fragment {
+public abstract class BaseFragment extends Fragment implements SortInterface{
     public abstract void setToolbarForFragment();
+
+    @Override
+    public void onsuccessfull1(String value) {
+        setSortInterface(this);
+    }
+
+    SortInterface sortInterface;
+
+    public SortInterface getSortInterface() {
+        return sortInterface;
+    }
+
+    public void setSortInterface(SortInterface sortInterface) {
+        this.sortInterface = sortInterface;
+    }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {

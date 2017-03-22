@@ -266,6 +266,49 @@ public class ReqestParameter {
         }
         return jsonObject;
     }
+    public JSONObject toGetLocation(String...vars) {
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("method", RequestApi.GET_LOCATION);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return jsonObject;
+    }
+    public JSONObject toSearchCategory(String... vars) {
+        JSONObject object = new JSONObject();
+        try {
+            object.put("method", RequestApi.GET_ALL_CATEGORIES);
+            object.put("get_all", vars[0]);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return object;
+    }
+    public JSONObject toSearchPopularQueries(String... vars) {
+        JSONObject object = new JSONObject();
+        try {
+            object.put("method", RequestApi.GET_POPULAR_SEARCHES);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return object;
+    }
+    public JSONObject toSearchResult(String... vars) {
+        JSONObject object = new JSONObject();
+        try {
+            object.put("method", RequestApi.SEARCH);
+            object.put("keyword", vars[0]);
+            object.put("lat", vars[1]);
+            object.put("long", vars[2]);
+            object.put("cat_id", vars[3]);
+            object.put("sort_by", vars[4]);
+            object.put("page", vars[5]);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return object;
+    }
     public JSONObject toLogin(String... vars) {
         JSONObject object = new JSONObject();
         try {
@@ -279,7 +322,6 @@ public class ReqestParameter {
         }
         return object;
     }
-
     public JSONObject toMyShopDetails(String...vars){
         JSONObject object = new JSONObject();
 

@@ -26,4 +26,8 @@
     <dimen name="thumbnail_width">140dp</dimen>
     <dimen name="image_height_portrait">220dp</dimen>
     <dimen name="image_height_landscape">110dp</dimen>
+
+    <dimen name="defaultTagsTextSize">16sp</dimen>
+    <dimen name="defaultTagsCloseImagePadding">5dp</dimen>
+    <dimen name="defaultTagsPadding">0dp</dimen>
 </resources>

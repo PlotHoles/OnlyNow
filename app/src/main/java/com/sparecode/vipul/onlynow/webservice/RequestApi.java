@@ -37,6 +37,10 @@ public interface RequestApi {
     String UPDATEPROFILE = "update_profile";
     String CHANGEPASSWORD = "change_password";
     String MAP_COUPONS = "get_map_coupons";
+    String GET_LOCATION = "get_search_locations";
+    String GET_ALL_CATEGORIES = "get_all_categories";
+    String GET_POPULAR_SEARCHES = "get_popular_searches";
+    String SEARCH = "search";
     //String BASEURL = "http://192.168.2.16/projects/wilo/api/";
     String BASEURL = "http://192.168.2.7/projects/onlynow/api/";
     String SERVICE = BASEURL + "services.php?data=";

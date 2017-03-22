@@ -12,10 +12,11 @@ import android.widget.RatingBar;
 
 import com.sparecode.vipul.onlynow.R;
 import com.sparecode.vipul.onlynow.activity.BaseActivity;
-import com.sparecode.vipul.onlynow.adapters.ReviewAdapter;
+import com.sparecode.vipul.onlynow.adapters.ClientReviewAdapter;
 import com.sparecode.vipul.onlynow.model.ClientReview;
 import com.sparecode.vipul.onlynow.model.ClientReviewWrapper;
 import com.sparecode.vipul.onlynow.view.EndlessRecyclerViewScrollListener;
+import com.sparecode.vipul.onlynow.view.OnClickListener;
 import com.sparecode.vipul.onlynow.widgets.LatoTextView;
 
 import java.util.ArrayList;
@@ -43,7 +44,6 @@ public class ClientReviewFragment extends BaseFragment implements ClientReviewBa
     RatingBar onestarRating;
     @Bind(R.id.review_recyclerview)
     RecyclerView reviewRecyclerview;
-    ReviewAdapter reviewAdapter;
     @Bind(R.id.text_average)
     LatoTextView textAverage;
     @Bind(R.id.star5)
@@ -60,7 +60,7 @@ public class ClientReviewFragment extends BaseFragment implements ClientReviewBa
     List<ClientReview> data;
     ClientReviewBackend clientReviewBackend;
     GridLayoutManager gridLayoutManager;
-
+    ClientReviewAdapter clientReviewAdapter;
     public ClientReviewFragment() {
         // Required empty public constructor
     }
@@ -111,19 +111,18 @@ public class ClientReviewFragment extends BaseFragment implements ClientReviewBa
     }
     public void setRecycleView() {
         reviewRecyclerview.setLayoutManager(new GridLayoutManager(getActivity(), 1));
-        /*reviewAdapter = new ReviewAdapter(getActivity(), data, new OnClickListener() {
+        clientReviewAdapter = new ClientReviewAdapter(getActivity(), data, new OnClickListener() {
             @Override
             public void onItemClicked(int position) {
-                if (getActivity() != null)
-                    ((BaseActivity)getActivity()).openClientCouponDetailsPage();
+
             }
-        });*/
-        reviewRecyclerview.setAdapter(reviewAdapter);
+        });
+        reviewRecyclerview.setAdapter(clientReviewAdapter);
     }
 
     public void setAdapter(List<ClientReview> dataList) {
         this.data.addAll(dataList);
-        reviewAdapter.notifyDataSetChanged();
+        clientReviewAdapter.notifyDataSetChanged();
     }
     @Override
     public void setToolbarForFragment() {
