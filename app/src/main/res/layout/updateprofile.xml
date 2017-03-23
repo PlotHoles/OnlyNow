@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:id="@+id/UpdateProfile"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.sparecode.vipul.onlynow.view.CircleImageView
+        android:id="@+id/UserImage"
+        android:layout_marginTop="@dimen/dp_10"
+        android:layout_width="wrap_content"
+        android:layout_height="90dp"
+        android:layout_gravity="center"
+        android:src="@drawable/profile_icon"/>
+
+    <LinearLayout
+        android:layout_marginTop="@dimen/dp_10"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <com.sparecode.vipul.onlynow.widgets.LatoEditText
+        android:id="@+id/firstname"
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/firstname"/>
+
+    <com.sparecode.vipul.onlynow.widgets.LatoEditText
+        android:id="@+id/lastname"
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/lastname"/>
+    </LinearLayout>
+
+    <com.sparecode.vipul.onlynow.widgets.LatoButton
+        android:layout_marginTop="@dimen/dp_10"
+        android:id="@+id/ClickUpdateProfile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Update Profile"
+        android:textAllCaps="false"
+        android:layout_gravity="center"
+        android:background="@color/orange"
+        android:textColor="@color/white"
+        android:layout_marginRight="@dimen/dp_20"
+        android:layout_marginLeft="@dimen/dp_20"/>
+</LinearLayout>

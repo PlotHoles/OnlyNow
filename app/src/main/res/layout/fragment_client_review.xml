@@ -5,7 +5,17 @@
     android:layout_height="match_parent"
     tools:context="com.sparecode.vipul.onlynow.fragments.ClientReviewFragment">
 
+    <com.sparecode.vipul.onlynow.widgets.LatoTextView
+        android:id="@+id/nodata"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="No Data Found"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:textColor="@color/black"
+        android:visibility="gone"/>
     <LinearLayout
+        android:id="@+id/linearreview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="@dimen/dp_10"

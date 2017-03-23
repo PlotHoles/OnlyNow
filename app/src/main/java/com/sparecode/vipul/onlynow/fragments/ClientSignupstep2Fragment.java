@@ -20,6 +20,7 @@ import com.sparecode.vipul.onlynow.model.ClientSignup1setter;
 import com.sparecode.vipul.onlynow.model.Clientsignupsetter;
 import com.sparecode.vipul.onlynow.view.EndlessRecyclerViewScrollListener;
 import com.sparecode.vipul.onlynow.view.OnClickListener;
+import com.sparecode.vipul.onlynow.widgets.LatoTextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,16 +29,18 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 
 
-public class ClientSignupstep2Fragment extends BaseFragment implements Signupstep3Backend.CategoryListProvider{
+public class ClientSignupstep2Fragment extends BaseFragment implements Signupstep3Backend.CategoryListProvider {
 
 
     @Bind(R.id.recyclerview)
     RecyclerView recyclerview;
     LinearsAdapter linearsAdapter;
     List<CategoryData> categoryDatas;
+    @Bind(R.id.nodata)
+    LatoTextView nodata;
     private Signupstep3Backend signupstep3Backend;
     GridLayoutManager gridLayoutManager;
-    String fname,lname,cname,area,zipcode,prefecture,cityname,streetname,buildname,pnumber,emailaddress,cemailaddress,password,wurl;
+    String fname, lname, cname, area, zipcode, prefecture, cityname, streetname, buildname, pnumber, emailaddress, cemailaddress, password, wurl;
     String cat_id;
     String caategory;
     Clientsignupsetter clientsignupsetter;
@@ -84,32 +87,32 @@ public class ClientSignupstep2Fragment extends BaseFragment implements Signupste
         super.onActivityCreated(savedInstanceState);
         categoryDatas = new ArrayList<>();
         signupstep3Backend = new Signupstep3Backend(this, getActivity());
-        gridLayoutManager = new GridLayoutManager(getActivity(),1);
+        gridLayoutManager = new GridLayoutManager(getActivity(), 1);
         recyclerview.setLayoutManager(gridLayoutManager);
         linearsAdapter = new LinearsAdapter(categoryDatas, getActivity(), new OnClickListener() {
             @Override
             public void onItemClicked(int position) {
                 cat_id = categoryDatas.get(position).getId();
                 //Toast.makeText(getActivity(),cat_id,Toast.LENGTH_LONG).show();
-                Log.e("position",cat_id);
-                Onlynow onlynow = (Onlynow)getActivity().getApplicationContext();
+                Log.e("position", cat_id);
+                Onlynow onlynow = (Onlynow) getActivity().getApplicationContext();
                 onlynow.setCat_id(categoryDatas.get(position).getId());
                 onlynow.getFirst_name();
                 String first = onlynow.getFirst_name();
-                System.out.println("------>first"+first);
-                System.out.println("------>first"+onlynow.getLname());
-                System.out.println("------>first"+onlynow.getCname());
-                System.out.println("------>first"+onlynow.getArea());
-                System.out.println("------>first"+onlynow.getZipcode());
-                System.out.println("------>first"+onlynow.getPrefecture());
-                System.out.println("------>first"+onlynow.getCityname());
-                System.out.println("------>first"+onlynow.getStreetname());
-                System.out.println("------>first"+onlynow.getBuildname());
-                System.out.println("------>first"+onlynow.getPnumber());
-                System.out.println("------>first"+onlynow.getEmailaddress());
-                System.out.println("------>first"+onlynow.getCemailaddress());
-                System.out.println("------>first"+onlynow.getPassword());
-                System.out.println("------>first"+onlynow.getWurl());
+                System.out.println("------>first" + first);
+                System.out.println("------>first" + onlynow.getLname());
+                System.out.println("------>first" + onlynow.getCname());
+                System.out.println("------>first" + onlynow.getArea());
+                System.out.println("------>first" + onlynow.getZipcode());
+                System.out.println("------>first" + onlynow.getPrefecture());
+                System.out.println("------>first" + onlynow.getCityname());
+                System.out.println("------>first" + onlynow.getStreetname());
+                System.out.println("------>first" + onlynow.getBuildname());
+                System.out.println("------>first" + onlynow.getPnumber());
+                System.out.println("------>first" + onlynow.getEmailaddress());
+                System.out.println("------>first" + onlynow.getCemailaddress());
+                System.out.println("------>first" + onlynow.getPassword());
+                System.out.println("------>first" + onlynow.getWurl());
                 clientsignupsetter = new Clientsignupsetter();
                 clientsignupsetter.setCat_id(cat_id);
                 clientsignupsetter.setFirst_name(onlynow.getFirst_name());
@@ -127,15 +130,15 @@ public class ClientSignupstep2Fragment extends BaseFragment implements Signupste
                 clientsignupsetter.setCemailaddress(onlynow.getCemailaddress());
                 clientsignupsetter.setPassword(onlynow.getPassword());
                 clientsignupsetter.setWurl(onlynow.getWurl());
-               ClientSignupFragment clientSignupFragment = new ClientSignupFragment(getActivity(),cat_id);
-               // clientSignupFragment.call(clientsignupsetter);
+                ClientSignupFragment clientSignupFragment = new ClientSignupFragment(getActivity(), cat_id);
+                // clientSignupFragment.call(clientsignupsetter);
             }
         });
-        System.out.println("----->signup2"+caategory);
-        ((BaseActivity)getActivity()).getTextNext().setOnClickListener(new View.OnClickListener() {
+        System.out.println("----->signup2" + caategory);
+        ((BaseActivity) getActivity()).getTextNext().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.e("hi","textnext");
+                Log.e("hi", "textnext");
             }
         });
 
@@ -160,6 +163,7 @@ public class ClientSignupstep2Fragment extends BaseFragment implements Signupste
             }
         });
     }
+
     @Override
     public void onDestroyView() {
         super.onDestroyView();
@@ -168,22 +172,25 @@ public class ClientSignupstep2Fragment extends BaseFragment implements Signupste
 
     @Override
     public void setToolbarForFragment() {
-        ((BaseActivity)getActivity()).getTextNext().setOnClickListener(new View.OnClickListener() {
+        ((BaseActivity) getActivity()).getTextNext().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getActivity(),"hi",Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity(), "hi", Toast.LENGTH_LONG).show();
             }
         });
     }
 
     @Override
     public void onSuccess(CategoryWrapper categoryWrapper) {
+        nodata.setVisibility(View.GONE);
+        recyclerview.setVisibility(View.VISIBLE);
         categoryDatas.addAll(categoryWrapper.getData());
         linearsAdapter.notifyDataSetChanged();
     }
 
     @Override
     public void onError(String msg) {
-
+        recyclerview.setVisibility(View.GONE);
+        nodata.setVisibility(View.VISIBLE   );
     }
 }

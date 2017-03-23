@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.RatingBar;
 
 import com.sparecode.vipul.onlynow.R;
@@ -56,11 +57,16 @@ public class ClientReviewFragment extends BaseFragment implements ClientReviewBa
     LatoTextView star2;
     @Bind(R.id.star1)
     LatoTextView star1;
+    @Bind(R.id.nodata)
+    LatoTextView nodata;
+    @Bind(R.id.linearreview)
+    LinearLayout linearreview;
     private View view;
     List<ClientReview> data;
     ClientReviewBackend clientReviewBackend;
     GridLayoutManager gridLayoutManager;
     ClientReviewAdapter clientReviewAdapter;
+
     public ClientReviewFragment() {
         // Required empty public constructor
     }
@@ -109,6 +115,7 @@ public class ClientReviewFragment extends BaseFragment implements ClientReviewBa
             }
         });
     }
+
     public void setRecycleView() {
         reviewRecyclerview.setLayoutManager(new GridLayoutManager(getActivity(), 1));
         clientReviewAdapter = new ClientReviewAdapter(getActivity(), data, new OnClickListener() {
@@ -124,6 +131,7 @@ public class ClientReviewFragment extends BaseFragment implements ClientReviewBa
         this.data.addAll(dataList);
         clientReviewAdapter.notifyDataSetChanged();
     }
+
     @Override
     public void setToolbarForFragment() {
         ((BaseActivity) getActivity()).getAppbarLayout().setVisibility(View.VISIBLE);
@@ -133,8 +141,8 @@ public class ClientReviewFragment extends BaseFragment implements ClientReviewBa
         ((BaseActivity) getActivity()).getImgAdd().setVisibility(View.GONE);
         ((BaseActivity) getActivity()).getImgEdit().setVisibility(View.GONE);
         ((BaseActivity) getActivity()).getFab().setVisibility(View.GONE);
-        ((BaseActivity)getActivity()).getImgToolBarBack().setVisibility(View.GONE);
-        ((BaseActivity)getActivity()).getTextNext().setVisibility(View.GONE);
+        ((BaseActivity) getActivity()).getImgToolBarBack().setVisibility(View.GONE);
+        ((BaseActivity) getActivity()).getTextNext().setVisibility(View.GONE);
         ((BaseActivity) getActivity()).getImgToolBarCancel().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -151,6 +159,8 @@ public class ClientReviewFragment extends BaseFragment implements ClientReviewBa
 
     @Override
     public void onSuccessfullLogin(ClientReviewWrapper clientReviewWrapper) {
+        linearreview.setVisibility(View.VISIBLE);
+        nodata.setVisibility(View.GONE);
         textRating.setText(clientReviewWrapper.getData().getRating());
         star1.setText(clientReviewWrapper.getData().getStars1());
         star2.setText(clientReviewWrapper.getData().getStars2());
@@ -170,5 +180,9 @@ public class ClientReviewFragment extends BaseFragment implements ClientReviewBa
     @Override
     public void onLoginfailure(String msg) {
         Snackbar.make(view, msg, Snackbar.LENGTH_SHORT).show();
+        nodata.setVisibility(View.VISIBLE);
+        linearreview.setVisibility(View.GONE);
+
+
     }
 }

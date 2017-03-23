@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.sparecode.vipul.onlynow.R;
@@ -45,9 +46,13 @@ public class ClientShopFragment extends BaseFragment implements ClientShopBacken
     LatoEditText editaddress;
     @Bind(R.id.savedetail)
     LatoButton savedetail;
+    @Bind(R.id.nodata)
+    LatoTextView nodata;
+    @Bind(R.id.linearshop)
+    LinearLayout linearshop;
     private View view;
     private String shop_id;
-    
+
     public ClientShopFragment() {
         // Required empty public constructor
     }
@@ -100,8 +105,8 @@ public class ClientShopFragment extends BaseFragment implements ClientShopBacken
         ((BaseActivity) getActivity()).getImgToolBarCancel().setVisibility(View.VISIBLE);
         ((BaseActivity) getActivity()).getImgAdd().setVisibility(View.GONE);
         ((BaseActivity) getActivity()).getFab().setVisibility(View.GONE);
-        ((BaseActivity)getActivity()).getTextNext().setVisibility(View.GONE);
-        ((BaseActivity)getActivity()).getImgToolBarBack().setVisibility(View.GONE);
+        ((BaseActivity) getActivity()).getTextNext().setVisibility(View.GONE);
+        ((BaseActivity) getActivity()).getImgToolBarBack().setVisibility(View.GONE);
         ((BaseActivity) getActivity()).getImgToolBarCancel().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -133,25 +138,29 @@ public class ClientShopFragment extends BaseFragment implements ClientShopBacken
                     .placeholder(R.drawable.placeholder)
                     .error(R.drawable.placeholder)
                     .into(couponImage);
-        
+
 
         shop_id = clientShopWrapper.getData().getShopId();
     }
 
     @Override
     public void onSuccessfullLogin(ClientUpdateshopWrapper clientUpdateshopWrapper) {
+        nodata.setVisibility(View.GONE);
+        linearshop.setVisibility(View.VISIBLE);
         Snackbar.make(view, clientUpdateshopWrapper.getMessage(), Snackbar.LENGTH_SHORT).show();
     }
 
     @Override
     public void onLoginFailure(String msg) {
+        linearshop.setVisibility(View.GONE);
+        nodata.setVisibility(View.VISIBLE);
         Snackbar.make(view, msg, Snackbar.LENGTH_SHORT).show();
     }
 
     @OnClick(R.id.savedetail)
     public void onClick() {
-        Toast.makeText(getActivity(),shop_id ,Toast.LENGTH_LONG).show();
-        ClientUpdateshopBackend clientUpdateshopBackend = new ClientUpdateshopBackend(getActivity(),shop_id,editnumber.getText().toString().trim(),editurl.getText().toString().trim(),
-                editshopdetail.getText().toString().trim(),editaddress.getText().toString().trim(),this);
+        Toast.makeText(getActivity(), shop_id, Toast.LENGTH_LONG).show();
+        ClientUpdateshopBackend clientUpdateshopBackend = new ClientUpdateshopBackend(getActivity(), shop_id, editnumber.getText().toString().trim(), editurl.getText().toString().trim(),
+                editshopdetail.getText().toString().trim(), editaddress.getText().toString().trim(), this);
     }
 }

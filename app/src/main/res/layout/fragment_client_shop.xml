@@ -3,6 +3,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -14,13 +15,24 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="com.sparecode.vipul.onlynow.fragments.ClientShopFragment">
 
+    <com.sparecode.vipul.onlynow.widgets.LatoTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:text="No Data Found"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:id="@+id/nodata"
+        android:visibility="gone"/>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:layout_marginLeft="@dimen/dp_10"
         android:layout_marginRight="@dimen/dp_10"
-        android:layout_marginTop="@dimen/dp_10">
+        android:layout_marginTop="@dimen/dp_10"
+        android:id="@+id/linearshop">
 
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"

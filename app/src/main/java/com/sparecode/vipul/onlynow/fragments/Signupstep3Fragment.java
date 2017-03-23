@@ -14,6 +14,7 @@ import com.sparecode.vipul.onlynow.R;
 import com.sparecode.vipul.onlynow.adapters.LinearAdapter;
 import com.sparecode.vipul.onlynow.model.CategoryData;
 import com.sparecode.vipul.onlynow.model.CategoryWrapper;
+import com.sparecode.vipul.onlynow.model.SelectCategoryWrapper;
 import com.sparecode.vipul.onlynow.model.SignupWrapper;
 import com.sparecode.vipul.onlynow.util.Prefs;
 import com.sparecode.vipul.onlynow.view.EndlessRecyclerViewScrollListener;
@@ -33,11 +34,15 @@ public class Signupstep3Fragment extends BaseFragment implements Signupstep3Back
 
     List<CategoryData> categoryDatas;
     GridLayoutManager gridLayoutManager;
+    SelectCategoryWrapper  selectCategoryWrapper;
+    private boolean isChangeCategory;
 
     public Signupstep3Fragment() {
         // Required empty public constructor
     }
-
+    public Signupstep3Fragment(boolean isChangeCategory) {
+        this.isChangeCategory = isChangeCategory;
+    }
     public static Signupstep3Fragment newInstance(String text) {
         Signupstep3Fragment fragment = new Signupstep3Fragment();
         Bundle args = new Bundle();
@@ -46,7 +51,10 @@ public class Signupstep3Fragment extends BaseFragment implements Signupstep3Back
         System.out.println("------>" + args);
         return fragment;
     }
-
+    public void setSelectCategoryWrapper(SelectCategoryWrapper selectCategoryWrapper)
+    {
+        this.selectCategoryWrapper=selectCategoryWrapper;
+    }
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

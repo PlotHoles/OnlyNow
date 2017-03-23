@@ -1,6 +1,7 @@
 package com.sparecode.vipul.onlynow.fragments;
 
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -16,18 +17,23 @@ import com.sparecode.vipul.onlynow.model.MyListSavedWrapper;
 import com.sparecode.vipul.onlynow.model.SignupWrapper;
 import com.sparecode.vipul.onlynow.util.Prefs;
 import com.sparecode.vipul.onlynow.view.OnClickListener;
+import com.sparecode.vipul.onlynow.widgets.LatoTextView;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
 
-public class CouponSavedFragment extends BaseFragment implements CouponSavedBackend.CouponSavedDataProvider{
+public class CouponSavedFragment extends BaseFragment implements CouponSavedBackend.CouponSavedDataProvider {
 
 
     @Bind(R.id.recyclerview)
     RecyclerView recyclerview;
     CouponSavedAdapter couponSavedAdapter;
     SignupWrapper signupWrapper;
+    @Bind(R.id.nodata)
+    LatoTextView nodata;
+    @Bind(R.id.swiperefresh)
+    SwipeRefreshLayout swiperefresh;
 
     public CouponSavedFragment() {
         // Required empty public constructor
@@ -58,6 +64,7 @@ public class CouponSavedFragment extends BaseFragment implements CouponSavedBack
             ((BaseActivity) getActivity()).openSplashPage();
         }
     }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -65,13 +72,18 @@ public class CouponSavedFragment extends BaseFragment implements CouponSavedBack
         View view = inflater.inflate(R.layout.fragment_coupon_saved, container, false);
         ButterKnife.bind(this, view);
         getUser();
-        CouponSavedBackend couponSavedBackend = new CouponSavedBackend(getActivity(),signupWrapper.getData().getId(),this);
+        CouponSavedBackend couponSavedBackend = new CouponSavedBackend(getActivity(), signupWrapper.getData().getId(), this);
         couponSavedBackend.call(1);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 1);
         recyclerview.setLayoutManager(gridLayoutManager);
 
-
-
+        swiperefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                CouponSavedBackend couponSavedBackend = new CouponSavedBackend(getActivity(), signupWrapper.getData().getId(), CouponSavedFragment.this);
+                couponSavedBackend.call(1);
+            }
+        });
         return view;
     }
 
@@ -89,17 +101,22 @@ public class CouponSavedFragment extends BaseFragment implements CouponSavedBack
 
     @Override
     public void onSavedSuccess(MyListSavedWrapper myListSavedWrapper) {
+        nodata.setVisibility(View.GONE);
+        recyclerview.setVisibility(View.VISIBLE);
+        swiperefresh.setRefreshing(false);
         couponSavedAdapter = new CouponSavedAdapter(getActivity(), myListSavedWrapper, new OnClickListener() {
             @Override
             public void onItemClicked(int position) {
 
             }
         });
-      recyclerview.setAdapter(couponSavedAdapter);
+        recyclerview.setAdapter(couponSavedAdapter);
     }
 
     @Override
     public void onFailure(String msg) {
-
+        swiperefresh.setRefreshing(false);
+        nodata.setVisibility(View.VISIBLE);
+        recyclerview.setVisibility(View.GONE);
     }
 }

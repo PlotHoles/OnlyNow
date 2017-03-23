@@ -26,15 +26,17 @@
             android:ellipsize="end"/>
 
         <RatingBar
-            android:layout_marginTop="@dimen/dp_2"
-            android:layout_marginLeft="@dimen/dp_5"
+            style="@style/ratingBar"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
+            android:layout_height="29px"
+            android:scaleX="1.2"
+            android:scaleY="1.2"
+            android:isIndicator="true"
+            android:numStars="5"
             android:layout_toEndOf="@+id/textUserName"
             android:id="@+id/ratingBar2"
-            style="?android:attr/ratingBarStyleSmall"
-            android:progressBackgroundTint="@color/orange"/>
+            android:layout_marginLeft="@dimen/dp_10"
+            android:layout_marginTop="@dimen/dp_5"/>
 
         <TextView
             android:layout_marginRight="@dimen/dp_10"

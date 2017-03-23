@@ -105,14 +105,41 @@ public class CouponSavedAdapter extends RecyclerView.Adapter<CouponSavedAdapter.
         holder.txtCouponTimer.setText(getLeftTimeDuration(myListSavedDataList.get(position).getDate(), myListSavedDataList.get(position).getEndDate()));
         holder.txtCouponValidTill.setText(couponDetailWrapper.getData().getDate());*/
 
-        holder.textDate.setText(myListSavedWrapper.getData().get(position).getDate());
+       // holder.textDate.setText(myListSavedWrapper.getData().get(position).getDate());
         holder.txtCouponTimer.setText(getLeftTimeDuration(myListSavedWrapper.getData().get(position).getDate(), myListSavedWrapper.getData().get(position).getEndDate()));
-        holder.txtCouponValidTill.setText(myListSavedWrapper.getData().get(position).getDate());
         holder.couponDesc.setText(myListSavedWrapper.getData().get(position).getDescription());
         holder.couponShopname.setText(myListSavedWrapper.getData().get(position).getShopName());
         holder.couponArea.setText(myListSavedWrapper.getData().get(position).getArea());
         //
 
+        String inputPattern = "yyyy-MM-dd HH:mm:ss";
+        SimpleDateFormat inputFormat = new SimpleDateFormat(inputPattern);
+
+        String outputpattern = "MMM dd yyyy";
+        SimpleDateFormat outputFormat1 = new SimpleDateFormat(outputpattern);
+        Date date1 = null;
+        String str1 = null;
+
+        try {
+            date1 = inputFormat.parse(myListSavedWrapper.getData().get(position).getDate());
+            str1 = outputFormat1.format(date1);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        holder.textDate.setText(str1);
+
+        String outputPattern = "h:mm a dd-MM-yyyy ";
+        SimpleDateFormat outputFormat = new SimpleDateFormat(outputPattern);
+        Date date = null;
+        String str = null;
+
+        try {
+            date = inputFormat.parse(myListSavedWrapper.getData().get(position).getEndDate());
+            str = outputFormat.format(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        holder.txtCouponValidTill.setText(str);
         String rating = myListSavedWrapper.getData().get(position).getRating();
         System.out.println("----->rating" + rating);
         if (rating == "") {

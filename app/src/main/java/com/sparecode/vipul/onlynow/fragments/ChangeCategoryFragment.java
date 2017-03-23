@@ -18,6 +18,7 @@ import com.sparecode.vipul.onlynow.model.CategoryWrapper;
 import com.sparecode.vipul.onlynow.model.UpdateLocationWrapper;
 import com.sparecode.vipul.onlynow.view.EndlessRecyclerViewScrollListener;
 import com.sparecode.vipul.onlynow.view.OnClickListener;
+import com.sparecode.vipul.onlynow.widgets.LatoTextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,16 +26,19 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class ChangeCategoryFragment extends BaseFragment implements Signupstep3Backend.CategoryListProvider,UpdateCategoryBackend.UpdateCategoryResultProvider{
+public class ChangeCategoryFragment extends BaseFragment implements Signupstep3Backend.CategoryListProvider, UpdateCategoryBackend.UpdateCategoryResultProvider {
 
     @Bind(R.id.recyclerview)
     RecyclerView recyclerview;
     LinearsAdapter linearsAdapter;
     List<CategoryData> categoryDatas;
+    @Bind(R.id.nodata)
+    LatoTextView nodata;
     private Signupstep3Backend signupstep3Backend;
     GridLayoutManager gridLayoutManager;
     String cat_id;
     private View view;
+
     public ChangeCategoryFragment() {
         // Required empty public constructor
     }
@@ -59,14 +63,14 @@ public class ChangeCategoryFragment extends BaseFragment implements Signupstep3B
         super.onActivityCreated(savedInstanceState);
         categoryDatas = new ArrayList<>();
         signupstep3Backend = new Signupstep3Backend(this, getActivity());
-        gridLayoutManager = new GridLayoutManager(getActivity(),1);
+        gridLayoutManager = new GridLayoutManager(getActivity(), 1);
         recyclerview.setLayoutManager(gridLayoutManager);
         linearsAdapter = new LinearsAdapter(categoryDatas, getActivity(), new OnClickListener() {
             @Override
             public void onItemClicked(int position) {
                 cat_id = categoryDatas.get(position).getId();
                 //Toast.makeText(getActivity(),cat_id,Toast.LENGTH_LONG).show();
-                Log.e("position",cat_id);
+                Log.e("position", cat_id);
 
 
             }
@@ -75,6 +79,7 @@ public class ChangeCategoryFragment extends BaseFragment implements Signupstep3B
         signupstep3Backend.callPagination(1);
         setPagination(recyclerview);
     }
+
     private void setPagination(RecyclerView recyclerview) {
         recyclerview.addOnScrollListener(new EndlessRecyclerViewScrollListener(gridLayoutManager) {
             @Override
@@ -89,6 +94,7 @@ public class ChangeCategoryFragment extends BaseFragment implements Signupstep3B
             }
         });
     }
+
     @Override
     public void setToolbarForFragment() {
         ((BaseActivity) getActivity()).getAppbarLayout().setVisibility(View.VISIBLE);
@@ -99,8 +105,8 @@ public class ChangeCategoryFragment extends BaseFragment implements Signupstep3B
             @Override
             public void onClick(View v) {
 
-                UpdateCategoryBackend updateCategoryBackend = new UpdateCategoryBackend(getActivity(),getShopId(),cat_id,ChangeCategoryFragment.this);
-               // Toast.makeText(getActivity(), cat_id, Toast.LENGTH_SHORT).show();
+                UpdateCategoryBackend updateCategoryBackend = new UpdateCategoryBackend(getActivity(), getShopId(), cat_id, ChangeCategoryFragment.this);
+                // Toast.makeText(getActivity(), cat_id, Toast.LENGTH_SHORT).show();
             }
         });
         ((BaseActivity) getActivity()).getImgToolBarBack().setOnClickListener(new View.OnClickListener() {
@@ -119,19 +125,23 @@ public class ChangeCategoryFragment extends BaseFragment implements Signupstep3B
 
     @Override
     public void onSuccess(CategoryWrapper categoryWrapper) {
+        recyclerview.setVisibility(View.VISIBLE);
+        nodata.setVisibility(View.GONE);
         categoryDatas.addAll(categoryWrapper.getData());
         linearsAdapter.notifyDataSetChanged();
     }
 
     @Override
     public void onError(String msg) {
+        recyclerview.setVisibility(View.GONE);
+        nodata.setVisibility(View.VISIBLE);
 
     }
 
     @Override
     public void onSuccesssfullLogin(UpdateLocationWrapper updateLocationWrapper) {
-        Snackbar.make(view,"Change category Successfully",Snackbar.LENGTH_SHORT).show();
-        ((BaseActivity)getActivity()).openClientSettingPage();
+        Snackbar.make(view, "Change category Successfully", Snackbar.LENGTH_SHORT).show();
+        ((BaseActivity) getActivity()).openClientSettingPage();
     }
 
     @Override

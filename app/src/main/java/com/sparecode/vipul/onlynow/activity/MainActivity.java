@@ -30,6 +30,7 @@ import com.sparecode.vipul.onlynow.fragments.NoticeFragment;
 import com.sparecode.vipul.onlynow.fragments.ProfileFragment;
 import com.sparecode.vipul.onlynow.fragments.SearchFragment;
 import com.sparecode.vipul.onlynow.model.LoginData;
+import com.sparecode.vipul.onlynow.model.UpdateProfileData;
 import com.sparecode.vipul.onlynow.permission.PiemissionsUtils;
 
 import butterknife.Bind;
@@ -206,5 +207,14 @@ public class MainActivity extends BaseActivity {
 
         editor.putString("user", new Gson().toJson(data));
         editor.commit();
+    }
+    public void setUserData1(UpdateProfileData data) {
+
+        editor.putString("user", new Gson().toJson(data));
+        editor.commit();
+    }
+    public void toClearPrefrences() {
+        if (editor != null)
+            editor.clear().commit();
     }
 }

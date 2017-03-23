@@ -57,6 +57,8 @@ public class ClientAnalyticsClientkFragment extends BaseFragment implements Clie
     LatoTextView textClientLike;
     @Bind(R.id.linearclient)
     LinearLayout linearclient;
+    @Bind(R.id.nodata)
+    LatoTextView nodata;
 
     private int mYear, mMonth, mDay;
     private View view;
@@ -205,6 +207,7 @@ public class ClientAnalyticsClientkFragment extends BaseFragment implements Clie
     @Override
     public void onSuccessfullLogin(ClientAnalyticsWrapper clientAnalyticsWrapper) {
         linearclient.setVisibility(View.VISIBLE);
+        nodata.setVisibility(View.GONE);
         textCoupon.setText(clientAnalyticsWrapper.getData().getClient().getDetails());
         textClientShow.setText(clientAnalyticsWrapper.getData().getClient().getTotalViews());
         textClientLike.setText(clientAnalyticsWrapper.getData().getClient().getTotalLikes());
@@ -222,5 +225,7 @@ public class ClientAnalyticsClientkFragment extends BaseFragment implements Clie
     @Override
     public void onLoginfailure(String msg) {
         Snackbar.make(view, msg, Snackbar.LENGTH_SHORT).show();
+        nodata.setVisibility(View.VISIBLE);
+        linearclient.setVisibility(View.GONE);
     }
 }

@@ -27,7 +27,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.HashSet;
 import java.util.List;
 
 import butterknife.Bind;
@@ -60,6 +59,10 @@ public class ClentCouponAnalyticsFragment extends BaseFragment implements Client
     @Bind(R.id.recyclerview)
     RecyclerView recyclerview;
     ClientCouponAnalyticsAdapter clientCouponAnalyticsAdapter;
+    @Bind(R.id.linearcouponanalytics)
+    LinearLayout linearcouponanalytics;
+    @Bind(R.id.nodata)
+    LatoTextView nodata;
 
     private int mYear, mMonth, mDay;
     private View view;
@@ -231,11 +234,12 @@ public class ClentCouponAnalyticsFragment extends BaseFragment implements Client
     public void setAdapter(List<ClientsAnalyticsCoupon> dataList) {
 
 
-        HashSet<ClientsAnalyticsCoupon> hashSet = new HashSet<ClientsAnalyticsCoupon>();
+        /*HashSet<ClientsAnalyticsCoupon> hashSet = new HashSet<ClientsAnalyticsCoupon>();
         hashSet.addAll(dataList);
         data.clear();
-        data.addAll(hashSet);
-        //this.data.addAll(dataList);
+        data.addAll(hashSet);*/
+        data.clear();
+        this.data.addAll(dataList);
         clientCouponAnalyticsAdapter.notifyDataSetChanged();
 
 
@@ -262,11 +266,15 @@ public class ClentCouponAnalyticsFragment extends BaseFragment implements Client
     @Override
     public void onSuccessfullLogin(ClientAnalyticsWrapper clientAnalyticsWrapper) {
         //this.data = new ArrayList<>();
+        recyclerview.setVisibility(View.VISIBLE);
+        nodata.setVisibility(View.GONE);
         setAdapter(clientAnalyticsWrapper.getData().getCoupons());
     }
 
     @Override
     public void onLoginfailure(String msg) {
         Snackbar.make(view, msg, Snackbar.LENGTH_SHORT).show();
+        nodata.setVisibility(View.VISIBLE);
+        recyclerview.setVisibility(View.GONE);
     }
 }

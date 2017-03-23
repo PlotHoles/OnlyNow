@@ -18,10 +18,11 @@
             android:layout_marginRight="@dimen/dp_10">
 
             <com.sparecode.vipul.onlynow.view.CircleImageView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:src="@drawable/profile_icon"
-                android:id="@+id/profile_image"/>
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/placeholder"
+                android:id="@+id/profile_image"
+                android:layout_gravity="center"/>
 
             <com.sparecode.vipul.onlynow.widgets.LatoTextView
                 android:text="@string/mrjhon"

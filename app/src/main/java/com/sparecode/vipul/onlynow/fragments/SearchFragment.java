@@ -5,7 +5,9 @@ import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -24,13 +26,18 @@ import com.sparecode.vipul.onlynow.model.SearchLocationData;
 import com.sparecode.vipul.onlynow.model.SearchLocationWrapper;
 import com.sparecode.vipul.onlynow.model.SearchPopularQueriesWrapper;
 import com.sparecode.vipul.onlynow.model.SearchResultWrapper;
+import com.sparecode.vipul.onlynow.model.TagManager;
 import com.sparecode.vipul.onlynow.view.OnClickListener;
 import com.sparecode.vipul.onlynow.view.TagsEditText;
 import com.squareup.picasso.Picasso;
 
 import org.apache.commons.lang3.ArrayUtils;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 
@@ -40,7 +47,7 @@ import butterknife.OnClick;
 
 import static com.facebook.FacebookSdk.getApplicationContext;
 
-public class SearchFragment extends BaseFragment implements SearchBackend.SearchDataProvider, SearchCategoryBackend.SearchCategoryDataProvider, SearchPopularQueriesbackend.SearchPopularQueriesDataProvider,SearchResultBackend.SearchResultDataProvider {
+public class SearchFragment extends BaseFragment implements SearchBackend.SearchDataProvider, SearchCategoryBackend.SearchCategoryDataProvider, SearchPopularQueriesbackend.SearchPopularQueriesDataProvider, SearchResultBackend.SearchResultDataProvider {
 
     SearchAdapter searchAdapter;
     SearchResultAdapter searchResultAdapter;
@@ -80,7 +87,10 @@ public class SearchFragment extends BaseFragment implements SearchBackend.Search
     @Bind(R.id.searchcategoryrecycler)
     LinearLayout searchcategoryrecycler;
     String[] tags = new String[]{};
-    String latitude,longitude;
+    String latitude, longitude;
+    String keyword = "";
+
+    JSONObject jsonObject;
 
     public SearchFragment() {
         // Required empty public constructor
@@ -105,7 +115,9 @@ public class SearchFragment extends BaseFragment implements SearchBackend.Search
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
     }
 
     @Override
@@ -126,8 +138,42 @@ public class SearchFragment extends BaseFragment implements SearchBackend.Search
         gridLayoutManager = new GridLayoutManager(getActivity(), 1);
 
         Log.e("log", autoCompleteTextView.getText().toString());
+        jsonObject = new JSONObject();
+        autoCompleteTextView.setOnKeyListener(new View.OnKeyListener() {
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if (keyCode == KeyEvent.KEYCODE_ENTER) {
+                    //Toast.makeText(getActivity(),tags.length+"",Toast.LENGTH_SHORT).show();
+                    String array = Arrays.toString(tags);
+                    Log.e("tags", autoCompleteTextView.getText().toString());
+                    keyword = autoCompleteTextView.getText().toString();
 
-       // autoCompleteTextView.setOnTouchListener(new );
+                    try {
+                        jsonObject.accumulate(keyword, "keyword");
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    TagManager.setKeyKeyWord(keyword);
+                    SearchResultBackend searchResultBackend = new SearchResultBackend(getApplicationContext(), keyword, SearchFragment.this);
+                }
+                return false;
+            }
+        });
+        autoCompleteTextView.setTagsListener(new TagsEditText.TagsEditListener() {
+            @Override
+            public void onTagsChanged(Collection<String> tags, Collection<String> mOldTags) {
+
+                Log.e("TAG CHANGED::", ":::" + tags);
+                Log.e("OLD TAGS::", ":::" + mOldTags);
+                Log.e("JSON OBJECT::", "::" + jsonObject);
+            }
+
+            @Override
+            public void onEditingFinished() {
+                Log.e("TAG EDITING::", ":::");
+            }
+        });
+
+        // autoCompleteTextView.setOnTouchListener(new );
         /*searchAdapter = new SearchAdapter(getActivity(), new OnClickListener() {
             @Override
             public void onItemClicked(int position) {
@@ -252,6 +298,7 @@ public class SearchFragment extends BaseFragment implements SearchBackend.Search
         GridLayoutManager gridLayoutManager2 = new GridLayoutManager(getActivity(), 1);
         searchresultrecycler.setLayoutManager(gridLayoutManager2);
 
+
         /*searchResultAdapter = new SearchResultAdapter(getActivity(), new OnClickListener() {
             @Override
             public void onItemClicked(int position) {
@@ -263,6 +310,26 @@ public class SearchFragment extends BaseFragment implements SearchBackend.Search
         return view;
     }
 
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.popular:
+                Toast.makeText(getActivity(), "Popular Selected", Toast.LENGTH_SHORT).show();
+                return true;
+
+            case R.id.newmenu:
+                Toast.makeText(getActivity(), "New is Selected", Toast.LENGTH_SHORT).show();
+                return true;
+
+            case R.id.finishsoon:
+                Toast.makeText(getActivity(), "Finish Soon is Selected", Toast.LENGTH_SHORT).show();
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
 
     @OnClick(R.id.currentlocation)
     void onClickOpenMap() {
@@ -352,15 +419,26 @@ public class SearchFragment extends BaseFragment implements SearchBackend.Search
         searchAdapter = new SearchAdapter(getActivity(), searchLocationWrapper.getData(), new OnClickListener() {
             @Override
             public void onItemClicked(int position) {
-                Toast.makeText(getActivity(), searchLocationWrapper.getData().get(position).getLat(), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getActivity(), searchLocationWrapper.getData().get(position).getLat(), Toast.LENGTH_SHORT).show();
                 recyclerview.setVisibility(View.GONE);
                 locationlinear.setVisibility(View.GONE);
                 locationrecycler.setVisibility(View.GONE);
 
-                tags = new String[]{searchLocationWrapper.getData().get(position).getArea()};
+                tags = new String[]{keyword, searchLocationWrapper.getData().get(position).getArea()};
 
                 latitude = searchLocationWrapper.getData().get(position).getLat();
                 longitude = searchLocationWrapper.getData().get(position).getLong();
+
+                TagManager.setKeyLat(latitude);
+                TagManager.setKeyLong(longitude);
+
+
+                try {
+                    jsonObject.accumulate(latitude, "lat");
+                    jsonObject.accumulate(longitude, "long");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
                 autoCompleteTextView.setTags(tags);
                 searchcategoryrecycler.setVisibility(View.VISIBLE);
                 ((BaseActivity) getActivity()).getImgToolBarBack().setVisibility(View.VISIBLE);
@@ -414,8 +492,14 @@ public class SearchFragment extends BaseFragment implements SearchBackend.Search
                     tags = ArrayUtils.addAll(tmp, new String[]{searchCategoryWrapper.getData().get((Integer) textcategory.getTag()).getName()});
                     //tags[tags.length] = searchCategoryWrapper.getData().get((Integer) textcategory.getTag()).getName();
                     String cat_id = searchCategoryWrapper.getData().get((Integer) textcategory.getTag()).getId();
-                    SearchResultBackend searchResultBackend = new SearchResultBackend(getApplicationContext(),latitude,longitude,cat_id,SearchFragment.this);
+                    SearchResultBackend searchResultBackend = new SearchResultBackend(getApplicationContext(), latitude, longitude, cat_id, SearchFragment.this);
+                    try {
+                        jsonObject.accumulate(cat_id, "cat_id");
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
 
+                    TagManager.setKeyCategory(cat_id);
                     autoCompleteTextView.setTags(tags);
 
                     //Toast.makeText(getActivity(),textcategory.getTag()+"",Toast.LENGTH_SHORT).show();
@@ -460,9 +544,14 @@ public class SearchFragment extends BaseFragment implements SearchBackend.Search
                     ((BaseActivity) getActivity()).getTextViewToolBarTitle().setText(getString(R.string.searchresult));
                     String[] tmps = tags;
                     tags = ArrayUtils.addAll(tmps, new String[]{searchPopularQueriesWrapper.getData().get((Integer) textqueries.getTag()).getKeyword()});
-
                     String keyword = searchPopularQueriesWrapper.getData().get((Integer) textqueries.getTag()).getKeyword();
-                    SearchResultBackend searchResultBackend = new SearchResultBackend(getApplicationContext(),latitude,longitude,keyword,SearchFragment.this);
+                    TagManager.setKeyPopularQuery(keyword);
+                    try {
+                        jsonObject.accumulate(keyword, "keyword1");
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    SearchResultBackend searchResultBackend = new SearchResultBackend(getApplicationContext(), latitude, longitude, keyword, SearchFragment.this);
                     autoCompleteTextView.setTags(tags);
                 }
             });
@@ -474,7 +563,15 @@ public class SearchFragment extends BaseFragment implements SearchBackend.Search
 
     @Override
     public void onSuccessfull(SearchResultWrapper searchResultWrapper) {
-
+        recyclerview.setVisibility(View.GONE);
+        locationlinear.setVisibility(View.GONE);
+        locationrecycler.setVisibility(View.GONE);
+        searchcategoryrecycler.setVisibility(View.GONE);
+        searchcategoryrecycler.setVisibility(View.GONE);
+        searchresultrecycler.setVisibility(View.VISIBLE);
+        ((BaseActivity) getActivity()).getImgMap().setVisibility(View.GONE);
+        ((BaseActivity) getActivity()).setOptionMenuVisibility(true);
+        ((BaseActivity) getActivity()).getTextViewToolBarTitle().setText(getString(R.string.searchresult));
         searchResultAdapter = new SearchResultAdapter(getActivity(), searchResultWrapper.getData(), new OnClickListener() {
             @Override
             public void onItemClicked(int position) {
@@ -488,4 +585,5 @@ public class SearchFragment extends BaseFragment implements SearchBackend.Search
     public void onFailure(String msg) {
 
     }
+
 }

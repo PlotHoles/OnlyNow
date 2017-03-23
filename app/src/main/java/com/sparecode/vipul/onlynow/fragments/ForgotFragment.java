@@ -1,6 +1,7 @@
 package com.sparecode.vipul.onlynow.fragments;
 
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,15 +10,17 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.sparecode.vipul.onlynow.R;
 import com.sparecode.vipul.onlynow.activity.BaseActivity;
+import com.sparecode.vipul.onlynow.model.ForgotWrapper;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class ForgotFragment extends BaseFragment {
+public class ForgotFragment extends BaseFragment implements ForgotBackend.ForgotDataProvider {
 
     @Bind(R.id.edit_forgotemail)
     EditText editForgotemail;
@@ -30,6 +33,7 @@ public class ForgotFragment extends BaseFragment {
     @Bind(R.id.textView5)
     TextView textView5;
     String usertype;
+    View view;
 
     public ForgotFragment() {
         // Required empty public constructor
@@ -45,7 +49,8 @@ public class ForgotFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_forgot, container, false);
+
+        view = inflater.inflate(R.layout.fragment_forgot, container, false);
         ButterKnife.bind(this, view);
 
             usertype = getArguments().getString("key");
@@ -63,11 +68,7 @@ public class ForgotFragment extends BaseFragment {
         }
         else
         {
-            ResetFragment fragment = new ResetFragment();
-            Bundle bundle = new Bundle();
-            bundle.putString("key",usertype);
-            fragment.setArguments(bundle);
-            addFragment(fragment,true);
+            ForgotBackend forgotBackend = new ForgotBackend(getActivity(),editForgotemail.getText().toString().trim(),this);
             //((BaseActivity)getActivity()).openResetPage();
         }
     }
@@ -103,5 +104,22 @@ public class ForgotFragment extends BaseFragment {
 
             }
         });
+    }
+
+    @Override
+    public void onSuccessfull(ForgotWrapper forgotWrapper) {
+
+        Toast.makeText(getActivity(),forgotWrapper.getMessage(),Toast.LENGTH_SHORT).show();
+        ResetFragment fragment = new ResetFragment();
+        Bundle bundle = new Bundle();
+        bundle.putString("key",usertype);
+        fragment.setArguments(bundle);
+        addFragment(fragment,true);
+
+    }
+
+    @Override
+    public void onFailure(String msg) {
+        Snackbar.make(view,msg,Snackbar.LENGTH_SHORT).show();
     }
 }

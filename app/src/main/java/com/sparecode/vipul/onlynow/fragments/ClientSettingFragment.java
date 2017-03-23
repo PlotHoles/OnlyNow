@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import com.sparecode.vipul.onlynow.R;
 import com.sparecode.vipul.onlynow.activity.BaseActivity;
+import com.sparecode.vipul.onlynow.activity.MainActivity;
 import com.sparecode.vipul.onlynow.dialog.CancelDealDialog;
 import com.sparecode.vipul.onlynow.interfaces.OnResponse;
 import com.sparecode.vipul.onlynow.model.LogoutWrapper;
@@ -232,6 +233,8 @@ public class ClientSettingFragment extends BaseFragment implements UpdateLocatio
                         .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
+                                //Prefs.clear();
+                                ((MainActivity)getActivity()).toClearPrefrences();
                                 LogoutBackend logoutBackend = new LogoutBackend(getActivity(), getUserId(), ClientSettingFragment.this);
                             }
                         })

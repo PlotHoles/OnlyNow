@@ -11,7 +11,6 @@ public interface RequestApi {
     String FBLOGIN = "login_with_fb";
     String MYPRODUCT = "MyProduct";
     String SEARCH_PRODUCT = "search_product";
-    String FORGOT_PASSWORD = "forgotPassword";
     String PRODUCT_DETAIL = "product_detail";
     String PRODUCT_DELETE = "DeleteProduct";
     String PRODUCT_ORDER = "OrderHistory";
@@ -41,6 +40,7 @@ public interface RequestApi {
     String GET_ALL_CATEGORIES = "get_all_categories";
     String GET_POPULAR_SEARCHES = "get_popular_searches";
     String SEARCH = "search";
+    String FORGOT_PASSWORD = "forgot_password";
     //String BASEURL = "http://192.168.2.16/projects/wilo/api/";
     String BASEURL = "http://192.168.2.7/projects/onlynow/api/";
     String SERVICE = BASEURL + "services.php?data=";

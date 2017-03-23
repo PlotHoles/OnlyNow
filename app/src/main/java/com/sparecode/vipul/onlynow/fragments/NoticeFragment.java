@@ -2,6 +2,7 @@ package com.sparecode.vipul.onlynow.fragments;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -18,6 +19,7 @@ import com.sparecode.vipul.onlynow.model.NoticeWrapper;
 import com.sparecode.vipul.onlynow.model.SignupWrapper;
 import com.sparecode.vipul.onlynow.util.Prefs;
 import com.sparecode.vipul.onlynow.view.EndlessRecyclerOnScrollListener;
+import com.sparecode.vipul.onlynow.widgets.LatoTextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,6 +33,10 @@ public class NoticeFragment extends BaseFragment implements NoticeBackend.Notice
     RecyclerView recyclerview;
     NoticeAdapter noticeAdapter;
     NoticeBackend noticeBackend;
+    @Bind(R.id.nodata)
+    LatoTextView nodata;
+    @Bind(R.id.swiperefresh)
+    SwipeRefreshLayout swiperefresh;
     private View view;
     GridLayoutManager gridLayoutManager;
     List<NoticeData> data;
@@ -58,6 +64,13 @@ public class NoticeFragment extends BaseFragment implements NoticeBackend.Notice
         gridLayoutManager = new GridLayoutManager(getActivity(), 1);
         recyclerview.setLayoutManager(gridLayoutManager);
 
+        swiperefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                noticeBackend = new NoticeBackend(signupWrapper.getData().getId(), getActivity(), NoticeFragment.this);
+                noticeBackend.callWs(1);
+            }
+        });
 
         return view;
     }
@@ -97,8 +110,8 @@ public class NoticeFragment extends BaseFragment implements NoticeBackend.Notice
         ((BaseActivity) getActivity()).setOptionMenuVisibility(false);
         ((BaseActivity) getActivity()).getImgMap().setVisibility(View.GONE);
         ((BaseActivity) getActivity()).getImgSearchMap().setVisibility(View.GONE);
-        ((BaseActivity)getActivity()).getImgShare().setVisibility(View.GONE);
-        ((BaseActivity)getActivity()).getImgToolBarCancel().setVisibility(View.GONE);
+        ((BaseActivity) getActivity()).getImgShare().setVisibility(View.GONE);
+        ((BaseActivity) getActivity()).getImgToolBarCancel().setVisibility(View.GONE);
     }
 
     @Override
@@ -110,14 +123,25 @@ public class NoticeFragment extends BaseFragment implements NoticeBackend.Notice
     @Override
     public void onSuccess(NoticeWrapper noticeWrapper) {
         if (getActivity() != null) {
+            swiperefresh.setRefreshing(false);
+            nodata.setVisibility(View.GONE);
+            recyclerview.setVisibility(View.VISIBLE);
             data.addAll(noticeWrapper.getData());
             noticeAdapter.notifyDataSetChanged();
         }
     }
 
     @Override
-    public void onFailure(String msg) {
+    public void onFailure(NoticeWrapper noticeWrapper) {
         if (getActivity() != null) {
+            swiperefresh.setRefreshing(false);
+            if (noticeWrapper.getPage() != null) {
+                if (noticeWrapper.getPage() == 1) {
+                    recyclerview.setVisibility(View.GONE);
+                    nodata.setVisibility(View.VISIBLE);
+                }
+            }
+
             //Snackbar.make(view, msg, Snackbar.LENGTH_SHORT).show();
         }
     }

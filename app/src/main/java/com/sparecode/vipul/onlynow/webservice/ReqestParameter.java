@@ -156,12 +156,13 @@ public class ReqestParameter {
         }
         return jsonObject;
     }
-    public JSONObject toGetCoupnsByCategory(String userId, String catId) {
+    public JSONObject toGetCoupnsByCategory(String userId, String catId,String sort_by) {
         JSONObject jsonObject = new JSONObject();
         try {
             jsonObject.put("method", "get_coupons_by_category");
             jsonObject.put("user_id", "" + userId);
             jsonObject.put("cat_id", "" + catId);
+            jsonObject.put("sort_by", "" + sort_by);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -304,6 +305,60 @@ public class ReqestParameter {
             object.put("cat_id", vars[3]);
             object.put("sort_by", vars[4]);
             object.put("page", vars[5]);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return object;
+    }
+    public JSONObject toGetSelectFavCategory(String UserId) {
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("method", "get_categories");
+            jsonObject.put("user_id", "" + UserId);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return jsonObject;
+    }
+    public JSONObject toGetChangePassword(String UserId,String OldPassword,String NewPassword) {
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("method", "change_password");
+            jsonObject.put("user_id", "" + UserId);
+            jsonObject.put("old_password", "" + OldPassword);
+            jsonObject.put("new_password", "" + NewPassword);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return jsonObject;
+    }
+    public JSONObject toGetUpdateProfile(String UserId,String fname,String lname) {
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("method", "update_profile");
+            jsonObject.put("user_id", "" + UserId);
+            jsonObject.put("fname", "" + fname);
+            jsonObject.put("lname", "" + lname);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return jsonObject;
+    }
+    public JSONObject toGetProfileUpdate(String UserId) {
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("method", "profile");
+            jsonObject.put("user_id", "" + UserId);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return jsonObject;
+    }
+    public JSONObject toForgotPassword(String... vars) {
+        JSONObject object = new JSONObject();
+        try {
+            object.put("method", RequestApi.FORGOT_PASSWORD);
+            object.put("email", vars[0]);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -611,7 +666,7 @@ public class ReqestParameter {
     }
 
 
-    public JSONObject toForgotPassword(String... vars) {
+   /* public JSONObject toForgotPassword(String... vars) {
         JSONObject object = new JSONObject();
         try {
             object.put("method", RequestApi.FORGOT_PASSWORD);
@@ -620,7 +675,7 @@ public class ReqestParameter {
             e.printStackTrace();
         }
         return object;
-    }
+    }*/
 
     public JSONObject toSearchProduct(String... vars) {
         JSONObject object = new JSONObject();

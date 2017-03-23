@@ -1,6 +1,7 @@
 package com.sparecode.vipul.onlynow.fragments;
 
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -16,6 +17,7 @@ import com.sparecode.vipul.onlynow.model.MyListFavoriteWrapper;
 import com.sparecode.vipul.onlynow.model.SignupWrapper;
 import com.sparecode.vipul.onlynow.util.Prefs;
 import com.sparecode.vipul.onlynow.view.OnClickListener;
+import com.sparecode.vipul.onlynow.widgets.LatoTextView;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -26,6 +28,10 @@ public class CouponViewedFragment extends BaseFragment implements CouponFavourit
     RecyclerView recyclerview;
     CouponViewedAdapter couponViewedAdapter;
     SignupWrapper signupWrapper;
+    @Bind(R.id.nodata)
+    LatoTextView nodata;
+    @Bind(R.id.swiperefresh)
+    SwipeRefreshLayout swiperefresh;
 
     public CouponViewedFragment() {
         // Required empty public constructor
@@ -61,10 +67,17 @@ public class CouponViewedFragment extends BaseFragment implements CouponFavourit
         View view = inflater.inflate(R.layout.fragment_coupon_viewed, container, false);
         ButterKnife.bind(this, view);
         getUser();
-        CouponFavouritebackendBackend couponFavouritebackendBackend = new CouponFavouritebackendBackend(getActivity(),signupWrapper.getData().getId(),2,this);
+        CouponFavouritebackendBackend couponFavouritebackendBackend = new CouponFavouritebackendBackend(getActivity(), signupWrapper.getData().getId(), 2, this);
         couponFavouritebackendBackend.call(1);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 1);
         recyclerview.setLayoutManager(gridLayoutManager);
+        swiperefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                CouponFavouritebackendBackend couponFavouritebackendBackend = new CouponFavouritebackendBackend(getActivity(), signupWrapper.getData().getId(), 2, CouponViewedFragment.this);
+                couponFavouritebackendBackend.call(1);
+            }
+        });
       /*  couponViewedAdapter = new CouponViewedAdapter(getActivity());
         recyclerview.setAdapter(couponViewedAdapter);*/
         return view;
@@ -83,7 +96,10 @@ public class CouponViewedFragment extends BaseFragment implements CouponFavourit
 
     @Override
     public void onFavouriteSuccess(MyListFavoriteWrapper myListFavoriteWrapper) {
-        couponViewedAdapter=new CouponViewedAdapter(getActivity(), myListFavoriteWrapper, new OnClickListener() {
+        nodata.setVisibility(View.GONE);
+        recyclerview.setVisibility(View.VISIBLE);
+        swiperefresh.setRefreshing(false);
+        couponViewedAdapter = new CouponViewedAdapter(getActivity(), myListFavoriteWrapper, new OnClickListener() {
             @Override
             public void onItemClicked(int position) {
 
@@ -94,6 +110,8 @@ public class CouponViewedFragment extends BaseFragment implements CouponFavourit
 
     @Override
     public void onFailure(String msg) {
-
+        swiperefresh.setRefreshing(false);
+        recyclerview.setVisibility(View.GONE);
+        nodata.setVisibility(View.VISIBLE);
     }
 }

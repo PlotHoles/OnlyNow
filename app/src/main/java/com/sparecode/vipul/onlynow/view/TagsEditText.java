@@ -231,6 +231,7 @@ public class TagsEditText extends AutoCompleteTextView {
         mTextWatcher.afterTextChanged(getText());
     }
 
+
     @Override
     public Parcelable onSaveInstanceState() {
 
@@ -496,12 +497,13 @@ public class TagsEditText extends AutoCompleteTextView {
                 }
             }
 
+            List<TagSpan> mOldTagSpans = mTagSpans;
             getText().clear();
             getText().append(sb);
             setMovementMethod(LinkMovementMethod.getInstance());
             setSelection(sb.length());
             if (mListener != null && !str.equals(mLastString)) {
-                mListener.onTagsChanged(convertTagSpanToList(mTagSpans));
+                mListener.onTagsChanged(convertTagSpanToList(mTagSpans), convertTagSpanToList(mOldTagSpans));
             }
         }
     }
@@ -572,10 +574,11 @@ public class TagsEditText extends AutoCompleteTextView {
             newTag.setIndex(i - 1);
             newTag.setPosition(newTag.getPosition() - tagLength);
         }
+        List<TagSpan> mOldTagSpans = mTagSpans;
         mTags.remove(tagIndex);
         mTagSpans.remove(tagIndex);
         if (mListener == null) return;
-        mListener.onTagsChanged(convertTagSpanToList(mTagSpans));
+        mListener.onTagsChanged(convertTagSpanToList(mTagSpans), convertTagSpanToList(mOldTagSpans));
     }
 
     private static List<String> convertTagSpanToList(List<TagSpan> tagSpans) {
@@ -767,7 +770,7 @@ public class TagsEditText extends AutoCompleteTextView {
 
     public interface TagsEditListener {
 
-        void onTagsChanged(Collection<String> tags);
+        void onTagsChanged(Collection<String> tags, Collection<String> oldTags);
 
         void onEditingFinished();
 
@@ -775,12 +778,15 @@ public class TagsEditText extends AutoCompleteTextView {
 
     public static class TagsEditListenerAdapter implements TagsEditListener {
 
+
         @Override
-        public void onTagsChanged(Collection<String> tags) {
+        public void onTagsChanged(Collection<String> tags, Collection<String> oldTags) {
+
         }
 
         @Override
         public void onEditingFinished() {
+
         }
 
     }

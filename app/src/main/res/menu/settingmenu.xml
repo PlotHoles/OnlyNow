@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:id="@+id/sortby"
-        android:icon="@drawable/sortby_icon"
-        android:title="@string/sort_by"/>
-
     <item android:id="@+id/popular"
         android:icon="@drawable/popular_icon"
         android:title="@string/popular"/>

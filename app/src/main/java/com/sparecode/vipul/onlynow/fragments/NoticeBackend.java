@@ -31,13 +31,13 @@ public class NoticeBackend {
                 if (noticeWrapper.getStatus() == 1) {
                     noticeDataProvider.onSuccess(noticeWrapper);
                 } else {
-                    noticeDataProvider.onFailure("" + noticeWrapper.getData());
+                    noticeDataProvider.onFailure(noticeWrapper);
                 }
             }
 
             @Override
             public void onError() {
-                noticeDataProvider.onFailure("Please try again !!");
+                //noticeDataProvider.onFailure("Please try again !!");
             }
         });
     }
@@ -46,6 +46,6 @@ public class NoticeBackend {
     public interface NoticeDataProvider {
         void onSuccess(NoticeWrapper noticeWrapper);
 
-        void onFailure(String msg);
+        void onFailure(NoticeWrapper noticeWrapper);
     }
 }

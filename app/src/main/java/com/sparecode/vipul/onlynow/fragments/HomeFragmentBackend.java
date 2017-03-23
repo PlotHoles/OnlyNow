@@ -18,6 +18,7 @@ public class HomeFragmentBackend {
     String user_id;
     String cat_id;
     Context mContext;
+    String sort_by;
     HomePageDataProvider homePageDataProvider;
 
     public HomeFragmentBackend(String user_id, Context mContext, HomePageDataProvider homePageDataProvider) {
@@ -31,6 +32,15 @@ public class HomeFragmentBackend {
         this.user_id = user_id;
         this.cat_id = cat_id;
         this.mContext = mContext;
+        this.homePageDataProvider = homePageDataProvider;
+        callCouponWs();
+    }
+
+    public HomeFragmentBackend(String user_id, String cat_id,String sort_by, Context mContext, HomePageDataProvider homePageDataProvider) {
+        this.user_id = user_id;
+        this.cat_id = cat_id;
+        this.mContext = mContext;
+        this.sort_by = sort_by;
         this.homePageDataProvider = homePageDataProvider;
         callCouponWs();
     }
@@ -55,7 +65,7 @@ public class HomeFragmentBackend {
     }
 
     private void callCouponWs() {
-        new GetRequest<CouponWrapper>().toGetRequest(mContext, RequestApi.USERSERVICE, new ReqestParameter().toGetCoupnsByCategory(user_id, cat_id), CouponWrapper.class, new OnResponse<CouponWrapper>() {
+        new GetRequest<CouponWrapper>().toGetRequest(mContext, RequestApi.USERSERVICE, new ReqestParameter().toGetCoupnsByCategory(user_id, cat_id,sort_by), CouponWrapper.class, new OnResponse<CouponWrapper>() {
             @Override
             public void onSuccess(CouponWrapper couponWrapper) {
                 if (couponWrapper.getStatus() == 0) {

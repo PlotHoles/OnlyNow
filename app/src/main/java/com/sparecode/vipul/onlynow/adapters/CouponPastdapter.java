@@ -132,5 +132,13 @@ public class CouponPastdapter extends RecyclerView.Adapter<CouponPastdapter.MyVi
         return data.size();
     }
 
+    @Override
+    public int getItemViewType(int position) {
+        return position;
+    }
 
+    @Override
+    public long getItemId(int position) {
+        return position;
+    }
 }

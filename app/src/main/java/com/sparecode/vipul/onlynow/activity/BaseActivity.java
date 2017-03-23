@@ -19,7 +19,6 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.FrameLayout;
@@ -57,7 +56,9 @@ import com.sparecode.vipul.onlynow.fragments.SearchFragment;
 import com.sparecode.vipul.onlynow.fragments.SigninFragment;
 import com.sparecode.vipul.onlynow.fragments.SignupFragment;
 import com.sparecode.vipul.onlynow.fragments.SignupfacebookFragment;
+import com.sparecode.vipul.onlynow.fragments.Signupstep3Fragment;
 import com.sparecode.vipul.onlynow.fragments.SplashFragment;
+import com.sparecode.vipul.onlynow.fragments.UpdateProfileFragment;
 import com.sparecode.vipul.onlynow.interfaces.NetworkChangeListener;
 import com.sparecode.vipul.onlynow.interfaces.SignupNextListner;
 import com.sparecode.vipul.onlynow.model.FacebookWrapper;
@@ -294,13 +295,11 @@ public class BaseActivity extends AppCompatActivity implements NetworkChangeList
         return menuVisibilityFlag;
     }
 
-    public boolean onOptionsItemSelected(MenuItem item) {
+   /* public boolean onOptionsItemSelected(MenuItem item) {
 
         switch (item.getItemId()) {
             case R.id.sortby:
-
                 Toast.makeText(BaseActivity.this, "Sort By is Selected", Toast.LENGTH_SHORT).show();
-
                 return true;
 
             case R.id.popular:
@@ -318,7 +317,7 @@ public class BaseActivity extends AppCompatActivity implements NetworkChangeList
             default:
                 return super.onOptionsItemSelected(item);
         }
-    }
+    }*/
 
 //    @OnClick(R.id.imgSettings)
 //    void onSettingClick() {
@@ -369,6 +368,11 @@ public class BaseActivity extends AppCompatActivity implements NetworkChangeList
     @OnClick(text_next)
     void onNextTextClick() {
         onSignupNextClickPerform();
+    }
+
+    public void menu(String value)
+    {
+        System.out.println("---->value"+value);
     }
 
     public void addFragment(BaseFragment fragment, boolean isReplace) {
@@ -496,6 +500,14 @@ public class BaseActivity extends AppCompatActivity implements NetworkChangeList
         replaceFragment(new ClientEditprofileFragment(),R.id.container,ClientEditprofileFragment.class.getName(),true);
     }
 
+    public void openUpdateProfile() {
+        replaceFragment(new UpdateProfileFragment(), R.id.container, UpdateProfileFragment.class.getName(), true);
+    }
+    public Signupstep3Fragment openSelectCategory(boolean isChangeCategory) {
+        Signupstep3Fragment signupstep3Fragment = new Signupstep3Fragment(isChangeCategory);
+        replaceFragment(signupstep3Fragment, R.id.container, Signupstep3Fragment.class.getName(), true);
+        return signupstep3Fragment;
+    }
     public void onSignupNextClickPerform() {
         if (getSignupNextListner() != null) {
             // Toast.makeText(this, "::" + currentSignupPageNumber, Toast.LENGTH_SHORT).show();
@@ -518,6 +530,7 @@ public class BaseActivity extends AppCompatActivity implements NetworkChangeList
             imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
         }
     }
+
 
     @Override
     protected void onStart() {

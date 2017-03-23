@@ -54,6 +54,13 @@ public class SearchResultBackend {
         call();
     }
 
+    public SearchResultBackend(Context applicationContext, String keyword, SearchResultDataProvider searchResultDataProvider) {
+        this.context = applicationContext;
+        this.keyword = keyword;
+        this.searchResultDataProvider = searchResultDataProvider;
+        call();
+    }
+
     private void call()
     {
         new GetRequest<SearchResultWrapper>().toGetRequest(context, RequestApi.USERSERVICE, new ReqestParameter().toSearchResult(keyword,lat,longi,cat_id,sort_by,page), SearchResultWrapper.class, new OnResponse<SearchResultWrapper>() {

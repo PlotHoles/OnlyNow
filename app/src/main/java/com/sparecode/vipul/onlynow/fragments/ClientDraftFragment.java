@@ -2,6 +2,7 @@ package com.sparecode.vipul.onlynow.fragments;
 
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -15,6 +16,7 @@ import com.sparecode.vipul.onlynow.model.ClientDraftData;
 import com.sparecode.vipul.onlynow.model.ClientDraftWrapper;
 import com.sparecode.vipul.onlynow.view.EndlessRecyclerViewScrollListener;
 import com.sparecode.vipul.onlynow.view.OnClickListener;
+import com.sparecode.vipul.onlynow.widgets.LatoTextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,11 +25,15 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 
 
-public class ClientDraftFragment extends BaseFragment implements ClientDraftBackend.ClientDraftResultProvider  {
+public class ClientDraftFragment extends BaseFragment implements ClientDraftBackend.ClientDraftResultProvider {
 
     @Bind(R.id.recyclerview)
     RecyclerView recyclerview;
     CouponDraftadapter couponDraftadapter;
+    @Bind(R.id.nodata)
+    LatoTextView nodata;
+    @Bind(R.id.swiperefresh)
+    SwipeRefreshLayout swiperefresh;
     private View view;
     List<ClientDraftData> data;
     GridLayoutManager gridLayoutManager;
@@ -61,10 +67,18 @@ public class ClientDraftFragment extends BaseFragment implements ClientDraftBack
         ButterKnife.bind(this, view);
         data = new ArrayList<>();
 
-        clientDraftBackend = new ClientDraftBackend(getActivity(),getUserId(),this);
+        clientDraftBackend = new ClientDraftBackend(getActivity(), getUserId(), this);
         clientDraftBackend.callPagination(1);
 
         gridLayoutManager = new GridLayoutManager(getActivity(), 1);
+
+        swiperefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                clientDraftBackend = new ClientDraftBackend(getActivity(), getUserId(), ClientDraftFragment.this);
+                clientDraftBackend.callPagination(1);
+            }
+        });
         /*recyclerview.setLayoutManager(gridLayoutManager);
         couponLivedapter = new CouponLivedapter(getActivity(),new OnClickListener() {
             @Override
@@ -78,6 +92,7 @@ public class ClientDraftFragment extends BaseFragment implements ClientDraftBack
         setPagination(recyclerview);
         return view;
     }
+
     private void setPagination(RecyclerView recyclerview) {
         recyclerview.addOnScrollListener(new EndlessRecyclerViewScrollListener(gridLayoutManager) {
             @Override
@@ -92,17 +107,18 @@ public class ClientDraftFragment extends BaseFragment implements ClientDraftBack
             }
         });
     }
+
     public void setRecycleView() {
         recyclerview.setLayoutManager(new GridLayoutManager(getActivity(), 1));
         couponDraftadapter = new CouponDraftadapter(getActivity(), data, new OnClickListener() {
             @Override
             public void onItemClicked(int position) {
-                if (getActivity() != null){
+                if (getActivity() != null) {
                     ClientCouponDetailsFragment clientCouponDetailsFragment = new ClientCouponDetailsFragment();
                     Bundle bundle = new Bundle();
-                    bundle.putString("key",data.get(position).getId());
+                    bundle.putString("key", data.get(position).getId());
                     clientCouponDetailsFragment.setArguments(bundle);
-                    addFragment(clientCouponDetailsFragment,true);
+                    addFragment(clientCouponDetailsFragment, true);
                 }
                 // ((BaseActivity)getActivity()).openClientCouponDetailsPage();
             }
@@ -111,6 +127,11 @@ public class ClientDraftFragment extends BaseFragment implements ClientDraftBack
     }
 
     public void setAdapter(List<ClientDraftData> dataList) {
+        /*HashSet<ClientDraftData> hashSet = new HashSet<ClientDraftData>();
+        hashSet.addAll(dataList);
+        data.clear();
+        data.addAll(hashSet);*/
+        data.clear();
         this.data.addAll(dataList);
         couponDraftadapter.notifyDataSetChanged();
     }
@@ -128,11 +149,17 @@ public class ClientDraftFragment extends BaseFragment implements ClientDraftBack
 
     @Override
     public void onSuccessfullLogin(ClientDraftWrapper clientDraftWrapper) {
+        recyclerview.setVisibility(View.VISIBLE);
+        nodata.setVisibility(View.GONE);
+        swiperefresh.setRefreshing(false);
         setAdapter(clientDraftWrapper.getData());
     }
 
     @Override
     public void onLoginFailure(String msg) {
-        Snackbar.make(view,msg,Snackbar.LENGTH_SHORT).show();
+
+        Snackbar.make(view, msg, Snackbar.LENGTH_SHORT).show();
+        recyclerview.setVisibility(View.GONE);
+        nodata.setVisibility(View.VISIBLE);
     }
 }

@@ -18,15 +18,17 @@
         android:layout_marginRight="@dimen/dp_10">
 
         <com.sparecode.vipul.onlynow.view.CircleImageView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:id="@+id/UserImage"
+            android:layout_width="wrap_content"
+            android:layout_gravity="center"
+            android:layout_height="90dp"
             android:src="@drawable/profile_icon"/>
 
         <com.sparecode.vipul.onlynow.widgets.LatoTextView
             android:text="@string/mrjhon"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/textView13"
+            android:id="@+id/textUserName"
             android:gravity="center"
             android:layout_marginTop="@dimen/dp_2"
             android:textStyle="bold"
@@ -37,7 +39,7 @@
             android:text="@string/male"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/textView14"
+            android:id="@+id/textGender"
             android:gravity="center"
             android:layout_marginTop="@dimen/dp_2"
             android:textStyle="bold"
@@ -47,7 +49,7 @@
             android:text="@string/march17th1981"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/textView16"
+            android:id="@+id/textUserBirthdate"
             android:gravity="center"
             android:layout_marginTop="@dimen/dp_2"
             app:typeface="lato_regular"/>
@@ -56,7 +58,7 @@
             android:text="@string/uclaaerospace"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/textView17"
+            android:id="@+id/textUserEmailId"
             android:gravity="center"
             android:layout_marginTop="@dimen/dp_2"
             app:typeface="lato_regular"/>
@@ -65,7 +67,7 @@
             android:text="@string/edit_profile"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/textView18"
+            android:id="@+id/textEditProfile"
             android:gravity="center"
             android:layout_gravity="center"
             android:textColor="@color/headercolor"
@@ -92,7 +94,7 @@
                 app:srcCompat="@drawable/search_category_next_icon"
                 android:layout_centerVertical="true"
                 android:layout_alignParentEnd="true"
-                android:id="@+id/imageView7"
+                android:id="@+id/imagePassword"
                 android:clickable="true" />
 
             <com.sparecode.vipul.onlynow.widgets.LatoTextView
@@ -101,11 +103,42 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_alignParentStart="true"
-                android:id="@+id/textView19"
-                android:layout_toStartOf="@+id/imageView7"
+                android:id="@+id/textChangePassword"
+                android:layout_toStartOf="@+id/imagePassword"
                 android:clickable="true"
                 app:typeface="lato_regular"/>
+
         </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/ClickChangePassword"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone">
+
+            <com.sparecode.vipul.onlynow.widgets.LatoEditText
+                android:id="@+id/oldpassword"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="@string/old_password"
+                android:inputType="textPassword"/>
+
+            <com.sparecode.vipul.onlynow.widgets.LatoEditText
+                android:id="@+id/newpassword"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="@string/new_password"
+                android:inputType="textPassword"/>
+
+            <com.sparecode.vipul.onlynow.widgets.LatoButton
+                android:id="@+id/ChangePassword"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="change_password"
+                android:textAllCaps="false"/>
+        </LinearLayout>
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -117,7 +150,7 @@
                 app:srcCompat="@drawable/search_category_next_icon"
                 android:layout_centerVertical="true"
                 android:layout_alignParentEnd="true"
-                android:id="@+id/imageView8"
+                android:id="@+id/imageUserLocation"
                 android:clickable="true"/>
 
             <com.sparecode.vipul.onlynow.widgets.LatoTextView
@@ -126,8 +159,8 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_alignParentStart="true"
-                android:id="@+id/textView20"
-                android:layout_toStartOf="@+id/imageView8"
+                android:id="@+id/textUserLocation"
+                android:layout_toStartOf="@+id/imageUserLocation"
                 android:clickable="true"
                 app:typeface="lato_regular"/>
         </RelativeLayout>
@@ -149,7 +182,7 @@
                 app:srcCompat="@drawable/search_category_next_icon"
                 android:layout_centerVertical="true"
                 android:layout_alignParentEnd="true"
-                android:id="@+id/imageView10" />
+                android:id="@+id/ImageCategory" />
 
             <com.sparecode.vipul.onlynow.widgets.LatoTextView
                 android:text="@string/favourite_category"
@@ -157,8 +190,8 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_alignParentStart="true"
-                android:id="@+id/textView22"
-                android:layout_toStartOf="@+id/imageView10"
+                android:id="@+id/textUserFavCategory"
+                android:layout_toStartOf="@+id/ImageCategory"
                 android:clickable="true"
                 app:typeface="lato_regular"/>
         </RelativeLayout>
@@ -182,7 +215,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_alignParentStart="true"
-                android:id="@+id/textView23"
+                android:id="@+id/textEmailSwitch"
                 android:layout_toStartOf="@+id/emailswitch"
                 app:typeface="lato_regular"/>
         </RelativeLayout>
@@ -206,7 +239,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_alignParentStart="true"
-                android:id="@+id/textView21"
+                android:id="@+id/textNotificationSwitch"
                 android:layout_toStartOf="@+id/notificationswitch"
                 app:typeface="lato_regular"/>
         </RelativeLayout>
@@ -228,7 +261,7 @@
                 app:srcCompat="@drawable/search_category_next_icon"
                 android:layout_centerVertical="true"
                 android:layout_alignParentEnd="true"
-                android:id="@+id/imageView12"
+                android:id="@+id/imageQuestionAnswer"
                 android:clickable="true" />
 
             <com.sparecode.vipul.onlynow.widgets.LatoTextView
@@ -237,8 +270,8 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_alignParentStart="true"
-                android:id="@+id/textView24"
-                android:layout_toStartOf="@+id/imageView12"
+                android:id="@+id/textQA"
+                android:layout_toStartOf="@+id/imageQuestionAnswer"
                 android:clickable="true"
                 app:typeface="lato_regular"/>
         </RelativeLayout>
@@ -253,7 +286,7 @@
                 app:srcCompat="@drawable/search_category_next_icon"
                 android:layout_centerVertical="true"
                 android:layout_alignParentEnd="true"
-                android:id="@+id/imageView13"
+                android:id="@+id/imageProblem"
                 android:clickable="true"/>
 
             <com.sparecode.vipul.onlynow.widgets.LatoTextView
@@ -262,8 +295,8 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_alignParentStart="true"
-                android:id="@+id/textView25"
-                android:layout_toStartOf="@+id/imageView13"
+                android:id="@+id/textProblem"
+                android:layout_toStartOf="@+id/imageProblem"
                 android:clickable="true"
                 app:typeface="lato_regular"/>
         </RelativeLayout>
@@ -283,7 +316,7 @@
                 app:srcCompat="@drawable/search_category_next_icon"
                 android:layout_centerVertical="true"
                 android:layout_alignParentEnd="true"
-                android:id="@+id/imageView14"
+                android:id="@+id/imageAboutOnlynow"
                 android:clickable="true"/>
 
             <com.sparecode.vipul.onlynow.widgets.LatoTextView
@@ -292,8 +325,8 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_alignParentStart="true"
-                android:id="@+id/textView26"
-                android:layout_toStartOf="@+id/imageView14"
+                android:id="@+id/textAbout"
+                android:layout_toStartOf="@+id/imageAboutOnlynow"
                 android:clickable="true"
                 app:typeface="lato_regular"/>
         </RelativeLayout>
@@ -308,7 +341,7 @@
                 app:srcCompat="@drawable/search_category_next_icon"
                 android:layout_centerVertical="true"
                 android:layout_alignParentEnd="true"
-                android:id="@+id/imageView15"
+                android:id="@+id/imageBlog"
                 android:clickable="true"/>
 
             <com.sparecode.vipul.onlynow.widgets.LatoTextView
@@ -317,8 +350,8 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_alignParentStart="true"
-                android:id="@+id/textView27"
-                android:layout_toStartOf="@+id/imageView15"
+                android:id="@+id/textBlog"
+                android:layout_toStartOf="@+id/imageBlog"
                 android:clickable="true"
                 app:typeface="lato_regular"/>
         </RelativeLayout>
@@ -338,7 +371,7 @@
                 app:srcCompat="@drawable/search_category_next_icon"
                 android:layout_centerVertical="true"
                 android:layout_alignParentEnd="true"
-                android:id="@+id/imageView16"
+                android:id="@+id/imagePrivacyPolicy"
                 android:clickable="true"/>
 
             <com.sparecode.vipul.onlynow.widgets.LatoTextView
@@ -347,8 +380,8 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_alignParentStart="true"
-                android:id="@+id/textView28"
-                android:layout_toStartOf="@+id/imageView16"
+                android:id="@+id/textPrivacyPolicy"
+                android:layout_toStartOf="@+id/imagePrivacyPolicy"
                 android:clickable="true"
                 app:typeface="lato_regular"/>
         </RelativeLayout>
@@ -363,7 +396,7 @@
                 app:srcCompat="@drawable/search_category_next_icon"
                 android:layout_centerVertical="true"
                 android:layout_alignParentEnd="true"
-                android:id="@+id/imageView17"
+                android:id="@+id/imageTerms"
                 android:clickable="true"/>
 
             <com.sparecode.vipul.onlynow.widgets.LatoTextView
@@ -372,8 +405,8 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_alignParentStart="true"
-                android:id="@+id/textView29"
-                android:layout_toStartOf="@+id/imageView17"
+                android:id="@+id/textTermsCondition"
+                android:layout_toStartOf="@+id/imageTerms"
                 android:clickable="true"
                 app:typeface="lato_regular"/>
         </RelativeLayout>
@@ -389,7 +422,7 @@
                 app:srcCompat="@drawable/search_category_next_icon"
                 android:layout_centerVertical="true"
                 android:layout_alignParentEnd="true"
-                android:id="@+id/imageView18"
+                android:id="@+id/imageLogout"
                 android:clickable="true"/>
 
             <com.sparecode.vipul.onlynow.widgets.LatoTextView
@@ -398,8 +431,8 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_alignParentStart="true"
-                android:id="@+id/textView30"
-                android:layout_toStartOf="@+id/imageView18"
+                android:id="@+id/textLogout"
+                android:layout_toStartOf="@+id/imageLogout"
                 android:clickable="true"
                 app:typeface="lato_regular"/>
         </RelativeLayout>

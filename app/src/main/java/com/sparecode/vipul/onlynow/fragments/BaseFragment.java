@@ -41,6 +41,10 @@ public abstract class BaseFragment extends Fragment implements SortInterface{
             ((MainActivity)getActivity()).addFragment(fragment,true);
     }
 
+    public void menusort(String value)
+    {
+        ((MainActivity)getActivity()).menu(value);
+    }
     public String getUserId() {
         LoginData data;
         if (getUserData() != null)

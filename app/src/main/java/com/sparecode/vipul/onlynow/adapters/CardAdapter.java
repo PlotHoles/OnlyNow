@@ -106,8 +106,23 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.MyViewHolder> 
         holder.txtCouponShopName.setText(couponWrapper.getData().get(position).getShopName());
         holder.txtCouponAreaName.setText(couponWrapper.getData().get(position).getArea());
         holder.txtCouponTimer.setText(getLeftTimeDuration(couponWrapper.getData().get(position).getDate(), couponWrapper.getData().get(position).getEndDate()));
-        holder.txtCouponValidTill.setText(couponWrapper.getData().get(position).getDate());
 
+
+        String inputPattern = "yyyy-MM-dd HH:mm:ss";
+        String outputPattern = "h:mm a dd-MM-yyyy ";
+        SimpleDateFormat inputFormat = new SimpleDateFormat(inputPattern);
+        SimpleDateFormat outputFormat = new SimpleDateFormat(outputPattern);
+
+        Date date = null;
+        String str = null;
+
+        try {
+            date = inputFormat.parse(couponWrapper.getData().get(position).getEndDate());
+            str = outputFormat.format(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        holder.txtCouponValidTill.setText(str);
         //getLeftTimeDuration(couponWrapper.getData().get(position).getDate(), couponWrapper.getData().get(position).getEndDate());
         //holder.txtCouponTimer.setText(couponWrapper.getData().get(position).);
 
@@ -117,6 +132,7 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.MyViewHolder> 
 //        holder.text_place.setText(history.getPlace());
 //        holder.text_time.setText(history.getTime());
 //        holder.text_payments.setText(history.getPayments());
+
     }
 
     @Override
