@@ -354,6 +354,17 @@ public class ReqestParameter {
         }
         return jsonObject;
     }
+    public JSONObject toUserChangeLocation(String...vars) {
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("method", "get_all_areas");
+            jsonObject.put("user_id", vars[0]);
+            jsonObject.put("page", vars[1]);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return jsonObject;
+    }
     public JSONObject toForgotPassword(String... vars) {
         JSONObject object = new JSONObject();
         try {

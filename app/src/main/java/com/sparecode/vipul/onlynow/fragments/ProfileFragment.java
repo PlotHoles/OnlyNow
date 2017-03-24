@@ -121,6 +121,14 @@ public class ProfileFragment extends BaseFragment implements LogoutBackendUser.L
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_profile, container, false);
         ButterKnife.bind(this, view);
+
+        textUserLocation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((BaseActivity)getActivity()).openChangeLocationPage();
+                //Toast.makeText(getActivity(),"hi",Toast.LENGTH_SHORT).show();
+            }
+        });
         return view;
     }
 

@@ -30,6 +30,7 @@ import android.widget.Toast;
 import com.sparecode.vipul.onlynow.R;
 import com.sparecode.vipul.onlynow.fragments.BaseFragment;
 import com.sparecode.vipul.onlynow.fragments.ChangeCategoryFragment;
+import com.sparecode.vipul.onlynow.fragments.ChangeLocationFragment;
 import com.sparecode.vipul.onlynow.fragments.ClientAddCouponFragment;
 import com.sparecode.vipul.onlynow.fragments.ClientAnalyticsFragment;
 import com.sparecode.vipul.onlynow.fragments.ClientCouponDetailsFragment;
@@ -502,6 +503,9 @@ public class BaseActivity extends AppCompatActivity implements NetworkChangeList
 
     public void openUpdateProfile() {
         replaceFragment(new UpdateProfileFragment(), R.id.container, UpdateProfileFragment.class.getName(), true);
+    }
+    public void openChangeLocationPage() {
+        replaceFragment(new ChangeLocationFragment(), R.id.container, ChangeLocationFragment.class.getName(), true);
     }
     public Signupstep3Fragment openSelectCategory(boolean isChangeCategory) {
         Signupstep3Fragment signupstep3Fragment = new Signupstep3Fragment(isChangeCategory);
