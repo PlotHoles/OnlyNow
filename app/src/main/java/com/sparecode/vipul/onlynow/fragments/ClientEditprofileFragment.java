@@ -1,5 +1,6 @@
 package com.sparecode.vipul.onlynow.fragments;
 
+import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -19,9 +20,13 @@ import android.widget.Toast;
 
 import com.sparecode.vipul.onlynow.R;
 import com.sparecode.vipul.onlynow.activity.BaseActivity;
+import com.sparecode.vipul.onlynow.activity.MainActivity;
 import com.sparecode.vipul.onlynow.interfaces.OnResponse;
 import com.sparecode.vipul.onlynow.model.ChangeProfilePictureWrapper;
-import com.sparecode.vipul.onlynow.model.UpdateProfileWrapper;
+import com.sparecode.vipul.onlynow.model.LoginWrapper;
+import com.sparecode.vipul.onlynow.permission.PiemissionsCallback;
+import com.sparecode.vipul.onlynow.permission.PiemissionsRequest;
+import com.sparecode.vipul.onlynow.permission.PiemissionsUtils;
 import com.sparecode.vipul.onlynow.util.Utility;
 import com.sparecode.vipul.onlynow.view.CircleImageView;
 import com.sparecode.vipul.onlynow.webservice.PostRequest;
@@ -35,6 +40,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 
 import butterknife.Bind;
@@ -55,7 +61,15 @@ public class ClientEditprofileFragment extends BaseFragment implements UpdatePro
     private String userChoosenTask;
     File destination;
     private View view;;
+    private static final int PERMISSIONS_CODE = 13370;
+    private static final String[] PERMISSIONS = new String[]{
+            Manifest.permission.INTERNET,
+            Manifest.permission.WRITE_EXTERNAL_STORAGE,
+            Manifest.permission.READ_CONTACTS,
+            Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.CALL_PHONE
+            ,Manifest.permission.CAMERA,Manifest.permission.READ_EXTERNAL_STORAGE
 
+    };
     public ClientEditprofileFragment() {
         // Required empty public constructor
     }
@@ -73,6 +87,23 @@ public class ClientEditprofileFragment extends BaseFragment implements UpdatePro
 
         view = inflater.inflate(R.layout.fragment_editprofile, container, false);
         ButterKnife.bind(this, view);
+        final PiemissionsRequest request = new PiemissionsRequest(PERMISSIONS_CODE, PERMISSIONS);
+        request.setCallback(new PiemissionsCallback() {
+            @Override
+            public void onGranted() {
+                Log.e("log----::", "Permission Granted");
+                //locationHelper = new LocationHelper(getActivity(), ClientEditprofileFragment.this);
+            }
+
+            @Override
+            public boolean onDenied(HashMap<String, Boolean> rationalizablePermissions) {
+                Log.e("log---::", "Permission Denied");
+
+                return true;
+            }
+        });
+        PiemissionsUtils.requestPermission(request);
+
         return view;
     }
 
@@ -241,8 +272,8 @@ public class ClientEditprofileFragment extends BaseFragment implements UpdatePro
 
     public void callService() {
 
-        Log.e("imagegallery", String.valueOf(destination));
-        Log.e("imagegallery", getUserId());
+        /*Log.e("imagegallery", String.valueOf(destination));
+        Log.e("imagegallery", getUserId());*/
 
         List<Pair<String, String>> list = new ReqestParameter().toUpdateProfilePicture(getUserId());
 
@@ -261,14 +292,14 @@ public class ClientEditprofileFragment extends BaseFragment implements UpdatePro
 
             @Override
             public void onError() {
-
+                Toast.makeText(getActivity(),"Please try again",Toast.LENGTH_SHORT).show();
             }
         });
     }
 
     @Override
-    public void onSuccesscull(UpdateProfileWrapper updateProfileWrapper) {
-        //((MainActivity)getActivity()).setUserData1(updateProfileWrapper.getData());
+    public void onSuccesscull(LoginWrapper updateProfileWrapper) {
+        ((MainActivity)getActivity()).setUserData1(updateProfileWrapper.getData());
         Snackbar.make(view,updateProfileWrapper.getMessage(),Snackbar.LENGTH_SHORT).show();
     }
 

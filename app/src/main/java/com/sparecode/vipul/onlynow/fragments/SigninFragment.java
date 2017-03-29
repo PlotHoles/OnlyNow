@@ -87,7 +87,9 @@ public class SigninFragment extends BaseFragment implements SigninBackend.Signin
         printKeyHash();
         ButterKnife.bind(this, view);
 
+
         callbackManager = CallbackManager.Factory.create();
+        LoginManager.getInstance().logOut();
         LoginManager.getInstance().registerCallback(callbackManager,
                 new FacebookCallback<LoginResult>() {
                     @Override
@@ -105,7 +107,7 @@ public class SigninFragment extends BaseFragment implements SigninBackend.Signin
                                         FacebookWrapper facebookWrapper = gsonBuilder.create().fromJson(object.toString(), FacebookWrapper.class);
                                         //((BaseActivity) getActivity()).openHomePage();
                                         @SuppressLint("HardwareIds") String android_id = Settings.Secure.getString(getContext().getContentResolver(), Settings.Secure.ANDROID_ID);
-                                        SigninBackend signinBackend = new SigninBackend(getActivity(), facebookWrapper.getId(), editEmail.getText().toString(), editPassword.getText().toString(), "1.1", "1.2", "A", "" + android_id, SigninFragment.this);
+                                        SigninBackend signinBackend = new SigninBackend(getActivity(), facebookWrapper.getId(), facebookWrapper.getEmail(), editPassword.getText().toString(), "1.1", "1.2", "A", "" + android_id, SigninFragment.this);
                                     }
                                 });
                         Bundle parameters = new Bundle();

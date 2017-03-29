@@ -91,16 +91,18 @@ public class HomeFragment extends BaseFragment implements HomeFragmentBackend.Ho
 
     @Override
     public void onFavCatSuccess(FavCategoryWrapper favCategoryWrapper) {
-        tabTitles = new String[favCategoryWrapper.getData().size()];
-        for (int i = 0; i < favCategoryWrapper.getData().size(); i++) {
-            tabTitles[i] = favCategoryWrapper.getData().get(i).getName();
-        }
-        sectionPagerAdapter = new SectionPagerAdapter(getChildFragmentManager(), favCategoryWrapper);
-        pager.setAdapter(sectionPagerAdapter);
-        tabs.setupWithViewPager(pager);
-        Utils.applyFontedTab(getActivity(), pager, tabs);
+        if (getActivity() != null) {
+        if (pager!=null){
+            tabTitles = new String[favCategoryWrapper.getData().size()];
+            for (int i = 0; i < favCategoryWrapper.getData().size(); i++) {
+                tabTitles[i] = favCategoryWrapper.getData().get(i).getName();
+            }
+            sectionPagerAdapter = new SectionPagerAdapter(getChildFragmentManager(), favCategoryWrapper);
+            pager.setAdapter(sectionPagerAdapter);
+            tabs.setupWithViewPager(pager);
+            Utils.applyFontedTab(getActivity(), pager, tabs);
+        }}
     }
-
     @Override
     public void onCouponSuccess(CouponWrapper couponWrapper) {
 

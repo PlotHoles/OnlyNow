@@ -123,21 +123,40 @@ public class ClientShopFragment extends BaseFragment implements ClientShopBacken
 
     @Override
     public void onSuccessfullLogin(ClientShopWrapper clientShopWrapper) {
-        couponName.setText(clientShopWrapper.getData().getTitle());
-        couponType.setText(clientShopWrapper.getData().getCatName());
-        couponPlace.setText(clientShopWrapper.getData().getCity());
-        editnumber.setText(clientShopWrapper.getData().getPhone());
-        editurl.setText(clientShopWrapper.getData().getWeb());
-        editshopdetail.setText(clientShopWrapper.getData().getDetails());
-        editaddress.setText(clientShopWrapper.getData().getArea());
+        if (couponName!=null){
+            couponName.setText(clientShopWrapper.getData().getTitle());
+        }
+        if (couponType!=null){
+            couponType.setText(clientShopWrapper.getData().getCatName());
+        }
+        if (couponPlace!=null){
+            couponPlace.setText(clientShopWrapper.getData().getCity());
+        }if (editnumber!=null){
+            editnumber.setText(clientShopWrapper.getData().getPhone());
+        }if (editurl!=null){
+            editurl.setText(clientShopWrapper.getData().getWeb());
+        }if (editshopdetail!=null){
+            editshopdetail.setText(clientShopWrapper.getData().getDetails());
+        }if (editaddress!=null){
+            editaddress.setText(clientShopWrapper.getData().getArea());
+        }if (couponImage!=null){
+            if (clientShopWrapper.getData().getImageURL() != null &&
+                    (!clientShopWrapper.getData().getImageURL().equals("")))
+                Picasso.with(getActivity())
+                        .load(clientShopWrapper.getData().getImageURL())
+                        .placeholder(R.drawable.placeholder)
+                        .error(R.drawable.placeholder)
+                        .into(couponImage);
+        }
 
-        if (clientShopWrapper.getData().getImageURL() != null &&
-                (!clientShopWrapper.getData().getImageURL().equals("")))
-            Picasso.with(getActivity())
-                    .load(clientShopWrapper.getData().getImageURL())
-                    .placeholder(R.drawable.placeholder)
-                    .error(R.drawable.placeholder)
-                    .into(couponImage);
+
+
+
+
+
+
+
+
 
 
         shop_id = clientShopWrapper.getData().getShopId();

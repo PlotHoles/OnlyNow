@@ -406,21 +406,23 @@ public class MapFragment extends BaseFragment implements OnMapReadyCallback, Loc
 
     @Override
     public void onSuccessfull(MapWrapper mapWrapper) {
+        if (getActivity() != null){
+            if (mapViewpger != null) {
+                addMarker(mapWrapper);
+                customMapPagerAdapter = new CustomMapPagerAdapter(getActivity(), mapWrapper.getData());
+                mapViewpger.setAdapter(customMapPagerAdapter);
+                customMapPagerAdapter.notifyDataSetChanged();
 
-        addMarker(mapWrapper);
-        customMapPagerAdapter = new CustomMapPagerAdapter(getActivity(), mapWrapper.getData());
-        mapViewpger.setAdapter(customMapPagerAdapter);
-        customMapPagerAdapter.notifyDataSetChanged();
+                datasize = mapWrapper.getData().size();
 
-        datasize = mapWrapper.getData().size();
-
-        if (datasize == 0) {
-            mapnexticon.setVisibility(View.GONE);
-            mapprevioudicon.setVisibility(View.GONE);
-        } else if (datasize == 1) {
-            mapnexticon.setVisibility(View.GONE);
-            mapprevioudicon.setVisibility(View.GONE);
-        }
+                if (datasize == 0) {
+                    mapnexticon.setVisibility(View.GONE);
+                    mapprevioudicon.setVisibility(View.GONE);
+                } else if (datasize == 1) {
+                    mapnexticon.setVisibility(View.GONE);
+                    mapprevioudicon.setVisibility(View.GONE);
+                }
+            }}
     }
 
     private int getItem(int i) {

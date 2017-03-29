@@ -2,6 +2,7 @@ package com.sparecode.vipul.onlynow.fragments;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -49,6 +50,7 @@ public class Signupstep2Fragment extends BaseFragment implements Signupstep2Back
         return fragment;
     }
 
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,7 +62,7 @@ public class Signupstep2Fragment extends BaseFragment implements Signupstep2Back
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_signupstep2, container, false);
         ButterKnife.bind(this, view);
-
+        getUser();
         data = new ArrayList<>();
         gridLayoutManager = new GridLayoutManager(getActivity(), 2);
         recyclerview.setLayoutManager(gridLayoutManager);
@@ -69,6 +71,7 @@ public class Signupstep2Fragment extends BaseFragment implements Signupstep2Back
         Title2 = getArguments().getString("arg");
         return view;
     }
+
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
@@ -124,19 +127,30 @@ public class Signupstep2Fragment extends BaseFragment implements Signupstep2Back
 
     SignupWrapper signupWrapper;
 
+    public SignupWrapper getSignupWrapper() {
+        return signupWrapper;
+    }
+
+    public void setSignupWrapper(SignupWrapper signupWrapper) {
+        this.signupWrapper = signupWrapper;
+    }
+
+
     private void getUser() {
         signupWrapper = new Gson().fromJson(Prefs.getString("user", ""), SignupWrapper.class);
-        Log.e("::", "SIGNUP WRAPPER::" + signupWrapper.getData().getFname());
     }
 
     @Override
     public void getSelectedLocation(LocationListData locationListData, boolean flag) {
         Log.e("WHICH VIEW SELECTED::", "POS:" + locationListData.getId() + "FLAG:" + flag);
-        getUser();
-        if (flag) {
-            signupstep2Backend.addFavoriteLocation(signupWrapper.getData().getId(), locationListData.getId(), "1.1", "2.2");
+        if (signupWrapper != null) {
+            if (flag) {
+                signupstep2Backend.addFavoriteLocation(signupWrapper.getData().getId(), locationListData.getId(), "1.1", "2.2");
+            } else {
+                signupstep2Backend.removeFavoriteLocation(locationListData.getId());
+            }
         } else {
-            signupstep2Backend.removeFavoriteLocation(locationListData.getId());
+            Snackbar.make(view, "Please finish step-1 to move ahead", Snackbar.LENGTH_SHORT).show();
         }
     }
 }

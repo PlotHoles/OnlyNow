@@ -210,7 +210,7 @@ public class ClientSignupFragment extends BaseFragment implements SignupNextList
 
     @Override
     public void onSuccessfullLogin(LoginWrapper loginWrapper) {
-        ((BaseActivity)getActivity()).openClientDonePage();
+        ((BaseActivity)getActivity()).openClientSigninPage();
     }
 
     @Override
@@ -229,8 +229,8 @@ public class ClientSignupFragment extends BaseFragment implements SignupNextList
         longitude = String.valueOf(location.getLongitude());
         Log.e("locationsignup",location+"");
 
-        Toast.makeText(getActivity(), "RECEIVED LOC" + latitude, Toast.LENGTH_SHORT).show();
-        Toast.makeText(getActivity(), "RECEIVED LOC" + location, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getActivity(), "RECEIVED LOC" + latitude, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getActivity(), "RECEIVED LOC" + location, Toast.LENGTH_SHORT).show();
     }
 
     public class SectionPagerAdapter extends FragmentPagerAdapter {

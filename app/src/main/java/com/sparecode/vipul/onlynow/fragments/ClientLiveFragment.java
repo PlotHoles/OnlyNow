@@ -1,7 +1,6 @@
 package com.sparecode.vipul.onlynow.fragments;
 
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -148,17 +147,26 @@ public class ClientLiveFragment extends BaseFragment implements CliebtLiveBacken
 
     @Override
     public void onSuccessfullLogin(ClientLiveWrapper clientLiveWrapper) {
-        swiperefresh.setRefreshing(false);
-        recyclerview.setVisibility(View.VISIBLE);
-        nodata.setVisibility(View.GONE);
-        setAdapter(clientLiveWrapper.getData());
-        couponLivedapter.notifyDataSetChanged();
+        if (getActivity()!=null){
+            if (swiperefresh!=null){
+                if (recyclerview!=null) {
+                    if (nodata != null){
+                        swiperefresh.setRefreshing(false);
+                    recyclerview.setVisibility(View.VISIBLE);
+                    nodata.setVisibility(View.GONE);
+                    setAdapter(clientLiveWrapper.getData());
+                    couponLivedapter.notifyDataSetChanged();
+                }}}}
     }
 
     @Override
     public void onLoginFailure(String msg) {
-        recyclerview.setVisibility(View.GONE);
-        nodata.setVisibility(View.VISIBLE);
-        Snackbar.make(view, msg, Snackbar.LENGTH_SHORT).show();
-    }
+        if (getActivity()!=null){
+            if (recyclerview!=null) {
+                if (nodata != null) {
+                    recyclerview.setVisibility(View.GONE);
+                    nodata.setVisibility(View.VISIBLE);
+                    //Snackbar.make(view, msg, Snackbar.LENGTH_SHORT).show();
+                }
+            }}}
 }

@@ -136,13 +136,37 @@ public class ProfileFragment extends BaseFragment implements LogoutBackendUser.L
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         getUser();
-        textUserName.setText(signupWrapper.getData().getFname() + " " + signupWrapper.getData().getLname());
-        textGender.setText(signupWrapper.getData().getGender());
-        textUserBirthdate.setText(signupWrapper.getData().getBirthday());
-        textUserEmailId.setText(signupWrapper.getData().getEmail());
-        if (!signupWrapper.getData().getImage().trim().isEmpty()) {
-            Picasso.with(mContext).load(signupWrapper.getData().getImage()).resize(250, 250).placeholder(R.drawable.natural).into(UserImage);
+        if (textUserName != null)
+        {
+            textUserName.setText(signupWrapper.getData().getFname() + " " + signupWrapper.getData().getLname());
+
+
         }
+        if (textGender != null)
+        {
+            textGender.setText(signupWrapper.getData().getGender());
+
+        }
+        if (textUserBirthdate != null)
+        {
+            textUserBirthdate.setText(signupWrapper.getData().getBirthday());
+
+        }
+        if (textUserEmailId != null)
+        {
+            textUserEmailId.setText(signupWrapper.getData().getEmail());
+
+        }
+        if (UserImage != null)
+        {
+            if (signupWrapper.getData().getImageURL()!=null && !signupWrapper.getData().getImageURL().equals("")) {
+                Log.e("imageprofile",signupWrapper.getData().getImageURL());
+                Picasso.with(getActivity()).load(signupWrapper.getData().getImageURL()).resize(250, 250).placeholder(R.drawable.placeholder).into(UserImage);
+            }
+        }
+
+
+
         updateProfileBackend = new UpdateProfileBackendUser(getActivity(), signupWrapper.getData().getId(), this);
 
     }
@@ -183,7 +207,7 @@ public class ProfileFragment extends BaseFragment implements LogoutBackendUser.L
 
     @OnClick(R.id.textUserFavCategory)
     void onClickSelectCategory() {
-        profileBackend = new ProfileBackendUser(signupWrapper.getData().getId(), getActivity(), this);
+        profileBackend = new ProfileBackendUser(signupWrapper.getData().getImageURL(), getActivity(), this);
     }
 
     @OnClick(R.id.textChangePassword)
@@ -244,13 +268,33 @@ public class ProfileFragment extends BaseFragment implements LogoutBackendUser.L
     @Override
     public void onSuccess(SignupWrapper profileUpdateWrapper) {
         signupWrapper = profileUpdateWrapper;
-        textUserName.setText(signupWrapper.getData().getFname() + " " + signupWrapper.getData().getLname());
-        textGender.setText(signupWrapper.getData().getGender());
-        textUserBirthdate.setText(signupWrapper.getData().getBirthday());
-        textUserEmailId.setText(signupWrapper.getData().getEmail());
-        if (!signupWrapper.getData().getImage().trim().isEmpty()) {
-            Picasso.with(mContext).load(signupWrapper.getData().getImage()).resize(250, 250).placeholder(R.drawable.natural).into(UserImage);
+        if (textUserName != null)
+        {
+            textUserName.setText(signupWrapper.getData().getFname() + " " + signupWrapper.getData().getLname());
         }
+        if (textGender != null)
+        {
+            textGender.setText(signupWrapper.getData().getGender());
+        }
+        if (textUserBirthdate != null)
+        {
+            textUserBirthdate.setText(signupWrapper.getData().getBirthday());
+
+        }
+        if (textUserEmailId != null)
+        {
+            textUserEmailId.setText(signupWrapper.getData().getEmail());
+
+        }
+        if (UserImage != null)
+        {
+            if (signupWrapper.getData().getImageURL()!=null && !signupWrapper.getData().getImageURL().equals("")) {
+                Picasso.with(getActivity()).load(signupWrapper.getData().getImageURL()).resize(250, 250).into(UserImage);
+            }
+        }
+
+
+
     }
 
     @Override

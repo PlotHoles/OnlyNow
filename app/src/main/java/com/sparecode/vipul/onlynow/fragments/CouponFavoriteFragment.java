@@ -97,22 +97,32 @@ public class CouponFavoriteFragment extends BaseFragment implements CouponFavour
 
     @Override
     public void onFavouriteSuccess(MyListFavoriteWrapper myListFavoriteWrapper) {
-        nodata.setVisibility(View.GONE);
-        recyclerview.setVisibility(View.VISIBLE);
-        swiperefresh.setRefreshing(false);
-        couponFavouriteAdapter = new CouponFavouriteAdapter(getActivity(), myListFavoriteWrapper, new OnClickListener() {
-            @Override
-            public void onItemClicked(int position) {
+        if (getActivity()!=null){
+            if (nodata!=null) {
+                if (swiperefresh != null) {
+                    if (recyclerview!=null) {
+                        nodata.setVisibility(View.GONE);
+                        recyclerview.setVisibility(View.VISIBLE);
+                        swiperefresh.setRefreshing(false);
+                        couponFavouriteAdapter = new CouponFavouriteAdapter(getActivity(), myListFavoriteWrapper, new OnClickListener() {
+                            @Override
+                            public void onItemClicked(int position) {
 
-            }
-        });
-        recyclerview.setAdapter(couponFavouriteAdapter);
+                            }
+                        });
+                        recyclerview.setAdapter(couponFavouriteAdapter);
+                    }}}}
     }
 
     @Override
     public void onFailure(String msg) {
-        swiperefresh.setRefreshing(false);
-        recyclerview.setVisibility(View.GONE);
-        nodata.setVisibility(View.VISIBLE);
+        if (getActivity()!=null){
+            if (nodata!=null) {
+                if (swiperefresh != null) {
+                    if (recyclerview!=null) {
+                        swiperefresh.setRefreshing(false);
+                        recyclerview.setVisibility(View.GONE);
+                        nodata.setVisibility(View.VISIBLE);
+                    }}}}
     }
 }

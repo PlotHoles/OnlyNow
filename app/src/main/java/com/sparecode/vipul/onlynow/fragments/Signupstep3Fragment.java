@@ -1,7 +1,9 @@
 package com.sparecode.vipul.onlynow.fragments;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -11,9 +13,11 @@ import android.view.ViewGroup;
 
 import com.google.gson.Gson;
 import com.sparecode.vipul.onlynow.R;
+import com.sparecode.vipul.onlynow.activity.BaseActivity;
 import com.sparecode.vipul.onlynow.adapters.LinearAdapter;
 import com.sparecode.vipul.onlynow.model.CategoryData;
 import com.sparecode.vipul.onlynow.model.CategoryWrapper;
+import com.sparecode.vipul.onlynow.model.SelectCategoryData;
 import com.sparecode.vipul.onlynow.model.SelectCategoryWrapper;
 import com.sparecode.vipul.onlynow.model.SignupWrapper;
 import com.sparecode.vipul.onlynow.util.Prefs;
@@ -31,18 +35,27 @@ public class Signupstep3Fragment extends BaseFragment implements Signupstep3Back
     RecyclerView recyclerview;
     LinearAdapter linearAdapter;
     String Title3;
-
+    private boolean isChangeCategory;
+    List<SelectCategoryData> data;
     List<CategoryData> categoryDatas;
     GridLayoutManager gridLayoutManager;
-    SelectCategoryWrapper  selectCategoryWrapper;
-    private boolean isChangeCategory;
+    SelectCategoryWrapper selectCategoryWrapper;
 
     public Signupstep3Fragment() {
-        // Required empty public constructor
     }
+
+    @SuppressLint("ValidFragment")
     public Signupstep3Fragment(boolean isChangeCategory) {
         this.isChangeCategory = isChangeCategory;
     }
+
+    public void setSelectCategoryWrapper(SelectCategoryWrapper selectCategoryWrapper) {
+        this.selectCategoryWrapper = selectCategoryWrapper;
+        data = new ArrayList<>();
+        data.addAll(selectCategoryWrapper.getData());
+
+    }
+
     public static Signupstep3Fragment newInstance(String text) {
         Signupstep3Fragment fragment = new Signupstep3Fragment();
         Bundle args = new Bundle();
@@ -51,10 +64,9 @@ public class Signupstep3Fragment extends BaseFragment implements Signupstep3Back
         System.out.println("------>" + args);
         return fragment;
     }
-    public void setSelectCategoryWrapper(SelectCategoryWrapper selectCategoryWrapper)
-    {
-        this.selectCategoryWrapper=selectCategoryWrapper;
-    }
+
+    View view;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,10 +76,9 @@ public class Signupstep3Fragment extends BaseFragment implements Signupstep3Back
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_signupstep3, container, false);
+        view = inflater.inflate(R.layout.fragment_signupstep3, container, false);
         ButterKnife.bind(this, view);
-
-
+        getUser();
         gridLayoutManager = new GridLayoutManager(getActivity(), 1);
         recyclerview.setLayoutManager(gridLayoutManager);
         int oldFocusability = recyclerview.getDescendantFocusability();
@@ -75,7 +86,6 @@ public class Signupstep3Fragment extends BaseFragment implements Signupstep3Back
         recyclerview.setDescendantFocusability(recyclerview.FOCUS_BLOCK_DESCENDANTS);
         recyclerview.setDescendantFocusability(oldFocusability);
         recyclerview.setHasFixedSize(true);
-        // linearAdapter.setHasStableIds(false);
         if (getArguments() != null) {
             if (getArguments().getString("arg") != null)
                 Title3 = getArguments().getString("arg");
@@ -88,12 +98,46 @@ public class Signupstep3Fragment extends BaseFragment implements Signupstep3Back
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+
         signupstep3Backend = new Signupstep3Backend(this, getActivity());
+        /*if(categoryDatas!=null)
+        {
+
+            categoryDatas = new ArrayList<>();
+            linearAdapter = new LinearAdapter(categoryDatas, getActivity(), this);
+            recyclerview.setAdapter(linearAdapter);
+            signupstep3Backend.callPagination(1);
+            setPagination(recyclerview);
+        }
+        else {
+
+                data = new ArrayList<>();
+                linearAdapter = new LinearAdapter(data, getActivity(), this, true);
+                recyclerview.setAdapter(linearAdapter);
+                data.addAll(selectCategoryWrapper.getData());
+        }*/
+
         categoryDatas = new ArrayList<>();
-        linearAdapter = new LinearAdapter(categoryDatas, getActivity(), this);
-        recyclerview.setAdapter(linearAdapter);
-        signupstep3Backend.callPagination(1);
-        setPagination(recyclerview);
+
+        if (categoryDatas != null) {
+            linearAdapter = new LinearAdapter(categoryDatas, getActivity(), this);
+            recyclerview.setAdapter(linearAdapter);
+            signupstep3Backend.callPagination(1);
+            setPagination(recyclerview);
+        }
+
+        if (data != null) {
+            ((BaseActivity) getActivity()).getImgToolBarBack().setVisibility(View.VISIBLE);
+            ((BaseActivity) getActivity()).getImgToolBarBack().setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    ((BaseActivity) getActivity()).openProfilePage();
+                }
+            });
+            linearAdapter = new LinearAdapter(data, getActivity(), this, true);
+            recyclerview.setAdapter(linearAdapter);
+        }
+
 
     }
 
@@ -138,17 +182,37 @@ public class Signupstep3Fragment extends BaseFragment implements Signupstep3Back
 
     private void getUser() {
         signupWrapper = new Gson().fromJson(Prefs.getString("user", ""), SignupWrapper.class);
-        Log.e("::", "SIGNUP WRAPPER::" + signupWrapper.getData());
     }
 
     @Override
     public void getSelectedCategory(CategoryData categoryData, boolean flag) {
         Log.e("WHICH VIEW SELECTED::", "POS:" + categoryData.getId() + "FLAG:" + flag);
-        getUser();
-        if (flag) {
-            signupstep3Backend.addFavoriteCategory(signupWrapper.getData().getId(), categoryData.getId());
+        if (signupWrapper != null) {
+            if (flag) {
+                signupstep3Backend.addFavoriteCategory(signupWrapper.getData().getId(), categoryData.getId());
+            } else {
+                signupstep3Backend.removeFavoriteCategory(categoryData.toString());
+            }
         } else {
-            signupstep3Backend.removeFavoriteCategory(categoryData.toString());
+            Snackbar.make(view, "Please finish step-1 to move ahead", Snackbar.LENGTH_SHORT).show();
         }
+    }
+
+    @Override
+    public void getSelectedCategory(SelectCategoryData selectCategoryData, boolean flag) {
+        Log.e("WHICH VIEW SELECTED::", "POS:" + selectCategoryData.getId() + "FLAG:" + flag);
+        if (flag) {
+            signupstep3Backend.addFavoriteCategory(signupWrapper.getData().getId(), selectCategoryData.getId());
+        } else {
+            signupstep3Backend.removeFavoriteCategory(String.valueOf(selectCategoryData.getFavId()));
+        }
+            /*if(flag)
+            {selectCategoryData.getId();
+            }
+        else
+            {
+                selectCategoryData.toString();
+            }*/
+
     }
 }

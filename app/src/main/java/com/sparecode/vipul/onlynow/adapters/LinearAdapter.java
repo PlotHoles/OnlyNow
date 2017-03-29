@@ -2,6 +2,7 @@ package com.sparecode.vipul.onlynow.adapters;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 
 import com.sparecode.vipul.onlynow.R;
 import com.sparecode.vipul.onlynow.model.CategoryData;
+import com.sparecode.vipul.onlynow.model.SelectCategoryData;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -32,14 +34,21 @@ public class LinearAdapter extends RecyclerView.Adapter<LinearAdapter.MyViewHold
 //    }
     List<CategoryData> categoryDatas;
     Context mContext;
-    int focusPos;
     GetSelectedCategory getSelectedCategory;
+    List<SelectCategoryData> data;
 
     public LinearAdapter(List<CategoryData> categoryDatas, Context mContext, GetSelectedCategory getSelectedCategory) {
         this.categoryDatas = categoryDatas;
         this.mContext = mContext;
         this.getSelectedCategory = getSelectedCategory;
     }
+
+    public LinearAdapter(List<SelectCategoryData> data, Context mContext, GetSelectedCategory getSelectedCategory, boolean flag) {
+        this.data = data;
+        this.mContext = mContext;
+        this.getSelectedCategory = getSelectedCategory;
+    }
+
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         //public TextView text_name,text_place,text_time,text_payments;;
@@ -55,11 +64,7 @@ public class LinearAdapter extends RecyclerView.Adapter<LinearAdapter.MyViewHold
         public MyViewHolder(View view) {
             super(view);
             ButterKnife.bind(this, view);
-
-//            text_name = (TextView) view.findViewById(R.id.text_name);
-//            text_place = (TextView) view.findViewById(R.id.text_place);
-//            text_time = (TextView) view.findViewById(R.id.text_time);
-//            text_payments = (TextView) view.findViewById(R.id.text_payments);
+            ;
         }
     }
 
@@ -75,37 +80,59 @@ public class LinearAdapter extends RecyclerView.Adapter<LinearAdapter.MyViewHold
     @Override
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
 
-//        History history = historyList.get(position);
-//        holder.text_name.setText(history.getName());
-//        holder.text_place.setText(history.getPlace());
-//        holder.text_time.setText(history.getTime());
-//        holder.text_payments.setText(history.getPayments());
-        Picasso.with(mContext).load(categoryDatas.get(position).getImageURL()).placeholder(R.drawable.natural).resize(720, 200).into(holder.imageView2);
-        holder.txtCategoryName.setText(categoryDatas.get(position).getName());
-        holder.ImageCategorySelected.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                /*Log.e("CLICKED", "CLICK PERFORMED");*/
-                if (!holder.ImageCategory.isSelected())
-                    holder.ImageCategory.setSelected(true);
-                else
-                    holder.ImageCategory.setSelected(false);
-                getSelectedCategory.getSelectedCategory(categoryDatas.get(position), holder.ImageCategory.isSelected());
+        if (categoryDatas != null) {
+            Picasso.with(mContext).load(categoryDatas.get(position).getImageURL()).placeholder(R.drawable.natural).resize(720, 200).into(holder.imageView2);
+            holder.txtCategoryName.setText(categoryDatas.get(position).getName());
+            holder.ImageCategorySelected.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Log.e("CLICKED", "CLICK PERFORMED");
+                    if (!holder.ImageCategory.isSelected())
+                        holder.ImageCategory.setSelected(true);
+                    else
+                        holder.ImageCategory.setSelected(false);
 
+                    getSelectedCategory.getSelectedCategory(categoryDatas.get(position), holder.ImageCategory.isSelected());
+                }
+            });
+        } else {
+            Picasso.with(mContext).load(data.get(position).getImageURL()).placeholder(R.drawable.natural).resize(720, 200).into(holder.imageView2);
+            holder.txtCategoryName.setText(data.get(position).getName());
+
+            if (data.get(position).getIsFav() == 1) {
+                holder.ImageCategory.setSelected(true);
+                Log.e("HOLDER::", "" + holder.ImageCategory.isSelected());
+            } else {
+                holder.ImageCategory.setSelected(false);
             }
-        });
-    }
+            holder.ImageCategorySelected.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (!holder.ImageCategory.isSelected())
+                        holder.ImageCategory.setSelected(true);
+                    else
+                        holder.ImageCategory.setSelected(false);
+                    getSelectedCategory.getSelectedCategory(data.get(position), holder.ImageCategory.isSelected());
 
+                }
+            });
+        }
+    }
 
     @Override
     public int getItemCount() {
-        return categoryDatas.size();
+        if (categoryDatas != null) {
+            return categoryDatas.size();
+        } else {
+            Log.e("::", "size" + data.size());
+            return data.size();
+        }
     }
 
-    //       return historyList.size();
-//    }
     public interface GetSelectedCategory {
         void getSelectedCategory(CategoryData categoryData, boolean flag);
+
+        void getSelectedCategory(SelectCategoryData selectCategoryData, boolean flag);
     }
 
     @Override

@@ -3,7 +3,7 @@ package com.sparecode.vipul.onlynow.fragments;
 import android.content.Context;
 
 import com.sparecode.vipul.onlynow.interfaces.OnResponse;
-import com.sparecode.vipul.onlynow.model.UpdateProfileWrapper;
+import com.sparecode.vipul.onlynow.model.LoginWrapper;
 import com.sparecode.vipul.onlynow.webservice.GetRequest;
 import com.sparecode.vipul.onlynow.webservice.ReqestParameter;
 import com.sparecode.vipul.onlynow.webservice.RequestApi;
@@ -29,9 +29,9 @@ public class UpdateProfileBackend {
 
     private void call()
     {
-        new GetRequest<UpdateProfileWrapper>().toGetRequest(context, RequestApi.COMMONSERVICE, new ReqestParameter().toUpdateProfile(userId, fname, lname), UpdateProfileWrapper.class, new OnResponse<UpdateProfileWrapper>() {
+        new GetRequest<LoginWrapper>().toGetRequest(context, RequestApi.COMMONSERVICE, new ReqestParameter().toUpdateProfile(userId, fname, lname), LoginWrapper.class, new OnResponse<LoginWrapper>() {
             @Override
-            public void onSuccess(UpdateProfileWrapper updateProfileWrapper) {
+            public void onSuccess(LoginWrapper updateProfileWrapper) {
                 if (updateProfileWrapper.getStatus() == 0)
                 {
                     updateProfileDataProvider.onFailure(updateProfileWrapper.getMessage());
@@ -51,7 +51,7 @@ public class UpdateProfileBackend {
 
     public interface UpdateProfileDataProvider{
 
-        void onSuccesscull(UpdateProfileWrapper updateProfileWrapper);
+        void onSuccesscull(LoginWrapper updateProfileWrapper);
 
         void onFailure(String msg);
     }

@@ -134,7 +134,7 @@ public class ReqestParameter {
         try {
             object.put("method", RequestApi.FBLOGIN);
             object.put("email", vars[0]);
-            object.put("password", vars[1]);
+            //object.put("password", vars[1]);
             object.put("lat", vars[2]);
             object.put("long", vars[3]);
             object.put("device_type", vars[4]);

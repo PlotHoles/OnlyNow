@@ -96,23 +96,32 @@ public class CouponReviewedFragment extends BaseFragment implements CouponReview
 
     @Override
     public void onReviewedSuccess(MyListReviewedWrapper myListReviewedWrapper) {
-        nodata.setVisibility(View.GONE);
-        recyclerview.setVisibility(View.VISIBLE);
-        swiperefresh.setRefreshing(false);
-        couponReviewedAdapter = new CouponReviewedAdapter(getActivity(), myListReviewedWrapper, new OnClickListener() {
-            @Override
-            public void onItemClicked(int position) {
+        if (getActivity()!=null){
+            if (nodata!=null) {
+                if (swiperefresh != null) {
+                    if (recyclerview!=null) {
+                        nodata.setVisibility(View.GONE);
+                        recyclerview.setVisibility(View.VISIBLE);
+                        swiperefresh.setRefreshing(false);
+                        couponReviewedAdapter = new CouponReviewedAdapter(getActivity(), myListReviewedWrapper, new OnClickListener() {
+                            @Override
+                            public void onItemClicked(int position) {
 
-            }
-        });
-        recyclerview.setAdapter(couponReviewedAdapter);
-
+                            }
+                        });
+                        recyclerview.setAdapter(couponReviewedAdapter);
+                    }}}}
     }
 
     @Override
     public void onFailure(String msg) {
-        swiperefresh.setRefreshing(false);
-        nodata.setVisibility(View.VISIBLE);
-        recyclerview.setVisibility(View.GONE);
-    }
+        if (getActivity()!=null){
+            if (nodata!=null) {
+                if (swiperefresh != null) {
+                    if (recyclerview != null) {
+                        swiperefresh.setRefreshing(false);
+                        nodata.setVisibility(View.VISIBLE);
+                        recyclerview.setVisibility(View.GONE);
+                    }
+                }}}}
 }

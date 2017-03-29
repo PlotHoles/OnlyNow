@@ -31,7 +31,7 @@
             android:gravity="center"
             app:typeface="lato_bold"/>
 
-        <com.sparecode.vipul.onlynow.widgets.LatoButton
+        <com.facebook.login.widget.LoginButton
             android:textAllCaps="false"
             android:textColor="@color/white"
             android:background="@color/blue"
@@ -40,7 +40,7 @@
             android:layout_marginRight="@dimen/dp_20"
             android:text="@string/facebooksignup"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="90dp"
             android:id="@+id/button_signup_facebook"
             app:typeface="lato_bold"/>
 

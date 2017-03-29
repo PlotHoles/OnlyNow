@@ -101,22 +101,31 @@ public class CouponSavedFragment extends BaseFragment implements CouponSavedBack
 
     @Override
     public void onSavedSuccess(MyListSavedWrapper myListSavedWrapper) {
-        nodata.setVisibility(View.GONE);
-        recyclerview.setVisibility(View.VISIBLE);
-        swiperefresh.setRefreshing(false);
-        couponSavedAdapter = new CouponSavedAdapter(getActivity(), myListSavedWrapper, new OnClickListener() {
-            @Override
-            public void onItemClicked(int position) {
+        if (getActivity()!=null){
+            if (nodata!=null) {
+                if (swiperefresh != null) {
+                    if (recyclerview!=null){
+                    nodata.setVisibility(View.GONE);
+                    recyclerview.setVisibility(View.VISIBLE);
+                    swiperefresh.setRefreshing(false);
+                    couponSavedAdapter = new CouponSavedAdapter(getActivity(), myListSavedWrapper, new OnClickListener() {
+                        @Override
+                        public void onItemClicked(int position) {
 
-            }
-        });
-        recyclerview.setAdapter(couponSavedAdapter);
-    }
-
+                        }
+                    });
+                    recyclerview.setAdapter(couponSavedAdapter);
+                }
+            }}}}
     @Override
     public void onFailure(String msg) {
-        swiperefresh.setRefreshing(false);
-        nodata.setVisibility(View.VISIBLE);
-        recyclerview.setVisibility(View.GONE);
-    }
+        if (getActivity()!=null){
+            if (nodata!=null) {
+                if (swiperefresh != null) {
+                    if (recyclerview != null) {
+                        swiperefresh.setRefreshing(false);
+                        nodata.setVisibility(View.VISIBLE);
+                        recyclerview.setVisibility(View.GONE);
+                    }
+                }}}}
 }

@@ -71,6 +71,15 @@ public class SignupData {
     @SerializedName("date")
     @Expose
     private String date;
+    @SerializedName("cancel_date")
+    @Expose
+    private String cancelDate;
+    @SerializedName("comment")
+    @Expose
+    private String comment;
+    @SerializedName("imageURL")
+    @Expose
+    private String imageURL;
 
     public String getId() {
         return id;
@@ -238,5 +247,27 @@ public class SignupData {
 
     public void setDate(String date) {
         this.date = date;
+    }public String getCancelDate() {
+        return cancelDate;
+    }
+
+    public void setCancelDate(String cancelDate) {
+        this.cancelDate = cancelDate;
+    }
+
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
+
+    public String getImageURL() {
+        return imageURL;
+    }
+
+    public void setImageURL(String imageURL) {
+        this.imageURL = imageURL;
     }
 }

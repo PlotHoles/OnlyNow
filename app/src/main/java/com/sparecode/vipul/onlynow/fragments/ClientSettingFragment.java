@@ -21,6 +21,7 @@ import com.sparecode.vipul.onlynow.activity.BaseActivity;
 import com.sparecode.vipul.onlynow.activity.MainActivity;
 import com.sparecode.vipul.onlynow.dialog.CancelDealDialog;
 import com.sparecode.vipul.onlynow.interfaces.OnResponse;
+import com.sparecode.vipul.onlynow.model.LoginWrapper;
 import com.sparecode.vipul.onlynow.model.LogoutWrapper;
 import com.sparecode.vipul.onlynow.model.UpdateLocationWrapper;
 import com.sparecode.vipul.onlynow.model.ZipWrapper;
@@ -35,7 +36,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class ClientSettingFragment extends BaseFragment implements UpdateLocationBackend.UpdateLocationResultProvider, LogoutBackend.LogoutBackendResultProvider, ChangePasswordbackend.ChangePasswordDataProvider {
+public class ClientSettingFragment extends BaseFragment implements UpdateLocationBackend.UpdateLocationResultProvider, LogoutBackend.LogoutBackendResultProvider, ChangePasswordbackend.ChangePasswordDataProvider,UpdateProfileBackend.UpdateProfileDataProvider {
 
     @Bind(R.id.profile_image)
     CircleImageView profileImage;
@@ -122,6 +123,7 @@ public class ClientSettingFragment extends BaseFragment implements UpdateLocatio
     private View view;
     public static final int PICK_IMAGE_ID = 234;
     public static final int PICK_VIDEO = 123;
+    LoginWrapper loginWrapper;
 
     public ClientSettingFragment() {
         // Required empty public constructor
@@ -144,9 +146,17 @@ public class ClientSettingFragment extends BaseFragment implements UpdateLocatio
         firstname.setText(getUserData().getFname());
         fullname.setText(getUserData().getFname() + getUserData().getLname());
 
-        String phonenumber = PhoneNumberUtils.formatNumber(getUserData().getPhone());
-        mobile.setText(phonenumber);
-        email.setText(getUserData().getEmail());
+        if (getUserData().getPhone()!=null)
+        {
+            String phonenumber = PhoneNumberUtils.formatNumber(getUserData().getPhone());
+            mobile.setText(phonenumber);
+
+        }
+        if (getUserData().getEmail()!=null)
+        {
+            email.setText(getUserData().getEmail());
+
+        }
         String visible = String.valueOf(ziplinear.getVisibility());
         System.out.println("visible" + visible);
 
@@ -204,7 +214,7 @@ public class ClientSettingFragment extends BaseFragment implements UpdateLocatio
             public void onClick(View v) {
                 //Toast.makeText(getActivity(),"hi",Toast.LENGTH_SHORT).show();
 
-                UpdateLocationBackend updateLocationBackend = new UpdateLocationBackend(getActivity(), getShopId(), editZipcode.getText().toString().trim(), editPrefecture.getText().toString(), editCityname.getText().toString(), ClientSettingFragment.this);
+                UpdateLocationBackend updateLocationBackend = new UpdateLocationBackend(getActivity(), getUserData().getShopId(), editZipcode.getText().toString().trim(), editPrefecture.getText().toString(), editCityname.getText().toString(), ClientSettingFragment.this);
             }
         });
         textChangecategory.setOnClickListener(new View.OnClickListener() {
@@ -234,8 +244,9 @@ public class ClientSettingFragment extends BaseFragment implements UpdateLocatio
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 //Prefs.clear();
+                               //
+                                LogoutBackend logoutBackend = new LogoutBackend(getActivity(), getUserData().getId(), ClientSettingFragment.this);
                                 ((MainActivity)getActivity()).toClearPrefrences();
-                                LogoutBackend logoutBackend = new LogoutBackend(getActivity(), getUserId(), ClientSettingFragment.this);
                             }
                         })
                         .setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
@@ -308,7 +319,7 @@ public class ClientSettingFragment extends BaseFragment implements UpdateLocatio
 
     @Override
     public void onSuccessfullLogout(LogoutWrapper logoutWrapper) {
-        ((BaseActivity) getActivity()).openClientSigninPage();
+        ((BaseActivity) getActivity()).openClientSplashPage();
     }
 
     @Override
@@ -326,12 +337,22 @@ public class ClientSettingFragment extends BaseFragment implements UpdateLocatio
 
         Log.e("oldpassword",oldpassword);
         Log.e("oldpassword",newpassword);
-        ChangePasswordbackend changePasswordbackend = new ChangePasswordbackend(getActivity(), getUserId(), oldpassword,newpassword,ClientSettingFragment.this);
+        ChangePasswordbackend changePasswordbackend = new ChangePasswordbackend(getActivity(), getUserData().getId(), oldpassword,newpassword,ClientSettingFragment.this);
     }
 
     @Override
     public void onSuccessfull(ChangePasswordWrapper changePasswordWrapper) {
         Toast.makeText(getActivity(),changePasswordWrapper.getMessage(),Toast.LENGTH_SHORT).show();
+        changepasswordlinear.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void onSuccesscull(LoginWrapper updateProfileWrapper) {
+            loginWrapper = updateProfileWrapper;
+        firstname.setText(updateProfileWrapper.getData().getFname());
+        fullname.setText(updateProfileWrapper.getData().getFname() + updateProfileWrapper.getData().getLname());
+
+
     }
 
     @Override

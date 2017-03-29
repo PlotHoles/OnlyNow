@@ -159,30 +159,36 @@ public class ClientReviewFragment extends BaseFragment implements ClientReviewBa
 
     @Override
     public void onSuccessfullLogin(ClientReviewWrapper clientReviewWrapper) {
-        linearreview.setVisibility(View.VISIBLE);
-        nodata.setVisibility(View.GONE);
-        textRating.setText(clientReviewWrapper.getData().getRating());
-        star1.setText(clientReviewWrapper.getData().getStars1());
-        star2.setText(clientReviewWrapper.getData().getStars2());
-        star3.setText(clientReviewWrapper.getData().getStars3());
-        star4.setText(clientReviewWrapper.getData().getStars4());
-        star5.setText(clientReviewWrapper.getData().getStars5());
+        if (getActivity()!=null) {
+            if (linearreview!=null){
+            linearreview.setVisibility(View.VISIBLE);
+            nodata.setVisibility(View.GONE);
+            textRating.setText(clientReviewWrapper.getData().getRating());
+            star1.setText(clientReviewWrapper.getData().getStars1());
+            star2.setText(clientReviewWrapper.getData().getStars2());
+            star3.setText(clientReviewWrapper.getData().getStars3());
+            star4.setText(clientReviewWrapper.getData().getStars4());
+            star5.setText(clientReviewWrapper.getData().getStars5());
 
-        fivestarRating.setRating(Float.parseFloat(clientReviewWrapper.getData().getStars5()));
-        fourstarRating.setRating(Float.parseFloat(clientReviewWrapper.getData().getStars4()));
-        threestarRating.setRating(Float.parseFloat(clientReviewWrapper.getData().getStars3()));
-        twostarRating.setRating(Float.parseFloat(clientReviewWrapper.getData().getStars2()));
-        onestarRating.setRating(Float.parseFloat(clientReviewWrapper.getData().getStars1()));
+            fivestarRating.setRating(Float.parseFloat(clientReviewWrapper.getData().getStars5()));
+            fourstarRating.setRating(Float.parseFloat(clientReviewWrapper.getData().getStars4()));
+            threestarRating.setRating(Float.parseFloat(clientReviewWrapper.getData().getStars3()));
+            twostarRating.setRating(Float.parseFloat(clientReviewWrapper.getData().getStars2()));
+            onestarRating.setRating(Float.parseFloat(clientReviewWrapper.getData().getStars1()));
 
-        setAdapter(clientReviewWrapper.getData().getReviews());
-    }
+            setAdapter(clientReviewWrapper.getData().getReviews());
+        }}
+        }
 
     @Override
     public void onLoginfailure(String msg) {
-        Snackbar.make(view, msg, Snackbar.LENGTH_SHORT).show();
-        nodata.setVisibility(View.VISIBLE);
-        linearreview.setVisibility(View.GONE);
-
+        if (getActivity()!=null){
+            if (linearreview!=null){
+                if (nodata != null) {
+                    Snackbar.make(view, msg, Snackbar.LENGTH_SHORT).show();
+                    nodata.setVisibility(View.VISIBLE);
+                    linearreview.setVisibility(View.GONE);
+                }}}
 
     }
 }

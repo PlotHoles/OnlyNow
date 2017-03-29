@@ -1,5 +1,6 @@
 package com.sparecode.vipul.onlynow.fragments;
 
+import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -27,6 +28,9 @@ import com.sparecode.vipul.onlynow.interfaces.OnResponse;
 import com.sparecode.vipul.onlynow.model.ChangeProfilePictureWrapper;
 import com.sparecode.vipul.onlynow.model.SignupWrapper;
 import com.sparecode.vipul.onlynow.model.UpdateProfileWrapper;
+import com.sparecode.vipul.onlynow.permission.PiemissionsCallback;
+import com.sparecode.vipul.onlynow.permission.PiemissionsRequest;
+import com.sparecode.vipul.onlynow.permission.PiemissionsUtils;
 import com.sparecode.vipul.onlynow.util.Prefs;
 import com.sparecode.vipul.onlynow.util.Utility;
 import com.sparecode.vipul.onlynow.view.CircleImageView;
@@ -42,6 +46,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 
 import butterknife.Bind;
@@ -71,6 +76,15 @@ public class UpdateProfileFragment extends BaseFragment implements UpdateProfile
     private int REQUEST_CAMERA = 0, SELECT_FILE = 1;
     private String userChoosenTask;
     File destination;
+    private static final int PERMISSIONS_CODE = 13370;
+    private static final String[] PERMISSIONS = new String[]{
+            Manifest.permission.INTERNET,
+            Manifest.permission.WRITE_EXTERNAL_STORAGE,
+            Manifest.permission.READ_CONTACTS,
+            Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.CALL_PHONE
+            ,Manifest.permission.CAMERA,Manifest.permission.READ_EXTERNAL_STORAGE
+
+    };
 
     @Nullable
     @Override
@@ -84,6 +98,22 @@ public class UpdateProfileFragment extends BaseFragment implements UpdateProfile
                 selectImage();
             }
         });
+        final PiemissionsRequest request = new PiemissionsRequest(PERMISSIONS_CODE, PERMISSIONS);
+        request.setCallback(new PiemissionsCallback() {
+            @Override
+            public void onGranted() {
+                Log.e("log----::", "Permission Granted");
+                //locationHelper = new LocationHelper(getActivity(), ClientEditprofileFragment.this);
+            }
+
+            @Override
+            public boolean onDenied(HashMap<String, Boolean> rationalizablePermissions) {
+                Log.e("log---::", "Permission Denied");
+
+                return true;
+            }
+        });
+        PiemissionsUtils.requestPermission(request);
         return view;
     }
 
@@ -99,7 +129,7 @@ public class UpdateProfileFragment extends BaseFragment implements UpdateProfile
         super.onActivityCreated(savedInstanceState);
         getUser();
         if (!signupWrapper.getData().getImage().trim().isEmpty()) {
-            Picasso.with(mContext).load(signupWrapper.getData().getImage()).resize(250, 250).placeholder(R.drawable.natural).into(UserImage);
+            Picasso.with(mContext).load(signupWrapper.getData().getImage()).resize(250, 250).placeholder(R.drawable.placeholder).into(UserImage);
         }
     }
 
@@ -237,10 +267,10 @@ public class UpdateProfileFragment extends BaseFragment implements UpdateProfile
     }
     public void callService() {
 
-        Log.e("imagegallery", String.valueOf(destination));
-        Log.e("imagegallery", getUserId());
+        /*Log.e("imagegallery", String.valueOf(destination));
+        Log.e("imagegallery", signupWrapper.getData().getId());*/
 
-        List<Pair<String, String>> list = new ReqestParameter().toUpdateProfilePicture(getUserId());
+        List<Pair<String, String>> list = new ReqestParameter().toUpdateProfilePicture(signupWrapper.getData().getId());
 
         new PostRequest<ChangeProfilePictureWrapper>().onPostRequest(getActivity(), RequestApi.UPDATEPROFILEPICTURE, list, "image", destination, ChangeProfilePictureWrapper.class, new OnResponse<ChangeProfilePictureWrapper>() {
             @Override
@@ -257,7 +287,7 @@ public class UpdateProfileFragment extends BaseFragment implements UpdateProfile
 
             @Override
             public void onError() {
-
+                Toast.makeText(getActivity(),"Please try again",Toast.LENGTH_SHORT).show();
             }
         });
     }

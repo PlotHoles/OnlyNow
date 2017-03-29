@@ -20,7 +20,7 @@ public class Signupstep1Backend {
     private Context mContext;
     private SignupWrapperProvider signupWrapperProvider;
 
-    public Signupstep1Backend(Context mContext, String fname, String lname, String email, String pwd, String bdate, String gender, String lat, String lng, String recieve_email, String device_id, SignupWrapperProvider signupWrapperProvider) {
+    public Signupstep1Backend(Context mContext, String fname, String lname, String email, String pwd, String gender, String bdate, String lat, String lng, String recieve_email, String device_id, SignupWrapperProvider signupWrapperProvider) {
         this.fname = fname;
         this.lname = lname;
         this.email = email;
@@ -36,7 +36,7 @@ public class Signupstep1Backend {
         register();
     }
 
-    public Signupstep1Backend(Context mContext, String fname, String lname, String email, String pwd, String bdate, String gender, String lat, String lng, String device_id, String recieve_email, String fbid, SignupWrapperProvider signupWrapperProvider) {
+    public Signupstep1Backend(Context mContext, String fname, String lname, String email, String pwd, String gender, String bdate, String lat, String lng, String device_id, String recieve_email, String fbid, SignupWrapperProvider signupWrapperProvider) {
         this.fname = fname;
         this.lname = lname;
         this.email = email;
@@ -54,7 +54,7 @@ public class Signupstep1Backend {
     }
 
     private void register() {
-        new GetRequest<SignupWrapper>().toGetRequest(mContext, RequestApi.USERSERVICE, new ReqestParameter().toSignup(fname, lname, email, pwd, bdate, gender, lat, lng, recieve_email, "A", device_id), SignupWrapper.class, new OnResponse<SignupWrapper>() {
+        new GetRequest<SignupWrapper>().toGetRequest(mContext, RequestApi.USERSERVICE, new ReqestParameter().toSignup(fname, lname, email, pwd, gender, bdate, lat, lng, recieve_email, "A", device_id), SignupWrapper.class, new OnResponse<SignupWrapper>() {
             @Override
             public void onSuccess(SignupWrapper signupWrapper) {
                 if (signupWrapper.getStatus() == 1) {
@@ -72,7 +72,7 @@ public class Signupstep1Backend {
     }
 
     private void fbRegister() {
-        new GetRequest<SignupWrapper>().toGetRequest(mContext, RequestApi.USERSERVICE, new ReqestParameter().toFbSignup(fname, lname, email, pwd, bdate, gender, lat, lng, recieve_email, "A", device_id, fbid), SignupWrapper.class, new OnResponse<SignupWrapper>() {
+        new GetRequest<SignupWrapper>().toGetRequest(mContext, RequestApi.USERSERVICE, new ReqestParameter().toFbSignup(fname, lname, email, pwd, gender, bdate, lat, lng, recieve_email, "A", device_id, fbid), SignupWrapper.class, new OnResponse<SignupWrapper>() {
             @Override
             public void onSuccess(SignupWrapper signupWrapper) {
                 if (signupWrapper.getStatus() == 1) {

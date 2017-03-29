@@ -1,7 +1,6 @@
 package com.sparecode.vipul.onlynow.fragments;
 
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -149,17 +148,25 @@ public class ClientDraftFragment extends BaseFragment implements ClientDraftBack
 
     @Override
     public void onSuccessfullLogin(ClientDraftWrapper clientDraftWrapper) {
-        recyclerview.setVisibility(View.VISIBLE);
-        nodata.setVisibility(View.GONE);
-        swiperefresh.setRefreshing(false);
-        setAdapter(clientDraftWrapper.getData());
+        if (getActivity()!=null){
+            if (swiperefresh!=null){
+                if (recyclerview!=null) {
+                    if (nodata != null) {
+                        recyclerview.setVisibility(View.VISIBLE);
+                        nodata.setVisibility(View.GONE);
+                        swiperefresh.setRefreshing(false);
+                        setAdapter(clientDraftWrapper.getData());
+                    }}}}
     }
 
     @Override
     public void onLoginFailure(String msg) {
-
-        Snackbar.make(view, msg, Snackbar.LENGTH_SHORT).show();
-        recyclerview.setVisibility(View.GONE);
-        nodata.setVisibility(View.VISIBLE);
+        if (getActivity()!=null){
+            if (recyclerview!=null) {
+                if (nodata != null) {
+                    //Snackbar.make(view, msg, Snackbar.LENGTH_SHORT).show();
+                    recyclerview.setVisibility(View.GONE);
+                    nodata.setVisibility(View.VISIBLE);
+                }}}
     }
 }

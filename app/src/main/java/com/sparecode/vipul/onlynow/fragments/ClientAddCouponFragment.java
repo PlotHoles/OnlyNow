@@ -298,6 +298,7 @@ public class ClientAddCouponFragment extends BaseFragment implements ClientGetCa
 
     public void callService() {
 
+/*
         Log.e("imagelistasd", fileList.toString());
         Log.e("imagelistasd", getUserId());
         Log.e("imagelistasd", shopName.getText().toString());
@@ -306,6 +307,7 @@ public class ClientAddCouponFragment extends BaseFragment implements ClientGetCa
         Log.e("imagelistasd", startDate.getText().toString());
         Log.e("imagelistasd", endDate.getText().toString());
         Log.e("imagelistasd", categoryid);
+*/
         List<Pair<String, String>> list = new ReqestParameter().toAddCLientCoupon(getUserId(),
                 categoryid, shopName.getText().toString(), couponDesc.getText().toString(), couponDetails.getText().toString(), startDate.getText().toString(), endDate.getText().toString());
         if (getActivity() != null) {

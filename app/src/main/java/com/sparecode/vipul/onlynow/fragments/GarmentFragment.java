@@ -161,8 +161,18 @@ public class GarmentFragment extends BaseFragment implements HomeFragmentBackend
 
     @Override
     public void onFailure(String msg) {
-        swiperefresh.setRefreshing(false);
-        nodata.setVisibility(View.VISIBLE);
-        recyclerview.setVisibility(View.GONE);
+        if(getActivity()!= null)
+        {   if (nodata != null)
+            {   if (recyclerview !=null) {
+                if (swiperefresh != null) {
+                    nodata.setVisibility(View.VISIBLE);
+                    swiperefresh.setRefreshing(false);
+                    recyclerview.setVisibility(View.GONE);
+
+                }
+            }
+            }
+        }
+
     }
 }

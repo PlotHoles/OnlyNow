@@ -1,7 +1,6 @@
 package com.sparecode.vipul.onlynow.fragments;
 
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -149,17 +148,26 @@ public class ClientPastFragment extends BaseFragment implements ClientPastBacken
 
     @Override
     public void onSuccessfullLogin(ClientPastWrapper clientPastWrapper) {
-        nodata.setVisibility(View.GONE);
-        recyclerview.setVisibility(View.VISIBLE);
-        swiperefresh.setRefreshing(false);
-        setAdapter(clientPastWrapper.getData());
-        couponPastdapter.notifyDataSetChanged();
+        if (getActivity()!=null){
+            if (swiperefresh!=null){
+                if (recyclerview!=null) {
+                    if (nodata != null) {
+                        nodata.setVisibility(View.GONE);
+                        recyclerview.setVisibility(View.VISIBLE);
+                        swiperefresh.setRefreshing(false);
+                        setAdapter(clientPastWrapper.getData());
+                        couponPastdapter.notifyDataSetChanged();
+                    }}}}
     }
 
     @Override
     public void onLoginFailure(String msg) {
-        nodata.setVisibility(View.VISIBLE);
-        recyclerview.setVisibility(View.GONE);
-        Snackbar.make(view, msg, Snackbar.LENGTH_SHORT).show();
+        if (getActivity()!=null){
+            if (recyclerview!=null) {
+                if (nodata != null) {
+                    nodata.setVisibility(View.VISIBLE);
+                    recyclerview.setVisibility(View.GONE);
+                    // Snackbar.make(view, msg, Snackbar.LENGTH_SHORT).show();
+                }}}
     }
 }

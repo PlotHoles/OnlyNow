@@ -123,25 +123,33 @@ public class NoticeFragment extends BaseFragment implements NoticeBackend.Notice
     @Override
     public void onSuccess(NoticeWrapper noticeWrapper) {
         if (getActivity() != null) {
+            if (swiperefresh!= null)
+            {
+            if (nodata != null){
+            if (recyclerview != null){
             swiperefresh.setRefreshing(false);
             nodata.setVisibility(View.GONE);
             recyclerview.setVisibility(View.VISIBLE);
             data.addAll(noticeWrapper.getData());
             noticeAdapter.notifyDataSetChanged();
-        }
+        }}}}
     }
 
     @Override
     public void onFailure(NoticeWrapper noticeWrapper) {
         if (getActivity() != null) {
-            swiperefresh.setRefreshing(false);
-            if (noticeWrapper.getPage() != null) {
-                if (noticeWrapper.getPage() == 1) {
-                    recyclerview.setVisibility(View.GONE);
-                    nodata.setVisibility(View.VISIBLE);
-                }
-            }
-
+            if (swiperefresh!= null) {
+                swiperefresh.setRefreshing(false);
+                if (recyclerview!=null) {
+                    if (nodata != null) {
+                        if (noticeWrapper.getPage() != null) {
+                            if (noticeWrapper.getPage() == 1) {
+                                recyclerview.setVisibility(View.GONE);
+                                nodata.setVisibility(View.VISIBLE);
+                            }
+                        }
+                    }
+                }}
             //Snackbar.make(view, msg, Snackbar.LENGTH_SHORT).show();
         }
     }

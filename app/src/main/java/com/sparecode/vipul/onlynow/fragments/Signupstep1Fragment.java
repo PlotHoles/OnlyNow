@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.support.annotation.IdRes;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.util.Log;
@@ -69,8 +70,10 @@ public class Signupstep1Fragment extends BaseFragment implements Signupstep1Back
     @Bind(R.id.genderradiogroup)
     RadioGroup genderradiogroup;
     private int mYear, mMonth, mDay;
-     Signupstep1Backend signupstep1Backend;
+    Signupstep1Backend signupstep1Backend;
     View view;
+    RadioButton radioButton1;
+    String selectionradiobutton;
 
     public Signupstep1Fragment() {
         // Required empty public constructor
@@ -107,7 +110,18 @@ public class Signupstep1Fragment extends BaseFragment implements Signupstep1Back
         mMonth = c.get(Calendar.MONTH);
         mDay = c.get(Calendar.DAY_OF_MONTH);
         getFbData();
+
+        genderradiogroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
+                radioButton1 = (RadioButton)view.findViewById(checkedId);
+                selectionradiobutton = (String)radioButton1.getText();
+                Toast.makeText(getActivity(), selectionradiobutton,Toast.LENGTH_SHORT).show();
+            }
+        });
+
         return view;
+
     }
 
     @Override
@@ -129,6 +143,7 @@ public class Signupstep1Fragment extends BaseFragment implements Signupstep1Back
         boolean receive = receivecheck.isChecked();
 
         String gender = String.valueOf(genderradiogroup.getCheckedRadioButtonId());
+
         System.out.println("----->gender" + gender);
         boolean gender1 = gender.matches("-1");
         System.out.println("----->gender1" + gender1);
@@ -156,9 +171,9 @@ public class Signupstep1Fragment extends BaseFragment implements Signupstep1Back
         } else {
             @SuppressLint("HardwareIds") String android_id = Settings.Secure.getString(getContext().getContentResolver(), Settings.Secure.ANDROID_ID);
             if (facebookWrapper != null) {
-                signupstep1Backend = new Signupstep1Backend(getActivity(), editFirstname.getText().toString(), editLastname.getText().toString(), editEmail.getText().toString(), editPassword.getText().toString(), editBirthday.getText().toString(), gender, "1.1", "1.2", android_id, "1", facebookWrapper.getId(), Signupstep1Fragment.this);
+                signupstep1Backend = new Signupstep1Backend(getActivity(), editFirstname.getText().toString(), editLastname.getText().toString(), editEmail.getText().toString(), editPassword.getText().toString(), selectionradiobutton, editBirthday.getText().toString(),"1.1", "1.2", android_id, "1", facebookWrapper.getId(), Signupstep1Fragment.this);
             } else {
-                signupstep1Backend = new Signupstep1Backend(getActivity(), editFirstname.getText().toString(), editLastname.getText().toString(), editEmail.getText().toString(), editPassword.getText().toString(), editBirthday.getText().toString(), gender, "1.1", "1.2", android_id, "1", Signupstep1Fragment.this);
+                signupstep1Backend = new Signupstep1Backend(getActivity(), editFirstname.getText().toString(), editLastname.getText().toString(), editEmail.getText().toString(), editPassword.getText().toString(), selectionradiobutton, editBirthday.getText().toString(), "1.1", "1.2", android_id, "1", Signupstep1Fragment.this);
             }
 
         }
@@ -225,9 +240,10 @@ public class Signupstep1Fragment extends BaseFragment implements Signupstep1Back
 
     @Override
     public void onSuccess(SignupWrapper signupWrapper) {
+        Prefs.putString("user", new Gson().toJson(signupWrapper));
         if (getActivity() != null) {
+            ((SignupFragment) getParentFragment()).signupstep2Fragment.setSignupWrapper(signupWrapper);
             ((SignupFragment) getParentFragment()).performNext();
-            Prefs.putString("user",new Gson().toJson(signupWrapper));
         }
     }
 

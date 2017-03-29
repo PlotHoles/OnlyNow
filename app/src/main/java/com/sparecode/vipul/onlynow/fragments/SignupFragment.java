@@ -54,7 +54,8 @@ public class SignupFragment extends BaseFragment implements SignupNextListner {
         sectionPagerAdapter = new SectionPagerAdapter(getChildFragmentManager());
         pager.setAdapter(sectionPagerAdapter);
         stepIndicator.setupWithViewPager(pager);
-        pager.setOffscreenPageLimit(3);
+        pager.setOffscreenPageLimit(1);
+
         pager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -101,14 +102,6 @@ public class SignupFragment extends BaseFragment implements SignupNextListner {
         return pager.getCurrentItem() + i;
     }
 
-    public void performPrevious() {
-        pager.setCurrentItem(getItems(-1));
-    }
-
-    public int getItems(int i) {
-        return pager.getCurrentItem() - i;
-    }
-
     @Override
     public void onDestroyView() {
         super.onDestroyView();
@@ -141,6 +134,7 @@ public class SignupFragment extends BaseFragment implements SignupNextListner {
 
     }
 
+    Signupstep2Fragment signupstep2Fragment;
 
     public class SectionPagerAdapter extends FragmentPagerAdapter {
 
@@ -154,7 +148,8 @@ public class SignupFragment extends BaseFragment implements SignupNextListner {
                 case 0:
                     return Signupstep1Fragment.newInstance("Sign Up");
                 case 1:
-                    return Signupstep2Fragment.newInstance("Select Active Area");
+                    signupstep2Fragment = Signupstep2Fragment.newInstance("Select Active Area");
+                    return signupstep2Fragment;
                 case 2:
                     return Signupstep3Fragment.newInstance("Select Favourite Category");
                 default:
