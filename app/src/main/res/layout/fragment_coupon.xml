@@ -223,77 +223,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_10"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:id="@+id/othercoupon_linear">
 
-                <com.sparecode.vipul.onlynow.widgets.LatoTextView
-                    android:id="@+id/textView45"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/other_coupon_details"
-                    android:textColor="@color/headercolor"
-                    app:typeface="lato_bold" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/dp_20"
-                    android:layout_marginTop="@dimen/dp_10"
-                    android:orientation="vertical">
-
-                    <com.sparecode.vipul.onlynow.widgets.LatoTextView
-                        android:id="@+id/text_other_coupon_name"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/coupon_name"
-                        app:typeface="lato_regular" />
-
-                    <com.sparecode.vipul.onlynow.widgets.LatoTextView
-                        android:id="@+id/textValid"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/valid"
-                        app:typeface="lato_regular" />
-                </LinearLayout>
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-
-                <com.sparecode.vipul.onlynow.widgets.LatoTextView
-                    android:id="@+id/textView48"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_10"
-                    android:text="@string/other_coupon_details"
-                    android:textColor="@color/headercolor"
-                    app:typeface="lato_bold" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/dp_20"
-                    android:layout_marginTop="@dimen/dp_10"
-                    android:orientation="vertical">
-
-                    <com.sparecode.vipul.onlynow.widgets.LatoTextView
-                        android:id="@+id/textView49"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/coupon_name"
-                        app:typeface="lato_regular" />
-
-                    <com.sparecode.vipul.onlynow.widgets.LatoTextView
-                        android:id="@+id/textView50"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/valid"
-                        app:typeface="lato_regular" />
-                </LinearLayout>
-
-            </LinearLayout>
 
             <com.sparecode.vipul.onlynow.widgets.LatoButton
                 android:layout_width="match_parent"

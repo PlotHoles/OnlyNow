@@ -129,6 +129,18 @@ public class ProfileFragment extends BaseFragment implements LogoutBackendUser.L
                 //Toast.makeText(getActivity(),"hi",Toast.LENGTH_SHORT).show();
             }
         });
+        textPrivacyPolicy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((BaseActivity)getActivity()).openUserPrivacyPage();
+            }
+        });
+        textTermsCondition.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((BaseActivity)getActivity()).openUserTermsPage();
+            }
+        });
         return view;
     }
 
@@ -207,7 +219,7 @@ public class ProfileFragment extends BaseFragment implements LogoutBackendUser.L
 
     @OnClick(R.id.textUserFavCategory)
     void onClickSelectCategory() {
-        profileBackend = new ProfileBackendUser(signupWrapper.getData().getImageURL(), getActivity(), this);
+        profileBackend = new ProfileBackendUser(signupWrapper.getData().getId(), getActivity(), this);
     }
 
     @OnClick(R.id.textChangePassword)

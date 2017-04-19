@@ -138,7 +138,8 @@ public class CouponFavouriteAdapter extends RecyclerView.Adapter<CouponFavourite
         holder.couponArea.setText(myListFavoriteWrapper.getData().get(position).getArea());
         holder.txtCouponTimer.setVisibility(View.GONE);
         holder.txtCouponValidTill.setVisibility(View.GONE);
-        if (!myListFavoriteWrapper.getData().get(position).getImageURL().trim().isEmpty()) {
+
+        if (myListFavoriteWrapper.getData().get(position).getImageURL() != null && myListFavoriteWrapper.getData().get(position).getImageURL().equals("") ) {
             Picasso.with(mContext).load(myListFavoriteWrapper.getData().get(position).getImageURL()).resize(720, 200).into(holder.couponImage);
         }
         String rating = myListFavoriteWrapper.getData().get(position).getRating();
@@ -146,7 +147,11 @@ public class CouponFavouriteAdapter extends RecyclerView.Adapter<CouponFavourite
         if (rating == "") {
             holder.ratingbar.setRating(0);
         } else {
-            holder.ratingbar.setRating(Float.parseFloat(rating));
+            if (myListFavoriteWrapper.getData().get(position).getRating() != null)
+            {
+                holder.ratingbar.setRating(Float.parseFloat(rating));
+            }
+
         }
     }
 

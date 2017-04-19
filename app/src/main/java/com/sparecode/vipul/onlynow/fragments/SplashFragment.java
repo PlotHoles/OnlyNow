@@ -9,8 +9,13 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
 import com.sparecode.vipul.onlynow.R;
 import com.sparecode.vipul.onlynow.activity.BaseActivity;
+import com.sparecode.vipul.onlynow.model.LoginWrapper;
+import com.sparecode.vipul.onlynow.model.SignupWrapper;
+import com.sparecode.vipul.onlynow.util.Prefs;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -33,8 +38,8 @@ public class SplashFragment extends BaseFragment implements View.OnClickListener
     @Bind(R.id.signin_button)
     Button signinButton;
     // TODO: Rename parameter arguments, choose names that match
-
-
+    SignupWrapper signupWrapper;
+    LoginWrapper loginWrapper;
     public SplashFragment() {
         // Required empty public constructor
     }
@@ -54,11 +59,30 @@ public class SplashFragment extends BaseFragment implements View.OnClickListener
 
         ButterKnife.bind(this, view);
 
+        /*getUser();
+        if (signupWrapper != null) {
+            if (signupWrapper.getData() != null) {
+                ((BaseActivity) getActivity()).openHomePage();
+            } else {
+                //((BaseActivity) getActivity()).openSplashPage();
+            }
+        } else {
+            //((BaseActivity) getActivity()).openSplashPage();
+        }*/
         return view;
     }
 
+    private void getUser() {
+        try {
+            signupWrapper = new Gson().fromJson(Prefs.getString("user", ""), SignupWrapper.class);
 
-    @Override
+        } catch (JsonSyntaxException e) {
+            ((BaseActivity) getActivity()).openSplashPage();
+        }
+    }
+
+
+        @Override
     public void setToolbarForFragment() {
         ((BaseActivity) getActivity()).getAppbarLayout().setVisibility(View.GONE);
         ((BaseActivity) getActivity()).getTabLayout().setVisibility(View.GONE);

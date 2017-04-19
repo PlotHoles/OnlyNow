@@ -42,7 +42,7 @@ public interface RequestApi {
     String SEARCH = "search";
     String FORGOT_PASSWORD = "forgot_password";
     //String BASEURL = "http://192.168.2.16/projects/wilo/api/";
-    String BASEURL = "http://192.168.2.7/projects/onlynow/api/";
+    String BASEURL = "http://sparecodesolutions.com/onlynow/API/";
     String SERVICE = BASEURL + "services.php?data=";
     String USERSERVICE = BASEURL + "user/?data=";
     String CLIENTSERVICE = BASEURL + "client/?data=";

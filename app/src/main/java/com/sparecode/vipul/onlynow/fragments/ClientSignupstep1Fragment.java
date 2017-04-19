@@ -111,12 +111,21 @@ public class ClientSignupstep1Fragment extends BaseFragment  {
                     public void onSuccess(ZipWrapper zipWrapper) {
                         if (zipWrapper.getStatus() == 400)
                         {
-                            Toast.makeText(getActivity(),"Please Select Valid ZipCode",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getActivity(),"Please Provide Valid ZipCode",Toast.LENGTH_SHORT).show();
                         }
                         else
                         {
-                            editPrefecture.setText(zipWrapper.getResults().get(0).getAddress1());
-                            editCityname.setText(zipWrapper.getResults().get(0).getAddress2()+" "+zipWrapper.getResults().get(0).getAddress3());
+                            if (zipWrapper.getResults() != null)
+                            {
+                                editPrefecture.setText(zipWrapper.getResults().get(0).getAddress1());
+                                editCityname.setText(zipWrapper.getResults().get(0).getAddress2()+" "+zipWrapper.getResults().get(0).getAddress3());
+                            }
+                            else
+                            {
+                                Toast.makeText(getActivity(),"Please Provide Valid ZipCode",Toast.LENGTH_SHORT).show();
+                            }
+
+
                         }
                     }
 

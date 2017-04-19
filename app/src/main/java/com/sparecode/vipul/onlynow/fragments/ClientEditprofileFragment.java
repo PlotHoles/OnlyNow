@@ -20,10 +20,9 @@ import android.widget.Toast;
 
 import com.sparecode.vipul.onlynow.R;
 import com.sparecode.vipul.onlynow.activity.BaseActivity;
-import com.sparecode.vipul.onlynow.activity.MainActivity;
 import com.sparecode.vipul.onlynow.interfaces.OnResponse;
 import com.sparecode.vipul.onlynow.model.ChangeProfilePictureWrapper;
-import com.sparecode.vipul.onlynow.model.LoginWrapper;
+import com.sparecode.vipul.onlynow.model.UpdateProfileWrapper;
 import com.sparecode.vipul.onlynow.permission.PiemissionsCallback;
 import com.sparecode.vipul.onlynow.permission.PiemissionsRequest;
 import com.sparecode.vipul.onlynow.permission.PiemissionsUtils;
@@ -47,7 +46,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class ClientEditprofileFragment extends BaseFragment implements UpdateProfileBackend.UpdateProfileDataProvider{
+public class ClientEditprofileFragment extends BaseFragment implements UpdateProfileBackend.UpdateProfileDataProvider {
 
     @Bind(R.id.edit_profilepicture)
     CircleImageView editProfilepicture;
@@ -60,16 +59,19 @@ public class ClientEditprofileFragment extends BaseFragment implements UpdatePro
     private int REQUEST_CAMERA = 0, SELECT_FILE = 1;
     private String userChoosenTask;
     File destination;
-    private View view;;
+    private View view;
+    ;
     private static final int PERMISSIONS_CODE = 13370;
     private static final String[] PERMISSIONS = new String[]{
             Manifest.permission.INTERNET,
             Manifest.permission.WRITE_EXTERNAL_STORAGE,
             Manifest.permission.READ_CONTACTS,
             Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.CALL_PHONE
-            ,Manifest.permission.CAMERA,Manifest.permission.READ_EXTERNAL_STORAGE
+            , Manifest.permission.CAMERA, Manifest.permission.READ_EXTERNAL_STORAGE
 
     };
+    String key, image;
+
     public ClientEditprofileFragment() {
         // Required empty public constructor
     }
@@ -87,6 +89,7 @@ public class ClientEditprofileFragment extends BaseFragment implements UpdatePro
 
         view = inflater.inflate(R.layout.fragment_editprofile, container, false);
         ButterKnife.bind(this, view);
+
         final PiemissionsRequest request = new PiemissionsRequest(PERMISSIONS_CODE, PERMISSIONS);
         request.setCallback(new PiemissionsCallback() {
             @Override
@@ -121,7 +124,6 @@ public class ClientEditprofileFragment extends BaseFragment implements UpdatePro
     }
 
 
-
     @Override
     public void onDestroyView() {
         super.onDestroyView();
@@ -136,9 +138,12 @@ public class ClientEditprofileFragment extends BaseFragment implements UpdatePro
                 selectImage();
                 break;
             case R.id.update_profile:
+                if (destination != null) {
+                    callService();
 
-                UpdateProfileBackend updateProfileBackend = new UpdateProfileBackend(getActivity(),getUserId(),ediprofileFirstname.getText().toString().trim(),ediprofileFirstname.getText().toString().trim(),this);
-                callService();
+                }
+                UpdateProfileBackend updateProfileBackend = new UpdateProfileBackend(getActivity(), getUserId(), ediprofileFirstname.getText().toString().trim(), ediprofileLastname.getText().toString().trim(), this);
+
                 break;
         }
     }
@@ -148,9 +153,9 @@ public class ClientEditprofileFragment extends BaseFragment implements UpdatePro
         switch (requestCode) {
             case Utility.MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE:
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    if(userChoosenTask.equals("Take Photo"))
+                    if (userChoosenTask.equals("Take Photo"))
                         cameraIntent();
-                    else if(userChoosenTask.equals("Choose from Library"))
+                    else if (userChoosenTask.equals("Choose from Library"))
                         galleryIntent();
                 } else {
                     //code for deny
@@ -160,24 +165,24 @@ public class ClientEditprofileFragment extends BaseFragment implements UpdatePro
     }
 
     private void selectImage() {
-        final CharSequence[] items = { "Take Photo", "Choose from Library",
-                "Cancel" };
+        final CharSequence[] items = {"Take Photo", "Choose from Library",
+                "Cancel"};
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle("Add Photo!");
         builder.setItems(items, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int item) {
-                boolean result=Utility.checkPermission(getActivity());
+                boolean result = Utility.checkPermission(getActivity());
 
                 if (items[item].equals("Take Photo")) {
-                    userChoosenTask ="Take Photo";
-                    if(result)
+                    userChoosenTask = "Take Photo";
+                    if (result)
                         cameraIntent();
 
                 } else if (items[item].equals("Choose from Library")) {
-                    userChoosenTask ="Choose from Library";
-                    if(result)
+                    userChoosenTask = "Choose from Library";
+                    if (result)
                         galleryIntent();
 
                 } else if (items[item].equals("Cancel")) {
@@ -188,16 +193,14 @@ public class ClientEditprofileFragment extends BaseFragment implements UpdatePro
         builder.show();
     }
 
-    private void galleryIntent()
-    {
+    private void galleryIntent() {
         Intent intent = new Intent();
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);//
-        startActivityForResult(Intent.createChooser(intent, "Select File"),SELECT_FILE);
+        startActivityForResult(Intent.createChooser(intent, "Select File"), SELECT_FILE);
     }
 
-    private void cameraIntent()
-    {
+    private void cameraIntent() {
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         startActivityForResult(intent, REQUEST_CAMERA);
     }
@@ -241,15 +244,15 @@ public class ClientEditprofileFragment extends BaseFragment implements UpdatePro
     @SuppressWarnings("deprecation")
     private void onSelectFromGalleryResult(Intent data) {
 
-        Bitmap bm=null;
+        Bitmap bm = null;
         if (data != null) {
             try {
                 bm = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), data.getData());
 
                 ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-                bm.compress(Bitmap.CompressFormat.JPEG,90,bytes);
+                bm.compress(Bitmap.CompressFormat.JPEG, 90, bytes);
 
-                destination = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES),System.currentTimeMillis() + ".jpg");
+                destination = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), System.currentTimeMillis() + ".jpg");
                 Log.e("gallery", String.valueOf(destination));
                 FileOutputStream fo;
                 try {
@@ -274,37 +277,43 @@ public class ClientEditprofileFragment extends BaseFragment implements UpdatePro
 
         /*Log.e("imagegallery", String.valueOf(destination));
         Log.e("imagegallery", getUserId());*/
-
+        File image = destination;
+        Log.e("USERID::", "::" + getUserId());
         List<Pair<String, String>> list = new ReqestParameter().toUpdateProfilePicture(getUserId());
+        Log.e("DESTINATION FILE PATH", "::" + destination.getAbsolutePath());
 
-        new PostRequest<ChangeProfilePictureWrapper>().onPostRequest(getActivity(), RequestApi.UPDATEPROFILEPICTURE, list, "image", destination, ChangeProfilePictureWrapper.class, new OnResponse<ChangeProfilePictureWrapper>() {
-            @Override
-            public void onSuccess(ChangeProfilePictureWrapper changeProfilePictureWrapper) {
-                if (changeProfilePictureWrapper.getStatus() == 1)
-                {
-                    Toast.makeText(getActivity(),"Profile picture Updated Successfully",Toast.LENGTH_SHORT).show();
+        if (image != null && getUserId() != null) {
+            Log.e("SIZE OF LIST", "::" + list.size());
+            new PostRequest<ChangeProfilePictureWrapper>().onPostRequest(getActivity(), RequestApi.UPDATEPROFILEPICTURE, list, "image", image, ChangeProfilePictureWrapper.class, new OnResponse<ChangeProfilePictureWrapper>() {
+                @Override
+                public void onSuccess(ChangeProfilePictureWrapper changeProfilePictureWrapper) {
+                    if (changeProfilePictureWrapper.getStatus() == 1) {
+                        Toast.makeText(getActivity(), "Profile picture Updated Successfully", Toast.LENGTH_SHORT).show();
+                        ClientSettingFragment clientSettingFragment = new ClientSettingFragment(getActivity(), "imagekey", changeProfilePictureWrapper.getData().getImageURL());
+                        //((MainActivity) getActivity()).setUserData2(changeProfilePictureWrapper.getData());
+                    } else {
+
+                    }
                 }
-                else
-                {
 
+                @Override
+                public void onError() {
+                    Toast.makeText(getActivity(), "Please try again", Toast.LENGTH_SHORT).show();
                 }
-            }
-
-            @Override
-            public void onError() {
-                Toast.makeText(getActivity(),"Please try again",Toast.LENGTH_SHORT).show();
-            }
-        });
+            });
+        }
     }
 
     @Override
-    public void onSuccesscull(LoginWrapper updateProfileWrapper) {
-        ((MainActivity)getActivity()).setUserData1(updateProfileWrapper.getData());
-        Snackbar.make(view,updateProfileWrapper.getMessage(),Snackbar.LENGTH_SHORT).show();
+    public void onSuccesscull(UpdateProfileWrapper updateProfileWrapper) {
+        //((MainActivity) getActivity()).setUserData1(updateProfileWrapper.getData());
+        Toast.makeText(getActivity(), updateProfileWrapper.getMessage(), Toast.LENGTH_SHORT).show();
+
+        Snackbar.make(view, updateProfileWrapper.getMessage(), Snackbar.LENGTH_SHORT).show();
     }
 
     @Override
     public void onFailure(String msg) {
-        Snackbar.make(view,"try again",Snackbar.LENGTH_SHORT).show();
+        Snackbar.make(view, "try again", Snackbar.LENGTH_SHORT).show();
     }
 }

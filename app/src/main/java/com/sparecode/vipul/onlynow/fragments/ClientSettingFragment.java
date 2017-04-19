@@ -1,5 +1,6 @@
 package com.sparecode.vipul.onlynow.fragments;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -36,7 +37,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class ClientSettingFragment extends BaseFragment implements UpdateLocationBackend.UpdateLocationResultProvider, LogoutBackend.LogoutBackendResultProvider, ChangePasswordbackend.ChangePasswordDataProvider,UpdateProfileBackend.UpdateProfileDataProvider {
+public class ClientSettingFragment extends BaseFragment implements UpdateLocationBackend.UpdateLocationResultProvider, LogoutBackend.LogoutBackendResultProvider, ChangePasswordbackend.ChangePasswordDataProvider,UpdateProfileBackend.ProfileUpdateData {
 
     @Bind(R.id.profile_image)
     CircleImageView profileImage;
@@ -129,6 +130,15 @@ public class ClientSettingFragment extends BaseFragment implements UpdateLocatio
         // Required empty public constructor
     }
 
+    String key,image;
+    Context context;
+    String fname;
+
+    public ClientSettingFragment(Context context,String key, String image) {
+        this.context = context;
+        this.key = key;
+        this.image = image;
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -142,6 +152,9 @@ public class ClientSettingFragment extends BaseFragment implements UpdateLocatio
 
         view = inflater.inflate(R.layout.fragment_client_setting, container, false);
         ButterKnife.bind(this, view);
+
+
+
 
         firstname.setText(getUserData().getFname());
         fullname.setText(getUserData().getFname() + getUserData().getLname());
@@ -284,8 +297,23 @@ public class ClientSettingFragment extends BaseFragment implements UpdateLocatio
                 changepasswordlinear.setVisibility(View.VISIBLE);
             }
         });
+        textTerms.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((BaseActivity)getActivity()).openTermsPage();
+            }
+        });
+        textPrivacy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((BaseActivity) getActivity()).openPrivacyPage();
+            }
+        });
+
+        UpdateProfileBackend updateProfileBackend = new UpdateProfileBackend(getActivity(),getUserId(),ClientSettingFragment.this);
         return view;
     }
+
 
     @Override
     public void setToolbarForFragment() {
@@ -347,10 +375,32 @@ public class ClientSettingFragment extends BaseFragment implements UpdateLocatio
     }
 
     @Override
-    public void onSuccesscull(LoginWrapper updateProfileWrapper) {
-            loginWrapper = updateProfileWrapper;
-        firstname.setText(updateProfileWrapper.getData().getFname());
-        fullname.setText(updateProfileWrapper.getData().getFname() + updateProfileWrapper.getData().getLname());
+    public void onSuccess(LoginWrapper profileUpdateWrapper) {
+
+        if (firstname != null)
+        {
+            firstname.setText(profileUpdateWrapper.getData().getFname());
+
+        }
+        if (fullname != null)
+        {
+            fullname.setText(profileUpdateWrapper.getData().getFname() +" "+ profileUpdateWrapper.getData().getLname());
+        }
+        if (profileImage != null)
+        {
+            if (profileUpdateWrapper.getData().getImageURL() != null &&
+                    (!profileUpdateWrapper.getData().getImageURL().equals(""))) {
+
+                Picasso.with(getActivity())
+                        .load(profileUpdateWrapper.getData().getImageURL())
+                        .placeholder(R.drawable.placeholder)
+                        .error(R.drawable.placeholder)
+                        .resize(720, 200)
+                        .into(profileImage);
+            } else {
+                Picasso.with(getActivity()).load(R.drawable.placeholder).fit().into(profileImage);
+            }
+        }
 
 
     }

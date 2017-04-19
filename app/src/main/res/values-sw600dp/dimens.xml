@@ -1,0 +1,33 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">32dp</dimen>
+    <dimen name="activity_vertical_margin">32dp</dimen>
+    <dimen name="dp_10">20dp</dimen>
+    <dimen name="dp_15">30dp</dimen>
+    <dimen name="dp_20">40dp</dimen>
+    <dimen name="dp_30">60dp</dimen>
+    <dimen name="dp_175">350dp</dimen>
+    <dimen name="dp_5">10dp</dimen>
+    <dimen name="dp_25">50dp</dimen>
+    <dimen name="dp_2">4dp</dimen>
+
+    <dimen name="sp_18">36sp</dimen>
+    <dimen name="text_margin">32dp</dimen>
+    <dimen name="dp_3">6dp</dimen>
+    <dimen name="sp_20">40sp</dimen>
+    <dimen name="dp_1">2dp</dimen>
+    <dimen name="dp_8">16dp</dimen>
+    <dimen name="sp_50">100sp</dimen>
+    <dimen name="dp_150">300dp</dimen>
+    <dimen name="dp_45">90dp</dimen>
+    <dimen name="dp_50">100dp</dimen>
+    <dimen name="dp_40">80dp</dimen>
+    <dimen name="fab_margin">20dp</dimen>
+    <dimen name="thumbnail_width">280dp</dimen>
+    <dimen name="image_height_portrait">440dp</dimen>
+    <dimen name="image_height_landscape">220dp</dimen>
+
+    <dimen name="defaultTagsTextSize">32sp</dimen>
+    <dimen name="defaultTagsCloseImagePadding">10dp</dimen>
+    <dimen name="defaultTagsPadding">0dp</dimen>
+</resources>

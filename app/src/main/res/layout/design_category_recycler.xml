@@ -7,8 +7,8 @@
     <ImageView
         android:id="@+id/image_Category"
         android:layout_marginTop="@dimen/dp_10"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
+        android:layout_width="@dimen/dp_20"
+        android:layout_height="@dimen/dp_20"
         app:srcCompat="@drawable/placeholder"
         android:scaleType="fitXY"
         android:layout_marginLeft="@dimen/dp_10"/>

@@ -124,7 +124,10 @@ public class CouponViewedAdapter extends RecyclerView.Adapter<CouponViewedAdapte
         }
         else
         {
-            holder.ratingbar.setRating(Float.parseFloat(rating));
+            if (rating!=null)
+            {
+                holder.ratingbar.setRating(Float.parseFloat(rating));
+            }
         }
         if (!myListFavoriteWrapper.getData().get(position).getImageURL().trim().isEmpty()) {
             Picasso.with(mContext).load(myListFavoriteWrapper.getData().get(position).getImageURL()).resize(720, 200).into(holder.couponImage);

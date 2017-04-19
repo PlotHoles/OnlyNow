@@ -28,6 +28,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.sparecode.vipul.onlynow.R;
+import com.sparecode.vipul.onlynow.dialog.NoInternetDialog;
 import com.sparecode.vipul.onlynow.fragments.BaseFragment;
 import com.sparecode.vipul.onlynow.fragments.ChangeCategoryFragment;
 import com.sparecode.vipul.onlynow.fragments.ChangeLocationFragment;
@@ -48,9 +49,11 @@ import com.sparecode.vipul.onlynow.fragments.DetailsFragment;
 import com.sparecode.vipul.onlynow.fragments.DoneFragment;
 import com.sparecode.vipul.onlynow.fragments.ForgotFragment;
 import com.sparecode.vipul.onlynow.fragments.HomeFragment;
+import com.sparecode.vipul.onlynow.fragments.LaunchScreen;
 import com.sparecode.vipul.onlynow.fragments.MapFragment;
 import com.sparecode.vipul.onlynow.fragments.MylistFragment;
 import com.sparecode.vipul.onlynow.fragments.NoticeFragment;
+import com.sparecode.vipul.onlynow.fragments.PrivacyFragment;
 import com.sparecode.vipul.onlynow.fragments.ProfileFragment;
 import com.sparecode.vipul.onlynow.fragments.ResetFragment;
 import com.sparecode.vipul.onlynow.fragments.SearchFragment;
@@ -59,7 +62,10 @@ import com.sparecode.vipul.onlynow.fragments.SignupFragment;
 import com.sparecode.vipul.onlynow.fragments.SignupfacebookFragment;
 import com.sparecode.vipul.onlynow.fragments.Signupstep3Fragment;
 import com.sparecode.vipul.onlynow.fragments.SplashFragment;
+import com.sparecode.vipul.onlynow.fragments.TermsFragment;
 import com.sparecode.vipul.onlynow.fragments.UpdateProfileFragment;
+import com.sparecode.vipul.onlynow.fragments.UserTermsFragment;
+import com.sparecode.vipul.onlynow.fragments.userPrivacyFragment;
 import com.sparecode.vipul.onlynow.interfaces.NetworkChangeListener;
 import com.sparecode.vipul.onlynow.interfaces.SignupNextListner;
 import com.sparecode.vipul.onlynow.model.FacebookWrapper;
@@ -388,6 +394,9 @@ public class BaseActivity extends AppCompatActivity implements NetworkChangeList
         fragmentTransaction.commitAllowingStateLoss();
     }
 
+    public void openlauncherPage() {
+        replaceFragment(new LaunchScreen(), R.id.container, LaunchScreen.class.getName(), false);
+    }
     public void openSplashPage() {
         replaceFragment(new SplashFragment(), R.id.container, SplashFragment.class.getName(), false);
     }
@@ -507,6 +516,19 @@ public class BaseActivity extends AppCompatActivity implements NetworkChangeList
     public void openChangeLocationPage() {
         replaceFragment(new ChangeLocationFragment(), R.id.container, ChangeLocationFragment.class.getName(), true);
     }
+    public void openTermsPage() {
+        replaceFragment(new TermsFragment(), R.id.container, TermsFragment.class.getName(), true);
+    }
+    public void openPrivacyPage() {
+        replaceFragment(new PrivacyFragment(), R.id.container, PrivacyFragment.class.getName(), true);
+    }
+    public void openUserTermsPage() {
+        replaceFragment(new UserTermsFragment(), R.id.container, UserTermsFragment.class.getName(), true);
+    }
+    public void openUserPrivacyPage() {
+        replaceFragment(new userPrivacyFragment(), R.id.container, userPrivacyFragment.class.getName(), true);
+    }
+
     public Signupstep3Fragment openSelectCategory(boolean isChangeCategory) {
         Signupstep3Fragment signupstep3Fragment = new Signupstep3Fragment(isChangeCategory);
         replaceFragment(signupstep3Fragment, R.id.container, Signupstep3Fragment.class.getName(), true);
@@ -539,7 +561,7 @@ public class BaseActivity extends AppCompatActivity implements NetworkChangeList
     @Override
     protected void onStart() {
         super.onStart();
-        receiver = new NetworkReceiver();
+        receiver = new NetworkReceiver(this);
         filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
         locationReceiver = new LocationReceiver();
         registerReceiver(receiver, filter);
@@ -552,14 +574,31 @@ public class BaseActivity extends AppCompatActivity implements NetworkChangeList
         unregisterReceiver(locationReceiver);
         super.onStop();
     }
+    NoInternetDialog noInternetDialog;
 
     @Override
     public void onConnected() {
+
         Toast.makeText(this, "Connected", Toast.LENGTH_SHORT).show();
+        if (noInternetDialog != null) {
+            noInternetDialog.dismiss();
+        }
+
     }
 
     @Override
     public void onDisconnected() {
         Toast.makeText(this, "DisConnected", Toast.LENGTH_SHORT).show();
+        if (noInternetDialog == null) {
+            noInternetDialog = new NoInternetDialog();
+            noInternetDialog.show(getSupportFragmentManager(), "NoInternet");
+        } else {
+
+            noInternetDialog = null;
+            noInternetDialog = new NoInternetDialog();
+            noInternetDialog.show(getSupportFragmentManager(), "NoInternet");
+
+        }
+
     }
 }

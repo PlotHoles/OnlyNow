@@ -7,7 +7,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -58,14 +57,18 @@ public class HomeFragment extends BaseFragment implements HomeFragmentBackend.Ho
 
     private void getUser() {
         signupWrapper = new Gson().fromJson(Prefs.getString("user", ""), SignupWrapper.class);
-        Log.e("::", "SIGNUP WRAPPER::" + signupWrapper.getData());
+        //Log.e("::", "SIGNUP WRAPPER::" + signupWrapper.getData());
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         getUser();
-        homeFragmentBackend = new HomeFragmentBackend(signupWrapper.getData().getId(), getActivity(), this);
+        if (signupWrapper != null)
+        {
+            homeFragmentBackend = new HomeFragmentBackend(signupWrapper.getData().getId(), getActivity(), this);
+        }
+
     }
 
     @Override
@@ -81,6 +84,7 @@ public class HomeFragment extends BaseFragment implements HomeFragmentBackend.Ho
         ((BaseActivity) getActivity()).getImgToolBarCancel().setVisibility(View.GONE);
         ((BaseActivity) getActivity()).setOptionMenuVisibility(true);
         ((BaseActivity) getActivity()).getImgSearchMap().setVisibility(View.GONE);
+        ((BaseActivity)getActivity()).getTabLayoutclient().setVisibility(View.GONE);
     }
 
     @Override

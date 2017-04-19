@@ -182,15 +182,15 @@ public class ClientSignupstep2Fragment extends BaseFragment implements Signupste
 
     @Override
     public void onSuccess(CategoryWrapper categoryWrapper) {
-        nodata.setVisibility(View.GONE);
-        recyclerview.setVisibility(View.VISIBLE);
+        /*nodata.setVisibility(View.GONE);
+        recyclerview.setVisibility(View.VISIBLE);*/
         categoryDatas.addAll(categoryWrapper.getData());
         linearsAdapter.notifyDataSetChanged();
     }
 
     @Override
     public void onError(String msg) {
-        recyclerview.setVisibility(View.GONE);
-        nodata.setVisibility(View.VISIBLE   );
+        /*recyclerview.setVisibility(View.GONE);
+        nodata.setVisibility(View.VISIBLE );*/
     }
 }

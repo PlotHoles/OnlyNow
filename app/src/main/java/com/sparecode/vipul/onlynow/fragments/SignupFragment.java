@@ -56,6 +56,7 @@ public class SignupFragment extends BaseFragment implements SignupNextListner {
         stepIndicator.setupWithViewPager(pager);
         pager.setOffscreenPageLimit(1);
 
+
         pager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {

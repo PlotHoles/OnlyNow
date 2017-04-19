@@ -1,10 +1,12 @@
 package com.sparecode.vipul.onlynow.fragments;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
+import android.location.Location;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.design.widget.Snackbar;
@@ -17,6 +19,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
@@ -29,8 +32,13 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.sparecode.vipul.onlynow.R;
 import com.sparecode.vipul.onlynow.activity.BaseActivity;
+import com.sparecode.vipul.onlynow.location.LocationHelper;
+import com.sparecode.vipul.onlynow.location.LocationProvider;
 import com.sparecode.vipul.onlynow.model.FacebookWrapper;
 import com.sparecode.vipul.onlynow.model.SigninWrapper;
+import com.sparecode.vipul.onlynow.permission.PiemissionsCallback;
+import com.sparecode.vipul.onlynow.permission.PiemissionsRequest;
+import com.sparecode.vipul.onlynow.permission.PiemissionsUtils;
 import com.sparecode.vipul.onlynow.util.Prefs;
 
 import org.json.JSONObject;
@@ -38,12 +46,13 @@ import org.json.JSONObject;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
+import java.util.HashMap;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class SigninFragment extends BaseFragment implements SigninBackend.SigninResultProvider {
+public class SigninFragment extends BaseFragment implements SigninBackend.SigninResultProvider,LocationProvider {
 
     @Bind(R.id.text_signup)
     TextView textSignup;
@@ -67,6 +76,16 @@ public class SigninFragment extends BaseFragment implements SigninBackend.Signin
     Button buttonSignin;
     CallbackManager callbackManager;
     private View view;
+    private static final int PERMISSIONS_CODE = 13370;
+    private static final String[] PERMISSIONS = new String[]{
+            Manifest.permission.INTERNET,
+            Manifest.permission.WRITE_EXTERNAL_STORAGE,
+            Manifest.permission.READ_CONTACTS,
+            Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.CALL_PHONE
+
+    };
+    LocationHelper locationHelper;
+    String latitude,longitude;
 
     public SigninFragment() {
         // Required empty public constructor
@@ -87,6 +106,22 @@ public class SigninFragment extends BaseFragment implements SigninBackend.Signin
         printKeyHash();
         ButterKnife.bind(this, view);
 
+        final PiemissionsRequest request = new PiemissionsRequest(PERMISSIONS_CODE, PERMISSIONS);
+        request.setCallback(new PiemissionsCallback() {
+            @Override
+            public void onGranted() {
+                Log.e("log----::","Permission Granted");
+                locationHelper = new LocationHelper(getActivity(),SigninFragment.this);
+            }
+
+            @Override
+            public boolean onDenied(HashMap<String, Boolean> rationalizablePermissions) {
+                Log.e("log---::","Permission Denied");
+
+                return true;
+            }
+        });
+        PiemissionsUtils.requestPermission(request);
 
         callbackManager = CallbackManager.Factory.create();
         LoginManager.getInstance().logOut();
@@ -107,7 +142,7 @@ public class SigninFragment extends BaseFragment implements SigninBackend.Signin
                                         FacebookWrapper facebookWrapper = gsonBuilder.create().fromJson(object.toString(), FacebookWrapper.class);
                                         //((BaseActivity) getActivity()).openHomePage();
                                         @SuppressLint("HardwareIds") String android_id = Settings.Secure.getString(getContext().getContentResolver(), Settings.Secure.ANDROID_ID);
-                                        SigninBackend signinBackend = new SigninBackend(getActivity(), facebookWrapper.getId(), facebookWrapper.getEmail(), editPassword.getText().toString(), "1.1", "1.2", "A", "" + android_id, SigninFragment.this);
+                                        SigninBackend signinBackend = new SigninBackend(getActivity(), facebookWrapper.getId(), facebookWrapper.getEmail(), editPassword.getText().toString(), latitude, longitude, "A", "" + android_id, SigninFragment.this);
                                     }
                                 });
                         Bundle parameters = new Bundle();
@@ -151,7 +186,7 @@ public class SigninFragment extends BaseFragment implements SigninBackend.Signin
             editPassword.setError(getString(R.string.password));
         } else {
             @SuppressLint("HardwareIds") String android_id = Settings.Secure.getString(getContext().getContentResolver(), Settings.Secure.ANDROID_ID);
-            SigninBackend signinBackend = new SigninBackend(getActivity(), editEmail.getText().toString(), editPassword.getText().toString(), "1.1", "1.2", "A", "" + android_id, this);
+            SigninBackend signinBackend = new SigninBackend(getActivity(), editEmail.getText().toString(), editPassword.getText().toString(), latitude, longitude, "A", "" + android_id, this);
         }
     }
 
@@ -244,5 +279,17 @@ public class SigninFragment extends BaseFragment implements SigninBackend.Signin
         if (getActivity() != null) {
             Snackbar.make(view, msg, Snackbar.LENGTH_SHORT).show();
         }
+    }
+
+    @Override
+    public void onNewLcoationReceived(Location location) {
+        location.getLongitude();
+        location.getLatitude();
+        latitude = String.valueOf(location.getLatitude());
+        longitude = String.valueOf(location.getLongitude());
+        Log.e("locationsignup",location+"");
+
+        Toast.makeText(getActivity(), "RECEIVED LOC" + latitude, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getActivity(), "RECEIVED LOC" + location, Toast.LENGTH_SHORT).show();
     }
 }

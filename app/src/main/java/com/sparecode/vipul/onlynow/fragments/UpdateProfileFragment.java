@@ -312,8 +312,10 @@ public class UpdateProfileFragment extends BaseFragment implements UpdateProfile
 
     @Override
     public void onFailure(String msg) {
-        if (getActivity() != null)
-            Snackbar.make(view, msg, Snackbar.LENGTH_SHORT).show();
+        if (getActivity() != null){
+
+        }
+           // Snackbar.make(view, msg, Snackbar.LENGTH_SHORT).show();
 
     }
 

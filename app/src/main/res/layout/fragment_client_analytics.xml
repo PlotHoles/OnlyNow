@@ -19,7 +19,7 @@
             app:tabIndicatorColor="@color/headercolor"
             app:tabIndicatorHeight="@dimen/dp_5"
             app:tabTextAppearance="@android:style/TextAppearance.Widget.TabWidget"
-            app:tabGravity="fill"></android.support.design.widget.TabLayout>
+            app:tabMode="fixed"></android.support.design.widget.TabLayout>
 
 
 

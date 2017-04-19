@@ -9,6 +9,7 @@ import android.widget.LinearLayout;
 
 import com.sparecode.vipul.onlynow.R;
 import com.sparecode.vipul.onlynow.activity.BaseActivity;
+import com.sparecode.vipul.onlynow.model.LoginWrapper;
 import com.sparecode.vipul.onlynow.widgets.LatoButton;
 import com.sparecode.vipul.onlynow.widgets.LatoTextView;
 
@@ -33,6 +34,7 @@ public class ClientSplashFragment extends BaseFragment {
     LatoButton createaccountButton;
     @Bind(R.id.signin_button)
     LatoButton signinButton;
+    LoginWrapper loginWrapper;
 
     public ClientSplashFragment() {
         // Required empty public constructor
@@ -50,8 +52,10 @@ public class ClientSplashFragment extends BaseFragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_client_splash, container, false);
         ButterKnife.bind(this, view);
+
         return view;
     }
+
 
     @Override
     public void onDestroyView() {

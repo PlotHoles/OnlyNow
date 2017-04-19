@@ -1,6 +1,7 @@
 package com.sparecode.vipul.onlynow.fragments;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -8,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RatingBar;
 
 import com.google.gson.Gson;
@@ -21,6 +23,8 @@ import com.sparecode.vipul.onlynow.widgets.LatoTextView;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+
+import static com.facebook.FacebookSdk.getApplicationContext;
 
 @SuppressLint("ValidFragment")
 public class CouponFragment extends Fragment implements DetailFragemenBackend.CouponDetailProvider {
@@ -56,20 +60,10 @@ public class CouponFragment extends Fragment implements DetailFragemenBackend.Co
     LatoTextView textCouponName;
     @Bind(R.id.textCouponText)
     LatoTextView textCouponText;
-    @Bind(R.id.textView45)
-    LatoTextView textView45;
-    @Bind(R.id.text_other_coupon_name)
-    LatoTextView textOtherCouponName;
-    @Bind(R.id.textValid)
-    LatoTextView textValid;
-    @Bind(R.id.textView48)
-    LatoTextView textView48;
-    @Bind(R.id.textView49)
-    LatoTextView textView49;
-    @Bind(R.id.textView50)
-    LatoTextView textView50;
     @Bind(R.id.text_rating)
     LatoTextView textRating;
+    @Bind(R.id.othercoupon_linear)
+    LinearLayout othercouponLinear;
 
 
     public CouponFragment(String couponId) {
@@ -118,7 +112,7 @@ public class CouponFragment extends Fragment implements DetailFragemenBackend.Co
         textDatefrom.setText(couponDetailWrapper.getData().getEndDate());
         textArea.setText(couponDetailWrapper.getData().getArea());
         textCat.setText(couponDetailWrapper.getData().getCategory());
-        textShopName.setText(couponDetailWrapper.getData().getShopName()+"\n"+couponDetailWrapper.getData().getArea() + "\n" + couponDetailWrapper.getData().getPhone()+ "\n" + couponDetailWrapper.getData().getZipCode()+ "\n" + couponDetailWrapper.getData().getPrefecture()+ "\n" + couponDetailWrapper.getData().getCity()+ "\n" + couponDetailWrapper.getData().getStreet()+ "\n" + couponDetailWrapper.getData().getBuildName()+ "\n" + couponDetailWrapper.getData().getWebsite());
+        textShopName.setText(couponDetailWrapper.getData().getShopName() + "\n" + couponDetailWrapper.getData().getArea() + "\n" + couponDetailWrapper.getData().getPhone() + "\n" + couponDetailWrapper.getData().getZipCode() + "\n" + couponDetailWrapper.getData().getPrefecture() + "\n" + couponDetailWrapper.getData().getCity() + "\n" + couponDetailWrapper.getData().getStreet() + "\n" + couponDetailWrapper.getData().getBuildName() + "\n" + couponDetailWrapper.getData().getWebsite());
         textCouponDesc.setText(couponDetailWrapper.getData().getDescription());
         textCouponName.setText(couponDetailWrapper.getData().getName());
         textCouponText.setText(couponDetailWrapper.getData().getInstruction());
@@ -131,6 +125,18 @@ public class CouponFragment extends Fragment implements DetailFragemenBackend.Co
         }
         textRating.setText(couponDetailWrapper.getData().getRating());
         //textOtherCouponName.setText(couponDetailWrapper.getData().getOtherCoupons().get());
+        for (int i=0;i<couponDetailWrapper.getData().getOtherCoupons().size();i++)
+        {
+            LayoutInflater layoutInflater = (LayoutInflater) getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            View v = layoutInflater.inflate(R.layout.design_othercoupon, null);
+            othercouponLinear.addView(v, i, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+
+            LatoTextView text_other_coupon_name = (LatoTextView)v.findViewById(R.id.text_other_coupon_name);
+            LatoTextView textValid = (LatoTextView)v.findViewById(R.id.textValid);
+
+            text_other_coupon_name.setText(couponDetailWrapper.getData().getOtherCoupons().get(i).getName());
+            textValid.setText(couponDetailWrapper.getData().getOtherCoupons().get(i).getEndDate());
+        }
 
     }
 

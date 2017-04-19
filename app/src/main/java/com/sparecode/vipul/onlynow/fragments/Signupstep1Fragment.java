@@ -1,7 +1,9 @@
 package com.sparecode.vipul.onlynow.fragments;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
+import android.location.Location;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.annotation.IdRes;
@@ -23,12 +25,18 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.sparecode.vipul.onlynow.R;
 import com.sparecode.vipul.onlynow.activity.BaseActivity;
+import com.sparecode.vipul.onlynow.location.LocationHelper;
+import com.sparecode.vipul.onlynow.location.LocationProvider;
 import com.sparecode.vipul.onlynow.model.FacebookWrapper;
 import com.sparecode.vipul.onlynow.model.SignupWrapper;
+import com.sparecode.vipul.onlynow.permission.PiemissionsCallback;
+import com.sparecode.vipul.onlynow.permission.PiemissionsRequest;
+import com.sparecode.vipul.onlynow.permission.PiemissionsUtils;
 import com.sparecode.vipul.onlynow.util.Prefs;
 import com.sparecode.vipul.onlynow.widgets.LatoCheckBox;
 
 import java.util.Calendar;
+import java.util.HashMap;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -36,7 +44,7 @@ import butterknife.OnClick;
 
 import static com.sparecode.vipul.onlynow.R.id.text_signin;
 
-public class Signupstep1Fragment extends BaseFragment implements Signupstep1Backend.SignupWrapperProvider {
+public class Signupstep1Fragment extends BaseFragment implements Signupstep1Backend.SignupWrapperProvider ,LocationProvider{
 
     String Title1;
     @Bind(R.id.text_already)
@@ -74,6 +82,16 @@ public class Signupstep1Fragment extends BaseFragment implements Signupstep1Back
     View view;
     RadioButton radioButton1;
     String selectionradiobutton;
+    private static final int PERMISSIONS_CODE = 13370;
+    private static final String[] PERMISSIONS = new String[]{
+            Manifest.permission.INTERNET,
+            Manifest.permission.WRITE_EXTERNAL_STORAGE,
+            Manifest.permission.READ_CONTACTS,
+            Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.CALL_PHONE
+
+    };
+    LocationHelper locationHelper;
+    String latitude,longitude;
 
     public Signupstep1Fragment() {
         // Required empty public constructor
@@ -104,6 +122,23 @@ public class Signupstep1Fragment extends BaseFragment implements Signupstep1Back
         Title1 = getArguments().getString("arg");
         System.out.println("------>" + Title1);
         ButterKnife.bind(this, view);
+
+        final PiemissionsRequest request = new PiemissionsRequest(PERMISSIONS_CODE, PERMISSIONS);
+        request.setCallback(new PiemissionsCallback() {
+            @Override
+            public void onGranted() {
+                Log.e("log----::","Permission Granted");
+                locationHelper = new LocationHelper(getActivity(),Signupstep1Fragment.this);
+            }
+
+            @Override
+            public boolean onDenied(HashMap<String, Boolean> rationalizablePermissions) {
+                Log.e("log---::","Permission Denied");
+
+                return true;
+            }
+        });
+        PiemissionsUtils.requestPermission(request);
 
         final Calendar c = Calendar.getInstance();
         mYear = c.get(Calendar.YEAR);
@@ -171,9 +206,9 @@ public class Signupstep1Fragment extends BaseFragment implements Signupstep1Back
         } else {
             @SuppressLint("HardwareIds") String android_id = Settings.Secure.getString(getContext().getContentResolver(), Settings.Secure.ANDROID_ID);
             if (facebookWrapper != null) {
-                signupstep1Backend = new Signupstep1Backend(getActivity(), editFirstname.getText().toString(), editLastname.getText().toString(), editEmail.getText().toString(), editPassword.getText().toString(), selectionradiobutton, editBirthday.getText().toString(),"1.1", "1.2", android_id, "1", facebookWrapper.getId(), Signupstep1Fragment.this);
+                signupstep1Backend = new Signupstep1Backend(getActivity(), editFirstname.getText().toString(), editLastname.getText().toString(), editEmail.getText().toString(), editPassword.getText().toString(), selectionradiobutton, editBirthday.getText().toString(),latitude, longitude, android_id, "1", facebookWrapper.getId(), Signupstep1Fragment.this);
             } else {
-                signupstep1Backend = new Signupstep1Backend(getActivity(), editFirstname.getText().toString(), editLastname.getText().toString(), editEmail.getText().toString(), editPassword.getText().toString(), selectionradiobutton, editBirthday.getText().toString(), "1.1", "1.2", android_id, "1", Signupstep1Fragment.this);
+                signupstep1Backend = new Signupstep1Backend(getActivity(), editFirstname.getText().toString(), editLastname.getText().toString(), editEmail.getText().toString(), editPassword.getText().toString(), selectionradiobutton, editBirthday.getText().toString(), latitude, longitude, android_id, "1", Signupstep1Fragment.this);
             }
 
         }
@@ -252,5 +287,17 @@ public class Signupstep1Fragment extends BaseFragment implements Signupstep1Back
         if (getActivity() != null) {
             Snackbar.make(view, msg, Snackbar.LENGTH_SHORT).show();
         }
+    }
+
+    @Override
+    public void onNewLcoationReceived(Location location) {
+        location.getLongitude();
+        location.getLatitude();
+        latitude = String.valueOf(location.getLatitude());
+        longitude = String.valueOf(location.getLongitude());
+        Log.e("locationsignup",location+"");
+
+        Toast.makeText(getActivity(), "RECEIVED LOC" + latitude, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getActivity(), "RECEIVED LOC" + location, Toast.LENGTH_SHORT).show();
     }
 }

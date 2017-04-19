@@ -48,7 +48,7 @@ public class PostAsync<T> extends AsyncTask<String, Void, String> {
         this.callback = t;
     }
 
-    public PostAsync(Context context, String url,  String keyImage, File file, Class<T> clazz, OnResponse<T> t) {
+    public PostAsync(Context context, String url, String keyImage, File file, Class<T> clazz, OnResponse<T> t) {
         this.context = context;
         this.url = url;
         this.keyImage = keyImage;
@@ -68,7 +68,7 @@ public class PostAsync<T> extends AsyncTask<String, Void, String> {
     @Override
     protected String doInBackground(String... params) {
 
-        MultipartBody.Builder multipartBuilder =  new MultipartBody.Builder();
+        MultipartBody.Builder multipartBuilder = new MultipartBody.Builder();
         multipartBuilder.setType(MultipartBody.FORM);
 
         for (Pair pair : pairList)
@@ -77,7 +77,7 @@ public class PostAsync<T> extends AsyncTask<String, Void, String> {
         if (file != null)
             multipartBuilder.addFormDataPart(keyImage, file.getAbsolutePath(), RequestBody.create(MEDIA_TYPE_PNG, file));
 
-        RequestBody requestBody  = multipartBuilder.build();
+        RequestBody requestBody = multipartBuilder.build();
         Request request = new Request.Builder()
                 .header("Authorization", "Client-ID " + IMGUR_CLIENT_ID)
                 .url(url)

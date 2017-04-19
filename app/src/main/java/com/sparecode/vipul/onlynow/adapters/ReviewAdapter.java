@@ -2,6 +2,7 @@ package com.sparecode.vipul.onlynow.adapters;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -76,16 +77,23 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.MyViewHold
 //        holder.text_name.setText(history.getName());
 //        holder.text_place.setText(history.getPlace());
 //        holder.text_time.setText(history.getTime());
-        holder.textUserName.setText(reviewWrapper.getData().getReviews().get(position).getUsername());
-        holder.textReviewDate.setText(reviewWrapper.getData().getReviews().get(position).getDate());
-        holder.textUserDescription.setVisibility(View.GONE);
-         rating = reviewWrapper.getData().getReviews().get(position).getStar();
+        Log.e("size review",""+reviewWrapper.getData().getReviews().size());
+        if (reviewWrapper.getData().getReviews().size()<0)
+        {
+            holder.textUserName.setText(reviewWrapper.getData().getReviews().get(position).getUsername());
+            holder.textReviewDate.setText(reviewWrapper.getData().getReviews().get(position).getDate());
+            holder.textUserDescription.setVisibility(View.GONE);
+            rating = reviewWrapper.getData().getReviews().get(position).getStar();
 
             if (rating == " ") {
                 holder.ratingBar2.setRating(0);
             } else {
                 holder.ratingBar2.setRating(Float.parseFloat(rating));
             }
+        }
+
+
+
 
 
 
@@ -93,6 +101,6 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.MyViewHold
 
     @Override
     public int getItemCount() {
-        return 10;
+        return reviewWrapper.getData().getReviews().size();
     }
 }

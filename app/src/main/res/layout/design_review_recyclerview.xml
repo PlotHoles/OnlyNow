@@ -13,7 +13,6 @@
         android:layout_height="wrap_content">
 
         <TextView
-            android:text="Christina Clark"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
@@ -40,7 +39,6 @@
 
         <TextView
             android:layout_marginRight="@dimen/dp_10"
-            android:text="aug_19_2015"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
@@ -48,7 +46,6 @@
             android:id="@+id/textReviewDate" />
     </RelativeLayout>
     <TextView
-        android:text="einstein_has_just_become_the_world_s_first_time_teaveler_i_sent_him_into_the_future_one_minute_into_the_future_to_be_exact_and_at_exactly_1_21_am_we_shall_catch_up_with_him"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/textUserDescription"

@@ -29,7 +29,10 @@ import com.sparecode.vipul.onlynow.fragments.MylistFragment;
 import com.sparecode.vipul.onlynow.fragments.NoticeFragment;
 import com.sparecode.vipul.onlynow.fragments.ProfileFragment;
 import com.sparecode.vipul.onlynow.fragments.SearchFragment;
+import com.sparecode.vipul.onlynow.fragments.SplashFragment;
+import com.sparecode.vipul.onlynow.model.ChangeProfilePictureData;
 import com.sparecode.vipul.onlynow.model.LoginData;
+import com.sparecode.vipul.onlynow.model.UpdateProfileData;
 import com.sparecode.vipul.onlynow.permission.PiemissionsUtils;
 
 import butterknife.Bind;
@@ -76,6 +79,7 @@ public class MainActivity extends BaseActivity {
     SharedPreferences sharedpreferences;
     SharedPreferences.Editor editor;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -87,8 +91,8 @@ public class MainActivity extends BaseActivity {
         editor = sharedpreferences.edit();
 
         onSettingClick();
-        openSplashPage();
-
+        //openSplashPage();
+        openlauncherPage();
 //        tabLayout.addTab(tabLayout.newTab().setText("Home").setIcon(R.drawable.home_sel_icon));
 //        tabLayout.addTab(tabLayout.newTab().setText("Notice"));
 //        tabLayout.addTab(tabLayout.newTab().setText("Search"));
@@ -180,7 +184,7 @@ public class MainActivity extends BaseActivity {
     public void onBackPressed() {
         Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.container);
         Log.e("1:::->", "" + fragment.getClass().getName());
-        if (fragment instanceof HomeFragment || fragment instanceof NoticeFragment || fragment instanceof SearchFragment || fragment instanceof MylistFragment || fragment instanceof ProfileFragment) {
+        if (fragment instanceof HomeFragment || fragment instanceof NoticeFragment || fragment instanceof SearchFragment || fragment instanceof MylistFragment || fragment instanceof ProfileFragment || fragment instanceof SplashFragment) {
             finish();
         } else if (fragment instanceof ClientCouponFragment || fragment instanceof ClientShopFragment || fragment instanceof ClientReviewFragment || fragment instanceof ClientAnalyticsFragment || fragment instanceof ClientSettingFragment) {
             finish();
@@ -207,7 +211,12 @@ public class MainActivity extends BaseActivity {
         editor.putString("user", new Gson().toJson(data));
         editor.commit();
     }
-    public void setUserData1(LoginData data) {
+    public void setUserData1(UpdateProfileData data) {
+
+        editor.putString("user", new Gson().toJson(data));
+        editor.commit();
+    }
+    public void setUserData2(ChangeProfilePictureData data) {
 
         editor.putString("user", new Gson().toJson(data));
         editor.commit();

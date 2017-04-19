@@ -379,20 +379,25 @@ public class ClientAddCouponFragment extends BaseFragment implements ClientGetCa
 
     @Override
     public void onSuccess(final ClientGetCategoryWrapper clientGetCategoryWrapper) {
-        categoryList.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
-                categoryid = clientGetCategoryWrapper.getData().get(position).getId();
-                //Toast.makeText(getActivity(), categoryid, Toast.LENGTH_SHORT).show();
-            }
+        if (clientGetCategoryWrapper.getData()!=null)
+        {
+            categoryList.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
+                    categoryid = clientGetCategoryWrapper.getData().get(position).getId();
+                    //Toast.makeText(getActivity(), categoryid, Toast.LENGTH_SHORT).show();
+                }
 
-            }
-        });
-        categoryList.setAdapter(new SpinnerAdapter(getActivity(), clientGetCategoryWrapper.getData()));
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });
+            categoryList.setAdapter(new SpinnerAdapter(getActivity(), clientGetCategoryWrapper.getData()));
+        }
+
     }
 
     @Override

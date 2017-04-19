@@ -30,6 +30,21 @@ public class NetworkUtil {
         return TYPE_NOT_CONNECTED;
     }
 
+    public static boolean getConnectivityBoolStatus(Context context) {
+        ConnectivityManager cm = (ConnectivityManager) context
+                .getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+        if (null != activeNetwork) {
+            if(activeNetwork.getType() == ConnectivityManager.TYPE_WIFI)
+                return true;
+
+            if(activeNetwork.getType() == ConnectivityManager.TYPE_MOBILE)
+                return true;
+        }
+        return false;
+    }
+
     public static String getConnectivityStatusString(Context context) {
         int conn = NetworkUtil.getConnectivityStatus(context);
         String status = null;
