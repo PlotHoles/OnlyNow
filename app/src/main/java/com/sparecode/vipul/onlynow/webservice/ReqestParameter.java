@@ -370,6 +370,8 @@ public class ReqestParameter {
         try {
             object.put("method", RequestApi.FORGOT_PASSWORD);
             object.put("email", vars[0]);
+            object.put("password", vars[0]);
+            object.put("birthday", vars[0]);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -398,6 +400,27 @@ public class ReqestParameter {
             e.printStackTrace();
         }
 
+        return object;
+    }
+    public JSONObject toSaveCoupon(String... vars) {
+        JSONObject object = new JSONObject();
+        try {
+            object.put("method", "save_coupon");
+            object.put("user_id", vars[0]);
+            object.put("coupon_id", vars[1]);
+            object.put("name", vars[2]);
+            object.put("instruction", vars[3]);
+            object.put("shop_name", vars[4]);
+            object.put("shop_details", vars[5]);
+            object.put("description", vars[6]);
+            object.put("imageURL", vars[7]);
+            object.put("end_date", vars[8]);
+            object.put("cat_name", vars[9]);
+            object.put("area", vars[10]);
+            object.put("rating", vars[11]);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
         return object;
     }
     public JSONObject toClientLiveCoupon(String...vars){
@@ -502,6 +525,19 @@ public class ReqestParameter {
             object.put("instruction",vars[1]);
             object.put("description",vars[2]);
             object.put("end_date",vars[3]);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return object;
+    }
+    public JSONObject toAddReviewToShop(String... vars) {
+        JSONObject object = new JSONObject();
+        try {
+            object.put("method","add_review_shop");
+            object.put("shop_id", vars[0]);
+            object.put("user_id", vars[1]);
+            object.put("review", vars[2]);
+            object.put("star", vars[3]);
         } catch (JSONException e) {
             e.printStackTrace();
         }

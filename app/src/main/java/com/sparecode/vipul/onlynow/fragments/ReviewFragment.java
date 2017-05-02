@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
@@ -18,6 +19,7 @@ import com.sparecode.vipul.onlynow.activity.BaseActivity;
 import com.sparecode.vipul.onlynow.adapters.ReviewAdapter;
 import com.sparecode.vipul.onlynow.dialog.ReviewDialog;
 import com.sparecode.vipul.onlynow.model.ReviewWrapper;
+import com.sparecode.vipul.onlynow.model.SaveReviewWrapper;
 import com.sparecode.vipul.onlynow.model.SignupWrapper;
 import com.sparecode.vipul.onlynow.util.Prefs;
 import com.sparecode.vipul.onlynow.view.OnClickListener;
@@ -28,7 +30,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 
-public class ReviewFragment extends Fragment implements ReviewFragmentBackend.ShopReviewDataProvider {
+public class ReviewFragment extends Fragment implements ReviewFragmentBackend.ShopReviewDataProvider ,SaveReviewBackend.ReviewDataProvider{
 
     String shopId;
     @Bind(R.id.textReviewFive)
@@ -66,7 +68,8 @@ public class ReviewFragment extends Fragment implements ReviewFragmentBackend.Sh
     @Bind(R.id.review_recyclerview)
     RecyclerView reviewRecyclerview;
     ReviewAdapter reviewAdapter;
-
+    SaveReviewBackend saveReviewBackend;
+    ReviewDialog reviewDialog;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -87,7 +90,12 @@ public class ReviewFragment extends Fragment implements ReviewFragmentBackend.Sh
 
     @OnClick(R.id.text_review)
     void onSubmitReviewClick() {
-        ReviewDialog reviewDialog = new ReviewDialog();
+        reviewDialog = new ReviewDialog(new ReviewDialog.OnReviewClick() {
+            @Override
+            public void onClick(String review, String star) {
+                saveReviewBackend   = new SaveReviewBackend(getActivity(),shopId,signupWrapper.getData().getId(),review,star,ReviewFragment.this);
+            }
+        });
         reviewDialog.show(getActivity().getSupportFragmentManager(), "review");
     }
 
@@ -141,6 +149,17 @@ public class ReviewFragment extends Fragment implements ReviewFragmentBackend.Sh
 
     @Override
     public void onFailure(String msg) {
+
+    }
+
+    @Override
+    public void Successfull(SaveReviewWrapper saveReviewWrapper) {
+        reviewDialog.dismiss();
+        Toast.makeText(getActivity(),saveReviewWrapper.getMessage(),Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void Failure(String msg) {
 
     }
 }

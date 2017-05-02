@@ -297,7 +297,7 @@ public class Signupstep1Fragment extends BaseFragment implements Signupstep1Back
         longitude = String.valueOf(location.getLongitude());
         Log.e("locationsignup",location+"");
 
-        Toast.makeText(getActivity(), "RECEIVED LOC" + latitude, Toast.LENGTH_SHORT).show();
-        Toast.makeText(getActivity(), "RECEIVED LOC" + location, Toast.LENGTH_SHORT).show();
+       // Toast.makeText(getActivity(), "RECEIVED LOC" + latitude, Toast.LENGTH_SHORT).show();
+       // Toast.makeText(getActivity(), "RECEIVED LOC" + location, Toast.LENGTH_SHORT).show();
     }
 }

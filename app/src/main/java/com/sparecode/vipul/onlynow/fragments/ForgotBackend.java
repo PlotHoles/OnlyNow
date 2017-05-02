@@ -16,18 +16,23 @@ public class ForgotBackend {
 
     private Context context;
     private String email;
+    private String password;
+    private String birthday;
     ForgotDataProvider forgotDataProvider;
 
-    public ForgotBackend(Context context, String email, ForgotDataProvider forgotDataProvider) {
+
+    public ForgotBackend(Context context, String email, String password, String birthday, ForgotDataProvider forgotDataProvider) {
         this.context = context;
         this.email = email;
+        this.password = password;
+        this.birthday = birthday;
         this.forgotDataProvider = forgotDataProvider;
         call();
     }
 
     private void call()
     {
-        new GetRequest<ForgotWrapper>().toGetRequest(context, RequestApi.COMMONSERVICE, new ReqestParameter().toForgotPassword(email), ForgotWrapper.class, new OnResponse<ForgotWrapper>() {
+        new GetRequest<ForgotWrapper>().toGetRequest(context, RequestApi.COMMONSERVICE, new ReqestParameter().toForgotPassword(email,password,birthday), ForgotWrapper.class, new OnResponse<ForgotWrapper>() {
             @Override
             public void onSuccess(ForgotWrapper forgotWrapper) {
 

@@ -11,23 +11,27 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RatingBar;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 import com.sparecode.vipul.onlynow.R;
 import com.sparecode.vipul.onlynow.activity.BaseActivity;
 import com.sparecode.vipul.onlynow.model.CouponDetailWrapper;
+import com.sparecode.vipul.onlynow.model.SaveCouponWrapper;
 import com.sparecode.vipul.onlynow.model.SignupWrapper;
 import com.sparecode.vipul.onlynow.util.Prefs;
+import com.sparecode.vipul.onlynow.widgets.LatoButton;
 import com.sparecode.vipul.onlynow.widgets.LatoTextView;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 import static com.facebook.FacebookSdk.getApplicationContext;
 
 @SuppressLint("ValidFragment")
-public class CouponFragment extends Fragment implements DetailFragemenBackend.CouponDetailProvider {
+public class CouponFragment extends Fragment implements DetailFragemenBackend.CouponDetailProvider,SaveCouponBackend.SaveCouponData {
 
     String couponId;
     @Bind(R.id.imageView9)
@@ -64,7 +68,10 @@ public class CouponFragment extends Fragment implements DetailFragemenBackend.Co
     LatoTextView textRating;
     @Bind(R.id.othercoupon_linear)
     LinearLayout othercouponLinear;
-
+    @Bind(R.id.savecoupon_button)
+    LatoButton savecouponButton;
+    SaveCouponBackend saveCouponBackend;
+    String ImageURl;
 
     public CouponFragment(String couponId) {
         this.couponId = couponId;
@@ -125,19 +132,24 @@ public class CouponFragment extends Fragment implements DetailFragemenBackend.Co
         }
         textRating.setText(couponDetailWrapper.getData().getRating());
         //textOtherCouponName.setText(couponDetailWrapper.getData().getOtherCoupons().get());
-        for (int i=0;i<couponDetailWrapper.getData().getOtherCoupons().size();i++)
-        {
+        for (int i = 0; i < couponDetailWrapper.getData().getOtherCoupons().size(); i++) {
             LayoutInflater layoutInflater = (LayoutInflater) getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             View v = layoutInflater.inflate(R.layout.design_othercoupon, null);
             othercouponLinear.addView(v, i, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
 
-            LatoTextView text_other_coupon_name = (LatoTextView)v.findViewById(R.id.text_other_coupon_name);
-            LatoTextView textValid = (LatoTextView)v.findViewById(R.id.textValid);
+            LatoTextView text_other_coupon_name = (LatoTextView) v.findViewById(R.id.text_other_coupon_name);
+            LatoTextView textValid = (LatoTextView) v.findViewById(R.id.textValid);
 
             text_other_coupon_name.setText(couponDetailWrapper.getData().getOtherCoupons().get(i).getName());
             textValid.setText(couponDetailWrapper.getData().getOtherCoupons().get(i).getEndDate());
         }
+        ImageURl =couponDetailWrapper.getData().getImages().get(0).getImageURL();
 
+    }
+
+    @Override
+    public void onSuccess(SaveCouponWrapper saveCouponWrapper) {
+        Toast.makeText(getActivity(),saveCouponWrapper.getMessage(),Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -149,5 +161,11 @@ public class CouponFragment extends Fragment implements DetailFragemenBackend.Co
     public void onDestroyView() {
         super.onDestroyView();
         ButterKnife.unbind(this);
+    }
+
+    @OnClick(R.id.savecoupon_button)
+    public void onViewClicked() {
+        saveCouponBackend = new SaveCouponBackend(getActivity(), CouponFragment.this, signupWrapper.getData().getId(), couponId, couponDesc.getText().toString(), textDateto.getText().toString(), textShopName.getText().toString(), textShopName.getText().toString(),textCouponDesc.getText().toString(),ImageURl,textDatefrom.getText().toString(),textCat.getText().toString(),textArea.getText().toString(),textRating.getText().toString());
+
     }
 }

@@ -239,7 +239,8 @@
                 android:text="@string/save"
                 android:textAllCaps="false"
                 android:textColor="@color/white"
-                app:typeface="lato_bold" />
+                app:typeface="lato_bold"
+                android:id="@+id/savecoupon_button"/>
 
         </LinearLayout>
     </ScrollView>

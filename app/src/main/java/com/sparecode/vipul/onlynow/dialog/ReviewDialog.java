@@ -1,5 +1,6 @@
 package com.sparecode.vipul.onlynow.dialog;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
@@ -27,6 +28,7 @@ import butterknife.OnClick;
  * Created by hitesh on 9/3/17.
  */
 
+@SuppressLint("ValidFragment")
 public class ReviewDialog extends DialogFragment {
     @Bind(R.id.ratingReview)
     RatingBar ratingReview;
@@ -35,6 +37,12 @@ public class ReviewDialog extends DialogFragment {
     @Bind(R.id.submitReview)
     LatoButton submitReview;
     private View view;
+    OnReviewClick onReviewClick;
+
+    @SuppressLint("ValidFragment")
+    public ReviewDialog(OnReviewClick onReviewClick) {
+        this.onReviewClick = onReviewClick;
+    }
 
     @Nullable
     @Override
@@ -63,6 +71,7 @@ public class ReviewDialog extends DialogFragment {
     @OnClick(R.id.submitReview)
     void onSubmitReviewClick() {
         Log.e("USER ID :::", "" + signupWrapper.getData().getId());
+        onReviewClick.onClick(edtReview.getText().toString(), String.valueOf(ratingReview.getRating()));
     }
 
     SignupWrapper signupWrapper;
@@ -80,5 +89,10 @@ public class ReviewDialog extends DialogFragment {
     public void onDestroyView() {
         super.onDestroyView();
         ButterKnife.unbind(this);
+    }
+    public interface OnReviewClick
+    {
+       void onClick(String review, String star);
+
     }
 }
